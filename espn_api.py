@@ -22,14 +22,21 @@ class ESPNFantasyAPI:
         
     def get_league_data(self) -> Optional[Dict[str, Any]]:
         """Fetch league data from ESPN API."""
+        response = None
         try:
             url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}"
             cookies = self._get_cookies()
-            response = requests.get(url, cookies=cookies)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept': 'application/json'
+            }
+            response = requests.get(url, cookies=cookies, headers=headers)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
             logging.error(f"Failed to fetch league data: {e}")
+            if response:
+                logging.error(f"Response status: {response.status_code}")
             return None
 
     def get_boxscore(self, week: int) -> Optional[Dict[str, Any]]:
@@ -41,7 +48,11 @@ class ESPNFantasyAPI:
             }
             url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}/matchups"
             cookies = self._get_cookies()
-            response = requests.get(url, params=params, cookies=cookies)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept': 'application/json'
+            }
+            response = requests.get(url, params=params, cookies=cookies, headers=headers)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
