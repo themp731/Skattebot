@@ -60,6 +60,9 @@ The season years you want to scrape historical data for.
 ### 3. Run the Scraper
 
 **In the Shell (recommended):**
+
+**Note:** Each time you run the scraper, it will **clear and overwrite** existing CSV files to ensure fresh data without duplicates.
+
 ```bash
 # Single year
 python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2024

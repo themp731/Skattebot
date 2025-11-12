@@ -48,6 +48,16 @@ def validate_arguments(args) -> bool:
         
     return True
 
+def clear_existing_csv_files(output_dir: str):
+    """Clear existing CSV files before starting a new scrape."""
+    csv_files = [OUTPUT_FILES['matchups'], OUTPUT_FILES['player_stats'], OUTPUT_FILES['team_stats']]
+    
+    for csv_file in csv_files:
+        file_path = os.path.join(output_dir, csv_file)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            logging.info(f"Cleared existing file: {csv_file}")
+
 def main():
     """Main execution function."""
     setup_logging()
@@ -64,6 +74,9 @@ def main():
         logging.info("Using ESPN authentication credentials for private league access")
     else:
         logging.info("No authentication credentials found - accessing public league only")
+
+    # Clear existing CSV files to start fresh
+    clear_existing_csv_files(args.output)
 
     csv_generator = CSVGenerator(args.output)
     
