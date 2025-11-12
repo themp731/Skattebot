@@ -93,6 +93,7 @@ python team_analysis.py
 - **visualizations/** folder containing:
   - `power_rankings.png` - Overall power rankings (#1-#12)
   - `power_breakdown.png` - Stacked bar chart showing power score components
+  - `power_rankings_evolution.png` - Line chart showing weekly power ranking changes
   - `wax_leaderboard.png` - Luck index showing who's running hot/cold
   - `wins_vs_expected.png` - Real wins vs expected wins scatter plot
   - `total_points.png` - Total points scored by each team

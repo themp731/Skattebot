@@ -338,6 +338,58 @@ def create_visualizations(df, summary):
     plt.savefig('visualizations/consistency.png', dpi=300, bbox_inches='tight')
     print("✓ Created: visualizations/consistency.png")
     plt.close()
+    
+    # Figure 8: Power Rankings Evolution by Week
+    fig, ax = plt.subplots(figsize=(14, 9))
+    
+    # Filter to latest season only
+    season_df = df[df['season'] == latest_season].copy()
+    
+    # Calculate weekly cumulative power rankings
+    weekly_data = []
+    for week in sorted(season_df['week'].unique()):
+        week_df = season_df[season_df['week'] <= week].copy()
+        
+        # Calculate cumulative stats through this week
+        week_summary = week_df.groupby('team_name').agg({
+            'wins': 'sum',
+            'mvp_w': 'sum',
+            'top6_wins': 'sum'
+        }).reset_index()
+        
+        # Calculate power score (using 'wins' from the raw data)
+        week_summary['power_score'] = (week_summary['wins'] * 2) + week_summary['top6_wins'] + week_summary['mvp_w']
+        week_summary['power_rank'] = week_summary['power_score'].rank(ascending=False, method='min').astype(int)
+        week_summary['week'] = week
+        
+        weekly_data.append(week_summary)
+    
+    weekly_rankings = pd.concat(weekly_data, ignore_index=True)
+    
+    # Plot line for each team
+    teams = sorted(current_summary['team_name'].unique())
+    cmap = plt.get_cmap('tab20')
+    colors = cmap(np.linspace(0, 1, len(teams)))
+    
+    for team, color in zip(teams, colors):
+        team_data = weekly_rankings[weekly_rankings['team_name'] == team].sort_values('week')
+        ax.plot(team_data['week'], team_data['power_rank'], 
+               marker='o', linewidth=2.5, markersize=8, 
+               label=team, color=color, alpha=0.8)
+    
+    ax.set_xlabel('Week', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Power Rank', fontsize=12, fontweight='bold')
+    ax.set_title(f'Power Rankings Evolution - {latest_season} Season\nLower is Better (#1 = Best)', 
+                fontsize=14, fontweight='bold', pad=20)
+    ax.grid(True, alpha=0.3, linestyle='--')
+    ax.set_ylim(12.5, 0.5)  # Inverted so #1 is at top
+    ax.set_yticks(range(1, 13))
+    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), fontsize=10, framealpha=0.9)
+    
+    plt.tight_layout()
+    plt.savefig('visualizations/power_rankings_evolution.png', dpi=300, bbox_inches='tight')
+    print("✓ Created: visualizations/power_rankings_evolution.png")
+    plt.close()
 
 def save_summary_csv(summary, filename='team_summary.csv'):
     """Save summary table to CSV."""
@@ -404,6 +456,12 @@ Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That mean
 ## Power Score Breakdown
 
 ![Power Score Breakdown](visualizations/power_breakdown.png)
+
+## Power Rankings Evolution Over Time
+
+![Power Rankings Evolution](visualizations/power_rankings_evolution.png)
+
+*Lower rank is better - watch how teams rise and fall throughout the season.*
 
 ---
 
@@ -544,6 +602,7 @@ def main():
     print("  • power_rankings_analysis.md - Snarky written analysis with embedded images")
     print("  • visualizations/power_rankings.png - Overall power rankings")
     print("  • visualizations/power_breakdown.png - Power score component breakdown")
+    print("  • visualizations/power_rankings_evolution.png - Weekly power rankings trends")
     print("  • visualizations/wax_leaderboard.png - Luck index ranking")
     print("  • visualizations/wins_vs_expected.png - Real wins vs expected wins")
     print("  • visualizations/total_points.png - Total points scored by team")

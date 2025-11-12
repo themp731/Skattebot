@@ -54,6 +54,12 @@ Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That mean
 
 ![Power Score Breakdown](visualizations/power_breakdown.png)
 
+## Power Rankings Evolution Over Time
+
+![Power Rankings Evolution](visualizations/power_rankings_evolution.png)
+
+*Lower rank is better - watch how teams rise and fall throughout the season.*
+
 ---
 
 ## Team-by-Team Analysis (With the Snark You Deserve)
