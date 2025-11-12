@@ -89,6 +89,7 @@ python team_analysis.py
 
 **This creates:**
 - **team_summary.csv** - Season summary with Power Rankings and WAX (Wins Above Expectation) metric
+- **power_rankings_analysis.md** - Snarky written analysis of each team's performance with embedded images
 - **visualizations/** folder containing:
   - `power_rankings.png` - Overall power rankings (#1-#12)
   - `power_breakdown.png` - Stacked bar chart showing power score components

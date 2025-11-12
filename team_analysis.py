@@ -344,6 +344,95 @@ def save_summary_csv(summary, filename='team_summary.csv'):
     summary.to_csv(filename, index=False)
     print(f"✓ Saved summary table to: {filename}")
 
+def generate_markdown_analysis(summary, filename='power_rankings_analysis.md'):
+    """Generate a snarky markdown analysis of the power rankings."""
+    latest_season = summary['season'].max()
+    current_summary = summary[summary['season'] == latest_season].sort_values('power_rank')
+    
+    md = """# 2025 Fantasy Football Power Rankings Analysis
+## A Brutally Honest Assessment of Your League's Mediocrity
+
+---
+
+## Overall Power Rankings
+
+![Power Rankings](visualizations/power_rankings.png)
+
+## Power Score Breakdown
+
+![Power Score Breakdown](visualizations/power_breakdown.png)
+
+---
+
+## Team-by-Team Analysis (With the Snark You Deserve)
+
+"""
+    
+    snark_templates = {
+        1: "Congratulations, you're actually good. With {wins} wins and the highest scoring average in the league, you're not just getting lucky—you're genuinely dominating. That {wax:+.2f} WAX means you've earned almost every win. The rest of the league is basically playing for second place at this point. Enjoy your inevitable championship and the awkward silence when you try to talk about your fantasy team at parties.",
+        2: "Solidly in second place, you're doing everything right: consistent top-6 finishes, decent wins, and you're actually *slightly* unlucky ({wax:+.2f} WAX). You're the tortoise to MP's hare, except the hare is already at the finish line and the tortoise is stuck in traffic. Still, you're legitimately good—just not good enough to catch the leader.",
+    }
+    
+    for idx, row in current_summary.iterrows():
+        rank = int(row['power_rank'])
+        team = row['team_name']
+        wins = int(row['real_wins'])
+        losses = int(row['games_played'] - row['real_wins'])
+        ppg = row['ppg']
+        wax = row['wax']
+        power = row['power_score']
+        
+        # Generate custom snark based on position and stats
+        if rank == 1:
+            analysis = snark_templates[1].format(wins=wins, wax=wax)
+        elif rank == 2:
+            analysis = snark_templates[2].format(wax=wax)
+        elif wax < -1.0:
+            analysis = f"Oh, {team}. You poor, unfortunate soul. You're scoring {ppg:.2f} PPG (third-highest in the league!), finishing in the top 6 seven times, and somehow you're sitting at {wins}-{losses}. That {wax:+.2f} WAX is the league's worst luck—you should have {wins+2}-{losses-2} wins by now. You're the fantasy football equivalent of a talented actor who never gets nominated for an Oscar. Maybe next week schedule some easier opponents? Oh wait, that's not how this works."
+        elif wax > 1.5:
+            analysis = f"Oh, {team}. You beautiful, lucky bastard. You're ranked #{rank} in power but sitting at {wins}-{losses} because you have a league-leading {wax:+.2f} WAX. That means you've won TWO more games than your mediocre {ppg:.2f} PPG deserves. You're the kid who guesses on every test question and somehow passes. Enjoy your fraudulent record while it lasts—the fantasy gods giveth, and they definitely taketh away."
+        elif wax > 0.5:
+            analysis = f"Tied for third with KIRK, but let's be real—you're not the same. KIRK is unlucky and elite; you're lucky and good. That {wax:+.2f} WAX means you've stolen at least one win you didn't deserve. Your {ppg:.2f} PPG is middle-of-the-pack, but you're sitting pretty at {wins}-{losses} because the fantasy gods smiled upon you. Enjoy it while it lasts, because regression to the mean is coming for you."
+        elif wax < -0.5:
+            analysis = f"Another victim of bad luck with {wax:+.2f} WAX. You're scoring {ppg:.2f} PPG (fourth-best!), but sitting at .500 because apparently your opponents decided to have their best weeks against you. Seven top-6 finishes should translate to more wins, but the fantasy football scheduling algorithm clearly has it out for you. At least you can take solace in knowing you're better than your record suggests. Small victories, right?"
+        elif rank <= 3:
+            analysis = f"Legitimately good with {wins} wins and {ppg:.2f} PPG. Your {wax:+.2f} WAX shows you're getting what you deserve—no luck, no excuses, just solid roster management. Keep it up and you'll be battling for the championship."
+        elif rank >= 10:
+            if wax < -0.5:
+                analysis = f"Dead last. Basement dweller. The league's punching bag. You're scoring {ppg:.2f} PPG (worst in the league), you have {wins} wins (also worst), and you're STILL unlucky ({wax:+.2f} WAX)! You should theoretically have {wins+1} wins, but nope, even the universe has given up on you. The good news? You can only go up from here. The bad news? That's what you said last year."
+            else:
+                analysis = f"Barely unlucky, mostly just not good. That {ppg:.2f} PPG is third-worst in the league, and your {wins}-{losses} record reflects it. Consistency is apparently not your strong suit. Neither is winning, apparently. Maybe next year will be your year? (Narrator: It won't be.)"
+        else:
+            analysis = f"A bit lucky ({wax:+.2f} WAX) but mostly just average. You're scoring {ppg:.2f} PPG in a 12-team league, which is... fine, I guess? Your power ranking suggests you're fighting for a playoff spot, and that's exactly where you belong—on the bubble, hoping for the best, preparing for mediocrity. The good news is you're not in last place. The bad news is that's the only good news."
+        
+        md += f"""### #{rank} {team} - Power Score: {power:.2f}
+**Record: {wins}-{losses} | PPG: {ppg:.2f} | WAX: {wax:+.2f}**
+
+{analysis}
+
+---
+
+"""
+    
+    md += """
+## Final Thoughts
+
+This league has: one elite team (MP), a cluster of above-average teams fighting for playoff spots, a bunch of lucky frauds (looking at you, GEMP), some genuinely unlucky squads (RIP KIRK), and absolute dumpster fires bringing up the rear (3000, we're still talking about you).
+
+May the odds be ever in your favor. Or not. Based on these power rankings, most of you need more than luck—you need a miracle.
+
+---
+
+*Power Rankings Formula: (Real Wins × 2) + (Top6 Wins) + (MVP-W)*  
+*WAX (Wins Above Expectation) = Real Wins - MVP-W*  
+*Data through Week 10, 2025 Season*
+"""
+    
+    with open(filename, 'w') as f:
+        f.write(md)
+    
+    print(f"✓ Generated snarky analysis: {filename}")
+
 def main():
     """Main execution."""
     print("\n" + "="*100)
@@ -366,6 +455,10 @@ def main():
     # Save summary CSV
     save_summary_csv(summary)
     
+    # Generate markdown analysis
+    print("\nGenerating snarky analysis...")
+    generate_markdown_analysis(summary)
+    
     # Create visualizations
     print("\nGenerating visualizations...")
     create_visualizations(df, summary)
@@ -375,6 +468,7 @@ def main():
     print("="*100)
     print("\nGenerated Files:")
     print("  • team_summary.csv - Summary statistics table with Power Rankings")
+    print("  • power_rankings_analysis.md - Snarky written analysis with embedded images")
     print("  • visualizations/power_rankings.png - Overall power rankings")
     print("  • visualizations/power_breakdown.png - Power score component breakdown")
     print("  • visualizations/wax_leaderboard.png - Luck index ranking")
