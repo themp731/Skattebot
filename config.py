@@ -12,11 +12,11 @@ MAX_WEEK = 17
 # CSV output settings
 CSV_HEADERS = {
     'matchups': [
-        'week', 'matchup_id', 'team_id', 'opponent_id',
+        'week', 'matchup_id', 'team_id', 'team_name', 'opponent_id', 'opponent_name',
         'team_score', 'opponent_score', 'winner', 'season'
     ],
     'player_stats': [
-        'week', 'team_id', 'player_id', 'player_name',
+        'week', 'team_id', 'team_name', 'player_id', 'player_name',
         'position', 'slot_position', 'points', 'projected_points', 'season'
     ],
     'team_stats': [

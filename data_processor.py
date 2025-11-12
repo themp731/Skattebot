@@ -2,6 +2,7 @@
 import pandas as pd
 from typing import Dict, List, Any
 import logging
+from position_mapping import POSITION_MAP, LINEUP_SLOT_MAP
 
 class DataProcessor:
     def __init__(self, league_data: Dict[str, Any]):
@@ -41,7 +42,9 @@ class DataProcessor:
                         'week': week,
                         'matchup_id': matchup['id'],
                         'team_id': home_team_id,
+                        'team_name': self.teams_map.get(home_team_id, f'Team {home_team_id}'),
                         'opponent_id': away_team_id,
+                        'opponent_name': self.teams_map.get(away_team_id, f'Team {away_team_id}'),
                         'team_score': home_score,
                         'opponent_score': away_score,
                         'winner': home_score > away_score
@@ -50,7 +53,9 @@ class DataProcessor:
                         'week': week,
                         'matchup_id': matchup['id'],
                         'team_id': away_team_id,
+                        'team_name': self.teams_map.get(away_team_id, f'Team {away_team_id}'),
                         'opponent_id': home_team_id,
+                        'opponent_name': self.teams_map.get(home_team_id, f'Team {home_team_id}'),
                         'team_score': away_score,
                         'opponent_score': home_score,
                         'winner': away_score > home_score
@@ -68,15 +73,20 @@ class DataProcessor:
         try:
             for team in boxscore_data.get('teams', []):
                 team_id = team['id']
+                team_name = self.teams_map.get(team_id, f'Team {team_id}')
                 
                 for player in team.get('roster', {}).get('entries', []):
+                    position_id = player['playerPoolEntry']['player']['defaultPositionId']
+                    slot_id = player['lineupSlotId']
+                    
                     player_stats.append({
                         'week': week,
                         'team_id': team_id,
+                        'team_name': team_name,
                         'player_id': player['playerId'],
                         'player_name': player['playerPoolEntry']['player']['fullName'],
-                        'position': player['playerPoolEntry']['player']['defaultPositionId'],
-                        'slot_position': player['lineupSlotId'],
+                        'position': POSITION_MAP.get(position_id, f'POS_{position_id}'),
+                        'slot_position': LINEUP_SLOT_MAP.get(slot_id, f'SLOT_{slot_id}'),
                         'points': player['playerPoolEntry']['appliedStatTotal'],
                         'projected_points': player['playerPoolEntry'].get('projectedPointTotal', 0)
                     })

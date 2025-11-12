@@ -88,16 +88,40 @@ python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --output 
 All CSV files include a `season` column to track which year the data is from:
 
 ### matchups.csv
-Weekly head-to-head matchup results
-- `week`, `matchup_id`, `team_id`, `opponent_id`, `team_score`, `opponent_score`, `winner`, `season`
+Weekly head-to-head matchup results with team names
+- `week` - Week number (1-17)
+- `matchup_id` - Unique matchup identifier
+- `team_id` - Team ID number
+- `team_name` - Team name/abbreviation (e.g., "PATS", "ZSF")
+- `opponent_id` - Opponent team ID
+- `opponent_name` - Opponent team name/abbreviation
+- `team_score` - Points scored by team
+- `opponent_score` - Points scored by opponent
+- `winner` - True if team won, False if lost
+- `season` - Year (e.g., 2024)
 
 ### player_stats.csv
-Individual player performance by week
-- `week`, `team_id`, `player_id`, `player_name`, `position`, `slot_position`, `points`, `projected_points`, `season`
+Individual player performance by week with position names
+- `week` - Week number (1-17)
+- `team_id` - Team ID number
+- `team_name` - Team name/abbreviation
+- `player_id` - ESPN player ID
+- `player_name` - Player full name
+- `position` - Player position (QB, RB, WR, TE, K, D/ST, etc.)
+- `slot_position` - Lineup slot (QB, RB, WR, FLEX, BENCH, IR, etc.)
+- `points` - Actual fantasy points scored
+- `projected_points` - Projected fantasy points
+- `season` - Year (e.g., 2024)
 
 ### team_stats.csv
 Team-level statistics by week
-- `week`, `team_id`, `team_name`, `points_for`, `points_against`, `weekly_rank`, `season`
+- `week` - Week number (1-17)
+- `team_id` - Team ID number
+- `team_name` - Team name/abbreviation
+- `points_for` - Points scored this week
+- `points_against` - Points allowed this week
+- `weekly_rank` - Ranking for this week (1 = highest scoring)
+- `season` - Year (e.g., 2024)
 
 ## Troubleshooting
 
