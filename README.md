@@ -1,13 +1,140 @@
 # ESPN Fantasy Football Data Scraper
 
-This tool scrapes ESPN fantasy football league box scores and generates BI-ready CSV files.
+A Python-based tool to scrape historical data from ESPN Fantasy Football leagues and export to CSV files.
 
 ## Features
-- Fetch box scores from ESPN fantasy football leagues
-- Generate formatted CSV files for BI tools
-- Support for multiple weeks/seasons
-- Progress indicators and error handling
 
-## Usage
-1. Run the script with your league ID:
-   
+- Scrape data from **multiple seasons** in one run
+- Supports both **public** and **private** ESPN leagues
+- Exports data to CSV files:
+  - `matchups.csv` - Weekly matchup results
+  - `player_stats.csv` - Individual player performance
+  - `team_stats.csv` - Team-level statistics
+
+## Setup Instructions
+
+### 1. Required Parameters (Always Needed)
+
+You need to set these parameters before running the scraper:
+
+#### **League ID** (Required)
+Your ESPN Fantasy Football League ID - found in your league URL:
+```
+https://fantasy.espn.com/football/league?leagueId=YOUR_LEAGUE_ID
+```
+
+#### **Years** (Required)
+The season years you want to scrape historical data for.
+
+### 2. ESPN Authentication (For Private Leagues Only)
+
+**Public leagues**: No authentication needed - skip to step 3!
+
+**Private leagues**: You need two authentication cookies from ESPN.
+
+#### How to Get Your ESPN Cookies:
+
+1. **Login to ESPN** - Go to your fantasy league page at https://fantasy.espn.com
+2. **Open Developer Tools**:
+   - Chrome/Edge: Press `F12` or right-click → "Inspect"
+   - Firefox: Press `F12` or right-click → "Inspect Element"
+3. **Navigate to Storage**:
+   - Chrome/Edge: Click the **"Application"** tab
+   - Firefox: Click the **"Storage"** tab
+4. **Find Cookies**:
+   - Expand "Cookies" in the left sidebar
+   - Click on `https://fantasy.espn.com`
+5. **Copy Two Values**:
+   - **`espn_s2`** - A long string (250+ characters)
+   - **`SWID`** - A shorter string (~38 characters, includes curly brackets like `{1E6CC139-...}`)
+
+#### Add Cookies to Replit Secrets:
+
+1. Click the **"Secrets"** tab (lock icon) in the left sidebar
+2. Add two secrets:
+   - Key: `ESPN_S2`, Value: [paste your espn_s2 cookie]
+   - Key: `SWID`, Value: [paste your SWID cookie]
+
+**Important**: Never share these cookies or commit them to your code!
+
+### 3. Configure the Workflow
+
+Update the workflow command with your league ID and desired years:
+
+1. The workflow is currently set to:
+   ```bash
+   python espn_ff_scraper.py --league_id 12345 --years 2023 2024
+   ```
+
+2. Edit the workflow command and replace:
+   - `12345` with your actual league ID
+   - `2023 2024` with the years you want to scrape
+
+**Or run manually in the Shell:**
+```bash
+# Single year
+python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2024
+
+# Multiple years
+python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2020 2021 2022 2023 2024
+
+# Specific week across years
+python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --week 10
+
+# Custom output directory
+python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --output ./data
+```
+
+## Command Line Options
+
+| Option | Description | Required | Default |
+|--------|-------------|----------|---------|
+| `--league_id` | ESPN Fantasy Football League ID | Yes | - |
+| `--years` | Season year(s) to scrape (can specify multiple) | No | 2023 |
+| `--week` | Specific week to scrape (default: all weeks) | No | All weeks |
+| `--output` | Output directory for CSV files | No | Current directory |
+
+## Output Files
+
+All CSV files include a `season` column to track which year the data is from:
+
+### matchups.csv
+Weekly head-to-head matchup results
+- `week`, `matchup_id`, `team_id`, `opponent_id`, `team_score`, `opponent_score`, `winner`, `season`
+
+### player_stats.csv
+Individual player performance by week
+- `week`, `team_id`, `player_id`, `player_name`, `position`, `slot_position`, `points`, `projected_points`, `season`
+
+### team_stats.csv
+Team-level statistics by week
+- `week`, `team_id`, `team_name`, `points_for`, `points_against`, `weekly_rank`, `season`
+
+## Troubleshooting
+
+### "403 Forbidden" Error
+- **For private leagues**: Make sure you've added `ESPN_S2` and `SWID` secrets correctly
+- **Check league ID**: Verify the league ID is correct
+- **Verify access**: Make sure you're a member of the league
+
+### "Invalid league ID" Error
+- Double-check your league ID from the ESPN URL
+- Verify the league exists for the years you're requesting
+
+### No Data for Certain Weeks
+- Early season weeks may not have data yet
+- Playoff weeks (15-17) may not exist for all league formats
+
+## Privacy & Security
+
+- **Never commit secrets** to your code or share them publicly
+- Store `ESPN_S2` and `SWID` in Replit Secrets only
+- These cookies give access to your ESPN account - treat them like passwords
+- Cookies may expire periodically - you'll need to retrieve fresh ones if scraping stops working
+
+## Technical Notes
+
+- Uses ESPN's unofficial Fantasy Football API (v3)
+- Supports seasons from 2010 onwards
+- Maximum 17 weeks per season (regular season + playoffs)
+- Data is appended to CSV files - delete existing files to start fresh

@@ -4,16 +4,28 @@ from typing import Dict, Any, Optional
 import logging
 
 class ESPNFantasyAPI:
-    def __init__(self, league_id: int, season: int):
+    def __init__(self, league_id: int, season: int, espn_s2: Optional[str] = None, swid: Optional[str] = None):
         self.league_id = league_id
         self.season = season
         self.base_url = "https://fantasy.espn.com/apis/v3/games/ffl"
+        self.espn_s2 = espn_s2
+        self.swid = swid
+        
+    def _get_cookies(self) -> Optional[Dict[str, str]]:
+        """Build cookies dict for private league authentication."""
+        if self.espn_s2 and self.swid:
+            return {
+                'espn_s2': self.espn_s2,
+                'SWID': self.swid
+            }
+        return None
         
     def get_league_data(self) -> Optional[Dict[str, Any]]:
         """Fetch league data from ESPN API."""
         try:
             url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}"
-            response = requests.get(url)
+            cookies = self._get_cookies()
+            response = requests.get(url, cookies=cookies)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
@@ -28,7 +40,8 @@ class ESPNFantasyAPI:
                 'view': ['mBoxscore', 'mMatchupScore']
             }
             url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}/matchups"
-            response = requests.get(url, params=params)
+            cookies = self._get_cookies()
+            response = requests.get(url, params=params, cookies=cookies)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:

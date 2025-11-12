@@ -3,6 +3,7 @@ import argparse
 import logging
 from datetime import datetime
 import sys
+import os
 from typing import Optional
 
 from espn_api import ESPNFantasyAPI
@@ -55,6 +56,15 @@ def main():
     if not validate_arguments(args):
         sys.exit(1)
 
+    # Get ESPN authentication credentials from environment variables (for private leagues)
+    espn_s2 = os.getenv('ESPN_S2')
+    swid = os.getenv('SWID')
+    
+    if espn_s2 and swid:
+        logging.info("Using ESPN authentication credentials for private league access")
+    else:
+        logging.info("No authentication credentials found - accessing public league only")
+
     csv_generator = CSVGenerator(args.output)
     
     # Determine weeks to process
@@ -64,8 +74,8 @@ def main():
     for year in args.years:
         logging.info(f"Processing season {year}...")
         
-        # Initialize API for this year
-        api = ESPNFantasyAPI(args.league_id, year)
+        # Initialize API for this year with optional authentication
+        api = ESPNFantasyAPI(args.league_id, year, espn_s2=espn_s2, swid=swid)
         
         # Validate league
         if not api.validate_league():
