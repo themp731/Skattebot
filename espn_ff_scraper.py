@@ -58,6 +58,26 @@ def clear_existing_csv_files(output_dir: str):
             os.remove(file_path)
             logging.info(f"Cleared existing file: {csv_file}")
 
+def has_week_been_played(boxscore_data: dict) -> bool:
+    """Check if a week has been played by looking for actual scores."""
+    if not boxscore_data:
+        return False
+    
+    # Check if there are any matchups with non-zero scores
+    schedule = boxscore_data.get('schedule', [])
+    if not schedule:
+        return False
+    
+    for matchup in schedule:
+        home_score = matchup.get('home', {}).get('totalPoints', 0)
+        away_score = matchup.get('away', {}).get('totalPoints', 0)
+        
+        # If any team has scored points, the week has been played
+        if home_score > 0 or away_score > 0:
+            return True
+    
+    return False
+
 def main():
     """Main execution function."""
     setup_logging()
@@ -111,6 +131,11 @@ def main():
             boxscore_data = api.get_boxscore(week)
             if not boxscore_data:
                 logging.warning(f"Skipping {year} week {week} - no data available")
+                continue
+            
+            # Check if the week has been played (has actual scores)
+            if not has_week_been_played(boxscore_data):
+                logging.info(f"Skipping {year} week {week} - no games played yet")
                 continue
 
             try:

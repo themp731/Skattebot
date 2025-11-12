@@ -61,7 +61,9 @@ The season years you want to scrape historical data for.
 
 **In the Shell (recommended):**
 
-**Note:** Each time you run the scraper, it will **clear and overwrite** existing CSV files to ensure fresh data without duplicates.
+**Note:** 
+- Each time you run the scraper, it will **clear and overwrite** existing CSV files to ensure fresh data without duplicates.
+- The scraper automatically **filters out weeks that haven't been played yet** (where all scores are 0), so you only get actual game data.
 
 ```bash
 # Single year
