@@ -1,0 +1,141 @@
+# ESPN Fantasy Football Scraper & Analyzer
+
+## Overview
+A comprehensive ESPN Fantasy Football data scraper and analysis tool that downloads historical league data and generates advanced statistical visualizations.
+
+**Current Status**: Fully functional with 2025 season data (weeks 1-10 processed)
+
+## Recent Changes (November 12, 2025)
+
+### Power Rankings System Added
+- Created comprehensive Power Rankings formula: `(Real Wins × 2) + (Top6 Wins) + (MVP-W)`
+- Added `power_rankings.png` visualization showing team rankings #1-#12
+- Added `power_breakdown.png` showing stacked bar chart of power score components
+- Updated `team_summary.csv` to include power_rank and power_score columns
+- Total visualizations: 8 charts now generated
+
+### Previous Features
+- ESPN API integration with private league authentication (ESPN_S2, SWID secrets)
+- Multi-season data scraping with automatic unplayed week filtering
+- Three CSV exports: matchups.csv, player_stats.csv, team_stats.csv
+- Human-readable team names, positions (QB/RB/WR/TE/K/D/ST), and slot positions (FLEX/BENCH/IR)
+- Advanced metrics: WAX (Wins Above Expectation), MVP-W, Top6 Wins
+- CSV overwrite mode (fresh data on each run)
+
+## Project Architecture
+
+### Core Files
+- **espn_ff_scraper.py** - Main scraper with CLI interface
+- **espn_api.py** - ESPN API wrapper for data fetching
+- **data_processor.py** - Data transformation and calculations
+- **csv_generator.py** - CSV file generation
+- **position_mapping.py** - Position/slot ID to name mappings
+- **config.py** - Configuration constants
+- **team_analysis.py** - Analysis and visualization generator (NEW)
+
+### Data Files
+- **team_stats.csv** - Weekly team statistics (120 rows for 2025)
+- **matchups.csv** - Head-to-head matchup results (3,469 rows)
+- **player_stats.csv** - Individual player performance (3,185 rows)
+- **team_summary.csv** - Season summary with power rankings (12 teams)
+
+### Visualizations (8 total)
+1. `power_rankings.png` - Power rankings leaderboard
+2. `power_breakdown.png` - Power score components (stacked bar)
+3. `wax_leaderboard.png` - Luck index (WAX)
+4. `wins_vs_expected.png` - Real vs expected wins scatter
+5. `total_points.png` - Total points scored
+6. `weekly_performance.png` - Weekly scoring trends
+7. `weekly_rank_heatmap.png` - Weekly rank grid
+8. `consistency.png` - Team consistency analysis
+
+## User Workflow
+
+### 1. Scraping Data
+```bash
+python espn_ff_scraper.py --league_id 149388 --years 2024 2025
+```
+- Authenticates using ESPN_S2 and SWID secrets
+- Filters out unplayed weeks automatically
+- Overwrites CSV files on each run
+
+### 2. Analyzing Data
+```bash
+python team_analysis.py
+```
+- Generates team_summary.csv with power rankings
+- Creates 8 visualization charts in visualizations/ folder
+- Outputs summary table to console
+
+## Key Metrics Explained
+
+### Power Score
+`(Real Wins × 2) + (Top6 Wins) + (MVP-W)`
+- Weights actual matchup wins heavily (2x)
+- Rewards consistent top-half scoring (Top6 Wins)
+- Includes theoretical all-play performance (MVP-W)
+
+### MVP-W (Minimized Variance Potential Wins)
+- Theoretical win rate if team played all opponents every week
+- Range: 0-1 per week, summed across season
+- Example: 0.8182 in week 1 = would beat 9 of 11 teams
+
+### WAX (Wins Above Expectation)
+`Real Wins - MVP-W`
+- Positive = lucky (winning more than expected)
+- Negative = unlucky (losing despite good scoring)
+- Identifies scheduling luck vs. skill
+
+### Top6 Wins
+- Binary: 1 if ranked in top 6 scorers that week, 0 otherwise
+- Measures consistency of high-scoring performances
+
+## 2025 Season Insights
+
+### Power Rankings Top 3
+1. **MP** - Power Score: 31.73 (8 wins, dominant)
+2. **sgf** - Power Score: 24.18 (6 wins, consistent)
+3. **KIRK & GV** - Power Score: 23.36 (tied)
+
+### Luckiest Teams (WAX)
+1. **GEMP** - WAX: +2.00 (6 wins vs 4.0 expected)
+2. **KESS** - WAX: +0.91
+3. **GV** - WAX: +0.64
+
+### Unluckiest Teams (WAX)
+1. **KIRK** - WAX: -1.36 (5 wins vs 6.4 expected)
+2. **3000** - WAX: -1.18
+3. **ZSF** - WAX: -0.64
+
+## Technical Notes
+
+### API Behavior
+- ESPN returns ALL season matchups in one API response
+- Each matchup has a `matchupPeriodId` indicating its actual week
+- Must filter by `matchupPeriodId == requested_week` to get correct data
+- Unplayed weeks return week 1 data (must check matchupPeriodId for filtering)
+
+### Filtering Logic
+```python
+def has_week_been_played(boxscore_data, requested_week):
+    # Find matchups where matchupPeriodId == requested_week
+    # Check if any have scores > 0
+    # Returns True only if week has actual game data
+```
+
+### Dependencies
+- Python packages: pandas, matplotlib, seaborn, requests
+- Replit secrets: ESPN_S2, SWID (for private league access)
+
+## Future Enhancements (Ideas)
+- Multi-season power rankings comparison
+- Playoff probability calculator
+- Trade value analyzer
+- Weekly matchup predictions
+- Historical trend analysis across years
+
+## Maintenance Notes
+- ESPN cookies (ESPN_S2, SWID) may expire periodically
+- Replit secrets are stored securely, never committed to code
+- CSV files auto-overwrite to prevent duplicates
+- Visualizations regenerate on each analysis run

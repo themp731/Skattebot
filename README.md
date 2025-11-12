@@ -88,14 +88,22 @@ python team_analysis.py
 ```
 
 **This creates:**
-- **team_summary.csv** - Season summary with WAX (Wins Above Expectation) metric
+- **team_summary.csv** - Season summary with Power Rankings and WAX (Wins Above Expectation) metric
 - **visualizations/** folder containing:
+  - `power_rankings.png` - Overall power rankings (#1-#12)
+  - `power_breakdown.png` - Stacked bar chart showing power score components
   - `wax_leaderboard.png` - Luck index showing who's running hot/cold
   - `wins_vs_expected.png` - Real wins vs expected wins scatter plot
   - `total_points.png` - Total points scored by each team
   - `weekly_performance.png` - Weekly scoring trends over time
   - `weekly_rank_heatmap.png` - Visual grid of weekly rankings
   - `consistency.png` - Team consistency analysis
+
+**About Power Rankings:**
+```
+[Power Score] = (Real Wins × 2) + (Top6 Wins) + (MVP-W)
+```
+This formula heavily weights actual matchup wins while also rewarding teams that consistently score in the top half and beat multiple opponents each week.
 
 **About WAX (Wins Above Expectation):**
 ```

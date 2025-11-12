@@ -45,11 +45,18 @@ def calculate_summary_stats(df):
         'weekly_rank': 'avg_weekly_rank'
     })
     
+    # Calculate Power Rankings
+    # Formula: (Real Wins × 2) + (Top6 Wins × 1) + (MVP-W × 1)
+    # Weights actual wins heavily, but rewards consistent high scoring
+    summary['power_score'] = (summary['real_wins'] * 2) + summary['top6_wins'] + summary['mvp_w']
+    summary['power_rank'] = summary.groupby('season')['power_score'].rank(ascending=False, method='min').astype(int)
+    
     # Round numeric columns
     summary['wax'] = summary['wax'].round(2)
     summary['ppg'] = summary['ppg'].round(2)
     summary['papg'] = summary['papg'].round(2)
     summary['avg_weekly_rank'] = summary['avg_weekly_rank'].round(2)
+    summary['power_score'] = summary['power_score'].round(2)
     
     # Sort by WAX (descending - most lucky first)
     summary = summary.sort_values('wax', ascending=False)
@@ -61,22 +68,23 @@ def print_summary_table(summary):
     print("\n" + "="*100)
     print("ESPN FANTASY FOOTBALL TEAM SUMMARY - 2024-2025 SEASONS")
     print("="*100)
-    print("\nWins Above Expectation (WAX) is derived via the following equation:")
+    print("\nPOWER RANKINGS FORMULA:")
+    print("  [Power Score] = (Real Wins × 2) + (Top6 Wins × 1) + (MVP-W × 1)")
+    print("  This weights actual matchup wins heavily while rewarding consistent high scoring.")
+    print("\nWINS ABOVE EXPECTATION (WAX):")
     print("  [WAX] = [Real Wins] - [MVP-W]")
-    print("\n[MVP-W], or Minimized Variance Potential Wins, represents a win-value agnostic")
-    print("to the weekly opponent (by calculating a theoretical win rate [0-1] assuming the")
-    print("team played all teams every week). Thus, the greater the WAX value, the more the")
-    print("manager is \"running hot\" (i.e. lucky as fuck).")
+    print("  MVP-W represents theoretical wins if playing all teams every week.")
+    print("  Positive WAX = lucky (running hot), Negative WAX = unlucky (running cold).")
     print("="*100)
     print()
     
     # Select and order columns for display
-    display_cols = ['team_name', 'season', 'real_wins', 'mvp_w', 'wax', 'top6_wins', 
-                   'points_for', 'ppg', 'avg_weekly_rank', 'games_played']
+    display_cols = ['team_name', 'season', 'power_rank', 'power_score', 'real_wins', 
+                   'top6_wins', 'mvp_w', 'wax', 'ppg', 'games_played']
     
     display_df = summary[display_cols].copy()
-    display_df.columns = ['Team', 'Season', 'Wins', 'MVP-W', 'WAX', 'Top6', 
-                          'Total PF', 'PPG', 'Avg Rank', 'GP']
+    display_df.columns = ['Team', 'Season', 'Rank', 'Power', 'Wins', 'Top6', 
+                          'MVP-W', 'WAX', 'PPG', 'GP']
     
     print(display_df.to_string(index=False))
     print("\n" + "="*100)
@@ -91,6 +99,41 @@ def create_visualizations(df, summary):
     # Get latest season data
     latest_season = df['season'].max()
     current_summary = summary[summary['season'] == latest_season].copy()
+    
+    # Figure 0: Power Rankings
+    fig, ax = plt.subplots(figsize=(12, 9))
+    
+    # Sort by power score
+    power_sorted = current_summary.sort_values('power_score', ascending=True)
+    
+    # Create color map based on rank
+    colors_power = plt.cm.RdYlGn(np.linspace(0.3, 0.9, len(power_sorted)))[::-1]
+    bars = ax.barh(power_sorted['team_name'], power_sorted['power_score'], 
+                   color=colors_power, alpha=0.85, edgecolor='black', linewidth=1.5)
+    
+    ax.set_xlabel('Power Score', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Team', fontsize=12, fontweight='bold')
+    ax.set_title(f'Power Rankings - {latest_season} Season\nFormula: (Wins × 2) + (Top6 Wins) + (MVP-W)', 
+                 fontsize=14, fontweight='bold', pad=20)
+    ax.grid(axis='x', alpha=0.3)
+    
+    # Add value labels and rank
+    for bar, (idx, row) in zip(bars, power_sorted.iterrows()):
+        width = bar.get_width()
+        # Power score on the right
+        ax.text(width + 0.3, bar.get_y() + bar.get_height()/2, 
+               f'{width:.2f}', ha='left', va='center', 
+               fontweight='bold', fontsize=10)
+        # Rank number on the left
+        ax.text(0.5, bar.get_y() + bar.get_height()/2, 
+               f'#{int(row["power_rank"])}', ha='left', va='center', 
+               fontweight='bold', fontsize=11, color='white',
+               bbox=dict(boxstyle='round,pad=0.3', facecolor='black', alpha=0.7))
+    
+    plt.tight_layout()
+    plt.savefig('visualizations/power_rankings.png', dpi=300, bbox_inches='tight')
+    print("✓ Created: visualizations/power_rankings.png")
+    plt.close()
     
     # Figure 1: WAX Leaderboard
     fig, ax = plt.subplots(figsize=(12, 8))
@@ -157,7 +200,7 @@ def create_visualizations(df, summary):
     fig, ax = plt.subplots(figsize=(12, 8))
     
     sorted_summary = current_summary.sort_values('points_for', ascending=True)
-    colors_pf = plt.cm.viridis(np.linspace(0.3, 0.9, len(sorted_summary)))
+    colors_pf = plt.cm.RdYlGn(np.linspace(0.3, 0.9, len(sorted_summary)))
     bars = ax.barh(sorted_summary['team_name'], sorted_summary['points_for'], 
                    color=colors_pf, alpha=0.8)
     
@@ -179,7 +222,44 @@ def create_visualizations(df, summary):
     print("✓ Created: visualizations/total_points.png")
     plt.close()
     
-    # Figure 4: Weekly Performance Over Time
+    # Figure 4: Power Score Breakdown (Stacked Bar)
+    fig, ax = plt.subplots(figsize=(12, 9))
+    
+    breakdown_sorted = current_summary.sort_values('power_score', ascending=True)
+    
+    # Components: Real Wins (×2), Top6 Wins, MVP-W
+    wins_component = breakdown_sorted['real_wins'] * 2
+    top6_component = breakdown_sorted['top6_wins']
+    mvp_component = breakdown_sorted['mvp_w']
+    
+    y_pos = np.arange(len(breakdown_sorted))
+    
+    p1 = ax.barh(y_pos, wins_component, label='Real Wins (×2)', color='#2ecc71', alpha=0.9)
+    p2 = ax.barh(y_pos, top6_component, left=wins_component, label='Top6 Wins', color='#3498db', alpha=0.9)
+    p3 = ax.barh(y_pos, mvp_component, left=wins_component + top6_component, 
+                label='MVP-W', color='#9b59b6', alpha=0.9)
+    
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(breakdown_sorted['team_name'])
+    ax.set_xlabel('Power Score Components', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Team', fontsize=12, fontweight='bold')
+    ax.set_title(f'Power Score Breakdown - {latest_season} Season', 
+                 fontsize=14, fontweight='bold', pad=20)
+    ax.legend(loc='lower right', fontsize=10, framealpha=0.9)
+    ax.grid(axis='x', alpha=0.3)
+    
+    # Add total labels
+    for i, (idx, row) in enumerate(breakdown_sorted.iterrows()):
+        total = row['power_score']
+        ax.text(total + 0.3, i, f'{total:.2f}', 
+               ha='left', va='center', fontweight='bold', fontsize=10)
+    
+    plt.tight_layout()
+    plt.savefig('visualizations/power_breakdown.png', dpi=300, bbox_inches='tight')
+    print("✓ Created: visualizations/power_breakdown.png")
+    plt.close()
+    
+    # Figure 5: Weekly Performance Over Time
     fig, ax = plt.subplots(figsize=(14, 8))
     
     # Get current season data
@@ -203,7 +283,7 @@ def create_visualizations(df, summary):
     print("✓ Created: visualizations/weekly_performance.png")
     plt.close()
     
-    # Figure 5: Weekly Rank Heatmap
+    # Figure 6: Weekly Rank Heatmap
     fig, ax = plt.subplots(figsize=(14, 10))
     
     # Create pivot table for heatmap
@@ -225,7 +305,7 @@ def create_visualizations(df, summary):
     print("✓ Created: visualizations/weekly_rank_heatmap.png")
     plt.close()
     
-    # Figure 6: Consistency Analysis (Std Dev of Weekly Rank)
+    # Figure 7: Consistency Analysis (Std Dev of Weekly Rank)
     fig, ax = plt.subplots(figsize=(12, 8))
     
     consistency = current_df.groupby('team_name').agg({
@@ -294,7 +374,9 @@ def main():
     print("ANALYSIS COMPLETE!")
     print("="*100)
     print("\nGenerated Files:")
-    print("  • team_summary.csv - Summary statistics table")
+    print("  • team_summary.csv - Summary statistics table with Power Rankings")
+    print("  • visualizations/power_rankings.png - Overall power rankings")
+    print("  • visualizations/power_breakdown.png - Power score component breakdown")
     print("  • visualizations/wax_leaderboard.png - Luck index ranking")
     print("  • visualizations/wins_vs_expected.png - Real wins vs expected wins")
     print("  • visualizations/total_points.png - Total points scored by team")
