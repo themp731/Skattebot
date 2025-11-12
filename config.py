@@ -21,7 +21,7 @@ CSV_HEADERS = {
     ],
     'team_stats': [
         'week', 'team_id', 'team_name', 'points_for',
-        'points_against', 'weekly_rank', 'season'
+        'points_against', 'weekly_rank', 'wins', 'top6_wins', 'mvp_w', 'season'
     ]
 }
 

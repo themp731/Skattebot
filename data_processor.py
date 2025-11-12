@@ -120,14 +120,34 @@ class DataProcessor:
             # Sort teams by points
             sorted_teams = sorted(team_points.items(), key=lambda x: x[1], reverse=True)
             
+            # Calculate stats for each team
+            total_teams = len(team_points)
+            
             for rank, (team_id, points) in enumerate(sorted_teams, 1):
+                points_against = team_points_against.get(team_id, 0)
+                
+                # Wins: 1 if won matchup, 0 if lost
+                wins = 1 if points > points_against else 0
+                
+                # Top6Wins: 1 if in top 6 scorers, 0 otherwise
+                top6_wins = 1 if rank <= 6 else 0
+                
+                # mvp_w: all-play winning percentage
+                # Count how many teams this team would have beaten
+                teams_beaten = sum(1 for other_points in team_points.values() if points > other_points)
+                # Divide by number of other teams (total - 1)
+                mvp_w = teams_beaten / (total_teams - 1) if total_teams > 1 else 0
+                
                 team_stats.append({
                     'week': week,
                     'team_id': team_id,
                     'team_name': self.teams_map.get(team_id, f"Team {team_id}"),
                     'points_for': points,
-                    'points_against': team_points_against.get(team_id, 0),
-                    'weekly_rank': rank
+                    'points_against': points_against,
+                    'weekly_rank': rank,
+                    'wins': wins,
+                    'top6_wins': top6_wins,
+                    'mvp_w': round(mvp_w, 4)
                 })
         except (KeyError, TypeError) as e:
             logging.error(f"Error processing team stats: {e}")

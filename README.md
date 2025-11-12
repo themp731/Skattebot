@@ -114,13 +114,16 @@ Individual player performance by week with position names
 - `season` - Year (e.g., 2024)
 
 ### team_stats.csv
-Team-level statistics by week
+Team-level statistics by week with advanced metrics
 - `week` - Week number (1-17)
 - `team_id` - Team ID number
 - `team_name` - Team name/abbreviation
 - `points_for` - Points scored this week
 - `points_against` - Points allowed this week
 - `weekly_rank` - Ranking for this week (1 = highest scoring)
+- `wins` - Matchup result (1 = won, 0 = lost)
+- `top6_wins` - Top-half scoring (1 = top 6, 0 = bottom 6)
+- `mvp_w` - All-play win percentage (0-1 scale, represents wins if playing all 11 opponents)
 - `season` - Year (e.g., 2024)
 
 ## Troubleshooting
