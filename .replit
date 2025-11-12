@@ -21,13 +21,14 @@ author = "agent"
 
 [workflows.workflow.metadata]
 agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
+outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python espn_ff_scraper.py --league_id 12345 --week 1"
+args = "python espn_ff_scraper.py --league_id 12345 --years 2023 2024"
 
 [deployment]
 run = ["sh", "-c", "python espn_ff_scraper.py --league_id 12345 --week 1"]
+
+[agent]
+expertMode = true
