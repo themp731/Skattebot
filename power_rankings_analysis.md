@@ -3,6 +3,49 @@
 
 ---
 
+## Understanding the Metrics
+
+Before we roast your teams, let's explain how we're measuring your mediocrity:
+
+### **Power Score** (The Overall Ranking)
+```
+Power Score = (Real Wins × 2) + (Top6 Wins) + (MVP-W)
+```
+This is our ultimate measure of team quality. It heavily weights **actual matchup wins** (multiplied by 2) because winning is what matters most. But it also rewards teams that consistently score in the top half (**Top6 Wins**) and would beat multiple opponents each week (**MVP-W**). A high power score means you're legitimately good, not just lucky.
+
+### **Real Wins**
+Your actual head-to-head record. Pretty simple: did you score more than your opponent? These are the only wins that show up in the standings, which is why they're weighted 2x in the Power Score.
+
+### **MVP-W** (Minimized Variance Potential Wins)
+This is your theoretical win rate if you played **all teams in the league every single week**. 
+
+**How it's calculated:**
+- Each week, we rank all 12 teams by their scores
+- Your MVP-W for that week = (number of teams you beat) ÷ (total teams - 1)
+- Example: If you scored 4th-highest in week 1, you beat 8 teams → MVP-W = 8/11 = 0.727
+
+Sum this across all weeks, and you get your season MVP-W. It measures how dominant your scoring is regardless of who you actually played. High scorers have high MVP-W; low scorers don't.
+
+### **Top6 Wins**
+Binary metric: did you finish in the **top half** of scorers that week? 
+- 1 point if you ranked #1-6 
+- 0 points if you ranked #7-12
+
+Sum across all weeks. This rewards consistency—teams that regularly score well get more Top6 Wins. It's harder to fluke your way into consistent top-6 finishes than it is to steal a lucky head-to-head win.
+
+### **WAX** (Wins Above Expectation) - The Luck Index
+```
+WAX = Real Wins - MVP-W
+```
+This tells you if you're **lucky or unlucky**:
+- **Positive WAX** = You're lucky (winning more games than your scoring deserves)
+- **Negative WAX** = You're unlucky (losing games despite good scoring)
+- **WAX near 0** = You're getting exactly what you deserve
+
+Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That means you've won 2 more games than expected based on your scoring. You're benefiting from a favorable schedule or weak opponents having bad weeks against you.
+
+---
+
 ## Overall Power Rankings
 
 ![Power Rankings](visualizations/power_rankings.png)
@@ -29,77 +72,76 @@ Solidly in second place, you're doing everything right: consistent top-6 finishe
 
 ---
 
-### #3 (Tied) KIRK - Power Score: 23.36
-**Record: 5-5 | PPG: 111.27 | WAX: -1.36**
+### #3 GV - Power Score: 23.36
+**Record: 6-4 | PPG: 103.66 | WAX: +0.64**
 
-Oh, KIRK. You poor, unfortunate soul. You're scoring 111 PPG (third-highest in the league!), finishing in the top 6 seven times, and somehow you're sitting at 5-5. That -1.36 WAX is the league's worst luck—you should have 6-7 wins by now. You're the fantasy football equivalent of a talented actor who never gets nominated for an Oscar. Maybe next week schedule some easier opponents? Oh wait, that's not how this works.
+Legitimately good, but let's be honest—you're getting a little help from the schedule gods. That +0.64 WAX means you've won 0.6 more games than your scoring suggests. Your 103.66 PPG is solid, but sitting at 6-4 is partly luck. Keep it up, but watch out for regression.
 
 ---
 
-### #3 (Tied) GV - Power Score: 23.36
-**Record: 6-4 | PPG: 103.66 | WAX: +0.64**
+### #3 KIRK - Power Score: 23.36
+**Record: 5-5 | PPG: 111.27 | WAX: -1.36**
 
-Tied for third with KIRK, but let's be real—you're not the same. KIRK is unlucky and elite; you're lucky and good. That +0.64 WAX means you've stolen at least one win you didn't deserve. Your 103 PPG is middle-of-the-pack, but you're sitting pretty at 6-4 because the fantasy gods smiled upon you. Enjoy it while it lasts, because regression to the mean is coming for you.
+Oh, KIRK. You poor, unfortunate soul. You're scoring 111.27 PPG, finishing in the top 6 7 times, and somehow you're sitting at 5-5. That -1.36 WAX is brutal—you should have at least 6-4 by now. You're the fantasy football equivalent of a talented actor who never gets nominated for an Oscar. Maybe next week schedule some easier opponents? Oh wait, that's not how this works.
 
 ---
 
 ### #5 ZSF - Power Score: 22.64
 **Record: 5-5 | PPG: 111.25 | WAX: -0.64**
 
-Another victim of bad luck with -0.64 WAX. You're scoring 111 PPG (fourth-best!), but sitting at .500 because apparently your opponents decided to have their best weeks against you. Seven top-6 finishes should translate to more wins, but the fantasy football scheduling algorithm clearly has it out for you. At least you can take solace in knowing you're better than your record suggests. Small victories, right?
+Another victim of bad luck with -0.64 WAX. You're scoring 111.25 PPG with 7 top-6 finishes, but sitting at 5-5 because apparently your opponents save their best weeks for you. The fantasy football scheduling algorithm clearly has it out for you. At least you can take solace in knowing you're better than your record suggests.
 
 ---
 
 ### #6 PATS - Power Score: 21.55
 **Record: 5-5 | PPG: 106.40 | WAX: -0.55**
 
-The most inconsistent team in the league (4.09 rank standard deviation), you're either a hero or a zero each week. That -0.55 WAX suggests you're slightly unlucky, but honestly, with your week-to-week volatility, it's hard to tell if you're unlucky or just bad at setting your lineup. Six top-6 finishes mixed with some absolute stinkers. Maybe try checking the injury report before Sunday?
+Another victim of bad luck with -0.55 WAX. You're scoring 106.40 PPG with 6 top-6 finishes, but sitting at 5-5 because apparently your opponents save their best weeks for you. The fantasy football scheduling algorithm clearly has it out for you. At least you can take solace in knowing you're better than your record suggests.
 
 ---
 
 ### #7 GEMP - Power Score: 19.00
 **Record: 6-4 | PPG: 100.81 | WAX: +2.00**
 
-Oh, GEMP. You beautiful, lucky bastard. You're ranked 7th in power but sitting at 6-4 because you have a league-leading +2.00 WAX. That means you've won TWO more games than your mediocre 100.81 PPG deserves. You're the kid who guesses on every test question and somehow passes. Enjoy your fraudulent record while it lasts—the fantasy gods giveth, and they definitely taketh away.
+Oh, GEMP. You beautiful, lucky bastard. You're ranked #7 in power but sitting at 6-4 because you have a league-leading +2.00 WAX. That means you've won TWO more games than your mediocre 100.81 PPG deserves. You're the kid who guesses on every test question and somehow passes. Enjoy your fraudulent record while it lasts—the fantasy gods giveth, and they definitely taketh away.
 
 ---
 
 ### #8 POO - Power Score: 18.45
 **Record: 5-5 | PPG: 102.37 | WAX: +0.55**
 
-A bit lucky (+0.55 WAX) but mostly just average. You're scoring 102 PPG in a 12-team league, which is... fine, I guess? Your power ranking suggests you're fighting for a playoff spot, and that's exactly where you belong—on the bubble, hoping for the best, preparing for mediocrity. The good news is you're not in last place. The bad news is that's the only good news.
+Even with +0.55 WAX helping you out, you're still sitting at 5-5. That 102.37 PPG isn't doing you any favors. You're winning more than you should, and you're still struggling. Imagine if you were unlucky?
 
 ---
 
 ### #9 ROUX - Power Score: 17.09
 **Record: 4-6 | PPG: 96.72 | WAX: -0.09**
 
-Barely unlucky, mostly just not good. That 96.72 PPG is third-worst in the league, and your 4-6 record reflects it. You've had five top-6 finishes somehow, which means you also had five bottom-6 finishes. Consistency is apparently not your strong suit. Neither is winning, apparently. Maybe next year will be your year? (Narrator: It won't be.)
+Fighting for scraps with a 4-6 record. That 96.72 PPG is bottom-tier, and your -0.09 WAX shows the fantasy gods aren't helping. Consistency isn't your strong suit. Neither is winning, apparently.
 
 ---
 
 ### #10 KESS - Power Score: 17.09
 **Record: 5-5 | PPG: 99.78 | WAX: +0.91**
 
-The most consistent terrible team in the league (2.42 rank std dev), you somehow have 5 wins despite a pathetic 99.78 PPG. That +0.91 WAX means you're winning games you have no business winning. You're like the relief pitcher who keeps giving up runs but somehow gets credited with wins. The most consistent thing about you is your ability to consistently underperform while still stumbling into victories.
+You somehow have 5 wins despite a pathetic 99.78 PPG. That +0.91 WAX means you're winning games you have no business winning. You're like the relief pitcher who keeps giving up runs but somehow gets credited with wins. The most consistent thing about you is your ability to consistently underperform while still stumbling into victories.
 
 ---
 
 ### #11 WOOD - Power Score: 12.36
 **Record: 3-7 | PPG: 91.84 | WAX: -0.36**
 
-Third-worst PPG (91.84), second-worst record (3-7), and you're even slightly unlucky (-0.36 WAX). That's impressive in all the wrong ways. You're not just bad—you're bad AND unfortunate. It's like watching someone trip on a banana peel and then get hit by a bus. At least you're slightly unlucky, so you can blame the universe instead of your terrible roster management?
+Second-to-last with 3-7. Your 91.84 PPG is brutal, and even with -0.36 WAX, you can't escape the bottom. You're not just bad—you're bad AND getting exactly what you deserve. At least you're not in last place?
 
 ---
 
 ### #12 3000 - Power Score: 9.18
 **Record: 2-8 | PPG: 91.15 | WAX: -1.18**
 
-Dead last. Basement dweller. The league's punching bag. You're scoring 91 PPG (worst in the league), you have 2 wins (also worst), and you're STILL unlucky (-1.18 WAX)! You should theoretically have 3 wins, but nope, even the universe has given up on you. You're so consistently bad (2.46 rank std dev) that opposing teams don't even bother checking scores—they just assume they won. 
-
-The good news? You can only go up from here. The bad news? That's what you said last year.
+Dead last. Basement dweller. The league's punching bag. You're scoring 91.15 PPG (worst in the league), you have 2 wins (also worst), and you're STILL unlucky (-1.18 WAX)! You should theoretically have 3 wins, but nope, even the universe has given up on you. The good news? You can only go up from here. The bad news? That's what you said last year.
 
 ---
+
 
 ## Final Thoughts
 

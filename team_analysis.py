@@ -107,7 +107,7 @@ def create_visualizations(df, summary):
     power_sorted = current_summary.sort_values('power_score', ascending=True)
     
     # Create color map based on rank
-    colors_power = plt.cm.RdYlGn(np.linspace(0.3, 0.9, len(power_sorted)))[::-1]
+    colors_power = plt.cm.get_cmap('RdYlGn')(np.linspace(0.3, 0.9, len(power_sorted)))[::-1]
     bars = ax.barh(power_sorted['team_name'], power_sorted['power_score'], 
                    color=colors_power, alpha=0.85, edgecolor='black', linewidth=1.5)
     
@@ -200,7 +200,7 @@ def create_visualizations(df, summary):
     fig, ax = plt.subplots(figsize=(12, 8))
     
     sorted_summary = current_summary.sort_values('points_for', ascending=True)
-    colors_pf = plt.cm.RdYlGn(np.linspace(0.3, 0.9, len(sorted_summary)))
+    colors_pf = plt.cm.get_cmap('RdYlGn')(np.linspace(0.3, 0.9, len(sorted_summary)))
     bars = ax.barh(sorted_summary['team_name'], sorted_summary['points_for'], 
                    color=colors_pf, alpha=0.8)
     
@@ -354,6 +354,49 @@ def generate_markdown_analysis(summary, filename='power_rankings_analysis.md'):
 
 ---
 
+## Understanding the Metrics
+
+Before we roast your teams, let's explain how we're measuring your mediocrity:
+
+### **Power Score** (The Overall Ranking)
+```
+Power Score = (Real Wins × 2) + (Top6 Wins) + (MVP-W)
+```
+This is our ultimate measure of team quality. It heavily weights **actual matchup wins** (multiplied by 2) because winning is what matters most. But it also rewards teams that consistently score in the top half (**Top6 Wins**) and would beat multiple opponents each week (**MVP-W**). A high power score means you're legitimately good, not just lucky.
+
+### **Real Wins**
+Your actual head-to-head record. Pretty simple: did you score more than your opponent? These are the only wins that show up in the standings, which is why they're weighted 2x in the Power Score.
+
+### **MVP-W** (Minimized Variance Potential Wins)
+This is your theoretical win rate if you played **all teams in the league every single week**. 
+
+**How it's calculated:**
+- Each week, we rank all 12 teams by their scores
+- Your MVP-W for that week = (number of teams you beat) ÷ (total teams - 1)
+- Example: If you scored 4th-highest in week 1, you beat 8 teams → MVP-W = 8/11 = 0.727
+
+Sum this across all weeks, and you get your season MVP-W. It measures how dominant your scoring is regardless of who you actually played. High scorers have high MVP-W; low scorers don't.
+
+### **Top6 Wins**
+Binary metric: did you finish in the **top half** of scorers that week? 
+- 1 point if you ranked #1-6 
+- 0 points if you ranked #7-12
+
+Sum across all weeks. This rewards consistency—teams that regularly score well get more Top6 Wins. It's harder to fluke your way into consistent top-6 finishes than it is to steal a lucky head-to-head win.
+
+### **WAX** (Wins Above Expectation) - The Luck Index
+```
+WAX = Real Wins - MVP-W
+```
+This tells you if you're **lucky or unlucky**:
+- **Positive WAX** = You're lucky (winning more games than your scoring deserves)
+- **Negative WAX** = You're unlucky (losing games despite good scoring)
+- **WAX near 0** = You're getting exactly what you deserve
+
+Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That means you've won 2 more games than expected based on your scoring. You're benefiting from a favorable schedule or weak opponents having bad weeks against you.
+
+---
+
 ## Overall Power Rankings
 
 ![Power Rankings](visualizations/power_rankings.png)
@@ -381,29 +424,59 @@ def generate_markdown_analysis(summary, filename='power_rankings_analysis.md'):
         ppg = row['ppg']
         wax = row['wax']
         power = row['power_score']
+        top6 = int(row['top6_wins'])
+        mvp_w = row['mvp_w']
         
         # Generate custom snark based on position and stats
         if rank == 1:
             analysis = snark_templates[1].format(wins=wins, wax=wax)
         elif rank == 2:
             analysis = snark_templates[2].format(wax=wax)
-        elif wax < -1.0:
-            analysis = f"Oh, {team}. You poor, unfortunate soul. You're scoring {ppg:.2f} PPG (third-highest in the league!), finishing in the top 6 seven times, and somehow you're sitting at {wins}-{losses}. That {wax:+.2f} WAX is the league's worst luck—you should have {wins+2}-{losses-2} wins by now. You're the fantasy football equivalent of a talented actor who never gets nominated for an Oscar. Maybe next week schedule some easier opponents? Oh wait, that's not how this works."
-        elif wax > 1.5:
-            analysis = f"Oh, {team}. You beautiful, lucky bastard. You're ranked #{rank} in power but sitting at {wins}-{losses} because you have a league-leading {wax:+.2f} WAX. That means you've won TWO more games than your mediocre {ppg:.2f} PPG deserves. You're the kid who guesses on every test question and somehow passes. Enjoy your fraudulent record while it lasts—the fantasy gods giveth, and they definitely taketh away."
-        elif wax > 0.5:
-            analysis = f"Tied for third with KIRK, but let's be real—you're not the same. KIRK is unlucky and elite; you're lucky and good. That {wax:+.2f} WAX means you've stolen at least one win you didn't deserve. Your {ppg:.2f} PPG is middle-of-the-pack, but you're sitting pretty at {wins}-{losses} because the fantasy gods smiled upon you. Enjoy it while it lasts, because regression to the mean is coming for you."
-        elif wax < -0.5:
-            analysis = f"Another victim of bad luck with {wax:+.2f} WAX. You're scoring {ppg:.2f} PPG (fourth-best!), but sitting at .500 because apparently your opponents decided to have their best weeks against you. Seven top-6 finishes should translate to more wins, but the fantasy football scheduling algorithm clearly has it out for you. At least you can take solace in knowing you're better than your record suggests. Small victories, right?"
-        elif rank <= 3:
-            analysis = f"Legitimately good with {wins} wins and {ppg:.2f} PPG. Your {wax:+.2f} WAX shows you're getting what you deserve—no luck, no excuses, just solid roster management. Keep it up and you'll be battling for the championship."
-        elif rank >= 10:
-            if wax < -0.5:
-                analysis = f"Dead last. Basement dweller. The league's punching bag. You're scoring {ppg:.2f} PPG (worst in the league), you have {wins} wins (also worst), and you're STILL unlucky ({wax:+.2f} WAX)! You should theoretically have {wins+1} wins, but nope, even the universe has given up on you. The good news? You can only go up from here. The bad news? That's what you said last year."
+        elif rank == 3:
+            if wax < -1.0:
+                # Unlucky elite team (like KIRK)
+                analysis = f"Oh, {team}. You poor, unfortunate soul. You're scoring {ppg:.2f} PPG, finishing in the top 6 {top6} times, and somehow you're sitting at {wins}-{losses}. That {wax:+.2f} WAX is brutal—you should have at least {int(mvp_w)}-{losses-(int(mvp_w)-wins)} by now. You're the fantasy football equivalent of a talented actor who never gets nominated for an Oscar. Maybe next week schedule some easier opponents? Oh wait, that's not how this works."
             else:
-                analysis = f"Barely unlucky, mostly just not good. That {ppg:.2f} PPG is third-worst in the league, and your {wins}-{losses} record reflects it. Consistency is apparently not your strong suit. Neither is winning, apparently. Maybe next year will be your year? (Narrator: It won't be.)"
-        else:
-            analysis = f"A bit lucky ({wax:+.2f} WAX) but mostly just average. You're scoring {ppg:.2f} PPG in a 12-team league, which is... fine, I guess? Your power ranking suggests you're fighting for a playoff spot, and that's exactly where you belong—on the bubble, hoping for the best, preparing for mediocrity. The good news is you're not in last place. The bad news is that's the only good news."
+                # Lucky team in 3rd (like GV)
+                analysis = f"Legitimately good, but let's be honest—you're getting a little help from the schedule gods. That {wax:+.2f} WAX means you've won {abs(wax):.1f} more games than your scoring suggests. Your {ppg:.2f} PPG is solid, but sitting at {wins}-{losses} is partly luck. Keep it up, but watch out for regression."
+        elif rank <= 6:
+            if wax < -0.5:
+                # Unlucky but good
+                analysis = f"Another victim of bad luck with {wax:+.2f} WAX. You're scoring {ppg:.2f} PPG with {top6} top-6 finishes, but sitting at {wins}-{losses} because apparently your opponents save their best weeks for you. The fantasy football scheduling algorithm clearly has it out for you. At least you can take solace in knowing you're better than your record suggests."
+            elif wax > 0.5:
+                # Lucky middle-tier
+                analysis = f"Sitting pretty at {wins}-{losses} with {ppg:.2f} PPG, but that {wax:+.2f} WAX tells the real story. You've won {abs(wax):.0f} more games than your scoring deserves. Not complaining though, right? Wins are wins, even if they're gifts from the schedule gods."
+            else:
+                # Fair middle-tier
+                analysis = f"Solid middle-of-the-pack performance. Your {wins}-{losses} record with {ppg:.2f} PPG and {wax:+.2f} WAX shows you're getting exactly what you deserve. No excuses, no lucky breaks—just decent football."
+        elif rank == 7:
+            if wax > 1.5:
+                # The lucky fraud (GEMP)
+                analysis = f"Oh, {team}. You beautiful, lucky bastard. You're ranked #{rank} in power but sitting at {wins}-{losses} because you have a league-leading {wax:+.2f} WAX. That means you've won TWO more games than your mediocre {ppg:.2f} PPG deserves. You're the kid who guesses on every test question and somehow passes. Enjoy your fraudulent record while it lasts—the fantasy gods giveth, and they definitely taketh away."
+            else:
+                analysis = f"Lower middle tier with {wins}-{losses}. Your {ppg:.2f} PPG puts you in no-man's land, and your {wax:+.2f} WAX shows you're getting what you earn. Not great, not terrible—just... there."
+        elif rank <= 9:
+            if wax > 0.3:
+                # Lucky but still bad
+                analysis = f"Even with {wax:+.2f} WAX helping you out, you're still sitting at {wins}-{losses}. That {ppg:.2f} PPG isn't doing you any favors. You're winning more than you should, and you're still struggling. Imagine if you were unlucky?"
+            else:
+                # Just not good
+                analysis = f"Fighting for scraps with a {wins}-{losses} record. That {ppg:.2f} PPG is bottom-tier, and your {wax:+.2f} WAX shows the fantasy gods aren't helping. Consistency isn't your strong suit. Neither is winning, apparently."
+        elif rank == 10:
+            if wax > 0.5:
+                # Lucky but terrible (KESS)
+                analysis = f"You somehow have {wins} wins despite a pathetic {ppg:.2f} PPG. That {wax:+.2f} WAX means you're winning games you have no business winning. You're like the relief pitcher who keeps giving up runs but somehow gets credited with wins. The most consistent thing about you is your ability to consistently underperform while still stumbling into victories."
+            else:
+                analysis = f"Ranked 10th with {wins}-{losses}. Your {ppg:.2f} PPG and {wax:+.2f} WAX paint a picture of mediocrity. You're not unlucky—you're just not good enough."
+        elif rank == 11:
+            analysis = f"Second-to-last with {wins}-{losses}. Your {ppg:.2f} PPG is brutal, and even with {wax:+.2f} WAX, you can't escape the bottom. You're not just bad—you're bad AND getting exactly what you deserve. At least you're not in last place?"
+        else:  # rank == 12
+            if wax < -0.5:
+                # Dead last AND unlucky (3000)
+                analysis = f"Dead last. Basement dweller. The league's punching bag. You're scoring {ppg:.2f} PPG (worst in the league), you have {wins} wins (also worst), and you're STILL unlucky ({wax:+.2f} WAX)! You should theoretically have {int(mvp_w)} wins, but nope, even the universe has given up on you. The good news? You can only go up from here. The bad news? That's what you said last year."
+            else:
+                # Dead last, getting what they deserve
+                analysis = f"Last place with {wins}-{losses}. Your {ppg:.2f} PPG is the worst in the league, and your {wax:+.2f} WAX shows you're getting exactly what you've earned—nothing. At least you own it?"
         
         md += f"""### #{rank} {team} - Power Score: {power:.2f}
 **Record: {wins}-{losses} | PPG: {ppg:.2f} | WAX: {wax:+.2f}**
