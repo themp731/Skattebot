@@ -7,7 +7,7 @@ class ESPNFantasyAPI:
     def __init__(self, league_id: int, season: int, espn_s2: Optional[str] = None, swid: Optional[str] = None):
         self.league_id = league_id
         self.season = season
-        self.base_url = "https://fantasy.espn.com/apis/v3/games/ffl"
+        self.base_url = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl"
         self.espn_s2 = espn_s2
         self.swid = swid
         
@@ -44,9 +44,9 @@ class ESPNFantasyAPI:
         try:
             params = {
                 'scoringPeriodId': week,
-                'view': ['mBoxscore', 'mMatchupScore']
+                'view': 'mMatchup'
             }
-            url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}/matchups"
+            url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}"
             cookies = self._get_cookies()
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',

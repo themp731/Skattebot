@@ -57,20 +57,9 @@ The season years you want to scrape historical data for.
 
 **Important**: Never share these cookies or commit them to your code!
 
-### 3. Configure the Workflow
+### 3. Run the Scraper
 
-Update the workflow command with your league ID and desired years:
-
-1. The workflow is currently set to:
-   ```bash
-   python espn_ff_scraper.py --league_id 12345 --years 2023 2024
-   ```
-
-2. Edit the workflow command and replace:
-   - `12345` with your actual league ID
-   - `2023 2024` with the years you want to scrape
-
-**Or run manually in the Shell:**
+**In the Shell (recommended):**
 ```bash
 # Single year
 python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2024

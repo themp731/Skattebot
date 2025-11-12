@@ -26,7 +26,7 @@ outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"⚠️  SETUP REQUIRED - Update this workflow command:\" && echo \"\" && echo \"1. Replace YOUR_LEAGUE_ID with your ESPN league ID\" && echo \"2. Replace YEAR1 YEAR2 with the years you want to scrape\" && echo \"3. For private leagues, add ESPN_S2 and SWID to Secrets\" && echo \"\" && echo \"Example command:\" && echo \"python espn_ff_scraper.py --league_id 123456 --years 2023 2024\" && echo \"\" && echo \"See README.md for detailed setup instructions\""
+args = "python espn_ff_scraper.py --league_id 149388 --years 2024"
 
 [deployment]
 run = ["sh", "-c", "python espn_ff_scraper.py --league_id 12345 --week 1"]

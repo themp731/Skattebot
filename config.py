@@ -1,7 +1,7 @@
 """Configuration settings for the ESPN Fantasy Football scraper."""
 
 # ESPN API endpoints
-ESPN_FF_BASE_URL = "https://fantasy.espn.com/apis/v3/games/ffl"
+ESPN_FF_BASE_URL = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl"
 LEAGUE_ENDPOINT = "/seasons/{year}/segments/0/leagues/{league_id}"
 BOXSCORE_ENDPOINT = "/boxscore"
 

@@ -13,7 +13,14 @@ class DataProcessor:
         teams_map = {}
         try:
             for team in self.league_data.get('teams', []):
-                teams_map[team['id']] = team['name']
+                # ESPN may have different name fields - try multiple options
+                team_id = team['id']
+                team_name = (
+                    team.get('name') or 
+                    f"{team.get('location', '')} {team.get('nickname', '')}".strip() or
+                    team.get('abbrev', f'Team {team_id}')
+                )
+                teams_map[team_id] = team_name
         except KeyError as e:
             logging.error(f"Error creating teams map: {e}")
         return teams_map
@@ -83,19 +90,36 @@ class DataProcessor:
         team_stats = []
         
         try:
-            teams_data = boxscore_data.get('teams', [])
-            sorted_teams = sorted(teams_data, key=lambda x: x['points'], reverse=True)
+            # Build team stats from matchup schedule data
+            team_points = {}
+            team_points_against = {}
             
-            for rank, team in enumerate(sorted_teams, 1):
+            for matchup in boxscore_data.get('schedule', []):
+                if matchup.get('matchupPeriodId') == week:
+                    home_id = matchup.get('home', {}).get('teamId')
+                    away_id = matchup.get('away', {}).get('teamId')
+                    home_points = matchup.get('home', {}).get('totalPoints', 0)
+                    away_points = matchup.get('away', {}).get('totalPoints', 0)
+                    
+                    if home_id and away_id:
+                        team_points[home_id] = home_points
+                        team_points[away_id] = away_points
+                        team_points_against[home_id] = away_points
+                        team_points_against[away_id] = home_points
+            
+            # Sort teams by points
+            sorted_teams = sorted(team_points.items(), key=lambda x: x[1], reverse=True)
+            
+            for rank, (team_id, points) in enumerate(sorted_teams, 1):
                 team_stats.append({
                     'week': week,
-                    'team_id': team['id'],
-                    'team_name': self.teams_map.get(team['id'], f"Team {team['id']}"),
-                    'points_for': team['points'],
-                    'points_against': team['pointsAgainst'],
+                    'team_id': team_id,
+                    'team_name': self.teams_map.get(team_id, f"Team {team_id}"),
+                    'points_for': points,
+                    'points_against': team_points_against.get(team_id, 0),
                     'weekly_rank': rank
                 })
-        except KeyError as e:
+        except (KeyError, TypeError) as e:
             logging.error(f"Error processing team stats: {e}")
             
         return pd.DataFrame(team_stats)
