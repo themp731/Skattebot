@@ -79,6 +79,30 @@ python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --week 10
 python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --output ./data
 ```
 
+### 4. Analyze Your Data (Optional)
+
+After scraping, run the analysis script to generate comprehensive statistics and visualizations:
+
+```bash
+python team_analysis.py
+```
+
+**This creates:**
+- **team_summary.csv** - Season summary with WAX (Wins Above Expectation) metric
+- **visualizations/** folder containing:
+  - `wax_leaderboard.png` - Luck index showing who's running hot/cold
+  - `wins_vs_expected.png` - Real wins vs expected wins scatter plot
+  - `total_points.png` - Total points scored by each team
+  - `weekly_performance.png` - Weekly scoring trends over time
+  - `weekly_rank_heatmap.png` - Visual grid of weekly rankings
+  - `consistency.png` - Team consistency analysis
+
+**About WAX (Wins Above Expectation):**
+```
+[WAX] = [Real Wins] - [MVP-W]
+```
+Where MVP-W (Minimized Variance Potential Wins) represents your theoretical win rate if you played all teams every week. A positive WAX means you're lucky (winning more than expected), negative means unlucky.
+
 ## Command Line Options
 
 | Option | Description | Required | Default |
