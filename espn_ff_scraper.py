@@ -58,17 +58,28 @@ def clear_existing_csv_files(output_dir: str):
             os.remove(file_path)
             logging.info(f"Cleared existing file: {csv_file}")
 
-def has_week_been_played(boxscore_data: dict) -> bool:
-    """Check if a week has been played by looking for actual scores."""
+def has_week_been_played(boxscore_data: dict, requested_week: int) -> bool:
+    """Check if a week has been played by finding matchups for that specific week.
+    
+    ESPN returns all matchups for the season in the 'schedule' field.
+    We need to find matchups where matchupPeriodId == requested_week and check if they have scores.
+    """
     if not boxscore_data:
         return False
     
-    # Check if there are any matchups with non-zero scores
     schedule = boxscore_data.get('schedule', [])
     if not schedule:
         return False
     
-    for matchup in schedule:
+    # Find matchups for the requested week
+    week_matchups = [m for m in schedule if m.get('matchupPeriodId') == requested_week]
+    
+    if not week_matchups:
+        # No matchups found for this week (week doesn't exist)
+        return False
+    
+    # Check if any matchup for this week has actual scores
+    for matchup in week_matchups:
         home_score = matchup.get('home', {}).get('totalPoints', 0)
         away_score = matchup.get('away', {}).get('totalPoints', 0)
         
@@ -76,6 +87,7 @@ def has_week_been_played(boxscore_data: dict) -> bool:
         if home_score > 0 or away_score > 0:
             return True
     
+    # All matchups for this week have 0 scores
     return False
 
 def main():
@@ -133,8 +145,8 @@ def main():
                 logging.warning(f"Skipping {year} week {week} - no data available")
                 continue
             
-            # Check if the week has been played (has actual scores)
-            if not has_week_been_played(boxscore_data):
+            # Check if the week has been played (matchupPeriodId matches requested week)
+            if not has_week_been_played(boxscore_data, week):
                 logging.info(f"Skipping {year} week {week} - no games played yet")
                 continue
 
