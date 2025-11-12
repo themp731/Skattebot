@@ -373,17 +373,14 @@ def create_visualizations(df, summary):
     
     for team, color in zip(teams, colors):
         team_data = weekly_rankings[weekly_rankings['team_name'] == team].sort_values('week')
-        ax.plot(team_data['week'], team_data['power_rank'], 
-               marker='o', linewidth=2.5, markersize=8, 
-               label=team, color=color, alpha=0.8)
+        ax.plot(team_data['week'], team_data['power_score'], 
+               linewidth=2.5, label=team, color=color, alpha=0.8)
     
     ax.set_xlabel('Week', fontsize=12, fontweight='bold')
-    ax.set_ylabel('Power Rank', fontsize=12, fontweight='bold')
-    ax.set_title(f'Power Rankings Evolution - {latest_season} Season\nLower is Better (#1 = Best)', 
+    ax.set_ylabel('Cumulative Power Score', fontsize=12, fontweight='bold')
+    ax.set_title(f'Power Score Evolution - {latest_season} Season\nHigher is Better', 
                 fontsize=14, fontweight='bold', pad=20)
     ax.grid(True, alpha=0.3, linestyle='--')
-    ax.set_ylim(12.5, 0.5)  # Inverted so #1 is at top
-    ax.set_yticks(range(1, 13))
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), fontsize=10, framealpha=0.9)
     
     plt.tight_layout()
@@ -457,11 +454,11 @@ Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That mean
 
 ![Power Score Breakdown](visualizations/power_breakdown.png)
 
-## Power Rankings Evolution Over Time
+## Power Score Evolution Over Time
 
-![Power Rankings Evolution](visualizations/power_rankings_evolution.png)
+![Power Score Evolution](visualizations/power_rankings_evolution.png)
 
-*Lower rank is better - watch how teams rise and fall throughout the season.*
+*Cumulative power score by week - higher is better. Watch how teams' performances build throughout the season.*
 
 ---
 
@@ -537,7 +534,8 @@ Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That mean
                 analysis = f"Last place with {wins}-{losses}. Your {ppg:.2f} PPG is the worst in the league, and your {wax:+.2f} WAX shows you're getting exactly what you've earned—nothing. At least you own it?"
         
         md += f"""### #{rank} {team} - Power Score: {power:.2f}
-**Record: {wins}-{losses} | PPG: {ppg:.2f} | WAX: {wax:+.2f}**
+**Record: {wins}-{losses} | PPG: {ppg:.2f} | WAX: {wax:+.2f}**  
+**Components: Real Wins: {wins} | Top6 Wins: {top6} | MVP-W: {mvp_w:.2f}**
 
 {analysis}
 
