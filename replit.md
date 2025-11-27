@@ -30,9 +30,17 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Weekly High Score** - $20 × 15 weeks = $300 (deducted from pool first)
 - **Playoff Pool** - $3,000 - $300 = $2,700 split: 55% 1st ($1,485), 30% 2nd ($810), 15% 3rd ($405)
 - **Points-For Champion** - 50% of Total FAAB Spent = $218 (current: $436 total FAAB)
-- **Expected Value Calculation** - E[Playoff] + E[PF Prize] + E[Weekly]
+- **Expected Value Calculation** - Net Expected = E[Playoff] + E[PF Prize] + E[Weekly] - (FAAB Cost)
+- **FAAB Cost Deduction** - Each manager's FAAB Spent/2 is deducted as their contribution to PF prize pool
 - **FAAB Tracking** - Shows each team's FAAB spent and their contribution to PF prize pool
 - **Terminology Fix** - "#1 Seed %" = Regular season champion, NOT playoff winner
+
+### OPTIMIZED Data Consistency (November 27, 2025)
+- **All Tables Use OPTIMIZED** - Every projection table uses optimized data (not raw ESPN)
+- **Methodology Section Updated** - Clearly explains OPTIMIZED Projections (60%) + Historical (40%)
+- **Matchup Tables Enhanced** - Show Optimized Proj, Historical PPG, MC Blended columns
+- **Win Probabilities** - Calculated from optimized blended projections
+- **Game Predictions Function** - Now accepts and uses optimized_lineups data
 
 ### Key Playoff Stats (Week 12)
 | Team | Record | Playoff % | PF Leader % | FAAB Spent | E[Playoff] | E[PF Prize] | E[Weekly] | **Total Expected** |

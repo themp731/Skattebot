@@ -531,8 +531,8 @@ def create_combined_density_plot(playoff_preds, summary):
     print("  Created: visualizations/monte_carlo_summary.png")
     plt.close()
 
-def predict_remaining_games(summary, remaining_schedule, espn_projections):
-    """Predict outcomes of remaining games using blended projections."""
+def predict_remaining_games(summary, remaining_schedule, espn_projections, optimized_lineups=None):
+    """Predict outcomes of remaining games using OPTIMIZED blended projections."""
     current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
     
     team_stats = {}
@@ -551,18 +551,25 @@ def predict_remaining_games(summary, remaining_schedule, espn_projections):
         if home not in team_stats or away not in team_stats:
             continue
         
+        week_optimized = optimized_lineups.get(week, {}) if optimized_lineups else {}
         week_proj = espn_projections.get(week, {})
         
-        home_espn = week_proj.get(home, {}).get('projected_points', None)
-        away_espn = week_proj.get(away, {}).get('projected_points', None)
+        home_optimized = week_optimized.get(home, {}).get('optimized_projection', None)
+        away_optimized = week_optimized.get(away, {}).get('optimized_projection', None)
         
-        if home_espn and home_espn > 0:
-            home_expected = (ESPN_PROJECTION_WEIGHT * home_espn) + (HISTORICAL_WEIGHT * team_stats[home]['ppg'])
+        home_espn_raw = week_proj.get(home, {}).get('projected_points', None)
+        away_espn_raw = week_proj.get(away, {}).get('projected_points', None)
+        
+        home_proj = home_optimized if home_optimized and home_optimized > 0 else home_espn_raw
+        away_proj = away_optimized if away_optimized and away_optimized > 0 else away_espn_raw
+        
+        if home_proj and home_proj > 0:
+            home_expected = (ESPN_PROJECTION_WEIGHT * home_proj) + (HISTORICAL_WEIGHT * team_stats[home]['ppg'])
         else:
             home_expected = team_stats[home]['ppg']
             
-        if away_espn and away_espn > 0:
-            away_expected = (ESPN_PROJECTION_WEIGHT * away_espn) + (HISTORICAL_WEIGHT * team_stats[away]['ppg'])
+        if away_proj and away_proj > 0:
+            away_expected = (ESPN_PROJECTION_WEIGHT * away_proj) + (HISTORICAL_WEIGHT * team_stats[away]['ppg'])
         else:
             away_expected = team_stats[away]['ppg']
         
@@ -580,8 +587,10 @@ def predict_remaining_games(summary, remaining_schedule, espn_projections):
             'away': away,
             'home_historical_ppg': team_stats[home]['ppg'],
             'away_historical_ppg': team_stats[away]['ppg'],
-            'home_espn_proj': home_espn if home_espn else 'N/A',
-            'away_espn_proj': away_espn if away_espn else 'N/A',
+            'home_espn_raw': home_espn_raw if home_espn_raw else 'N/A',
+            'away_espn_raw': away_espn_raw if away_espn_raw else 'N/A',
+            'home_optimized': home_optimized if home_optimized else home_espn_raw if home_espn_raw else 'N/A',
+            'away_optimized': away_optimized if away_optimized else away_espn_raw if away_espn_raw else 'N/A',
             'home_blended': home_expected,
             'away_blended': away_expected,
             'home_win_prob': home_win_prob * 100,
@@ -1329,15 +1338,27 @@ WAX = Real Wins - MVP-W
 
 Our playoff predictions use a **hybrid Monte Carlo simulation** that blends two data sources:
 
-1. **ESPN's Official Projections** ({ESPN_PROJECTION_WEIGHT*100:.0f}% weight) - ESPN's projected points for each team's upcoming matchups, factoring in their algorithms for player projections, matchups, and expected performance.
+1. **OPTIMIZED Projections** ({ESPN_PROJECTION_WEIGHT*100:.0f}% weight) - ESPN's projections **corrected** for BYE weeks and injuries, with intelligent bench substitutions applied. This is NOT raw ESPN data - we fix their broken methodology first (see the ESPN critique above).
 
 2. **Historical Performance** ({HISTORICAL_WEIGHT*100:.0f}% weight) - Each team's season-long PPG (points per game) and scoring variance, capturing their established scoring patterns.
+
+### The Optimization Process
+
+Before running any simulations, we transform ESPN's garbage projections into something useful:
+
+```
+Step 1: ESPN Raw         = Sum of all starter projections (BROKEN - includes BYE players)
+Step 2: Corrected Base   = ESPN Raw - unavailable points (BYE/Injured = 0)
+Step 3: OPTIMIZED        = Corrected Base + best bench replacements
+```
+
+The **OPTIMIZED** projection is what enters our Monte Carlo simulation - not ESPN's inflated nonsense.
 
 ### The Blending Formula
 
 For each simulated game:
 ```
-Expected Score = ({ESPN_PROJECTION_WEIGHT} × ESPN Projected Points) + ({HISTORICAL_WEIGHT} × Historical PPG)
+Expected Score = ({ESPN_PROJECTION_WEIGHT} × OPTIMIZED Projection) + ({HISTORICAL_WEIGHT} × Historical PPG)
 Simulated Score = Random draw from Normal(Expected Score, Adjusted Variance)
 ```
 
@@ -1381,10 +1402,11 @@ The **#1 Seed %** column shows your probability of finishing as the **regular se
 
 ### Assumptions & Limitations
 
-- ESPN projections are only as good as their source data (projected lineups, player health)
+- Our OPTIMIZED projections fix ESPN's BYE/injury issues, but still depend on ESPN's underlying player projections
 - Past scoring patterns may not continue (trades, injuries, bye weeks)
 - Each game is simulated independently (no momentum modeling)
 - We use Points For as the tiebreaker (matching your league settings)
+- All matchup tables and commentary use OPTIMIZED data, not raw ESPN projections
 
 ---
 
@@ -1562,21 +1584,23 @@ Each manager's FAAB contribution (spent ÷ 2) is **deducted** from their expecte
 
 ## Remaining Schedule (Weeks {weeks_played + 1}-{reg_season_weeks})
 
-*Win probabilities based on blended ESPN projections ({ESPN_PROJECTION_WEIGHT*100:.0f}%) and historical data ({HISTORICAL_WEIGHT*100:.0f}%).*
+*Win probabilities based on blended OPTIMIZED projections ({ESPN_PROJECTION_WEIGHT*100:.0f}%) and historical data ({HISTORICAL_WEIGHT*100:.0f}%). ESPN's broken projections have been corrected for BYE weeks and injuries before blending.*
 
 """
     
     for week in sorted(set(g['week'] for g in game_predictions)):
         md += f"### Week {week}\n\n"
-        md += "| Matchup | ESPN Projections | Historical PPG | Favorite | Win Prob |\n"
-        md += "|---------|-----------------|----------------|----------|----------|\n"
+        md += "*Using OPTIMIZED projections (BYE/injured players zeroed, bench substitutions applied)*\n\n"
+        md += "| Matchup | Optimized Proj | Historical PPG | MC Blended | Favorite | Win Prob |\n"
+        md += "|---------|----------------|----------------|------------|----------|----------|\n"
         
         week_games = [g for g in game_predictions if g['week'] == week]
         for game in week_games:
-            home_espn = game['home_espn_proj']
-            away_espn = game['away_espn_proj']
-            espn_str = f"{home_espn if home_espn != 'N/A' else '---'} vs {away_espn if away_espn != 'N/A' else '---'}"
+            home_opt = game['home_optimized']
+            away_opt = game['away_optimized']
+            opt_str = f"{home_opt:.1f} vs {away_opt:.1f}" if isinstance(home_opt, (int, float)) and isinstance(away_opt, (int, float)) else f"{home_opt} vs {away_opt}"
             hist_str = f"{game['home_historical_ppg']:.1f} vs {game['away_historical_ppg']:.1f}"
+            blended_str = f"{game['home_blended']:.1f} vs {game['away_blended']:.1f}"
             
             if game['home_win_prob'] > game['away_win_prob']:
                 favorite = game['home']
@@ -1585,7 +1609,7 @@ Each manager's FAAB contribution (spent ÷ 2) is **deducted** from their expecte
                 favorite = game['away']
                 prob = game['away_win_prob']
             
-            md += f"| {game['home']} vs {game['away']} | {espn_str} | {hist_str} | {favorite} | {prob:.0f}% |\n"
+            md += f"| {game['home']} vs {game['away']} | {opt_str} | {hist_str} | {blended_str} | {favorite} | {prob:.0f}% |\n"
         md += "\n"
 
     md += """---
@@ -1730,8 +1754,8 @@ def main():
     print(f"  Lineup optimization: BYE week substitutions + injury replacements")
     playoff_preds = monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections, roster_health, optimized_lineups)
     
-    print("[6/8] Predicting remaining games...")
-    game_predictions = predict_remaining_games(summary, remaining_schedule, espn_projections)
+    print("[6/8] Predicting remaining games (using optimized projections)...")
+    game_predictions = predict_remaining_games(summary, remaining_schedule, espn_projections, optimized_lineups)
     
     print_summary_table(summary)
     save_summary_csv(summary)
