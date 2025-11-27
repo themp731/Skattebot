@@ -42,6 +42,12 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Win Probabilities** - Calculated from optimized blended projections
 - **Game Predictions Function** - Now accepts and uses optimized_lineups data
 
+### Critical Bug Fixes (November 27, 2025)
+- **FLEX Position Fix** - Added slot 23 (Flex) to STARTER_SLOTS constant; was being excluded as bench
+- **BYE Week Schedule Corrected** - Updated BYE_WEEKS_2025 with correct 2025 NFL schedule
+- **Week 13 Has NO BYEs** - All 32 NFL teams play in Week 13 (Thanksgiving week)
+- **9-Starter Lineups** - Now correctly counts QB, RB, RB, WR, WR, TE, Flex, D/ST, K
+
 ### Key Playoff Stats (Week 12)
 | Team | Record | Playoff % | PF Leader % | FAAB Spent | E[Playoff] | E[PF Prize] | E[Weekly] | **Total Expected** |
 |------|--------|-----------|-------------|------------|------------|-------------|-----------|-------------------|

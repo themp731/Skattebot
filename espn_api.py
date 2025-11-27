@@ -36,6 +36,10 @@ BYE_WEEKS_2025 = {
 
 FLEX_ELIGIBLE = ['RB', 'WR', 'TE']
 
+# Starter slot IDs (excludes Bench=20, IR=21)
+STARTER_SLOTS = {0, 2, 4, 6, 16, 17, 23}  # QB, RB, WR, TE, D/ST, K, Flex
+BENCH_SLOTS = {20, 21}  # Bench, IR
+
 @dataclass
 class PlayerHealth:
     name: str
@@ -264,7 +268,7 @@ class ESPNFantasyAPI:
                         
                         for entry in entries:
                             slot_id = entry.get('lineupSlotId', 20)
-                            if slot_id >= 20:
+                            if slot_id not in STARTER_SLOTS:
                                 continue
                             
                             total_starters += 1
@@ -343,7 +347,7 @@ class ESPNFantasyAPI:
                 
                 for entry in entries:
                     slot_id = entry.get('lineupSlotId', 20)
-                    is_starter = slot_id < 20 and slot_id != 21
+                    is_starter = slot_id in STARTER_SLOTS
                     is_ir = slot_id == 21
                     
                     player_pool = entry.get('playerPoolEntry', {})
@@ -518,7 +522,7 @@ class ESPNFantasyAPI:
                 
                 for entry in entries:
                     slot_id = entry.get('lineupSlotId', 20)
-                    if slot_id >= 20:
+                    if slot_id not in STARTER_SLOTS:
                         continue
                     
                     player_pool = entry.get('playerPoolEntry', {})
@@ -611,7 +615,7 @@ class ESPNFantasyAPI:
                 
                 for entry in entries:
                     slot_id = entry.get('lineupSlotId', 20)
-                    is_starter = slot_id < 20 and slot_id != 21
+                    is_starter = slot_id in STARTER_SLOTS
                     
                     player_pool = entry.get('playerPoolEntry', {})
                     player = player_pool.get('player', {})
