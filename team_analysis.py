@@ -1760,6 +1760,15 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
     for team, health in sorted(roster_health.items(), key=lambda x: x[1]['roster_health_pct']):
         health_pct = health['roster_health_pct'] * 100
         
+        # DEBUG: Print all roster data for WOOD
+        if team == 'WOOD':
+            print(f"\n=== DEBUG: WOOD ROSTER DATA ===")
+            print(f"injured_starters: {health.get('injured_starters', [])}")
+            print(f"ir_players: {health.get('ir_players', [])}")
+            print(f"injured_bench: {health.get('injured_bench', [])}")
+            print(f"bench_studs: {health.get('bench_studs', [])}")
+            print(f"=== END DEBUG ===\n")
+        
         all_injured = []
         existing_names = set()
         

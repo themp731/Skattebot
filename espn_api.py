@@ -413,6 +413,13 @@ class ESPNFantasyAPI:
                 total_starters = len(starters)
                 roster_health_pct = healthy_count / max(total_starters, 1)
                 
+                # DEBUG: Print all bench players for WOOD
+                if team_abbrev == 'WOOD':
+                    print(f"\n=== DEBUG ESPN API: WOOD ALL BENCH PLAYERS ===")
+                    for p in bench_players:
+                        print(f"  {p.name} | {p.position} | status={p.injury_status} | proj={p.projected_points}")
+                    print(f"=== END ESPN API DEBUG ===\n")
+                
                 injury_impact = sum(p.projected_points for p in injured_starters) / max(total_starter_projection, 1)
                 
                 variance_mult = 1.0 + (injury_impact * 0.5) + (len(bench_studs) * 0.05)
