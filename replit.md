@@ -21,6 +21,15 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **QUESTIONABLE = Will Play** - Players with "Q" status are assumed to play (historical 80%+ play rate)
 - **FLEX Accepts RB/WR/TE** - Lineup optimizer considers all three positions for Flex slot substitutions
 
+### Roster Health Report (November 27, 2025)
+- **Playoff Predictions sorted by Projected Standing** - #1 seed at top, descending
+- **Comprehensive Injury Report** - Includes both starters AND bench players
+- **Severity Measures**:
+  - Q (Questionable) = Minor Concern (likely to play)
+  - D (Doubtful) = Moderate Concern (unlikely but possible)
+  - O (Out) = Major Concern (confirmed out)
+  - IR = "Why is he even on your roster?!" (long-term, wasting roster spot)
+
 ### Hybrid Monte Carlo with ESPN Projections
 - **ESPN Projection Integration** - Fetches ESPN's weekly projected points for each remaining matchup
 - **Blended Scoring Model** - 60% optimized projections + 40% historical PPG for each simulated game

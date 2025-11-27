@@ -1428,7 +1428,7 @@ Based on {NUM_SIMULATIONS:,} Monte Carlo simulations blending ESPN projections w
 |------|--------|-----------|------------------|--------------|----------------|----------------|-------------|
 """
     
-    sorted_playoff = sorted(playoff_preds.items(), key=lambda x: x[1]['playoff_pct'], reverse=True)
+    sorted_playoff = sorted(playoff_preds.items(), key=lambda x: x[1]['avg_standing'])
     for team, pred in sorted_playoff:
         team_row = current_summary[current_summary['team_name'] == team].iloc[0]
         wins = int(team_row['real_wins'])
@@ -1701,28 +1701,107 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 ## Roster Health Report
 
-*Current injury status affects simulation variance - injured rosters have more uncertainty.*
+*Comprehensive injury status for all rostered players. Severity reflects likelihood of missing games and roster impact.*
 
-| Team | Health % | Injured Starters | Impact |
-|------|----------|------------------|--------|
+### Severity Guide
+
+| Status | Severity | Meaning |
+|--------|----------|---------|
+| **Q** (Questionable) | Minor Concern | Likely to play (80%+ historical play rate) |
+| **D** (Doubtful) | Moderate Concern | Unlikely to play, but still possible |
+| **O** (Out) | Major Concern | Confirmed out this week - find a replacement |
+| **IR** | Why is he even on your roster?! | Long-term injury, taking up a roster spot |
+
+### Team-by-Team Injury Report
+
 """
+    
+    def get_severity(status):
+        status_upper = status.upper() if status else 'ACTIVE'
+        if status_upper in ['ACTIVE', 'NORMAL', 'HEALTHY']:
+            return None, None
+        elif status_upper == 'QUESTIONABLE' or status_upper == 'Q':
+            return 'Minor Concern', 'Q'
+        elif status_upper == 'DOUBTFUL' or status_upper == 'D':
+            return 'Moderate Concern', 'D'
+        elif status_upper == 'OUT' or status_upper == 'O':
+            return 'Major Concern', 'O'
+        elif status_upper in ['IR', 'INJURED_RESERVE']:
+            return 'Why is he even on your roster?!', 'IR'
+        elif status_upper == 'SUSPENSION':
+            return 'Major Concern', 'SUSP'
+        return None, None
     
     for team, health in sorted(roster_health.items(), key=lambda x: x[1]['roster_health_pct']):
         health_pct = health['roster_health_pct'] * 100
-        injured_count = len(health.get('injured_players', []))
         
-        if health_pct >= 90:
-            impact = "Minimal"
-        elif health_pct >= 75:
-            impact = "Moderate"
+        all_injured = []
+        
+        injured_starters = health.get('injured_starters', [])
+        for p in injured_starters:
+            status = p.get('status', 'OUT')
+            severity, code = get_severity(status)
+            if severity:
+                all_injured.append({
+                    'name': p.get('name', 'Unknown'),
+                    'position': p.get('position', 'UNK'),
+                    'status': status,
+                    'code': code,
+                    'severity': severity,
+                    'is_starter': True,
+                    'projected_pts': p.get('projected_pts', 0)
+                })
+        
+        bench_studs = health.get('bench_studs', [])
+        for p in bench_studs:
+            status = p.get('status', 'OUT')
+            severity, code = get_severity(status)
+            if severity:
+                all_injured.append({
+                    'name': p.get('name', 'Unknown'),
+                    'position': p.get('position', 'UNK'),
+                    'status': status,
+                    'code': code,
+                    'severity': severity,
+                    'is_starter': False,
+                    'projected_pts': p.get('projected_pts', 0)
+                })
+        
+        injured_players_raw = health.get('injured_players', [])
+        existing_names = {p['name'] for p in all_injured}
+        for p_str in injured_players_raw:
+            if '(' in p_str and ')' in p_str:
+                name = p_str.split('(')[0].strip()
+                status = p_str.split('(')[1].replace(')', '').strip()
+                if name not in existing_names:
+                    severity, code = get_severity(status)
+                    if severity:
+                        all_injured.append({
+                            'name': name,
+                            'position': 'UNK',
+                            'status': status,
+                            'code': code,
+                            'severity': severity,
+                            'is_starter': False,
+                            'projected_pts': 0
+                        })
+        
+        severity_order = {'IR': 0, 'O': 1, 'SUSP': 1, 'D': 2, 'Q': 3}
+        all_injured.sort(key=lambda x: (severity_order.get(x['code'], 99), -x['projected_pts']))
+        
+        if all_injured:
+            md += f"**{team}** (Health: {health_pct:.0f}%)\n\n"
+            md += "| Player | Position | Status | Severity | Role |\n"
+            md += "|--------|----------|--------|----------|------|\n"
+            
+            for p in all_injured:
+                role = "Starter" if p['is_starter'] else "Bench"
+                md += f"| {p['name']} | {p['position']} | {p['code']} | {p['severity']} | {role} |\n"
+            md += "\n"
         else:
-            impact = "Significant"
-        
-        md += f"| {team} | {health_pct:.0f}% | {injured_count} | {impact} |\n"
+            md += f"**{team}** (Health: {health_pct:.0f}%) - All players healthy!\n\n"
 
-    md += """
-
----
+    md += """---
 
 ## Team-by-Team Analysis
 
