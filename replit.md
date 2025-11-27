@@ -25,14 +25,22 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Win Density Plots** - Probability mass charts showing most likely win outcomes
 - **Player-Specific Commentary** - Names injured starters, bench depth, and return candidates
 
+### Expected Monetary Payouts (NEW)
+- **Full Prize Structure** - $250 buy-in × 12 teams = $3,000 pool
+- **Weekly High Score** - $20 × 15 weeks = $300 total
+- **Playoff Prizes** - $2,700 split: 55% 1st ($1,485), 30% 2nd ($810), 15% 3rd ($405)
+- **Points-For Champion** - Total FAAB spent by league (estimated ~$300)
+- **Expected Value Calculation** - (Playoff % × Avg Prize) + (PF Leader % × FAAB)
+- **Terminology Fix** - "#1 Seed %" = Regular season champion, NOT playoff winner
+
 ### Key Playoff Stats (Week 12)
-| Team | Record | Playoff % | Most Likely Wins | Projected PF | Championship % |
-|------|--------|-----------|------------------|--------------|----------------|
-| MP | 9-3 | 98.7% | 11 | 1,708 | 82.2% |
-| KIRK | 7-5 | 81.3% | 10 | 1,631 | 3.1% |
-| ZSF | 7-5 | 73.6% | 9 | 1,695 | 7.8% |
-| sgf | 8-4 | 68.4% | 9 | 1,638 | 5.1% |
-| POO | 7-5 | 50.3% | 9 | 1,581 | 1.4% |
+| Team | Record | Playoff % | Most Likely Wins | Projected PF | #1 Seed % | PF Leader % | Expected Payout |
+|------|--------|-----------|------------------|--------------|-----------|-------------|-----------------|
+| MP | 9-3 | 99.2% | 11 | 1,699 | 80.7% | 54.8% | **$1,057** |
+| ZSF | 7-5 | 76.7% | 9 | 1,726 | 7.0% | 37.9% | **$804** |
+| sgf | 8-4 | 73.9% | 10 | 1,693 | 4.3% | 5.4% | **$682** |
+| KIRK | 7-5 | 60.9% | 9 | 1,638 | 2.7% | 0.7% | **$550** |
+| POO | 7-5 | 52.4% | 9 | 1,586 | 0.4% | 0.1% | **$472** |
 
 ### Previous Features
 - Power Rankings system: `(Real Wins × 2) + (Top6 Wins) + (MVP-W)`

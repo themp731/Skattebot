@@ -184,6 +184,7 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
     standing_distributions = {team: [] for team in team_stats.keys()}
     playoff_counts = {team: 0 for team in team_stats.keys()}
     championship_counts = {team: 0 for team in team_stats.keys()}
+    points_for_leader_counts = {team: 0 for team in team_stats.keys()}
     
     games_by_week = {}
     for game in remaining_schedule:
@@ -286,6 +287,9 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
                 playoff_counts[team] += 1
                 if rank == 1:
                     championship_counts[team] += 1
+        
+        pf_leader = max(team_stats.keys(), key=lambda t: sim_points[t])
+        points_for_leader_counts[pf_leader] += 1
     
     results = {}
     for team in team_stats.keys():
@@ -304,6 +308,7 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             'playoff_pct': (playoff_counts[team] / num_simulations) * 100,
             'avg_standing': standings_array.mean(),
             'championship_pct': (championship_counts[team] / num_simulations) * 100,
+            'points_for_leader_pct': (points_for_leader_counts[team] / num_simulations) * 100,
             'current_wins': team_stats[team]['wins'],
             'current_points': team_stats[team]['points_for'],
             'win_distribution': wins_array,
@@ -1349,13 +1354,25 @@ For each of the {NUM_SIMULATIONS:,} simulations, we record:
 2. **Final Points For** - Total season points (the tiebreaker for playoff seeding)
 3. **Final Standing** - Where each team finishes in the standings
 
-### Why Points For Matters (Hint: $200)
+### League Prize Structure ($3,000 Pool)
 
-Points For isn't just a tiebreaker - it's worth cold, hard cash. **The highest Points For at the end of the regular season wins $200** (half of all buy-ins). 
+This league means business. Here's how the $250 buy-in breaks down:
 
-This means even if you miss the playoffs, you can still take home a significant payout by outscoring everyone else across the season. Our simulation tracks the full distribution of projected Points For, so you can see your odds of claiming that prize.
+| Prize | Amount | Criteria |
+|-------|--------|----------|
+| **Weekly High Score** | $20 × 15 weeks = **$300** | Top scorer each week through Week 15 |
+| **Playoff 1st Place** | **$1,485** (55% of $2,700) | Win the championship tournament |
+| **Playoff 2nd Place** | **$810** (30% of $2,700) | Lose in the finals |
+| **Playoff 3rd Place** | **$405** (15% of $2,700) | Win the consolation bracket |
+| **Points-For Champion** | **Total FAAB Spent** | Highest regular season Points For |
 
-Additionally, Points For is the **tiebreaker for playoff seeding**. Two teams with identical records? The one with more total points gets the higher seed. This is critical for teams battling for the 4th playoff spot.
+The Points-For prize is unique: whoever scores the most total points during the regular season wins the combined FAAB spent by all managers. Even if you miss the playoffs, outscore everyone else and you walk away with cash.
+
+### Why Points For Matters
+
+Points For serves two purposes:
+1. **Tiebreaker for playoff seeding** - Two teams with identical records? The one with more total points gets the higher seed.
+2. **Cash prize** - Highest Points For at season's end wins the FAAB pool. Our simulation tracks Point-For leader probability for each team.
 
 ### What "#1 Seed %" Means
 
@@ -1382,8 +1399,8 @@ The **#1 Seed %** column shows your probability of finishing as the **regular se
 
 Based on {NUM_SIMULATIONS:,} Monte Carlo simulations blending ESPN projections with historical data.
 
-| Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % |
-|------|--------|-----------|------------------|--------------|----------------|----------------|
+| Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % | PF Leader % |
+|------|--------|-----------|------------------|--------------|----------------|----------------|-------------|
 """
     
     sorted_playoff = sorted(playoff_preds.items(), key=lambda x: x[1]['playoff_pct'], reverse=True)
@@ -1391,7 +1408,8 @@ Based on {NUM_SIMULATIONS:,} Monte Carlo simulations blending ESPN projections w
         team_row = current_summary[current_summary['team_name'] == team].iloc[0]
         wins = int(team_row['real_wins'])
         losses = weeks_played - wins
-        md += f"| {team} | {wins}-{losses} | {pred['playoff_pct']:.1f}% | {pred['wins_mode']} | {pred['points_mean']:.0f} | #{pred['avg_standing']:.1f} | {pred['championship_pct']:.1f}% |\n"
+        pf_leader_pct = pred.get('points_for_leader_pct', 0)
+        md += f"| {team} | {wins}-{losses} | {pred['playoff_pct']:.1f}% | {pred['wins_mode']} | {pred['points_mean']:.0f} | #{pred['avg_standing']:.1f} | {pred['championship_pct']:.1f}% | {pf_leader_pct:.1f}% |\n"
 
     md += """
 ### Playoff Picture Analysis
@@ -1425,7 +1443,61 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
         expected_add = pred['points_mean'] - pred['current_points']
         md += f"| {i} | {team} | {pred['current_points']:.0f} | {pred['points_mean']:.0f} | +{expected_add:.0f} |\n"
 
+    md += """
+
+---
+
+## Expected Monetary Payouts
+
+Based on our Monte Carlo simulations, here's what each team can expect to earn. This accounts for playoff probability, seeding, and Points-For leader chances.
+
+**Prize Pool Breakdown:**
+- Weekly High Score: $20 × 15 weeks = $300 (not simulated - depends on weekly performance)
+- Playoff Pool: $2,700 (55% 1st / 30% 2nd / 15% 3rd)
+- Points-For Champion: FAAB Pool (estimated ~$200-400 based on typical spending)
+
+*Note: Expected Playoff Payout assumes equal probability of finishing 1st/2nd/3rd once in playoffs. This is a simplification - actual playoff tournament outcomes depend on seeding and matchups.*
+
+| Team | Playoff % | PF Leader % | Expected Playoff Payout | Expected PF Prize | Total Expected |
+|------|-----------|-------------|------------------------|-------------------|----------------|
+"""
+
+    FAAB_ESTIMATE = 300
+    PLAYOFF_1ST = 1485
+    PLAYOFF_2ND = 810
+    PLAYOFF_3RD = 405
+    AVG_PLAYOFF_PRIZE = (PLAYOFF_1ST + PLAYOFF_2ND + PLAYOFF_3RD) / 3
+    
+    expected_payouts = []
+    for team, pred in playoff_preds.items():
+        playoff_pct = pred['playoff_pct'] / 100
+        pf_leader_pct = pred.get('points_for_leader_pct', 0) / 100
+        
+        expected_playoff = playoff_pct * AVG_PLAYOFF_PRIZE
+        expected_pf = pf_leader_pct * FAAB_ESTIMATE
+        total_expected = expected_playoff + expected_pf
+        
+        expected_payouts.append({
+            'team': team,
+            'playoff_pct': pred['playoff_pct'],
+            'pf_leader_pct': pred.get('points_for_leader_pct', 0),
+            'expected_playoff': expected_playoff,
+            'expected_pf': expected_pf,
+            'total_expected': total_expected
+        })
+    
+    expected_payouts.sort(key=lambda x: x['total_expected'], reverse=True)
+    for ep in expected_payouts:
+        md += f"| {ep['team']} | {ep['playoff_pct']:.1f}% | {ep['pf_leader_pct']:.1f}% | ${ep['expected_playoff']:.0f} | ${ep['expected_pf']:.0f} | **${ep['total_expected']:.0f}** |\n"
+
     md += f"""
+
+**How to Read This:**
+- **Expected Playoff Payout**: (Playoff % × Average Playoff Prize $900). If you make playoffs, average payout is $900 (weighted avg of 1st/2nd/3rd).
+- **Expected PF Prize**: (PF Leader % × ~${FAAB_ESTIMATE} FAAB pool). Your probability of leading Points For × estimated FAAB pot.
+- **Total Expected**: Combined expected value from both prizes.
+
+*This doesn't include weekly $20 high score prizes - those depend on individual weekly matchups.*
 
 ---
 
