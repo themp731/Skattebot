@@ -606,7 +606,8 @@ class ESPNFantasyAPI:
                 bye_starters = []
                 injured_starters = []
                 
-                current_projection = 0.0
+                espn_raw_projection = 0.0
+                unavailable_points_lost = 0.0
                 
                 for entry in entries:
                     slot_id = entry.get('lineupSlotId', 20)
@@ -655,17 +656,17 @@ class ESPNFantasyAPI:
                     
                     if is_starter:
                         starters.append(player_data)
+                        espn_raw_projection += projected_pts
+                        
                         if is_on_bye:
                             bye_starters.append(player_data)
-                            current_projection += 0
+                            unavailable_points_lost += projected_pts
                         elif injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION']:
                             injured_starters.append(player_data)
-                            current_projection += 0
+                            unavailable_points_lost += projected_pts
                         elif injury_status == 'QUESTIONABLE':
                             injured_starters.append(player_data)
-                            current_projection += projected_pts * availability_pct
-                        else:
-                            current_projection += projected_pts
+                            unavailable_points_lost += projected_pts * (1 - availability_pct)
                     else:
                         bench_players.append(player_data)
                 
@@ -673,7 +674,7 @@ class ESPNFantasyAPI:
                 
                 bench_promotions = []
                 optimization_moves = []
-                optimized_projection = current_projection
+                replacement_points_gained = 0.0
                 used_bench = set()
                 
                 for starter in unavailable:
@@ -695,7 +696,8 @@ class ESPNFantasyAPI:
                         used_bench.add(best_replacement['name'])
                         
                         reason = 'BYE' if starter['is_on_bye'] else starter['injury_status']
-                        projected_gain = best_replacement['projected_pts']
+                        replacement_pts = best_replacement['projected_pts']
+                        replacement_points_gained += replacement_pts
                         
                         move = {
                             'bench_player': starter['name'],
@@ -703,11 +705,10 @@ class ESPNFantasyAPI:
                             'bench_reason': reason,
                             'start_player': best_replacement['name'],
                             'start_position': best_replacement['position'],
-                            'start_projected': round(best_replacement['projected_pts'], 1),
-                            'projected_gain': round(projected_gain, 1)
+                            'start_projected': round(replacement_pts, 1),
+                            'projected_gain': round(replacement_pts, 1)
                         }
                         optimization_moves.append(move)
-                        optimized_projection += projected_gain
                         
                         bench_promotions.append({
                             'player': best_replacement['name'],
@@ -745,7 +746,11 @@ class ESPNFantasyAPI:
                                 'historical_support': True
                             })
                 
-                projected_gain = optimized_projection - current_projection
+                corrected_baseline = espn_raw_projection - unavailable_points_lost
+                optimized_projection = corrected_baseline + replacement_points_gained
+                
+                projected_gain = replacement_points_gained
+                
                 confidence = 1.0 - (len(unavailable) * 0.1) - (len([s for s in injured_starters if s['availability'] < 0.8]) * 0.05)
                 confidence = max(0.5, min(1.0, confidence))
                 
@@ -755,7 +760,10 @@ class ESPNFantasyAPI:
                 )
                 
                 optimized_lineups[team_abbrev] = {
-                    'current_projection': round(current_projection, 2),
+                    'espn_raw_projection': round(espn_raw_projection, 2),
+                    'corrected_baseline': round(corrected_baseline, 2),
+                    'unavailable_points_lost': round(unavailable_points_lost, 2),
+                    'replacement_points_gained': round(replacement_points_gained, 2),
                     'optimized_projection': round(optimized_projection, 2),
                     'projected_gain': round(projected_gain, 2),
                     'bye_players': [

@@ -206,14 +206,12 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
         week_proj = espn_projections.get(week, {})
         
         for team in team_stats.keys():
-            if team in week_proj:
-                espn_proj_totals[team] += week_proj[team].get('projected_points', 0)
-                projection_weeks[team] += 1
-            
             if team in week_opt:
                 opt_data = week_opt[team]
+                espn_proj_totals[team] += opt_data.get('espn_raw_projection', 0)
                 optimized_proj_totals[team] += opt_data.get('optimized_projection', 0)
                 all_optimization_gains[team] += opt_data.get('projected_gain', 0)
+                projection_weeks[team] += 1
                 
                 for bye_p in opt_data.get('bye_players', []):
                     bye_p['week'] = week
@@ -1039,17 +1037,9 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
         lines.append(f"\n\n**Projection Breakdown (Avg Per Game, Weeks 13-15):**")
         lines.append(f"\n| Source | Projection | Notes |")
         lines.append(f"\n|--------|------------|-------|")
-        lines.append(f"\n| ESPN Raw | {avg_espn:.1f} pts | Official ESPN projection (includes BYE players) |")
+        lines.append(f"\n| ESPN Raw | {avg_espn:.1f} pts | ESPN projection (includes BYE/injured starters) |")
+        lines.append(f"\n| **Optimized** | **{avg_optimized:.1f} pts** | ESPN Raw - unavailable + bench subs |")
         lines.append(f"\n| Historical PPG | {historical:.1f} pts | Season average through week 12 |")
-        
-        opt_diff = avg_optimized - avg_espn
-        if opt_diff < -1:
-            opt_note = f"BYE/injury adjusted ({opt_diff:+.1f} from ESPN)"
-        elif opt_diff > 1:
-            opt_note = f"Bench upgrades available (+{opt_diff:.1f} from ESPN)"
-        else:
-            opt_note = "Minimal lineup changes needed"
-        lines.append(f"\n| **Optimized** | **{avg_optimized:.1f} pts** | {opt_note} |")
         lines.append(f"\n| Monte Carlo Input | {blended:.1f} pts | 60% Optimized + 40% Historical |")
     
     snark = generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_health)
@@ -1151,8 +1141,14 @@ def generate_matchup_breakdown(team, remaining_schedule, espn_projections, optim
         team_opt_data = week_opt.get(team, {})
         opp_opt_data = week_opt.get(opponent, {})
         
-        team_optimized = team_opt_data.get('optimized_projection', team_espn)
-        opp_optimized = opp_opt_data.get('optimized_projection', opp_espn)
+        team_espn_raw = team_opt_data.get('espn_raw_projection', team_espn)
+        opp_espn_raw = opp_opt_data.get('espn_raw_projection', opp_espn)
+        
+        team_corrected = team_opt_data.get('corrected_baseline', team_espn_raw)
+        opp_corrected = opp_opt_data.get('corrected_baseline', opp_espn_raw)
+        
+        team_optimized = team_opt_data.get('optimized_projection', team_corrected)
+        opp_optimized = opp_opt_data.get('optimized_projection', opp_corrected)
         
         team_blended = (ESPN_PROJECTION_WEIGHT * team_optimized) + (HISTORICAL_WEIGHT * team_historical)
         
@@ -1174,8 +1170,9 @@ def generate_matchup_breakdown(team, remaining_schedule, espn_projections, optim
         lines.append(f"\n**Week {week} vs {opponent}:**\n")
         lines.append(f"| Projection Type | {team} | {opponent} |")
         lines.append(f"\n|-----------------|--------|----------|")
-        lines.append(f"\n| ESPN Raw | {team_espn:.1f} | {opp_espn:.1f} |")
-        lines.append(f"\n| Optimized (BYE/Inj Adj) | {team_optimized:.1f} | {opp_optimized:.1f} |")
+        lines.append(f"\n| ESPN Raw | {team_espn_raw:.1f} | {opp_espn_raw:.1f} |")
+        lines.append(f"\n| Corrected (BYE/Inj=0) | {team_corrected:.1f} | {opp_corrected:.1f} |")
+        lines.append(f"\n| **Optimized (+Bench)** | **{team_optimized:.1f}** | **{opp_optimized:.1f}** |")
         lines.append(f"\n| Historical PPG | {team_historical:.1f} | {opp_historical:.1f} |")
         lines.append(f"\n| **MC Blended** | **{team_blended:.1f}** | **{opp_blended:.1f}** |")
         

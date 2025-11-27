@@ -169,11 +169,23 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
 ```python
 def get_optimized_lineup_projections(week):
     # For each team:
-    # 1. Get current ESPN projected points (starters only)
-    # 2. Identify unavailable starters (BYE week + injured)
-    # 3. Find best bench replacement by position
-    # 4. Calculate projected gain from optimal substitution
-    # 5. Return optimized projection with move details
+    # 1. Calculate ESPN Raw = sum of ALL starter projections (includes BYE/injured)
+    # 2. Calculate Corrected Baseline = ESPN Raw - unavailable points (BYE/injured = 0)
+    # 3. Find best bench replacement by position for each unavailable starter
+    # 4. Calculate Optimized = Corrected Baseline + replacement points
+    # 5. Optimized is ALWAYS >= Corrected Baseline (optimization always helps)
+    # 6. Return optimized projection with detailed move breakdown
+```
+
+### Projection Formula (CRITICAL)
+```python
+ESPN_Raw = sum(all_starters.projected_pts)  # Inflated, includes BYE players
+Corrected_Baseline = ESPN_Raw - unavailable_points  # Realistic, BYE/injured = 0
+Optimized = Corrected_Baseline + replacement_points  # After bench substitutions
+Monte_Carlo_Input = (0.6 × Optimized) + (0.4 × Historical_PPG)
+
+# IMPORTANT: Optimized is always >= Corrected_Baseline
+# Optimized may be < ESPN_Raw because ESPN incorrectly includes BYE players
 ```
 
 ### BYE Week Schedule (2024)
