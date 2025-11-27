@@ -1502,9 +1502,9 @@ Based on our Monte Carlo simulations, here's what each team can expect to earn. 
 | **3rd Place** | 15% of ${PLAYOFF_POOL:,} | = **${PLAYOFF_3RD:,}** |
 | **Points-For Champion** | 50% of Total FAAB | = **${pf_prize:.0f}** (current) |
 
-### FAAB Spending by Team
+### FAAB Spending by Team (Incremental Cost)
 
-The Points-For winner takes home **half of all FAAB spent** across the league. Here's what each manager has contributed to the pot:
+FAAB spending is **additional cost beyond the $250 buy-in**. The Points-For winner takes home **half of all FAAB spent** across the league. Here's each manager's incremental investment:
 
 | Team | FAAB Spent | Contribution to PF Prize |
 |------|------------|-------------------------|
@@ -1520,26 +1520,30 @@ The Points-For winner takes home **half of all FAAB spent** across the league. H
 
 ### Expected Payouts Summary
 
-Each manager's FAAB contribution (spent ÷ 2) is **deducted** from their expected payout since that's money they've put into the PF prize pool.
+Each manager's FAAB cost (spent ÷ 2) is **deducted** from their expected payout. FAAB is money spent **beyond the $250 buy-in**, and half goes to the Points-For prize pool.
 
 | Team | Playoff % | PF Leader % | FAAB Spent | FAAB Cost | E[Playoff] | E[PF Prize] | E[Weekly] | **Net Expected** |
 |------|-----------|-------------|------------|-----------|------------|-------------|-----------|------------------|
 """
     
+    all_ppg = [(team, pred.get('historical_ppg', 100)) for team, pred in playoff_preds.items()]
+    all_ppg.sort(key=lambda x: x[1], reverse=True)
+    
+    total_ppg = sum(ppg for _, ppg in all_ppg)
+    weekly_probabilities = {team: ppg / total_ppg for team, ppg in all_ppg}
+    
     expected_payouts = []
     for team, pred in playoff_preds.items():
         playoff_pct = pred['playoff_pct'] / 100
         pf_leader_pct = pred.get('points_for_leader_pct', 0) / 100
-        team_ppg = pred.get('historical_ppg', 100)
         faab_spent = team_faab.get(team, 0)
         faab_cost = faab_spent / 2
         
         expected_playoff = playoff_pct * AVG_PLAYOFF_PRIZE
         expected_pf = pf_leader_pct * pf_prize
         
-        ppg_rank = sum(1 for t, p in playoff_preds.items() if p.get('historical_ppg', 0) > team_ppg) + 1
-        weekly_probability = max(0, (NUM_TEAMS - ppg_rank + 1) / (NUM_TEAMS * 2))
-        expected_weekly = weekly_probability * WEEKLY_PRIZE * 3
+        weekly_probability = weekly_probabilities.get(team, 1/NUM_TEAMS)
+        expected_weekly = weekly_probability * WEEKLY_TOTAL
         
         net_expected = expected_playoff + expected_pf + expected_weekly - faab_cost
         
@@ -1569,16 +1573,18 @@ Each manager's FAAB contribution (spent ÷ 2) is **deducted** from their expecte
 2. **E[PF Prize]** = PF Leader % × ${pf_prize:.0f} (current FAAB pool ÷ 2)
    - Your probability of finishing with the most Points For × the prize
    
-3. **E[Weekly]** = Estimated weekly high-score wins based on PPG ranking
-   - Top scorers have better odds at the $20/week prize (3 remaining weeks estimated)
+3. **E[Weekly]** = Probability × ${WEEKLY_TOTAL} (total weekly pool)
+   - Each team's probability = their PPG ÷ total league PPG
+   - Sum of all teams' E[Weekly] = **${WEEKLY_TOTAL} exactly**
 
 4. **FAAB Cost** = Your FAAB Spent ÷ 2
-   - This is your contribution to the Points-For prize pool
-   - **Deducted from your net expected** since it's money you've already put in
+   - FAAB spending is **incremental cost beyond the $250 buy-in**
+   - This is your additional investment into the Points-For prize pool
+   - **Deducted from net expected** since it's money you've put in beyond the buy-in
 
 **Net Expected = E[Playoff] + E[PF Prize] + E[Weekly] - FAAB Cost**
 
-*Note: Weekly estimates are rough approximations based on current PPG. Actual weekly winners depend on head-to-head variance.*
+*Note: Weekly estimates are probability-weighted by PPG. Higher scorers have proportionally better odds at the $20/week prizes.*
 
 ---
 

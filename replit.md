@@ -25,15 +25,15 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Win Density Plots** - Probability mass charts showing most likely win outcomes
 - **Player-Specific Commentary** - Names injured starters, bench depth, and return candidates
 
-### Expected Monetary Payouts (NEW)
+### Expected Monetary Payouts
 - **Full Prize Structure** - $250 buy-in × 12 teams = $3,000 pool
-- **Weekly High Score** - $20 × 15 weeks = $300 (deducted from pool first)
+- **Weekly High Score** - $20 × 15 weeks = $300 total (probability-weighted by PPG)
 - **Playoff Pool** - $3,000 - $300 = $2,700 split: 55% 1st ($1,485), 30% 2nd ($810), 15% 3rd ($405)
 - **Points-For Champion** - 50% of Total FAAB Spent = $218 (current: $436 total FAAB)
-- **Expected Value Calculation** - Net Expected = E[Playoff] + E[PF Prize] + E[Weekly] - (FAAB Cost)
-- **FAAB Cost Deduction** - Each manager's FAAB Spent/2 is deducted as their contribution to PF prize pool
-- **FAAB Tracking** - Shows each team's FAAB spent and their contribution to PF prize pool
-- **Terminology Fix** - "#1 Seed %" = Regular season champion, NOT playoff winner
+- **E[Weekly] Calculation** - Each team's E[Weekly] = (PPG / League Total PPG) × $300
+- **Sum of E[Weekly] = $300** - All teams' expected weekly shares sum to exactly $300
+- **FAAB = Incremental Cost** - FAAB spending is ADDITIONAL cost beyond $250 buy-in
+- **Net Expected** = E[Playoff] + E[PF Prize] + E[Weekly] - FAAB Cost
 
 ### OPTIMIZED Data Consistency (November 27, 2025)
 - **All Tables Use OPTIMIZED** - Every projection table uses optimized data (not raw ESPN)
