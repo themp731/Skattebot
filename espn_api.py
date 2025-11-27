@@ -121,7 +121,7 @@ class ESPNFantasyAPI:
                 return 0.0, "OUT - may return soon"
             return 0.0, "OUT - status unclear"
         
-        elif status == 'IR':
+        elif status in ['IR', 'INJURY_RESERVE']:
             if 'designated to return' in detail_lower or 'return' in detail_lower:
                 return 0.0, "IR - designated to return, watch for activation"
             if 'short-term' in detail_lower:
@@ -270,7 +270,7 @@ class ESPNFantasyAPI:
                             player = player_pool.get('player', {})
                             
                             injury_status = player.get('injuryStatus', 'ACTIVE')
-                            if injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION']:
+                            if injury_status in ['OUT', 'IR', 'INJURY_RESERVE', 'DOUBTFUL', 'SUSPENSION']:
                                 injury_count += 1
                             else:
                                 healthy_starters += 1
@@ -387,7 +387,7 @@ class ESPNFantasyAPI:
                         starters.append(player_health)
                         total_starter_projection += projected_pts
                         
-                        if injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION']:
+                        if injury_status in ['OUT', 'IR', 'INJURY_RESERVE', 'DOUBTFUL', 'SUSPENSION']:
                             injured_starters.append(player_health)
                         elif injury_status == 'QUESTIONABLE':
                             injured_starters.append(player_health)
@@ -403,7 +403,7 @@ class ESPNFantasyAPI:
                         if is_stud:
                             bench_studs.append(player_health)
                         
-                        if injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION', 'QUESTIONABLE']:
+                        if injury_status in ['OUT', 'IR', 'INJURY_RESERVE', 'DOUBTFUL', 'SUSPENSION', 'QUESTIONABLE']:
                             injured_bench.append(player_health)
                         
                         if injury_status in ['OUT', 'DOUBTFUL'] and availability_pct == 0 and is_stud:
@@ -412,13 +412,6 @@ class ESPNFantasyAPI:
                 healthy_count = len([s for s in starters if s.injury_status in ['ACTIVE', 'NORMAL', None]])
                 total_starters = len(starters)
                 roster_health_pct = healthy_count / max(total_starters, 1)
-                
-                # DEBUG: Print all bench players for WOOD
-                if team_abbrev == 'WOOD':
-                    print(f"\n=== DEBUG ESPN API: WOOD ALL BENCH PLAYERS ===")
-                    for p in bench_players:
-                        print(f"  {p.name} | {p.position} | status={p.injury_status} | proj={p.projected_points}")
-                    print(f"=== END ESPN API DEBUG ===\n")
                 
                 injury_impact = sum(p.projected_points for p in injured_starters) / max(total_starter_projection, 1)
                 
@@ -559,7 +552,7 @@ class ESPNFantasyAPI:
                     player_name = player.get('fullName', 'Unknown')
                     injury_status = player.get('injuryStatus', 'ACTIVE')
                     
-                    if injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION']:
+                    if injury_status in ['OUT', 'IR', 'INJURY_RESERVE', 'DOUBTFUL', 'SUSPENSION']:
                         injured += 1
                         injured_players.append(f"{player_name} ({injury_status})")
                     elif injury_status == 'QUESTIONABLE':
@@ -694,7 +687,7 @@ class ESPNFantasyAPI:
                         if is_on_bye:
                             bye_starters.append(player_data)
                             unavailable_points_lost += projected_pts
-                        elif injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION']:
+                        elif injury_status in ['OUT', 'IR', 'INJURY_RESERVE', 'DOUBTFUL', 'SUSPENSION']:
                             injured_starters.append(player_data)
                             unavailable_points_lost += projected_pts
                         elif injury_status == 'QUESTIONABLE':

@@ -1751,7 +1751,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
             return 'Moderate Concern', 'D'
         elif status_upper == 'OUT' or status_upper == 'O':
             return 'Major Concern', 'O'
-        elif status_upper in ['IR', 'INJURED_RESERVE']:
+        elif status_upper in ['IR', 'INJURY_RESERVE', 'INJURED_RESERVE']:
             return 'Why is he even on your roster?!', 'IR'
         elif status_upper == 'SUSPENSION':
             return 'Major Concern', 'SUSP'
@@ -1759,15 +1759,6 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
     
     for team, health in sorted(roster_health.items(), key=lambda x: x[1]['roster_health_pct']):
         health_pct = health['roster_health_pct'] * 100
-        
-        # DEBUG: Print all roster data for WOOD
-        if team == 'WOOD':
-            print(f"\n=== DEBUG: WOOD ROSTER DATA ===")
-            print(f"injured_starters: {health.get('injured_starters', [])}")
-            print(f"ir_players: {health.get('ir_players', [])}")
-            print(f"injured_bench: {health.get('injured_bench', [])}")
-            print(f"bench_studs: {health.get('bench_studs', [])}")
-            print(f"=== END DEBUG ===\n")
         
         all_injured = []
         existing_names = set()
@@ -1818,7 +1809,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
                 severity, code = get_severity(status)
                 if severity:
                     status_upper = status.upper() if status else ''
-                    if status_upper in ['IR', 'INJURED_RESERVE']:
+                    if status_upper in ['IR', 'INJURY_RESERVE', 'INJURED_RESERVE']:
                         role = 'Bench (IR)'
                     elif status_upper == 'OUT':
                         role = 'Bench (O)'
@@ -1843,7 +1834,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
                 severity, code = get_severity(status)
                 if severity:
                     status_upper = status.upper() if status else ''
-                    if status_upper in ['IR', 'INJURED_RESERVE']:
+                    if status_upper in ['IR', 'INJURY_RESERVE', 'INJURED_RESERVE']:
                         role = 'Bench Stud (IR)'
                     elif status_upper == 'OUT':
                         role = 'Bench Stud (O)'

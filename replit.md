@@ -70,6 +70,8 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Game Predictions Function** - Now accepts and uses optimized_lineups data
 
 ### Critical Bug Fixes (November 27, 2025)
+- **INJURY_RESERVE Status Fix** - ESPN API returns 'INJURY_RESERVE' not 'IR'; now handles both variants
+- **Bench IR Players Captured** - Players with IR status on bench now show as "Bench (IR)" role
 - **FLEX Position Fix** - Added slot 23 (Flex) to STARTER_SLOTS constant; was being excluded as bench
 - **BYE Week Schedule Corrected** - Updated BYE_WEEKS_2025 with correct 2025 NFL schedule
 - **Week 13 Has NO BYEs** - All 32 NFL teams play in Week 13 (Thanksgiving week)
