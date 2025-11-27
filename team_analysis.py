@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ESPN Fantasy Football Team Statistics Analysis
-Generates summary table, visualizations, playoff predictions, and dynamic commentary
+Generates summary table, visualizations, playoff predictions with Monte Carlo simulations
 """
 
 import pandas as pd
@@ -12,7 +12,6 @@ from pathlib import Path
 import os
 import requests
 from datetime import datetime
-import random
 
 sns.set_style("whitegrid")
 plt.rcParams['figure.facecolor'] = 'white'
@@ -20,6 +19,7 @@ plt.rcParams['axes.facecolor'] = 'white'
 
 LEAGUE_ID = 149388
 CURRENT_SEASON = 2025
+NUM_SIMULATIONS = 10000
 
 def load_data(filename='team_stats.csv'):
     """Load team stats from CSV."""
@@ -107,16 +107,16 @@ def calculate_summary_stats(df):
 
 def calculate_win_probability(team1_ppg, team1_std, team2_ppg, team2_std):
     """Calculate probability team1 beats team2 using scoring distributions."""
+    from scipy.stats import norm
     diff_mean = team1_ppg - team2_ppg
     diff_std = np.sqrt(team1_std**2 + team2_std**2)
     if diff_std == 0:
         diff_std = 10
-    from scipy.stats import norm
     prob = norm.cdf(0, loc=-diff_mean, scale=diff_std)
     return max(0.05, min(0.95, prob))
 
-def monte_carlo_playoff_simulation(summary, remaining_schedule, num_simulations=10000):
-    """Run Monte Carlo simulation to predict playoff probabilities."""
+def monte_carlo_playoff_simulation(summary, remaining_schedule, num_simulations=NUM_SIMULATIONS):
+    """Run Monte Carlo simulation with full distribution tracking."""
     current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
     
     team_stats = {}
@@ -128,11 +128,12 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, num_simulations=
             'std': row.get('points_std', 15) if not pd.isna(row.get('points_std', 15)) else 15
         }
     
+    win_distributions = {team: [] for team in team_stats.keys()}
+    standing_distributions = {team: [] for team in team_stats.keys()}
     playoff_counts = {team: 0 for team in team_stats.keys()}
-    final_standings_sum = {team: 0 for team in team_stats.keys()}
     championship_counts = {team: 0 for team in team_stats.keys()}
     
-    for _ in range(num_simulations):
+    for sim in range(num_simulations):
         sim_wins = {team: stats['wins'] for team, stats in team_stats.items()}
         sim_points = {team: stats['points_for'] for team, stats in team_stats.items()}
         
@@ -161,7 +162,8 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, num_simulations=
                           reverse=True)
         
         for rank, team in enumerate(standings, 1):
-            final_standings_sum[team] += rank
+            win_distributions[team].append(sim_wins[team])
+            standing_distributions[team].append(rank)
             if rank <= 4:
                 playoff_counts[team] += 1
                 if rank == 1:
@@ -169,15 +171,153 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, num_simulations=
     
     results = {}
     for team in team_stats.keys():
+        wins_array = np.array(win_distributions[team])
+        standings_array = np.array(standing_distributions[team])
+        
         results[team] = {
             'playoff_pct': (playoff_counts[team] / num_simulations) * 100,
-            'avg_standing': final_standings_sum[team] / num_simulations,
+            'avg_standing': standings_array.mean(),
             'championship_pct': (championship_counts[team] / num_simulations) * 100,
             'current_wins': team_stats[team]['wins'],
-            'current_points': team_stats[team]['points_for']
+            'current_points': team_stats[team]['points_for'],
+            'win_distribution': wins_array,
+            'standing_distribution': standings_array,
+            'wins_mean': wins_array.mean(),
+            'wins_std': wins_array.std(),
+            'wins_ci_low': np.percentile(wins_array, 2.5),
+            'wins_ci_high': np.percentile(wins_array, 97.5),
+            'standing_ci_low': np.percentile(standings_array, 2.5),
+            'standing_ci_high': np.percentile(standings_array, 97.5),
         }
     
     return results
+
+def create_monte_carlo_plots(playoff_preds, summary):
+    """Create individual Monte Carlo distribution plots for each team."""
+    Path('visualizations/monte_carlo').mkdir(parents=True, exist_ok=True)
+    
+    current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
+    current_summary = current_summary.sort_values('power_rank')
+    
+    for _, row in current_summary.iterrows():
+        team = row['team_name']
+        pred = playoff_preds.get(team, {})
+        
+        if 'win_distribution' not in pred:
+            continue
+            
+        win_dist = pred['win_distribution']
+        current_wins = int(pred['current_wins'])
+        ci_low = pred['wins_ci_low']
+        ci_high = pred['wins_ci_high']
+        playoff_pct = pred['playoff_pct']
+        
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+        
+        ax1.hist(win_dist, bins=range(int(min(win_dist)), int(max(win_dist)) + 2), 
+                color='#3498db', alpha=0.7, edgecolor='black', linewidth=1.2)
+        
+        ax1.axvline(x=pred['wins_mean'], color='#e74c3c', linestyle='-', linewidth=2.5, 
+                   label=f'Mean: {pred["wins_mean"]:.1f} wins')
+        ax1.axvline(x=ci_low, color='#2ecc71', linestyle='--', linewidth=2, 
+                   label=f'95% CI: [{ci_low:.1f}, {ci_high:.1f}]')
+        ax1.axvline(x=ci_high, color='#2ecc71', linestyle='--', linewidth=2)
+        
+        ax1.axvspan(ci_low, ci_high, alpha=0.15, color='#2ecc71')
+        
+        ax1.set_xlabel('Final Win Total', fontsize=12, fontweight='bold')
+        ax1.set_ylabel('Frequency', fontsize=12, fontweight='bold')
+        ax1.set_title(f'{team} - Projected Win Distribution\n({NUM_SIMULATIONS:,} Monte Carlo Simulations)', 
+                     fontsize=14, fontweight='bold')
+        ax1.legend(loc='upper right', fontsize=10)
+        ax1.grid(axis='y', alpha=0.3)
+        
+        standing_dist = pred['standing_distribution']
+        standing_counts = pd.Series(standing_dist).value_counts().sort_index()
+        
+        colors = ['#2ecc71' if x <= 4 else '#e74c3c' for x in standing_counts.index]
+        ax2.bar(standing_counts.index, standing_counts.values / NUM_SIMULATIONS * 100, 
+               color=colors, alpha=0.8, edgecolor='black', linewidth=1)
+        
+        ax2.axvline(x=4.5, color='black', linestyle=':', linewidth=2, label='Playoff Cutoff')
+        
+        ax2.set_xlabel('Final Standing', fontsize=12, fontweight='bold')
+        ax2.set_ylabel('Probability (%)', fontsize=12, fontweight='bold')
+        ax2.set_title(f'{team} - Standing Distribution\nPlayoff Probability: {playoff_pct:.1f}%', 
+                     fontsize=14, fontweight='bold')
+        ax2.set_xticks(range(1, 13))
+        ax2.legend(loc='upper right', fontsize=10)
+        ax2.grid(axis='y', alpha=0.3)
+        
+        fig.suptitle(f'Monte Carlo Analysis: {team}', fontsize=16, fontweight='bold', y=1.02)
+        plt.tight_layout()
+        plt.savefig(f'visualizations/monte_carlo/{team.lower()}_monte_carlo.png', 
+                   dpi=200, bbox_inches='tight')
+        plt.close()
+        
+    print(f"✓ Created: visualizations/monte_carlo/ ({len(current_summary)} team plots)")
+
+def create_combined_monte_carlo_plot(playoff_preds, summary):
+    """Create a combined Monte Carlo summary plot for all teams."""
+    current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
+    current_summary = current_summary.sort_values('power_rank')
+    
+    fig, ax = plt.subplots(figsize=(14, 10))
+    
+    teams = []
+    means = []
+    ci_lows = []
+    ci_highs = []
+    playoff_pcts = []
+    current_wins_list = []
+    
+    for _, row in current_summary.iterrows():
+        team = row['team_name']
+        pred = playoff_preds.get(team, {})
+        if 'wins_mean' in pred:
+            teams.append(team)
+            means.append(pred['wins_mean'])
+            ci_lows.append(pred['wins_ci_low'])
+            ci_highs.append(pred['wins_ci_high'])
+            playoff_pcts.append(pred['playoff_pct'])
+            current_wins_list.append(pred['current_wins'])
+    
+    y_pos = np.arange(len(teams))
+    
+    colors = ['#2ecc71' if p >= 50 else '#f39c12' if p >= 10 else '#e74c3c' for p in playoff_pcts]
+    
+    for i, (team, mean, low, high, pct, curr) in enumerate(zip(teams, means, ci_lows, ci_highs, playoff_pcts, current_wins_list)):
+        ax.plot([low, high], [i, i], color=colors[i], linewidth=8, alpha=0.4, solid_capstyle='round')
+        ax.plot([low, high], [i, i], color=colors[i], linewidth=3, alpha=0.8, solid_capstyle='round')
+        ax.scatter([mean], [i], color=colors[i], s=150, zorder=5, edgecolors='black', linewidth=1.5)
+        ax.scatter([curr], [i], color='white', s=80, zorder=4, edgecolors='black', linewidth=1.5, marker='s')
+        
+        ax.text(high + 0.15, i, f'{pct:.0f}%', va='center', ha='left', 
+               fontweight='bold', fontsize=11, color=colors[i])
+    
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(teams, fontsize=11, fontweight='bold')
+    ax.set_xlabel('Final Win Total', fontsize=12, fontweight='bold')
+    ax.set_title(f'Monte Carlo Win Projections with 95% Confidence Intervals\n({NUM_SIMULATIONS:,} Simulations per Team)', 
+                fontsize=14, fontweight='bold', pad=20)
+    ax.grid(axis='x', alpha=0.3)
+    
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='gray', markersize=10, 
+               label='Projected Wins (Mean)'),
+        Line2D([0], [0], marker='s', color='w', markerfacecolor='white', markeredgecolor='black', 
+               markersize=8, label='Current Wins'),
+        Line2D([0], [0], color='#2ecc71', linewidth=4, alpha=0.6, label='95% CI (Playoff Likely)'),
+        Line2D([0], [0], color='#f39c12', linewidth=4, alpha=0.6, label='95% CI (On Bubble)'),
+        Line2D([0], [0], color='#e74c3c', linewidth=4, alpha=0.6, label='95% CI (Eliminated)'),
+    ]
+    ax.legend(handles=legend_elements, loc='lower right', fontsize=10)
+    
+    plt.tight_layout()
+    plt.savefig('visualizations/monte_carlo_summary.png', dpi=300, bbox_inches='tight')
+    print("✓ Created: visualizations/monte_carlo_summary.png")
+    plt.close()
 
 def predict_remaining_games(summary, remaining_schedule):
     """Predict outcomes of remaining games."""
@@ -255,7 +395,7 @@ def create_visualizations(df, summary):
     
     fig, ax = plt.subplots(figsize=(12, 9))
     power_sorted = current_summary.sort_values('power_score', ascending=True)
-    colors_power = plt.cm.get_cmap('RdYlGn')(np.linspace(0.3, 0.9, len(power_sorted)))[::-1]
+    colors_power = plt.colormaps['RdYlGn'](np.linspace(0.3, 0.9, len(power_sorted)))[::-1]
     bars = ax.barh(power_sorted['team_name'], power_sorted['power_score'], 
                    color=colors_power, alpha=0.85, edgecolor='black', linewidth=1.5)
     
@@ -336,7 +476,7 @@ def create_visualizations(df, summary):
     
     fig, ax = plt.subplots(figsize=(12, 8))
     sorted_summary = current_summary.sort_values('points_for', ascending=True)
-    colors_pf = plt.cm.get_cmap('RdYlGn')(np.linspace(0.3, 0.9, len(sorted_summary)))
+    colors_pf = plt.colormaps['RdYlGn'](np.linspace(0.3, 0.9, len(sorted_summary)))
     bars = ax.barh(sorted_summary['team_name'], sorted_summary['points_for'], 
                    color=colors_pf, alpha=0.8)
     
@@ -366,9 +506,9 @@ def create_visualizations(df, summary):
     
     y_pos = np.arange(len(breakdown_sorted))
     
-    p1 = ax.barh(y_pos, wins_component, label='Real Wins (×2)', color='#2ecc71', alpha=0.9)
-    p2 = ax.barh(y_pos, top6_component, left=wins_component, label='Top6 Wins', color='#3498db', alpha=0.9)
-    p3 = ax.barh(y_pos, mvp_component, left=wins_component + top6_component, 
+    ax.barh(y_pos, wins_component, label='Real Wins (×2)', color='#2ecc71', alpha=0.9)
+    ax.barh(y_pos, top6_component, left=wins_component, label='Top6 Wins', color='#3498db', alpha=0.9)
+    ax.barh(y_pos, mvp_component, left=wins_component + top6_component, 
                 label='MVP-W', color='#9b59b6', alpha=0.9)
     
     ax.set_yticks(y_pos)
@@ -472,7 +612,6 @@ def create_visualizations(df, summary):
         }).reset_index()
         
         week_summary['power_score'] = (week_summary['wins'] * 2) + week_summary['top6_wins'] + week_summary['mvp_w']
-        week_summary['power_rank'] = week_summary['power_score'].rank(ascending=False, method='min').astype(int)
         week_summary['week'] = week
         
         weekly_data.append(week_summary)
@@ -505,6 +644,40 @@ def save_summary_csv(summary, filename='team_summary.csv'):
     summary.to_csv(filename, index=False)
     print(f"✓ Saved summary table to: {filename}")
 
+def generate_snarky_ci_commentary(team, pred, rank, playoff_pct):
+    """Generate snarky commentary about the 95% CI outcome."""
+    ci_low = pred['wins_ci_low']
+    ci_high = pred['wins_ci_high']
+    mean_wins = pred['wins_mean']
+    current_wins = pred['current_wins']
+    
+    ci_width = ci_high - ci_low
+    
+    lines = []
+    
+    if playoff_pct >= 95:
+        if ci_width < 1.5:
+            lines.append(f"The simulations are practically unanimous: {team} finishes between {ci_low:.0f}-{ci_high:.0f} wins in 95% of futures. That's not uncertainty, that's inevitability.")
+        else:
+            lines.append(f"With a 95% CI of [{ci_low:.1f}, {ci_high:.1f}] wins, even {team}'s worst-case scenarios end in playoff berths. Must be nice.")
+    elif playoff_pct >= 75:
+        lines.append(f"The math says {ci_low:.1f}-{ci_high:.1f} wins 95% of the time. That's a pretty safe cushion, but fantasy football loves chaos.")
+    elif playoff_pct >= 50:
+        lines.append(f"95% CI: [{ci_low:.1f}, {ci_high:.1f}] wins. That range straddles the playoff line like a drunk person on a balance beam.")
+    elif playoff_pct >= 20:
+        lines.append(f"In 95% of simulations, {team} finishes with {ci_low:.1f}-{ci_high:.1f} wins. The math is not kind - most of those outcomes involve watching playoffs from the couch.")
+    elif playoff_pct >= 5:
+        lines.append(f"95% CI: [{ci_low:.1f}, {ci_high:.1f}] wins. Even in the *best* 2.5% of scenarios, {team} is still fighting for scraps. This is the statistical equivalent of 'thoughts and prayers.'")
+    else:
+        lines.append(f"With 95% confidence, {team} finishes with {ci_low:.1f}-{ci_high:.1f} wins. The computer has run {NUM_SIMULATIONS:,} simulations and found approximately zero paths to glory.")
+    
+    if ci_width > 2.5:
+        lines.append(f"That {ci_width:.1f}-win spread is massive - this team is a wildcard wrapped in an enigma wrapped in inconsistent QB play.")
+    elif ci_width < 1.0:
+        lines.append(f"A tight {ci_width:.1f}-win spread means the simulations agree: we know exactly how mediocre (or dominant) this team is.")
+    
+    return " ".join(lines)
+
 def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_remaining):
     """Generate fully dynamic commentary based on actual stats."""
     team = row['team_name']
@@ -517,18 +690,12 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
     power = row['power_score']
     top6 = int(row['top6_wins'])
     mvp_w = row['mvp_w']
-    points_for = row['points_for']
     
     pred = playoff_preds.get(team, {})
     playoff_pct = pred.get('playoff_pct', 0)
-    avg_standing = pred.get('avg_standing', rank)
     champ_pct = pred.get('championship_pct', 0)
-    
-    total_games = games + games_remaining
-    
-    ppg_rank = all_teams_summary['ppg'].rank(ascending=False)[row.name]
-    pf_rank = all_teams_summary['points_for'].rank(ascending=False)[row.name]
-    wax_rank = all_teams_summary['wax'].rank(ascending=False)[row.name]
+    ci_low = pred.get('wins_ci_low', wins)
+    ci_high = pred.get('wins_ci_high', wins + games_remaining)
     
     lines = []
     
@@ -541,8 +708,6 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"That {wax:+.2f} WAX means they've actually been a bit unlucky - imagine how scary they'd be with normal luck.")
         else:
             lines.append(f"Their {wax:+.2f} WAX shows they're earning their wins fair and square - no luck needed.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%** | Championship odds: **{champ_pct:.1f}%**")
-        
     elif rank == 2:
         leader = all_teams_summary[all_teams_summary['power_rank'] == 1].iloc[0]
         gap = leader['power_score'] - power
@@ -552,8 +717,6 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"That {wax:+.2f} WAX is frustrating - a bit more luck and they'd be in first.")
         elif wax > 0.3:
             lines.append(f"The {wax:+.2f} WAX suggests some fortune has helped along the way.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%** | Championship odds: **{champ_pct:.1f}%**")
-        
     elif rank <= 4:
         lines.append(f"Currently in the playoff picture at #{rank} with a {wins}-{losses} record.")
         lines.append(f"Their {ppg:.2f} PPG and {mvp_w:.2f} MVP-W put them in solid position.")
@@ -562,8 +725,6 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"The brutal {wax:+.2f} WAX means they've been snake-bitten - they should have more wins.")
         elif wax > 1.0:
             lines.append(f"That {wax:+.2f} WAX suggests they've been catching breaks.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%** | Championship odds: **{champ_pct:.1f}%**")
-        
     elif rank <= 6:
         lines.append(f"On the playoff bubble at #{rank} with {wins}-{losses}.")
         if playoff_pct >= 50:
@@ -575,8 +736,6 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"Some bad luck ({wax:+.2f} WAX) has hurt their cause.")
         elif wax > 0.5:
             lines.append(f"They've benefited from {wax:+.2f} WAX - riding some good matchups.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%** | Championship odds: **{champ_pct:.1f}%**")
-        
     elif rank <= 8:
         lines.append(f"Sitting at #{rank} with a {wins}-{losses} record - outside looking in.")
         if playoff_pct >= 20:
@@ -588,8 +747,6 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"That {wax:+.2f} WAX is actually concerning - they've been lucky and still can't crack the top 6.")
         elif wax < -1.0:
             lines.append(f"The {wax:+.2f} WAX means they're better than their record - just unlucky.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%**")
-        
     elif rank <= 10:
         lines.append(f"At #{rank} with {wins}-{losses}, the season hasn't gone as planned.")
         lines.append(f"Averaging {ppg:.2f} PPG with only {top6} top-6 finishes in {games} weeks.")
@@ -597,8 +754,6 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"That {wax:+.2f} WAX is brutal - they've been incredibly unlucky.")
         elif wax > 0.5:
             lines.append(f"The {wax:+.2f} WAX is a red flag - even with good luck, they're struggling.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%** - time to play for next year.")
-        
     else:
         lines.append(f"Bringing up the rear at #{rank} with a {wins}-{losses} record.")
         lines.append(f"Their {ppg:.2f} PPG ranks near the bottom of the league.")
@@ -607,7 +762,11 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
             lines.append(f"At least the {wax:+.2f} WAX shows they've had some bad luck.")
         elif wax > 0:
             lines.append(f"With {wax:+.2f} WAX, they've actually been a bit lucky - which makes this worse.")
-        lines.append(f"Playoff odds: **{playoff_pct:.1f}%** - better luck next year.")
+    
+    lines.append(f"\n\n**95% CI:** [{ci_low:.1f}, {ci_high:.1f}] wins | **Playoff Odds:** {playoff_pct:.1f}% | **Championship:** {champ_pct:.1f}%")
+    
+    ci_snark = generate_snarky_ci_commentary(team, pred, rank, playoff_pct)
+    lines.append(f"\n\n*{ci_snark}*")
     
     return " ".join(lines)
 
@@ -683,12 +842,53 @@ WAX = Real Wins - MVP-W
 
 ---
 
-## Playoff Predictions
+## Monte Carlo Simulation Methodology
 
-Based on {10000:,} Monte Carlo simulations of remaining games.
+### How We Predict the Future
 
-| Team | Current Record | Playoff % | Avg Final Standing | Championship % |
-|------|----------------|-----------|-------------------|----------------|
+Our playoff predictions use **Monte Carlo simulation**, a computational technique that runs thousands of random scenarios to estimate probabilities. Here's exactly what happens:
+
+**For each of the {NUM_SIMULATIONS:,} simulations:**
+
+1. **Model Team Scoring** - Each team's weekly score is drawn from a normal distribution based on their season PPG (points per game) and scoring variance (standard deviation).
+
+2. **Simulate Remaining Games** - For each unplayed matchup, both teams draw a random score. Higher score wins.
+
+3. **Calculate Final Standings** - After all {games_remaining} remaining weeks are simulated, teams are ranked by wins (tiebreaker: total points for).
+
+4. **Track Outcomes** - We record each team's final win total, standing, and whether they made playoffs (top 4) or won the championship (#1 seed).
+
+5. **Aggregate Results** - After all simulations, we calculate probability distributions, means, and 95% confidence intervals.
+
+### Why 95% Confidence Intervals?
+
+A 95% CI tells you: *"In 95% of our simulations, this team finished with between X and Y wins."* It captures the inherent randomness of fantasy football - injuries, boom weeks, busts, and schedule luck.
+
+- **Tight CI** = Predictable team (consistent scoring)
+- **Wide CI** = Volatile team (boom-or-bust)
+
+### Assumptions & Limitations
+
+- Past scoring patterns continue (no major injuries, trades, or bye week clumping)
+- Each game is independent (momentum/streaks not modeled)
+- Tiebreaker is total points for (matching your league settings)
+
+---
+
+## Monte Carlo Win Projections
+
+![Monte Carlo Summary](visualizations/monte_carlo_summary.png)
+
+*Each bar shows the 95% confidence interval for final wins. Circle = projected mean, Square = current wins.*
+
+---
+
+## Playoff Predictions with 95% Confidence Intervals
+
+Based on {NUM_SIMULATIONS:,} Monte Carlo simulations.
+
+| Team | Record | Playoff % | 95% CI Wins | Proj. Finish | Championship % |
+|------|--------|-----------|-------------|--------------|----------------|
 """
     
     sorted_playoff = sorted(playoff_preds.items(), key=lambda x: x[1]['playoff_pct'], reverse=True)
@@ -696,7 +896,9 @@ Based on {10000:,} Monte Carlo simulations of remaining games.
         team_row = current_summary[current_summary['team_name'] == team].iloc[0]
         wins = int(team_row['real_wins'])
         losses = weeks_played - wins
-        md += f"| {team} | {wins}-{losses} | {pred['playoff_pct']:.1f}% | #{pred['avg_standing']:.1f} | {pred['championship_pct']:.1f}% |\n"
+        ci_low = pred.get('wins_ci_low', wins)
+        ci_high = pred.get('wins_ci_high', wins + games_remaining)
+        md += f"| {team} | {wins}-{losses} | {pred['playoff_pct']:.1f}% | [{ci_low:.1f}, {ci_high:.1f}] | #{pred['avg_standing']:.1f} | {pred['championship_pct']:.1f}% |\n"
 
     md += """
 ### Playoff Picture Analysis
@@ -709,13 +911,13 @@ Based on {10000:,} Monte Carlo simulations of remaining games.
     longshot_teams = [t for t, p in playoff_preds.items() if p['playoff_pct'] < 10]
     
     if safe_teams:
-        md += f"**Locked In:** {', '.join(safe_teams)} - barring disaster, they're in.\n\n"
+        md += f"**Locked In:** {', '.join(safe_teams)} - The simulations have spoken. Barring a catastrophic collapse, these teams are playoff-bound.\n\n"
     if likely_teams:
-        md += f"**Looking Good:** {', '.join(likely_teams)} - control their destiny.\n\n"
+        md += f"**Looking Good:** {', '.join(likely_teams)} - Strong position but not mathematically safe. One bad week could change everything.\n\n"
     if bubble_teams:
-        md += f"**On the Bubble:** {', '.join(bubble_teams)} - need some things to break their way.\n\n"
+        md += f"**On the Bubble:** {', '.join(bubble_teams)} - The fantasy purgatory zone. Need wins AND help from the schedule gods.\n\n"
     if longshot_teams:
-        md += f"**Long Shots:** {', '.join(longshot_teams)} - would need a miracle.\n\n"
+        md += f"**Long Shots:** {', '.join(longshot_teams)} - The computer ran {NUM_SIMULATIONS:,} simulations and said 'lol, good luck with that.'\n\n"
 
     md += f"""---
 
@@ -746,9 +948,10 @@ Based on {10000:,} Monte Carlo simulations of remaining games.
 
 ## Team-by-Team Analysis
 
+*Each team analysis includes 95% confidence intervals for final win totals and snarky statistical commentary.*
+
 """
     
-    current_summary_indexed = current_summary.set_index('team_name')
     for idx, row in current_summary.iterrows():
         team = row['team_name']
         rank = int(row['power_rank'])
@@ -760,14 +963,16 @@ Based on {10000:,} Monte Carlo simulations of remaining games.
         
         commentary = generate_dynamic_commentary(row, current_summary, playoff_preds, games_remaining)
         md += f"{commentary}\n\n"
+        
+        md += f"![{team} Monte Carlo](visualizations/monte_carlo/{team.lower()}_monte_carlo.png)\n\n"
         md += "---\n\n"
 
     md += f"""## Predicted Final Standings
 
 Based on current trajectory and remaining schedule:
 
-| Rank | Team | Projected Wins | Current Record |
-|------|------|----------------|----------------|
+| Rank | Team | Projected Wins | 95% CI | Current Record |
+|------|------|----------------|--------|----------------|
 """
     
     final_standings = sorted(playoff_preds.items(), key=lambda x: x[1]['avg_standing'])
@@ -775,16 +980,10 @@ Based on current trajectory and remaining schedule:
         team_row = current_summary[current_summary['team_name'] == team].iloc[0]
         current_wins = int(team_row['real_wins'])
         current_losses = weeks_played - current_wins
+        ci_low = pred.get('wins_ci_low', current_wins)
+        ci_high = pred.get('wins_ci_high', current_wins + games_remaining)
         
-        expected_wins_remaining = 0
-        for game in game_predictions:
-            if game['home'] == team:
-                expected_wins_remaining += game['home_win_prob'] / 100
-            elif game['away'] == team:
-                expected_wins_remaining += game['away_win_prob'] / 100
-        
-        projected_wins = current_wins + expected_wins_remaining
-        md += f"| {proj_rank} | {team} | {projected_wins:.1f} | {current_wins}-{current_losses} |\n"
+        md += f"| {proj_rank} | {team} | {pred['wins_mean']:.1f} | [{ci_low:.1f}, {ci_high:.1f}] | {current_wins}-{current_losses} |\n"
 
     md += f"""
 ---
@@ -800,9 +999,9 @@ Based on current trajectory and remaining schedule:
         md += f"**Semifinal 1:** #{1} {top_4[0][0]} vs #{4} {top_4[3][0]}\n\n"
         md += f"**Semifinal 2:** #{2} {top_4[1][0]} vs #{3} {top_4[2][0]}\n\n"
 
-    md += """---
+    md += f"""---
 
-*Analysis generated by ESPN Fantasy Football Scraper. May your players stay healthy and your opponents' stars have bye weeks.*
+*Analysis generated by ESPN Fantasy Football Scraper using {NUM_SIMULATIONS:,} Monte Carlo simulations. May your players stay healthy and your opponents' stars have bye weeks.*
 """
     
     with open(filename, 'w') as f:
@@ -830,7 +1029,7 @@ def main():
     
     print(f"Found {len(remaining_schedule)} remaining games through week {reg_season_weeks}")
     
-    print("Running Monte Carlo playoff simulations (10,000 iterations)...")
+    print(f"Running Monte Carlo playoff simulations ({NUM_SIMULATIONS:,} iterations)...")
     playoff_preds = monte_carlo_playoff_simulation(summary, remaining_schedule)
     
     print("Predicting remaining game outcomes...")
@@ -842,6 +1041,10 @@ def main():
     print("\nCreating visualizations...")
     create_visualizations(df, summary)
     
+    print("\nCreating Monte Carlo distribution plots...")
+    create_monte_carlo_plots(playoff_preds, summary)
+    create_combined_monte_carlo_plot(playoff_preds, summary)
+    
     print("\nGenerating markdown analysis...")
     generate_markdown_analysis(summary, remaining_schedule, game_predictions, 
                               playoff_preds, reg_season_weeks)
@@ -849,10 +1052,10 @@ def main():
     print("\n" + "="*100)
     print("ANALYSIS COMPLETE!")
     print("="*100)
-    print("""
+    print(f"""
 Generated Files:
   • team_summary.csv - Summary statistics table with Power Rankings
-  • power_rankings_analysis.md - Snarky written analysis with embedded images
+  • power_rankings_analysis.md - Dynamic analysis with Monte Carlo predictions
   • visualizations/power_rankings.png - Overall power rankings
   • visualizations/power_breakdown.png - Power score component breakdown
   • visualizations/power_rankings_evolution.png - Weekly power rankings trends
@@ -862,6 +1065,8 @@ Generated Files:
   • visualizations/weekly_performance.png - Weekly scoring trends
   • visualizations/weekly_rank_heatmap.png - Weekly rankings grid
   • visualizations/consistency.png - Team consistency analysis
+  • visualizations/monte_carlo_summary.png - Combined 95% CI plot
+  • visualizations/monte_carlo/*.png - Individual team simulations ({len(playoff_preds)} plots)
 """)
     print("="*100)
 

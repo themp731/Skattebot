@@ -7,6 +7,7 @@ import markdown
 import os
 import base64
 from pathlib import Path
+import re
 
 def image_to_base64(image_path):
     """Convert image file to base64 data URI."""
@@ -39,7 +40,13 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
         'visualizations/weekly_performance.png',
         'visualizations/weekly_rank_heatmap.png',
         'visualizations/consistency.png',
+        'visualizations/monte_carlo_summary.png',
     ]
+    
+    mc_dir = Path('visualizations/monte_carlo')
+    if mc_dir.exists():
+        for mc_file in mc_dir.glob('*.png'):
+            image_files.append(str(mc_file))
     
     for img_path in image_files:
         if os.path.exists(img_path):
@@ -131,6 +138,11 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
             color: var(--text-primary);
         }}
         
+        em {{
+            color: var(--warning);
+            font-style: italic;
+        }}
+        
         img {{
             max-width: 100%;
             height: auto;
@@ -211,18 +223,20 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
             margin-bottom: 8px;
         }}
         
-        em {{
+        blockquote {{
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin: 20px 0;
             color: var(--text-secondary);
             font-style: italic;
         }}
         
-        .playoff-high {{
-            color: var(--success);
-            font-weight: bold;
-        }}
-        
-        .playoff-low {{
-            color: var(--accent);
+        .confidence-interval {{
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
         }}
         
         @media (max-width: 768px) {{
@@ -259,8 +273,11 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
         f.write(full_html)
     
     file_size = os.path.getsize(output_file)
-    print(f"Created HTML file: {output_file}")
-    print(f"  - File size: {file_size / 1024:.1f} KB")
+    print(f"✓ Created HTML file: {output_file}")
+    print(f"  - File size: {file_size / 1024 / 1024:.2f} MB")
+    
+    mc_count = len(list(Path('visualizations/monte_carlo').glob('*.png'))) if Path('visualizations/monte_carlo').exists() else 0
+    print(f"  - Embedded images: {len(image_files)} (including {mc_count} Monte Carlo plots)")
     
     return output_file
 
