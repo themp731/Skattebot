@@ -23,7 +23,12 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 
 ### Roster Health Report (November 27, 2025)
 - **Playoff Predictions sorted by Projected Standing** - #1 seed at top, descending
-- **Comprehensive Injury Report** - Includes both starters AND bench players
+- **Comprehensive Injury Report** - Includes starters, bench players, AND IR slot players
+- **Role Categories**:
+  - Starter = Currently in starting lineup
+  - Bench = On bench, available for substitution
+  - Bench (Stud) = High-value bench player (>15 PPG projected)
+  - IR Slot = In IR roster slot (long-term injury, wasting active roster spot)
 - **Severity Measures**:
   - Q (Questionable) = Minor Concern (likely to play)
   - D (Doubtful) = Moderate Concern (unlikely but possible)
