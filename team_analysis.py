@@ -1808,13 +1808,14 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
                 status = p.get('status', 'OUT')
                 severity, code = get_severity(status)
                 if severity:
+                    role = 'Bench (IR)' if status == 'IR' else 'Bench'
                     all_injured.append({
                         'name': name,
                         'position': p.get('position', 'UNK'),
                         'status': status,
                         'code': code,
                         'severity': severity,
-                        'role': 'Bench',
+                        'role': role,
                         'projected_pts': p.get('projected_pts', 0)
                     })
                     existing_names.add(name)
