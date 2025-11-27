@@ -195,12 +195,34 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
     all_optimization_moves = {team: [] for team in team_stats.keys()}
     all_optimization_gains = {team: 0.0 for team in team_stats.keys()}
     
+    espn_proj_totals = {team: 0.0 for team in team_stats.keys()}
+    optimized_proj_totals = {team: 0.0 for team in team_stats.keys()}
+    projection_weeks = {team: 0 for team in team_stats.keys()}
+    bye_players_all = {team: [] for team in team_stats.keys()}
+    unavailable_starters_all = {team: [] for team in team_stats.keys()}
+    
     for week in games_by_week.keys():
         week_opt = optimized_lineups.get(week, {})
+        week_proj = espn_projections.get(week, {})
+        
         for team in team_stats.keys():
+            if team in week_proj:
+                espn_proj_totals[team] += week_proj[team].get('projected_points', 0)
+                projection_weeks[team] += 1
+            
             if team in week_opt:
                 opt_data = week_opt[team]
+                optimized_proj_totals[team] += opt_data.get('optimized_projection', 0)
                 all_optimization_gains[team] += opt_data.get('projected_gain', 0)
+                
+                for bye_p in opt_data.get('bye_players', []):
+                    bye_p['week'] = week
+                    bye_players_all[team].append(bye_p)
+                
+                for unavail in opt_data.get('unavailable_starters', []):
+                    unavail['week'] = week
+                    unavailable_starters_all[team].append(unavail)
+                
                 moves = opt_data.get('optimization_moves', [])
                 for move in moves:
                     move['week'] = week
@@ -273,6 +295,13 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
         points_array = np.array(points_distributions[team])
         standings_array = np.array(standing_distributions[team])
         
+        weeks_count = max(projection_weeks.get(team, 1), 1)
+        avg_espn_proj = espn_proj_totals.get(team, 0) / weeks_count
+        avg_optimized_proj = optimized_proj_totals.get(team, 0) / weeks_count
+        historical_ppg = team_stats[team]['ppg']
+        
+        blended_proj = (ESPN_PROJECTION_WEIGHT * avg_optimized_proj) + (HISTORICAL_WEIGHT * historical_ppg)
+        
         results[team] = {
             'playoff_pct': (playoff_counts[team] / num_simulations) * 100,
             'avg_standing': standings_array.mean(),
@@ -296,6 +325,13 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             'health_narrative': team_stats[team].get('health_narrative', ''),
             'optimization_moves': all_optimization_moves.get(team, []),
             'total_optimization_gain': round(all_optimization_gains.get(team, 0), 1),
+            'avg_espn_projection': round(avg_espn_proj, 1),
+            'avg_optimized_projection': round(avg_optimized_proj, 1),
+            'historical_ppg': round(historical_ppg, 1),
+            'blended_projection': round(blended_proj, 1),
+            'bye_players': bye_players_all.get(team, []),
+            'unavailable_starters': unavailable_starters_all.get(team, []),
+            'projection_weeks': weeks_count,
         }
     
     return results
@@ -991,21 +1027,59 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
     
     lines.append(f"\n\n**Projection Summary:** Most likely finish: **{wins_mode} wins** | Projected PF: **{points_mean:.0f}** | Playoff: **{playoff_pct:.1f}%** | Championship: **{champ_pct:.1f}%**")
     
+    avg_espn = pred.get('avg_espn_projection', 0)
+    avg_optimized = pred.get('avg_optimized_projection', 0)
+    historical = pred.get('historical_ppg', ppg)
+    blended = pred.get('blended_projection', 0)
+    projection_weeks = pred.get('projection_weeks', 3)
+    bye_players = pred.get('bye_players', [])
+    unavailable_starters = pred.get('unavailable_starters', [])
+    
+    if avg_espn > 0 or avg_optimized > 0:
+        lines.append(f"\n\n**Projection Breakdown (Avg Per Game, Weeks 13-15):**")
+        lines.append(f"\n| Source | Projection | Notes |")
+        lines.append(f"\n|--------|------------|-------|")
+        lines.append(f"\n| ESPN Raw | {avg_espn:.1f} pts | Official ESPN projection (includes BYE players) |")
+        lines.append(f"\n| Historical PPG | {historical:.1f} pts | Season average through week 12 |")
+        
+        opt_diff = avg_optimized - avg_espn
+        if opt_diff < -1:
+            opt_note = f"BYE/injury adjusted ({opt_diff:+.1f} from ESPN)"
+        elif opt_diff > 1:
+            opt_note = f"Bench upgrades available (+{opt_diff:.1f} from ESPN)"
+        else:
+            opt_note = "Minimal lineup changes needed"
+        lines.append(f"\n| **Optimized** | **{avg_optimized:.1f} pts** | {opt_note} |")
+        lines.append(f"\n| Monte Carlo Input | {blended:.1f} pts | 60% Optimized + 40% Historical |")
+    
     snark = generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_health)
     lines.append(f"\n\n*{snark}*")
     
-    if injured_starters or returning_players or bench_studs:
-        lines.append(f"\n\n**Roster Health Report:**")
+    has_health_issues = injured_starters or returning_players or bench_studs or bye_players or unavailable_starters
+    
+    if has_health_issues:
+        lines.append(f"\n\n**Roster Health & Availability Report:**")
         
         if health_narrative:
             lines.append(f"\n{health_narrative}")
+        
+        if bye_players:
+            lines.append(f"\n\n*BYE Week Players ({len(bye_players)}):*")
+            for p in bye_players[:4]:
+                lines.append(f"\n- **{p['name']}** ({p['position']}, {p.get('nfl_team', 'UNK')}) - Week {p.get('week', '?')}")
+        
+        if unavailable_starters and not bye_players:
+            lines.append(f"\n\n*Unavailable Starters ({len(unavailable_starters)}):*")
+            for p in unavailable_starters[:4]:
+                pts = p.get('projected_pts', 0)
+                lines.append(f"\n- **{p['name']}** ({p['position']}, {p.get('reason', 'OUT')}) - {pts:.1f} pts lost, Week {p.get('week', '?')}")
         
         if injured_starters:
             lines.append(f"\n\n*Injured Starters ({len(injured_starters)}):*")
             for p in injured_starters[:4]:
                 stud_tag = " ⭐" if p.get('is_stud', False) else ""
-                availability = p.get('availability', 0) * 100
-                lines.append(f"\n- **{p['name']}** ({p['position']}, {p['status']}){stud_tag}: {p.get('outlook', 'Status unclear')}")
+                pts = p.get('projected_pts', 0)
+                lines.append(f"\n- **{p['name']}** ({p['position']}, {p['status']}){stud_tag}: {pts:.1f} pts proj, {p.get('outlook', 'Status unclear')}")
         
         if returning_players:
             lines.append(f"\n\n*Potential Returns:*")
@@ -1013,33 +1087,37 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
                 lines.append(f"\n- **{p['name']}** ({p['position']}): {p.get('outlook', 'Watch for updates')}")
         
         if bench_studs:
-            lines.append(f"\n\n*Bench Depth (Injured Studs):*")
-            for p in bench_studs[:2]:
-                lines.append(f"\n- **{p['name']}** ({p['position']}, {p['status']}): {p.get('outlook', 'On bench')}")
+            lines.append(f"\n\n*Injured Bench Players (High-Value):*")
+            for p in bench_studs[:3]:
+                pts = p.get('projected_pts', 0)
+                lines.append(f"\n- **{p['name']}** ({p['position']}, {p['status']}): {pts:.1f} pts proj when healthy")
         
-        if variance_mult > 1.1:
-            lines.append(f"\n\n*Simulation Impact:* Injury uncertainty increased variance by {(variance_mult-1)*100:.0f}%, widening the win/PF distribution range.")
+        if variance_mult > 1.05:
+            pct_increase = (variance_mult - 1) * 100
+            lines.append(f"\n\n*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **{pct_increase:.0f}%**, widening outcome distributions. This means higher upside but also higher downside risk.")
     
     optimization_moves = pred.get('optimization_moves', [])
     total_opt_gain = pred.get('total_optimization_gain', 0)
     
-    if optimization_moves or total_opt_gain > 0:
-        lines.append(f"\n\n**Lineup Optimization (BYE/Injury Substitutions):**")
+    if optimization_moves:
+        lines.append(f"\n\n**Lineup Optimization Moves:**")
         
-        if optimization_moves:
-            for move in optimization_moves[:3]:
-                week = move.get('week', '?')
-                bench_player = move.get('bench_player', 'Unknown')
-                reason = move.get('bench_reason', 'OUT')
-                start_player = move.get('start_player', 'Unknown')
-                start_proj = move.get('start_projected', 0)
-                lines.append(f"\n- Week {week}: Start **{start_player}** ({start_proj:.1f} pts) for {bench_player} ({reason})")
-            
-            if len(optimization_moves) > 3:
-                lines.append(f"\n- *+{len(optimization_moves)-3} more suggested moves*")
+        for move in optimization_moves[:4]:
+            week = move.get('week', '?')
+            bench_player = move.get('bench_player', 'Unknown')
+            reason = move.get('bench_reason', 'OUT')
+            start_player = move.get('start_player', 'Unknown')
+            start_proj = move.get('start_projected', 0)
+            gain = move.get('projected_gain', 0)
+            lines.append(f"\n- **Week {week}:** Bench {bench_player} ({reason}) → Start **{start_player}** (+{gain:.1f} pts)")
+        
+        if len(optimization_moves) > 4:
+            lines.append(f"\n- *+{len(optimization_moves)-4} more suggested moves*")
         
         if total_opt_gain > 0:
-            lines.append(f"\n\n*Optimization Impact:* Optimal lineup construction adds **~{total_opt_gain:.1f} projected points** across remaining weeks.")
+            lines.append(f"\n\n*Total Optimization Gain:* **+{total_opt_gain:.1f} projected points** across {projection_weeks} remaining weeks.")
+    elif total_opt_gain == 0 and not bye_players and not unavailable_starters:
+        lines.append(f"\n\n**Lineup Status:** Optimally set - no BYE week or injury substitutions needed.")
     
     return " ".join(lines)
 
