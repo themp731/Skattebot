@@ -1761,6 +1761,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
         health_pct = health['roster_health_pct'] * 100
         
         all_injured = []
+        existing_names = set()
         
         injured_starters = health.get('injured_starters', [])
         for p in injured_starters:
@@ -1773,43 +1774,68 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
                     'status': status,
                     'code': code,
                     'severity': severity,
-                    'is_starter': True,
+                    'role': 'Starter',
                     'projected_pts': p.get('projected_pts', 0)
                 })
+                existing_names.add(p.get('name', 'Unknown'))
         
-        bench_studs = health.get('bench_studs', [])
-        for p in bench_studs:
-            status = p.get('status', 'OUT')
-            severity, code = get_severity(status)
-            if severity:
+        ir_players = health.get('ir_players', [])
+        for p in ir_players:
+            name = p.get('name', 'Unknown')
+            if name not in existing_names:
+                status = p.get('status', 'IR')
+                if status in ['ACTIVE', 'NORMAL', None]:
+                    status = 'IR'
+                severity, code = get_severity(status)
+                if not severity:
+                    severity = 'Why is he even on your roster?!'
+                    code = 'IR'
                 all_injured.append({
-                    'name': p.get('name', 'Unknown'),
+                    'name': name,
                     'position': p.get('position', 'UNK'),
                     'status': status,
                     'code': code,
                     'severity': severity,
-                    'is_starter': False,
+                    'role': 'IR Slot',
                     'projected_pts': p.get('projected_pts', 0)
                 })
+                existing_names.add(name)
         
-        injured_players_raw = health.get('injured_players', [])
-        existing_names = {p['name'] for p in all_injured}
-        for p_str in injured_players_raw:
-            if '(' in p_str and ')' in p_str:
-                name = p_str.split('(')[0].strip()
-                status = p_str.split('(')[1].replace(')', '').strip()
-                if name not in existing_names:
-                    severity, code = get_severity(status)
-                    if severity:
-                        all_injured.append({
-                            'name': name,
-                            'position': 'UNK',
-                            'status': status,
-                            'code': code,
-                            'severity': severity,
-                            'is_starter': False,
-                            'projected_pts': 0
-                        })
+        injured_bench = health.get('injured_bench', [])
+        for p in injured_bench:
+            name = p.get('name', 'Unknown')
+            if name not in existing_names:
+                status = p.get('status', 'OUT')
+                severity, code = get_severity(status)
+                if severity:
+                    all_injured.append({
+                        'name': name,
+                        'position': p.get('position', 'UNK'),
+                        'status': status,
+                        'code': code,
+                        'severity': severity,
+                        'role': 'Bench',
+                        'projected_pts': p.get('projected_pts', 0)
+                    })
+                    existing_names.add(name)
+        
+        bench_studs = health.get('bench_studs', [])
+        for p in bench_studs:
+            name = p.get('name', 'Unknown')
+            if name not in existing_names:
+                status = p.get('status', 'OUT')
+                severity, code = get_severity(status)
+                if severity:
+                    all_injured.append({
+                        'name': name,
+                        'position': p.get('position', 'UNK'),
+                        'status': status,
+                        'code': code,
+                        'severity': severity,
+                        'role': 'Bench (Stud)',
+                        'projected_pts': p.get('projected_pts', 0)
+                    })
+                    existing_names.add(name)
         
         severity_order = {'IR': 0, 'O': 1, 'SUSP': 1, 'D': 2, 'Q': 3}
         all_injured.sort(key=lambda x: (severity_order.get(x['code'], 99), -x['projected_pts']))
@@ -1820,8 +1846,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
             md += "|--------|----------|--------|----------|------|\n"
             
             for p in all_injured:
-                role = "Starter" if p['is_starter'] else "Bench"
-                md += f"| {p['name']} | {p['position']} | {p['code']} | {p['severity']} | {role} |\n"
+                md += f"| {p['name']} | {p['position']} | {p['code']} | {p['severity']} | {p['role']} |\n"
             md += "\n"
         else:
             md += f"**{team}** (Health: {health_pct:.0f}%) - All players healthy!\n\n"

@@ -333,6 +333,8 @@ class ESPNFantasyAPI:
                 starters = []
                 bench_players = []
                 injured_starters = []
+                injured_bench = []
+                ir_players = []
                 bench_studs = []
                 returning_soon = []
                 
@@ -392,14 +394,19 @@ class ESPNFantasyAPI:
                             healthy_starter_projection += projected_pts * availability_pct
                         else:
                             healthy_starter_projection += projected_pts
+                    elif is_ir:
+                        ir_players.append(player_health)
+                        if 'return' in return_outlook.lower():
+                            returning_soon.append(player_health)
                     else:
                         bench_players.append(player_health)
                         if is_stud:
                             bench_studs.append(player_health)
                         
-                        if is_ir and 'return' in return_outlook.lower():
-                            returning_soon.append(player_health)
-                        elif injury_status in ['OUT', 'DOUBTFUL'] and availability_pct == 0 and is_stud:
+                        if injury_status in ['OUT', 'IR', 'DOUBTFUL', 'SUSPENSION', 'QUESTIONABLE']:
+                            injured_bench.append(player_health)
+                        
+                        if injury_status in ['OUT', 'DOUBTFUL'] and availability_pct == 0 and is_stud:
                             returning_soon.append(player_health)
                 
                 healthy_count = len([s for s in starters if s.injury_status in ['ACTIVE', 'NORMAL', None]])
@@ -429,6 +436,27 @@ class ESPNFantasyAPI:
                             'outlook': p.return_outlook,
                             'is_stud': p.is_stud
                         } for p in injured_starters
+                    ],
+                    'injured_bench': [
+                        {
+                            'name': p.name,
+                            'position': p.position,
+                            'status': p.injury_status,
+                            'projected_pts': round(p.projected_points, 1),
+                            'availability': p.availability_pct,
+                            'outlook': p.return_outlook,
+                            'is_stud': p.is_stud
+                        } for p in injured_bench
+                    ],
+                    'ir_players': [
+                        {
+                            'name': p.name,
+                            'position': p.position,
+                            'status': p.injury_status,
+                            'projected_pts': round(p.projected_points, 1),
+                            'availability': p.availability_pct,
+                            'outlook': p.return_outlook
+                        } for p in ir_players
                     ],
                     'bench_studs': [
                         {
