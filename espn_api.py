@@ -23,15 +23,15 @@ NFL_TEAM_MAP = {
 }
 
 BYE_WEEKS_2025 = {
-    5: ['DET', 'LAC'],
-    6: ['KC', 'LAR'],
-    7: ['MIN', 'SEA'],
-    9: ['CHI', 'DAL'],
-    10: ['CLE', 'GB', 'LV', 'PIT'],
-    11: ['ATL', 'BUF', 'CIN', 'JAX', 'NO', 'NYG'],
-    12: ['CAR', 'NYJ', 'TEN', 'ARI'],
-    13: ['BAL', 'DEN', 'HOU', 'IND', 'MIA', 'NE', 'PHI', 'WAS'],
-    14: ['SF', 'TB']
+    5: ['ATL', 'CHI', 'GB', 'PIT'],
+    6: ['HOU', 'MIN'],
+    7: ['BAL', 'BUF'],
+    8: ['ARI', 'DET', 'JAX', 'LV', 'LAR', 'SEA'],
+    9: ['CLE', 'NYJ', 'PHI', 'TB'],
+    10: ['CIN', 'DAL', 'KC', 'TEN'],
+    11: ['IND', 'NO'],
+    12: ['DEN', 'LAC', 'MIA', 'WAS'],
+    14: ['CAR', 'NE', 'NYG', 'SF']
 }
 
 FLEX_ELIGIBLE = ['RB', 'WR', 'TE']
