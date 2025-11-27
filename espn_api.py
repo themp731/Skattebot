@@ -104,13 +104,7 @@ class ESPNFantasyAPI:
             return 1.0, "Healthy - full availability expected"
         
         elif status == 'QUESTIONABLE':
-            if 'game-time' in detail_lower or 'gtd' in detail_lower:
-                return 0.5, "Game-time decision - coin flip"
-            elif 'expected to play' in detail_lower or 'likely to play' in detail_lower:
-                return 0.8, "Expected to play through injury"
-            elif 'limited' in detail_lower:
-                return 0.65, "Limited practice - likely to play"
-            return 0.6, "Questionable - may play with reduced workload"
+            return 1.0, "Questionable - assumed to play (historical: 80%+ play rate)"
         
         elif status == 'DOUBTFUL':
             if 'surprise' in detail_lower or 'unexpected' in detail_lower:
@@ -669,8 +663,7 @@ class ESPNFantasyAPI:
                             injured_starters.append(player_data)
                             unavailable_points_lost += projected_pts
                         elif injury_status == 'QUESTIONABLE':
-                            injured_starters.append(player_data)
-                            unavailable_points_lost += projected_pts * (1 - availability_pct)
+                            pass
                     else:
                         bench_players.append(player_data)
                 

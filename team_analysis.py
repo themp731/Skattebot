@@ -1402,6 +1402,8 @@ The **#1 Seed %** column shows your probability of finishing as the **regular se
 
 ### Assumptions & Limitations
 
+- **QUESTIONABLE players are assumed to play** - Historical data shows 80%+ of Questionable players suit up on game day. We treat them as healthy to avoid overly pessimistic projections.
+- **FLEX position accepts RB, WR, or TE** - When optimizing lineups, the top projected RB, WR, or TE from the bench can fill the Flex slot.
 - Our OPTIMIZED projections fix ESPN's BYE/injury issues, but still depend on ESPN's underlying player projections
 - Past scoring patterns may not continue (trades, injuries, bye weeks)
 - Each game is simulated independently (no momentum modeling)
@@ -1606,10 +1608,15 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 ### How the Optimizer Works
 
 1. **BYE Week Detection** - Cross-references every player's NFL team against the 2025 bye schedule
-2. **Injury Scanning** - Identifies starters with OUT, IR, DOUBTFUL, or SUSPENSION status
-3. **Position Matching** - Finds bench players eligible for each vacant starter slot
+2. **Injury Scanning** - Identifies starters with OUT, IR, DOUBTFUL, or SUSPENSION status (QUESTIONABLE players are assumed to play)
+3. **Position Matching** - Finds bench players eligible for each vacant starter slot (FLEX accepts RB, WR, or TE)
 4. **Gain Calculation** - Computes the projected point improvement from each substitution
 5. **Confidence Scoring** - Rates each move based on player projections and matchup strength
+
+### Key Modeling Assumptions
+
+- **QUESTIONABLE = Will Play** - Historical NFL data shows 80%+ of Questionable players suit up. We don't penalize these players.
+- **FLEX Flexibility** - When filling the Flex slot, we consider the top projected RB, WR, or TE from your bench - whichever scores highest.
 
 ### Key Lineup Moves This Week
 

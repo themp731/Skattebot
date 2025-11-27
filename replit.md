@@ -17,6 +17,10 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Markdown Section** - Dedicated "Lineup Optimizer: Your Secret Weapon" section with effusive praise
 - **Week-by-Week Tables** - Shows all optimization moves sorted by projected gain per week
 
+### Key Modeling Assumptions (November 27, 2025)
+- **QUESTIONABLE = Will Play** - Players with "Q" status are assumed to play (historical 80%+ play rate)
+- **FLEX Accepts RB/WR/TE** - Lineup optimizer considers all three positions for Flex slot substitutions
+
 ### Hybrid Monte Carlo with ESPN Projections
 - **ESPN Projection Integration** - Fetches ESPN's weekly projected points for each remaining matchup
 - **Blended Scoring Model** - 60% optimized projections + 40% historical PPG for each simulated game
