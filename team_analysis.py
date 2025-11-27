@@ -1023,7 +1023,7 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
         elif wax > 0:
             lines.append(f"With {wax:+.2f} WAX, they've actually been a bit lucky - which makes this worse.")
     
-    lines.append(f"\n\n**Projection Summary:** Most likely finish: **{wins_mode} wins** | Projected PF: **{points_mean:.0f}** | Playoff: **{playoff_pct:.1f}%** | Championship: **{champ_pct:.1f}%**")
+    lines.append(f"\n\n**Projection Summary:** Most likely finish: **{wins_mode} wins** | Projected PF: **{points_mean:.0f}** | Playoff: **{playoff_pct:.1f}%** | #1 Seed: **{champ_pct:.1f}%**")
     
     avg_espn = pred.get('avg_espn_projection', 0)
     avg_optimized = pred.get('avg_optimized_projection', 0)
@@ -1349,9 +1349,17 @@ For each of the {NUM_SIMULATIONS:,} simulations, we record:
 2. **Final Points For** - Total season points (the tiebreaker for playoff seeding)
 3. **Final Standing** - Where each team finishes in the standings
 
-### Why Points For Matters
+### Why Points For Matters (Hint: $200)
 
-In this league, **Points For is the tiebreaker** for playoff positioning. Two teams with identical records? The one with more total points gets the higher seed. Our simulation tracks the full distribution of projected Points For, which is critical for teams battling for the 4th playoff spot.
+Points For isn't just a tiebreaker - it's worth cold, hard cash. **The highest Points For at the end of the regular season wins $200** (half of all buy-ins). 
+
+This means even if you miss the playoffs, you can still take home a significant payout by outscoring everyone else across the season. Our simulation tracks the full distribution of projected Points For, so you can see your odds of claiming that prize.
+
+Additionally, Points For is the **tiebreaker for playoff seeding**. Two teams with identical records? The one with more total points gets the higher seed. This is critical for teams battling for the 4th playoff spot.
+
+### What "#1 Seed %" Means
+
+The **#1 Seed %** column shows your probability of finishing as the **regular season champion** - the top seed heading into playoffs. This is based on finishing with the best record (and Points For as tiebreaker). This is NOT the probability of winning the playoff tournament.
 
 ### Assumptions & Limitations
 
@@ -1374,7 +1382,7 @@ In this league, **Points For is the tiebreaker** for playoff positioning. Two te
 
 Based on {NUM_SIMULATIONS:,} Monte Carlo simulations blending ESPN projections with historical data.
 
-| Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | Championship % |
+| Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % |
 |------|--------|-----------|------------------|--------------|----------------|----------------|
 """
     
