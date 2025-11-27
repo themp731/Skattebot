@@ -32,8 +32,9 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Points-For Champion** - 50% of Total FAAB Spent = $218 (current: $436 total FAAB)
 - **E[Weekly] Calculation** - Each team's E[Weekly] = (PPG / League Total PPG) × $300
 - **Sum of E[Weekly] = $300** - All teams' expected weekly shares sum to exactly $300
-- **FAAB = Incremental Cost** - FAAB spending is ADDITIONAL cost beyond $250 buy-in
-- **Net Expected** = E[Playoff] + E[PF Prize] + E[Weekly] - FAAB Cost
+- **Total Cost** = $250 buy-in + (FAAB Spent ÷ 2) - accounts for all manager investment
+- **E[Return]** = E[Playoff] + E[PF Prize] + E[Weekly] - total expected winnings
+- **Net Expected** = E[Return] - Total Cost (positive = profit, negative = loss)
 
 ### OPTIMIZED Data Consistency (November 27, 2025)
 - **All Tables Use OPTIMIZED** - Every projection table uses optimized data (not raw ESPN)

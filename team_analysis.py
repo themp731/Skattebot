@@ -1520,10 +1520,10 @@ FAAB spending is **additional cost beyond the $250 buy-in**. The Points-For winn
 
 ### Expected Payouts Summary
 
-Each manager's FAAB cost (spent ÷ 2) is **deducted** from their expected payout. FAAB is money spent **beyond the $250 buy-in**, and half goes to the Points-For prize pool.
+Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expected shows expected profit/loss after accounting for all costs.
 
-| Team | Playoff % | PF Leader % | FAAB Spent | FAAB Cost | E[Playoff] | E[PF Prize] | E[Weekly] | **Net Expected** |
-|------|-----------|-------------|------------|-----------|------------|-------------|-----------|------------------|
+| Team | Playoff % | PF Leader % | Total Cost | E[Playoff] | E[PF Prize] | E[Weekly] | E[Return] | **Net Expected** |
+|------|-----------|-------------|------------|------------|-------------|-----------|-----------|------------------|
 """
     
     all_ppg = [(team, pred.get('historical_ppg', 100)) for team, pred in playoff_preds.items()]
@@ -1538,6 +1538,7 @@ Each manager's FAAB cost (spent ÷ 2) is **deducted** from their expected payout
         pf_leader_pct = pred.get('points_for_leader_pct', 0) / 100
         faab_spent = team_faab.get(team, 0)
         faab_cost = faab_spent / 2
+        total_cost = BUY_IN + faab_cost
         
         expected_playoff = playoff_pct * AVG_PLAYOFF_PRIZE
         expected_pf = pf_leader_pct * pf_prize
@@ -1545,7 +1546,8 @@ Each manager's FAAB cost (spent ÷ 2) is **deducted** from their expected payout
         weekly_probability = weekly_probabilities.get(team, 1/NUM_TEAMS)
         expected_weekly = weekly_probability * WEEKLY_TOTAL
         
-        net_expected = expected_playoff + expected_pf + expected_weekly - faab_cost
+        expected_return = expected_playoff + expected_pf + expected_weekly
+        net_expected = expected_return - total_cost
         
         expected_payouts.append({
             'team': team,
@@ -1553,15 +1555,17 @@ Each manager's FAAB cost (spent ÷ 2) is **deducted** from their expected payout
             'pf_leader_pct': pred.get('points_for_leader_pct', 0),
             'faab_spent': faab_spent,
             'faab_cost': faab_cost,
+            'total_cost': total_cost,
             'expected_playoff': expected_playoff,
             'expected_pf': expected_pf,
             'expected_weekly': expected_weekly,
+            'expected_return': expected_return,
             'net_expected': net_expected
         })
     
     expected_payouts.sort(key=lambda x: x['net_expected'], reverse=True)
     for ep in expected_payouts:
-        md += f"| {ep['team']} | {ep['playoff_pct']:.1f}% | {ep['pf_leader_pct']:.1f}% | ${ep['faab_spent']} | -${ep['faab_cost']:.0f} | ${ep['expected_playoff']:.0f} | ${ep['expected_pf']:.0f} | ${ep['expected_weekly']:.0f} | **${ep['net_expected']:.0f}** |\n"
+        md += f"| {ep['team']} | {ep['playoff_pct']:.1f}% | {ep['pf_leader_pct']:.1f}% | ${ep['total_cost']:.0f} | ${ep['expected_playoff']:.0f} | ${ep['expected_pf']:.0f} | ${ep['expected_weekly']:.0f} | ${ep['expected_return']:.0f} | **${ep['net_expected']:.0f}** |\n"
 
     md += f"""
 
@@ -1577,12 +1581,17 @@ Each manager's FAAB cost (spent ÷ 2) is **deducted** from their expected payout
    - Each team's probability = their PPG ÷ total league PPG
    - Sum of all teams' E[Weekly] = **${WEEKLY_TOTAL} exactly**
 
-4. **FAAB Cost** = Your FAAB Spent ÷ 2
-   - FAAB spending is **incremental cost beyond the $250 buy-in**
-   - This is your additional investment into the Points-For prize pool
-   - **Deducted from net expected** since it's money you've put in beyond the buy-in
+4. **Total Cost** = $250 buy-in + (FAAB Spent ÷ 2)
+   - Every manager pays $250 to enter
+   - FAAB spending is **incremental cost beyond the buy-in**
+   - Half of your FAAB goes to the Points-For prize pool
 
-**Net Expected = E[Playoff] + E[PF Prize] + E[Weekly] - FAAB Cost**
+5. **E[Return]** = E[Playoff] + E[PF Prize] + E[Weekly]
+   - Your total expected winnings before costs
+
+**Net Expected = E[Return] - Total Cost**
+   - Positive = expected profit
+   - Negative = expected loss
 
 *Note: Weekly estimates are probability-weighted by PPG. Higher scorers have proportionally better odds at the $20/week prizes.*
 
