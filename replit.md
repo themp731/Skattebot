@@ -7,13 +7,15 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 
 ## Recent Changes (November 27, 2025)
 
-### Lineup Optimization Engine (NEW)
-- **BYE Week Tracking** - NFL team BYE schedule (2024: weeks 5-14) integrated into projections
+### Lineup Optimization Engine
+- **BYE Week Tracking** - NFL team BYE schedule (2025: weeks 5-14, skip 13) integrated into projections
 - **Optimal Lineup Construction** - Identifies best bench replacements for BYE/injured starters
-- **Position-Aware Substitutions** - Matches bench players to correct position slots
+- **Position-Aware Substitutions** - Matches bench players to correct position slots (including Flex slot 23)
 - **Projected Gain Calculation** - Quantifies expected point improvement from optimal moves
-- **Optimization Commentary** - Reports specific lineup moves (e.g., "Start Tony Pollard for Jonathan Taylor (BYE)")
+- **Optimization Commentary** - Reports specific lineup moves with player names and point gains
 - **Confidence-Adjusted Variance** - Lower confidence moves increase simulation variance
+- **Markdown Section** - Dedicated "Lineup Optimizer: Your Secret Weapon" section with effusive praise
+- **Week-by-Week Tables** - Shows all optimization moves sorted by projected gain per week
 
 ### Hybrid Monte Carlo with ESPN Projections
 - **ESPN Projection Integration** - Fetches ESPN's weekly projected points for each remaining matchup

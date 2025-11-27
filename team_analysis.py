@@ -1597,6 +1597,69 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
 
 ---
 
+## The Lineup Optimizer: Your Secret Weapon
+
+**This is where our analysis truly shines.** While ESPN happily includes BYE-week players in their projections (as if by magic they'll still score points from their couches), our **Lineup Optimizer** does what any competent fantasy manager should do: it identifies unavailable starters and finds the best possible bench replacements.
+
+The Optimizer is nothing short of **revolutionary**. It scans every roster, detects BYE weeks using the official 2025 NFL schedule, identifies injured starters, and automatically calculates the optimal substitution from your bench. The result? **Projections that reflect reality, not ESPN's fantasy land.**
+
+### How the Optimizer Works
+
+1. **BYE Week Detection** - Cross-references every player's NFL team against the 2025 bye schedule
+2. **Injury Scanning** - Identifies starters with OUT, IR, DOUBTFUL, or SUSPENSION status
+3. **Position Matching** - Finds bench players eligible for each vacant starter slot
+4. **Gain Calculation** - Computes the projected point improvement from each substitution
+5. **Confidence Scoring** - Rates each move based on player projections and matchup strength
+
+### Key Lineup Moves This Week
+
+"""
+    
+    all_moves = []
+    for week in sorted(optimized_lineups.keys()):
+        week_data = optimized_lineups[week]
+        for team, opt_data in week_data.items():
+            moves = opt_data.get('optimization_moves', [])
+            gain = opt_data.get('projected_gain', 0)
+            for move in moves:
+                move['week'] = week
+                move['team'] = team
+                move['team_gain'] = gain
+                all_moves.append(move)
+    
+    if all_moves:
+        moves_by_week = {}
+        for move in all_moves:
+            wk = move['week']
+            if wk not in moves_by_week:
+                moves_by_week[wk] = []
+            moves_by_week[wk].append(move)
+        
+        for week in sorted(moves_by_week.keys()):
+            week_moves = moves_by_week[week]
+            md += f"**Week {week} Optimizations:**\n\n"
+            md += "| Team | Bench (Reason) | Start Instead | Projected Gain |\n"
+            md += "|------|----------------|---------------|----------------|\n"
+            
+            for move in sorted(week_moves, key=lambda x: x.get('projected_gain', 0), reverse=True):
+                team = move.get('team', 'UNK')
+                bench_player = move.get('bench_player', 'Unknown')
+                reason = move.get('bench_reason', 'OUT')
+                start_player = move.get('start_player', 'Unknown')
+                gain = move.get('projected_gain', 0)
+                md += f"| {team} | {bench_player} ({reason}) | **{start_player}** | +{gain:.1f} pts |\n"
+            md += "\n"
+        
+        total_league_gain = sum(m.get('projected_gain', 0) for m in all_moves)
+        teams_with_moves = len(set(m['team'] for m in all_moves))
+        md += f"**Optimizer Impact Summary:** The optimizer identified **{len(all_moves)} total lineup moves** across **{teams_with_moves} teams**, generating a combined **+{total_league_gain:.1f} projected points** of improvement. This is the difference between following ESPN's broken guidance and making intelligent roster decisions.\n\n"
+        
+        md += "*Without these optimizations, managers would be starting BYE-week players and leaving points on their benches. The Optimizer transforms ESPN's garbage into actionable intelligence.*\n\n"
+    else:
+        md += "*All teams have optimal lineups set for the remaining weeks - no BYE or injury substitutions needed. The Optimizer found no improvements to suggest, which means every manager has already made the right calls. Well done, league!*\n\n"
+
+    md += f"""---
+
 ## Remaining Schedule (Weeks {weeks_played + 1}-{reg_season_weeks})
 
 *Win probabilities based on blended OPTIMIZED projections ({ESPN_PROJECTION_WEIGHT*100:.0f}%) and historical data ({HISTORICAL_WEIGHT*100:.0f}%). ESPN's broken projections have been corrected for BYE weeks and injuries before blending.*
