@@ -116,7 +116,7 @@ def calculate_summary_stats(df):
     return summary
 
 def fetch_espn_projections(remaining_schedule):
-    """Fetch ESPN projections and enhanced roster health for remaining weeks."""
+    """Fetch ESPN projections, enhanced roster health, and optimized lineup data for remaining weeks."""
     api = get_espn_api()
     remaining_weeks = sorted(set(g['week'] for g in remaining_schedule))
     current_week = min(remaining_weeks) if remaining_weeks else 13
@@ -127,22 +127,34 @@ def fetch_espn_projections(remaining_schedule):
     print(f"  Fetching enhanced roster health (starters + bench studs)...")
     roster_health = api.get_enhanced_roster_health(current_week)
     
-    return projections, roster_health
+    print(f"  Calculating optimized lineup projections (BYE week + injury substitutions)...")
+    optimized_lineups = {}
+    for week in remaining_weeks:
+        optimized_lineups[week] = api.get_optimized_lineup_projections(week)
+    
+    return projections, roster_health, optimized_lineups
 
-def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections, roster_health, num_simulations=NUM_SIMULATIONS):
+def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections, roster_health, 
+                                   optimized_lineups=None, num_simulations=NUM_SIMULATIONS):
     """
-    Run Monte Carlo simulation with blended ESPN projections and historical performance.
+    Run Monte Carlo simulation with optimized lineup projections, blending ESPN projections 
+    with historical performance and accounting for BYE week / injury substitutions.
     
     Blending formula:
-        expected_score = (ESPN_PROJECTION_WEIGHT × espn_projected) + (HISTORICAL_WEIGHT × historical_ppg)
+        base_score = (ESPN_PROJECTION_WEIGHT × espn_projected) + (HISTORICAL_WEIGHT × historical_ppg)
+        optimized_score = base_score + lineup_optimization_gain
         
-    Enhanced roster health includes:
+    Enhanced features:
+    - Optimal lineup construction (BYE week substitutions, injury replacements)
     - Variance multiplier based on injury impact
     - Bench stud availability tracking
     - Returning player projections
     
     Tracks both wins AND total points for tiebreaker analysis.
     """
+    if optimized_lineups is None:
+        optimized_lineups = {}
+    
     current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
     
     team_stats = {}
@@ -164,6 +176,8 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             team_stats[team]['bench_studs'] = health_data.get('bench_studs', [])
             team_stats[team]['returning_players'] = health_data.get('returning_players', [])
             team_stats[team]['health_narrative'] = health_data.get('narrative', '')
+            team_stats[team]['optimization_moves'] = []
+            team_stats[team]['total_optimization_gain'] = 0.0
     
     win_distributions = {team: [] for team in team_stats.keys()}
     points_distributions = {team: [] for team in team_stats.keys()}
@@ -178,12 +192,27 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             games_by_week[week] = []
         games_by_week[week].append(game)
     
+    all_optimization_moves = {team: [] for team in team_stats.keys()}
+    all_optimization_gains = {team: 0.0 for team in team_stats.keys()}
+    
+    for week in games_by_week.keys():
+        week_opt = optimized_lineups.get(week, {})
+        for team in team_stats.keys():
+            if team in week_opt:
+                opt_data = week_opt[team]
+                all_optimization_gains[team] += opt_data.get('projected_gain', 0)
+                moves = opt_data.get('optimization_moves', [])
+                for move in moves:
+                    move['week'] = week
+                    all_optimization_moves[team].append(move)
+    
     for sim in range(num_simulations):
         sim_wins = {team: stats['wins'] for team, stats in team_stats.items()}
         sim_points = {team: stats['points_for'] for team, stats in team_stats.items()}
         
         for week, games in games_by_week.items():
             week_projections = espn_projections.get(week, {})
+            week_opt = optimized_lineups.get(week, {})
             
             for game in games:
                 home = game['home']
@@ -193,16 +222,24 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
                 
                 for team, opponent in [(home, away), (away, home)]:
                     stats = team_stats[team]
+                    
+                    opt_data = week_opt.get(team, {})
+                    optimized_proj = opt_data.get('optimized_projection', None)
                     espn_proj = week_projections.get(team, {}).get('projected_points', None)
                     
-                    if espn_proj and espn_proj > 0:
+                    if optimized_proj and optimized_proj > 0:
+                        expected = (ESPN_PROJECTION_WEIGHT * optimized_proj) + (HISTORICAL_WEIGHT * stats['ppg'])
+                    elif espn_proj and espn_proj > 0:
                         expected = (ESPN_PROJECTION_WEIGHT * espn_proj) + (HISTORICAL_WEIGHT * stats['ppg'])
                     else:
                         expected = stats['ppg']
                     
                     base_std = stats['std']
                     variance_mult = stats.get('variance_multiplier', 1.0)
-                    adjusted_std = base_std * variance_mult
+                    
+                    opt_confidence = opt_data.get('confidence', 1.0)
+                    confidence_factor = 1.0 + (1.0 - opt_confidence) * 0.3
+                    adjusted_std = base_std * variance_mult * confidence_factor
                     
                     if team == home:
                         home_score = max(50, np.random.normal(expected, adjusted_std))
@@ -257,6 +294,8 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             'bench_studs': team_stats[team].get('bench_studs', []),
             'returning_players': team_stats[team].get('returning_players', []),
             'health_narrative': team_stats[team].get('health_narrative', ''),
+            'optimization_moves': all_optimization_moves.get(team, []),
+            'total_optimization_gain': round(all_optimization_gains.get(team, 0), 1),
         }
     
     return results
@@ -981,6 +1020,27 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
         if variance_mult > 1.1:
             lines.append(f"\n\n*Simulation Impact:* Injury uncertainty increased variance by {(variance_mult-1)*100:.0f}%, widening the win/PF distribution range.")
     
+    optimization_moves = pred.get('optimization_moves', [])
+    total_opt_gain = pred.get('total_optimization_gain', 0)
+    
+    if optimization_moves or total_opt_gain > 0:
+        lines.append(f"\n\n**Lineup Optimization (BYE/Injury Substitutions):**")
+        
+        if optimization_moves:
+            for move in optimization_moves[:3]:
+                week = move.get('week', '?')
+                bench_player = move.get('bench_player', 'Unknown')
+                reason = move.get('bench_reason', 'OUT')
+                start_player = move.get('start_player', 'Unknown')
+                start_proj = move.get('start_projected', 0)
+                lines.append(f"\n- Week {week}: Start **{start_player}** ({start_proj:.1f} pts) for {bench_player} ({reason})")
+            
+            if len(optimization_moves) > 3:
+                lines.append(f"\n- *+{len(optimization_moves)-3} more suggested moves*")
+        
+        if total_opt_gain > 0:
+            lines.append(f"\n\n*Optimization Impact:* Optimal lineup construction adds **~{total_opt_gain:.1f} projected points** across remaining weeks.")
+    
     return " ".join(lines)
 
 def generate_markdown_analysis(summary, remaining_schedule, game_predictions, playoff_preds, 
@@ -1311,12 +1371,13 @@ def main():
     remaining_schedule, reg_season_weeks, playoff_teams = get_remaining_schedule()
     print(f"  Found {len(remaining_schedule)} remaining games through week {reg_season_weeks}")
     
-    print("[4/8] Fetching ESPN projections and roster health...")
-    espn_projections, roster_health = fetch_espn_projections(remaining_schedule)
+    print("[4/8] Fetching ESPN projections, roster health, and lineup optimization...")
+    espn_projections, roster_health, optimized_lineups = fetch_espn_projections(remaining_schedule)
     
     print(f"[5/8] Running Monte Carlo simulations ({NUM_SIMULATIONS:,} iterations)...")
-    print(f"  Blending: ESPN Projections ({ESPN_PROJECTION_WEIGHT*100:.0f}%) + Historical ({HISTORICAL_WEIGHT*100:.0f}%)")
-    playoff_preds = monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections, roster_health)
+    print(f"  Blending: Optimized Projections ({ESPN_PROJECTION_WEIGHT*100:.0f}%) + Historical ({HISTORICAL_WEIGHT*100:.0f}%)")
+    print(f"  Lineup optimization: BYE week substitutions + injury replacements")
+    playoff_preds = monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections, roster_health, optimized_lineups)
     
     print("[6/8] Predicting remaining games...")
     game_predictions = predict_remaining_games(summary, remaining_schedule, espn_projections)
