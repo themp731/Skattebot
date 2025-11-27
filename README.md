@@ -89,9 +89,18 @@ python team_analysis.py
 
 **This creates:**
 - **team_summary.csv** - Season summary with Power Rankings and WAX (Wins Above Expectation) metric
-- **power_rankings_analysis.md** - Snarky written analysis of each team's performance with embedded images
+- **power_rankings_analysis.md** - Dynamic analysis with playoff predictions, remaining schedule, and team commentary
 - **power_rankings_analysis.html** - Styled HTML version with embedded images (run `python md_to_html.py` to generate)
 - **visualizations/** folder containing:
+
+### Playoff Predictions Features:
+- **Monte Carlo Simulations** - 10,000 iterations to calculate playoff probabilities
+- **Remaining Schedule** - Shows all upcoming matchups with win probability percentages
+- **Playoff Odds** - Playoff %, Championship %, and projected final standing for each team
+- **Predicted Matchups** - Projected semifinal matchups based on current trajectory
+- **Dynamic Commentary** - All team analysis regenerates fresh with actual stats (no stale content)
+
+### Visualizations:
   - `power_rankings.png` - Overall power rankings (#1-#12)
   - `power_breakdown.png` - Stacked bar chart showing power score components
   - `power_rankings_evolution.png` - Line chart showing weekly power ranking changes
