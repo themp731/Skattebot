@@ -26,8 +26,12 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Comprehensive Injury Report** - Includes starters, bench players, AND IR slot players
 - **Role Categories**:
   - Starter = Currently in starting lineup
-  - Bench = On bench, available for substitution
-  - Bench (Stud) = High-value bench player (>15 PPG projected)
+  - Bench = On bench with minor injury (Q/D status)
+  - Bench (O) = On bench, confirmed OUT this week
+  - Bench (IR) = On bench with IR designation (should be moved to IR slot)
+  - Bench (Stud) = High-value bench player (>15 PPG projected) with minor injury
+  - Bench Stud (O) = High-value bench player, confirmed OUT
+  - Bench Stud (IR) = High-value bench player with IR designation
   - IR Slot = In IR roster slot (long-term injury, wasting active roster spot)
 - **Severity Measures**:
   - Q (Questionable) = Minor Concern (likely to play)
