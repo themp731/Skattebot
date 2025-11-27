@@ -26,7 +26,7 @@ outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python espn_ff_scraper.py --league_id 149388 --years 2024"
+args = "python espn_ff_scraper.py --league_id 149388 --years 2025"
 
 [deployment]
 run = ["sh", "-c", "python espn_ff_scraper.py --league_id 12345 --week 1"]
