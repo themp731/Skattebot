@@ -1,5 +1,5 @@
 # 2025 Fantasy Football Power Rankings Analysis
-## Week 12 Update - Generated November 27, 2025 at 07:33 AM
+## Week 12 Update - Generated November 27, 2025 at 07:43 AM
 
 ---
 
@@ -174,15 +174,15 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 | Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % | PF Leader % |
 |------|--------|-----------|------------------|--------------|----------------|----------------|-------------|
-| MP | 9-3 | 98.8% | 11 | 1725 | #1.4 | 77.6% | 43.2% |
-| ZSF | 7-5 | 75.9% | 9 | 1727 | #3.3 | 9.5% | 47.9% |
-| sgf | 8-4 | 73.0% | 9 | 1666 | #3.5 | 8.4% | 6.0% |
-| KIRK | 7-5 | 75.2% | 9 | 1652 | #3.6 | 2.5% | 1.4% |
-| POO | 7-5 | 45.3% | 9 | 1600 | #4.5 | 1.6% | 0.1% |
-| GV | 7-5 | 29.7% | 9 | 1579 | #5.1 | 0.5% | 0.0% |
-| PATS | 5-7 | 1.3% | 7 | 1630 | #7.7 | 0.0% | 1.5% |
-| GEMP | 6-6 | 0.9% | 7 | 1465 | #7.7 | 0.0% | 0.0% |
-| KESS | 5-7 | 0.0% | 6 | 1439 | #8.9 | 0.0% | 0.0% |
+| MP | 9-3 | 98.7% | 11 | 1725 | #1.4 | 78.7% | 42.4% |
+| ZSF | 7-5 | 75.8% | 9 | 1728 | #3.3 | 9.2% | 48.2% |
+| sgf | 8-4 | 71.9% | 9 | 1666 | #3.5 | 7.6% | 6.0% |
+| KIRK | 7-5 | 75.1% | 9 | 1652 | #3.6 | 2.3% | 1.5% |
+| POO | 7-5 | 47.3% | 9 | 1600 | #4.5 | 1.6% | 0.1% |
+| GV | 7-5 | 29.0% | 9 | 1579 | #5.1 | 0.6% | 0.0% |
+| PATS | 5-7 | 1.4% | 7 | 1630 | #7.7 | 0.0% | 1.7% |
+| GEMP | 6-6 | 0.8% | 7 | 1465 | #7.7 | 0.0% | 0.0% |
+| KESS | 5-7 | 0.0% | 6 | 1438 | #8.9 | 0.0% | 0.0% |
 | ROUX | 4-8 | 0.0% | 6 | 1437 | #9.5 | 0.0% | 0.0% |
 | 3000 | 4-8 | 0.0% | 4 | 1358 | #11.1 | 0.0% | 0.0% |
 | WOOD | 3-9 | 0.0% | 4 | 1330 | #11.7 | 0.0% | 0.0% |
@@ -216,12 +216,12 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
 
 | Rank | Team | Current PF | Projected Final PF | Expected Addition |
 |------|------|------------|-------------------|-------------------|
-| 1 | ZSF | 1379 | 1727 | +349 |
-| 2 | MP | 1390 | 1725 | +335 |
-| 3 | sgf | 1355 | 1666 | +312 |
+| 1 | ZSF | 1379 | 1728 | +349 |
+| 2 | MP | 1390 | 1725 | +334 |
+| 3 | sgf | 1355 | 1666 | +311 |
 | 4 | KIRK | 1312 | 1652 | +340 |
 | 5 | PATS | 1299 | 1630 | +331 |
-| 6 | POO | 1267 | 1600 | +333 |
+| 6 | POO | 1267 | 1600 | +334 |
 
 
 ---
@@ -269,31 +269,32 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
 
 | Team | Playoff % | PF Leader % | Total Cost | E[Playoff] | E[PF Prize] | E[Weekly] | E[Return] | **Net Expected** |
 |------|-----------|-------------|------------|------------|-------------|-----------|-----------|------------------|
-| MP | 98.8% | 43.2% | $258 | $889 | $94 | $28 | $1011 | **$753** |
-| ZSF | 75.9% | 47.9% | $289 | $683 | $104 | $28 | $815 | **$526** |
-| KIRK | 75.2% | 1.4% | $265 | $677 | $3 | $26 | $706 | **$441** |
-| sgf | 73.0% | 6.0% | $258 | $657 | $13 | $27 | $697 | **$439** |
-| POO | 45.3% | 0.1% | $270 | $408 | $0 | $26 | $434 | **$164** |
-| GV | 29.7% | 0.0% | $278 | $267 | $0 | $25 | $293 | **$15** |
-| GEMP | 0.9% | 0.0% | $256 | $8 | $0 | $24 | $31 | **$-225** |
+| MP | 98.7% | 42.4% | $258 | $1291 | $92 | $28 | $1411 | **$1153** |
+| ZSF | 75.8% | 48.2% | $289 | $447 | $105 | $28 | $580 | **$291** |
+| sgf | 71.9% | 6.0% | $258 | $403 | $13 | $27 | $443 | **$185** |
+| KIRK | 75.1% | 1.5% | $265 | $305 | $3 | $26 | $335 | **$70** |
+| POO | 47.3% | 0.1% | $270 | $164 | $0 | $26 | $190 | **$-80** |
+| GV | 29.0% | 0.0% | $278 | $89 | $0 | $25 | $115 | **$-163** |
 | 3000 | 0.0% | 0.0% | $250 | $0 | $0 | $22 | $22 | **$-228** |
+| GEMP | 0.8% | 0.0% | $256 | $0 | $0 | $24 | $24 | **$-232** |
 | WOOD | 0.0% | 0.0% | $254 | $0 | $0 | $21 | $21 | **$-233** |
 | ROUX | 0.0% | 0.0% | $266 | $0 | $0 | $23 | $23 | **$-243** |
-| PATS | 1.3% | 1.5% | $296 | $12 | $3 | $26 | $41 | **$-255** |
 | KESS | 0.0% | 0.0% | $278 | $0 | $0 | $23 | $23 | **$-255** |
+| PATS | 1.4% | 1.7% | $296 | $0 | $4 | $26 | $30 | **$-265** |
 
 
 ### How Expected Payouts Are Calculated
 
-1. **E[Playoff]** = Playoff % × Average Playoff Prize ($900)
-   - Average of 1st/2nd/3rd prizes assuming equal odds once in playoffs (simplification)
+1. **E[Playoff]** = P(1st) × $1,485 + P(2nd) × $810 + P(3rd) × $405
+   - Uses actual placement probabilities from Monte Carlo simulations
+   - **Sum of all teams' E[Playoff] = $2,700 exactly** (the full playoff pool)
    
 2. **E[PF Prize]** = PF Leader % × $218 (current FAAB pool ÷ 2)
    - Your probability of finishing with the most Points For × the prize
    
 3. **E[Weekly]** = Probability × $300 (total weekly pool)
    - Each team's probability = their PPG ÷ total league PPG
-   - Sum of all teams' E[Weekly] = **$300 exactly**
+   - **Sum of all teams' E[Weekly] = $300 exactly**
 
 4. **Total Cost** = $250 buy-in + (FAAB Spent ÷ 2)
    - Every manager pays $250 to enter
@@ -307,7 +308,7 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
    - Positive = expected profit
    - Negative = expected loss
 
-*Note: Weekly estimates are probability-weighted by PPG. Higher scorers have proportionally better odds at the $20/week prizes.*
+*Note: E[Playoff] uses position-specific probabilities (1st/2nd/3rd) from Monte Carlo simulations, ensuring all expected payouts sum to exactly the prize pool.*
 
 ---
 
@@ -473,7 +474,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 Sitting atop the standings with a commanding 9-3 record, this team has earned the top spot through dominant performance. Their 115.85 PPG leads the league, which translates to an impressive 8.36 MVP-W and 9 top-6 weekly finishes. With a +0.64 WAX, they've caught a few breaks too - but at this level, you take what you can get. 
 
-**Projection Summary:** Most likely finish: **11 wins** | Projected PF: **1725** | Playoff: **98.8%** | #1 Seed: **77.6%** 
+**Projection Summary:** Most likely finish: **11 wins** | Projected PF: **1725** | Playoff: **98.7%** | #1 Seed: **78.7%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -548,7 +549,7 @@ Fully healthy starting lineup.
 
 Second place with 8-4, trailing the leader by 3.54 power points. Scoring 112.91 PPG with 8 top-6 finishes shows genuine quality. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1666** | Playoff: **73.0%** | #1 Seed: **8.4%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1666** | Playoff: **71.9%** | #1 Seed: **7.6%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -558,7 +559,7 @@ Second place with 8-4, trailing the leader by 3.54 power points. Scoring 112.91 
 | Historical PPG | 112.9 pts | Season average through week 12 | 
 | Monte Carlo Input | 103.5 pts | 60% Optimized + 40% Historical | 
 
-*Right on the knife's edge at 73%. ESPN projects enough points to stay competitive, but so does everyone else. Injuries to Chris Olave (QUESTIONABLE) add unpredictability to the projections.* 
+*Right on the knife's edge at 72%. ESPN projects enough points to stay competitive, but so does everyone else. Injuries to Chris Olave (QUESTIONABLE) add unpredictability to the projections.* 
 
 **Roster Health & Availability Report:** 
 Key injuries: Chris Olave (RB, QUESTIONABLE). Bench depth: Joe Burrow (QB) available. 
@@ -643,7 +644,7 @@ Key injuries: Chris Olave (RB, QUESTIONABLE). Bench depth: Joe Burrow (QB) avail
 
 Currently in the playoff picture at #3 with a 7-5 record. Their 114.90 PPG and 7.36 MVP-W put them in solid position. 9 top-6 finishes in 12 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1727** | Playoff: **75.9%** | #1 Seed: **9.5%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1728** | Playoff: **75.8%** | #1 Seed: **9.2%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -718,7 +719,7 @@ Fully healthy starting lineup. Bench depth: Travis Etienne Jr. (RB) available.
 
 Currently in the playoff picture at #4 with a 7-5 record. Their 109.36 PPG and 7.18 MVP-W put them in solid position. 8 top-6 finishes in 12 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1652** | Playoff: **75.2%** | #1 Seed: **2.5%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1652** | Playoff: **75.1%** | #1 Seed: **2.3%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -786,9 +787,9 @@ Currently in the playoff picture at #4 with a 7-5 record. Their 109.36 PPG and 7
 
 **Record:** 7-5 | **PPG:** 104.92 | **Total PF:** 1259 | **Top6:** 7 | **MVP-W:** 6.82 | **WAX:** +0.18
 
-On the playoff bubble at #5 with 7-5. Need to step it up - only 29.7% playoff odds right now. Their 104.92 PPG and 7 top-6 finishes show potential. 
+On the playoff bubble at #5 with 7-5. Need to step it up - only 29.0% playoff odds right now. Their 104.92 PPG and 7 top-6 finishes show potential. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1579** | Playoff: **29.7%** | #1 Seed: **0.5%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1579** | Playoff: **29.0%** | #1 Seed: **0.6%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -798,7 +799,7 @@ On the playoff bubble at #5 with 7-5. Need to step it up - only 29.7% playoff od
 | Historical PPG | 104.9 pts | Season average through week 12 | 
 | Monte Carlo Input | 106.6 pts | 60% Optimized + 40% Historical | 
 
-*The 30% playoff odds aren't zero, but they're not exactly inspiring confidence either. Time to pray for upsets. Injuries to Saquon Barkley (QUESTIONABLE) add unpredictability to the projections.* 
+*The 29% playoff odds aren't zero, but they're not exactly inspiring confidence either. Time to pray for upsets. Injuries to Saquon Barkley (QUESTIONABLE) add unpredictability to the projections.* 
 
 **Roster Health & Availability Report:** 
 Key injuries: Saquon Barkley (RB, QUESTIONABLE). Bench depth: Dak Prescott (QB) available. 
@@ -864,9 +865,9 @@ Key injuries: Saquon Barkley (RB, QUESTIONABLE). Bench depth: Dak Prescott (QB) 
 
 **Record:** 7-5 | **PPG:** 105.56 | **Total PF:** 1267 | **Top6:** 6 | **MVP-W:** 6.00 | **WAX:** +1.00
 
-On the playoff bubble at #6 with 7-5. Need to step it up - only 45.3% playoff odds right now. Their 105.56 PPG and 6 top-6 finishes show potential. They've benefited from +1.00 WAX - riding some good matchups. 
+On the playoff bubble at #6 with 7-5. Need to step it up - only 47.3% playoff odds right now. Their 105.56 PPG and 6 top-6 finishes show potential. They've benefited from +1.00 WAX - riding some good matchups. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1600** | Playoff: **45.3%** | #1 Seed: **1.6%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1600** | Playoff: **47.3%** | #1 Seed: **1.6%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -876,7 +877,7 @@ On the playoff bubble at #6 with 7-5. Need to step it up - only 45.3% playoff od
 | Historical PPG | 105.6 pts | Season average through week 12 | 
 | Monte Carlo Input | 111.2 pts | 60% Optimized + 40% Historical | 
 
-*The 45% playoff odds aren't zero, but they're not exactly inspiring confidence either. Time to pray for upsets.* 
+*The 47% playoff odds aren't zero, but they're not exactly inspiring confidence either. Time to pray for upsets.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
@@ -934,9 +935,9 @@ On the playoff bubble at #6 with 7-5. Need to step it up - only 45.3% playoff od
 
 **Record:** 5-7 | **PPG:** 108.22 | **Total PF:** 1299 | **Top6:** 8 | **MVP-W:** 7.18 | **WAX:** -2.18
 
-Sitting at #7 with a 5-7 record - outside looking in. At just 1.3% playoff odds, it would take a miracle. Their 108.22 PPG suggests they have some scoring punch. The -2.18 WAX means they're better than their record - just unlucky. 
+Sitting at #7 with a 5-7 record - outside looking in. At just 1.4% playoff odds, it would take a miracle. Their 108.22 PPG suggests they have some scoring punch. The -2.18 WAX means they're better than their record - just unlucky. 
 
-**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1630** | Playoff: **1.3%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1630** | Playoff: **1.4%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1023,9 +1024,9 @@ Key injuries: Jaxson Dart (QB, QUESTIONABLE).
 
 **Record:** 6-6 | **PPG:** 97.92 | **Total PF:** 1175 | **Top6:** 3 | **MVP-W:** 4.45 | **WAX:** +1.55
 
-Sitting at #8 with a 6-6 record - outside looking in. At just 0.9% playoff odds, it would take a miracle. Their 97.92 PPG suggests they have some scoring punch. That +1.55 WAX is actually concerning - they've been lucky and still can't crack the top 6. 
+Sitting at #8 with a 6-6 record - outside looking in. At just 0.8% playoff odds, it would take a miracle. Their 97.92 PPG suggests they have some scoring punch. That +1.55 WAX is actually concerning - they've been lucky and still can't crack the top 6. 
 
-**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1465** | Playoff: **0.9%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1465** | Playoff: **0.8%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1189,7 +1190,7 @@ Key injuries: Kenneth Walker III (RB, QUESTIONABLE).
 
 At #10 with 5-7, the season hasn't gone as planned. Averaging 96.57 PPG with only 3 top-6 finishes in 12 weeks. 
 
-**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1439** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1438** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1435,15 +1436,15 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 | Rank | Team | Projected Wins | Projected PF | Current Record | Playoff % |
 |------|------|----------------|--------------|----------------|-----------|
-| 1 | MP | 10.7 | 1725 | 9-3 | 98.8% |
-| 2 | ZSF | 9.0 | 1727 | 7-5 | 75.9% |
-| 3 | sgf | 9.3 | 1666 | 8-4 | 73.0% |
-| 4 | KIRK | 9.2 | 1652 | 7-5 | 75.2% |
-| 5 | POO | 8.9 | 1600 | 7-5 | 45.3% |
-| 6 | GV | 8.7 | 1579 | 7-5 | 29.7% |
-| 7 | PATS | 6.6 | 1630 | 5-7 | 1.3% |
-| 8 | GEMP | 7.2 | 1465 | 6-6 | 0.9% |
-| 9 | KESS | 6.3 | 1439 | 5-7 | 0.0% |
+| 1 | MP | 10.7 | 1725 | 9-3 | 98.7% |
+| 2 | ZSF | 9.0 | 1728 | 7-5 | 75.8% |
+| 3 | sgf | 9.3 | 1666 | 8-4 | 71.9% |
+| 4 | KIRK | 9.2 | 1652 | 7-5 | 75.1% |
+| 5 | POO | 9.0 | 1600 | 7-5 | 47.3% |
+| 6 | GV | 8.7 | 1579 | 7-5 | 29.0% |
+| 7 | PATS | 6.6 | 1630 | 5-7 | 1.4% |
+| 8 | GEMP | 7.2 | 1465 | 6-6 | 0.8% |
+| 9 | KESS | 6.3 | 1438 | 5-7 | 0.0% |
 | 10 | ROUX | 5.6 | 1437 | 4-8 | 0.0% |
 | 11 | 3000 | 4.5 | 1358 | 4-8 | 0.0% |
 | 12 | WOOD | 4.0 | 1330 | 3-9 | 0.0% |
@@ -1456,7 +1457,7 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 **Semifinal 1:** #1 MP (Proj. PF: 1725) vs #4 KIRK (Proj. PF: 1652)
 
-**Semifinal 2:** #2 ZSF (Proj. PF: 1727) vs #3 sgf (Proj. PF: 1666)
+**Semifinal 2:** #2 ZSF (Proj. PF: 1728) vs #3 sgf (Proj. PF: 1666)
 
 ---
 

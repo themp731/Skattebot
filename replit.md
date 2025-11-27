@@ -45,6 +45,8 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 - **Weekly High Score** - $20 × 15 weeks = $300 total (probability-weighted by PPG)
 - **Playoff Pool** - $3,000 - $300 = $2,700 split: 55% 1st ($1,485), 30% 2nd ($810), 15% 3rd ($405)
 - **Points-For Champion** - 50% of Total FAAB Spent = $218 (current: $436 total FAAB)
+- **E[Playoff] Calculation** - P(1st) × $1,485 + P(2nd) × $810 + P(3rd) × $405
+- **Sum of E[Playoff] = $2,700** - All teams' expected playoff shares sum to exactly $2,700
 - **E[Weekly] Calculation** - Each team's E[Weekly] = (PPG / League Total PPG) × $300
 - **Sum of E[Weekly] = $300** - All teams' expected weekly shares sum to exactly $300
 - **Total Cost** = $250 buy-in + (FAAB Spent ÷ 2) - accounts for all manager investment

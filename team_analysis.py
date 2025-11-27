@@ -184,6 +184,8 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
     standing_distributions = {team: [] for team in team_stats.keys()}
     playoff_counts = {team: 0 for team in team_stats.keys()}
     championship_counts = {team: 0 for team in team_stats.keys()}
+    second_place_counts = {team: 0 for team in team_stats.keys()}
+    third_place_counts = {team: 0 for team in team_stats.keys()}
     points_for_leader_counts = {team: 0 for team in team_stats.keys()}
     
     games_by_week = {}
@@ -287,6 +289,10 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
                 playoff_counts[team] += 1
                 if rank == 1:
                     championship_counts[team] += 1
+                elif rank == 2:
+                    second_place_counts[team] += 1
+                elif rank == 3:
+                    third_place_counts[team] += 1
         
         pf_leader = max(team_stats.keys(), key=lambda t: sim_points[t])
         points_for_leader_counts[pf_leader] += 1
@@ -308,6 +314,8 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             'playoff_pct': (playoff_counts[team] / num_simulations) * 100,
             'avg_standing': standings_array.mean(),
             'championship_pct': (championship_counts[team] / num_simulations) * 100,
+            'second_place_pct': (second_place_counts[team] / num_simulations) * 100,
+            'third_place_pct': (third_place_counts[team] / num_simulations) * 100,
             'points_for_leader_pct': (points_for_leader_counts[team] / num_simulations) * 100,
             'current_wins': team_stats[team]['wins'],
             'current_points': team_stats[team]['points_for'],
@@ -1555,7 +1563,10 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
         faab_cost = faab_spent / 2
         total_cost = BUY_IN + faab_cost
         
-        expected_playoff = playoff_pct * AVG_PLAYOFF_PRIZE
+        first_pct = pred.get('championship_pct', 0) / 100
+        second_pct = pred.get('second_place_pct', 0) / 100
+        third_pct = pred.get('third_place_pct', 0) / 100
+        expected_playoff = (first_pct * PLAYOFF_1ST) + (second_pct * PLAYOFF_2ND) + (third_pct * PLAYOFF_3RD)
         expected_pf = pf_leader_pct * pf_prize
         
         weekly_probability = weekly_probabilities.get(team, 1/NUM_TEAMS)
@@ -1586,15 +1597,16 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
 
 ### How Expected Payouts Are Calculated
 
-1. **E[Playoff]** = Playoff % × Average Playoff Prize (${AVG_PLAYOFF_PRIZE:.0f})
-   - Average of 1st/2nd/3rd prizes assuming equal odds once in playoffs (simplification)
+1. **E[Playoff]** = P(1st) × ${PLAYOFF_1ST:,} + P(2nd) × ${PLAYOFF_2ND} + P(3rd) × ${PLAYOFF_3RD}
+   - Uses actual placement probabilities from Monte Carlo simulations
+   - **Sum of all teams' E[Playoff] = ${PLAYOFF_POOL:,} exactly** (the full playoff pool)
    
 2. **E[PF Prize]** = PF Leader % × ${pf_prize:.0f} (current FAAB pool ÷ 2)
    - Your probability of finishing with the most Points For × the prize
    
 3. **E[Weekly]** = Probability × ${WEEKLY_TOTAL} (total weekly pool)
    - Each team's probability = their PPG ÷ total league PPG
-   - Sum of all teams' E[Weekly] = **${WEEKLY_TOTAL} exactly**
+   - **Sum of all teams' E[Weekly] = ${WEEKLY_TOTAL} exactly**
 
 4. **Total Cost** = $250 buy-in + (FAAB Spent ÷ 2)
    - Every manager pays $250 to enter
@@ -1608,7 +1620,7 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
    - Positive = expected profit
    - Negative = expected loss
 
-*Note: Weekly estimates are probability-weighted by PPG. Higher scorers have proportionally better odds at the $20/week prizes.*
+*Note: E[Playoff] uses position-specific probabilities (1st/2nd/3rd) from Monte Carlo simulations, ensuring all expected payouts sum to exactly the prize pool.*
 
 ---
 
