@@ -1437,6 +1437,19 @@ Based on {NUM_SIMULATIONS:,} Monte Carlo simulations blending ESPN projections w
         md += f"| {team} | {wins}-{losses} | {pred['playoff_pct']:.1f}% | {pred['wins_mode']} | {pred['points_mean']:.0f} | #{pred['avg_standing']:.1f} | {pred['championship_pct']:.1f}% | {pf_leader_pct:.1f}% |\n"
 
     md += """
+
+> **Why Playoff % and Projected Standing Sometimes Conflict**
+> 
+> These two metrics measure different things and can appear contradictory:
+> - **Playoff %** = How often does this team finish in the top 4 across all simulations?
+> - **Projected Standing** = What's their *average* finishing position across all simulations?
+> 
+> A team can have a *lower* Playoff % but *better* Projected Standing if they have high-variance outcomes. For example, Team A might make playoffs 70% of the time but usually as the #4 seed (avg standing ~#4.5). Team B might make playoffs only 65% of the time, but when they do, they're often #1 or #2 (avg standing ~#3.0). Team B's better average standing reflects their upside, even though they miss playoffs more often.
+> 
+> **The tiebreaker (Points For) also matters.** Two teams with identical records get separated by total points. A team with high scoring variance might occasionally miss playoffs on tiebreakers (lowering Playoff %) but also occasionally win the #1 seed (improving avg standing).
+> 
+> *Bottom line: Playoff % tells you "will they make it?" while Projected Standing tells you "how good are they overall?"*
+
 ### Playoff Picture Analysis
 
 """
