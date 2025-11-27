@@ -1,48 +1,42 @@
 # 2025 Fantasy Football Power Rankings Analysis
-## A Brutally Honest Assessment of Your League's Mediocrity
+## Week 12 Update - Generated November 27, 2025 at 03:43 AM
+
+*This analysis is dynamically regenerated with fresh data each run. All commentary reflects current stats.*
+
+---
+
+## Season Snapshot
+
+| Metric | Value |
+|--------|-------|
+| Weeks Played | 12 |
+| Games Remaining | 3 |
+| Playoff Teams | 4 |
+| Current Leader | **MP** (9-3) |
+| Highest Scorer | **MP** (115.85 PPG) |
+| Luckiest Team | **GEMP** (+1.55 WAX) |
+| Unluckiest Team | **PATS** (-2.18 WAX) |
 
 ---
 
 ## Understanding the Metrics
 
-Before we roast your teams, let's explain how we're measuring your mediocrity:
-
 ### **Power Score** (The Overall Ranking)
 ```
 Power Score = (Real Wins × 2) + (Top6 Wins) + (MVP-W)
 ```
-This is our ultimate measure of team quality. It heavily weights **actual matchup wins** (multiplied by 2) because winning is what matters most. But it also rewards teams that consistently score in the top half (**Top6 Wins**) and would beat multiple opponents each week (**MVP-W**). A high power score means you're legitimately good, not just lucky.
-
-### **Real Wins**
-Your actual head-to-head record. Pretty simple: did you score more than your opponent? These are the only wins that show up in the standings, which is why they're weighted 2x in the Power Score.
+This is our ultimate measure of team quality. It heavily weights **actual matchup wins** (multiplied by 2) because winning is what matters most. But it also rewards teams that consistently score in the top half (**Top6 Wins**) and would beat multiple opponents each week (**MVP-W**).
 
 ### **MVP-W** (Minimized Variance Potential Wins)
-This is your theoretical win rate if you played **all teams in the league every single week**. 
+Your theoretical win rate if you played **all teams in the league every single week**. High scorers have high MVP-W; low scorers don't.
 
-**How it's calculated:**
-- Each week, we rank all 12 teams by their scores
-- Your MVP-W for that week = (number of teams you beat) ÷ (total teams - 1)
-- Example: If you scored 4th-highest in week 1, you beat 8 teams → MVP-W = 8/11 = 0.727
-
-Sum this across all weeks, and you get your season MVP-W. It measures how dominant your scoring is regardless of who you actually played. High scorers have high MVP-W; low scorers don't.
-
-### **Top6 Wins**
-Binary metric: did you finish in the **top half** of scorers that week? 
-- 1 point if you ranked #1-6 
-- 0 points if you ranked #7-12
-
-Sum across all weeks. This rewards consistency—teams that regularly score well get more Top6 Wins. It's harder to fluke your way into consistent top-6 finishes than it is to steal a lucky head-to-head win.
-
-### **WAX** (Wins Above Expectation) - The Luck Index
+### **WAX** (Wins Above Expectation)
 ```
 WAX = Real Wins - MVP-W
 ```
-This tells you if you're **lucky or unlucky**:
-- **Positive WAX** = You're lucky (winning more games than your scoring deserves)
-- **Negative WAX** = You're unlucky (losing games despite good scoring)
-- **WAX near 0** = You're getting exactly what you deserve
-
-Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That means you've won 2 more games than expected based on your scoring. You're benefiting from a favorable schedule or weak opponents having bad weeks against you.
+- **Positive WAX** = Lucky (winning more than scoring deserves)
+- **Negative WAX** = Unlucky (losing despite good scoring)
+- **WAX near 0** = Getting exactly what you deserve
 
 ---
 
@@ -58,117 +52,203 @@ Example: If you have 6 real wins but only 4.0 MVP-W, your WAX is +2.0. That mean
 
 ![Power Score Evolution](visualizations/power_rankings_evolution.png)
 
-*Cumulative power score by week - higher is better. Watch how teams' performances build throughout the season.*
+---
+
+## Playoff Predictions
+
+Based on 10,000 Monte Carlo simulations of remaining games.
+
+| Team | Current Record | Playoff % | Avg Final Standing | Championship % |
+|------|----------------|-----------|-------------------|----------------|
+| MP | 9-3 | 99.7% | #1.2 | 82.0% |
+| sgf | 8-4 | 89.9% | #2.7 | 11.9% |
+| KIRK | 7-5 | 77.6% | #3.8 | 0.6% |
+| ZSF | 7-5 | 75.9% | #3.5 | 4.9% |
+| POO | 7-5 | 30.5% | #5.0 | 0.4% |
+| GV | 7-5 | 22.4% | #5.4 | 0.2% |
+| PATS | 5-7 | 2.7% | #7.6 | 0.0% |
+| GEMP | 6-6 | 1.4% | #7.6 | 0.0% |
+| KESS | 5-7 | 0.0% | #8.7 | 0.0% |
+| 3000 | 4-8 | 0.0% | #10.9 | 0.0% |
+| WOOD | 3-9 | 0.0% | #11.8 | 0.0% |
+| ROUX | 4-8 | 0.0% | #9.7 | 0.0% |
+
+### Playoff Picture Analysis
+
+**Locked In:** MP - barring disaster, they're in.
+
+**Looking Good:** sgf, KIRK, ZSF - control their destiny.
+
+**On the Bubble:** POO, GV - need some things to break their way.
+
+**Long Shots:** GEMP, KESS, 3000, WOOD, ROUX, PATS - would need a miracle.
 
 ---
 
-## Team-by-Team Analysis (With the Snark You Deserve)
+## Remaining Schedule (Weeks 13-15)
+
+### Week 13
+
+| Matchup | Favorite | Win Prob |
+|---------|----------|----------|
+| KESS vs ROUX | KESS | 52% |
+| MP vs GEMP | MP | 73% |
+| KIRK vs WOOD | KIRK | 80% |
+| sgf vs GV | sgf | 62% |
+| ZSF vs PATS | ZSF | 57% |
+| 3000 vs POO | POO | 71% |
+
+### Week 14
+
+| Matchup | Favorite | Win Prob |
+|---------|----------|----------|
+| ROUX vs GEMP | GEMP | 54% |
+| WOOD vs KESS | KESS | 64% |
+| GV vs MP | MP | 65% |
+| PATS vs KIRK | KIRK | 52% |
+| POO vs sgf | sgf | 59% |
+| 3000 vs ZSF | ZSF | 76% |
+
+### Week 15
+
+| Matchup | Favorite | Win Prob |
+|---------|----------|----------|
+| WOOD vs ROUX | ROUX | 61% |
+| GEMP vs GV | GV | 62% |
+| KESS vs PATS | PATS | 66% |
+| MP vs POO | MP | 62% |
+| KIRK vs 3000 | KIRK | 79% |
+| sgf vs ZSF | ZSF | 52% |
+
+---
+
+## Team-by-Team Analysis
 
 ### #1 MP - Power Score: 35.36
-**Record: 9-3 | PPG: 115.85 | WAX: +0.64**  
-**Components: Real Wins: 9 | Top6 Wins: 9 | MVP-W: 8.36**
 
-Congratulations, you're actually good. With 9 wins and the highest scoring average in the league, you're not just getting lucky—you're genuinely dominating. That +0.64 WAX means you've earned almost every win. The rest of the league is basically playing for second place at this point. Enjoy your inevitable championship and the awkward silence when you try to talk about your fantasy team at parties.
+**Record:** 9-3 | **PPG:** 115.85 | **Top6:** 9 | **MVP-W:** 8.36 | **WAX:** +0.64
+
+Sitting atop the standings with a commanding 9-3 record, this team has earned the top spot through dominant performance. Their 115.85 PPG leads the league, which translates to an impressive 8.36 MVP-W and 9 top-6 weekly finishes. With a +0.64 WAX, they've caught a few breaks too - but at this level, you take what you can get. Playoff odds: **99.7%** | Championship odds: **82.0%**
 
 ---
 
 ### #2 sgf - Power Score: 31.82
-**Record: 8-4 | PPG: 112.91 | WAX: +0.18**  
-**Components: Real Wins: 8 | Top6 Wins: 8 | MVP-W: 7.82**
 
-Solidly in second place, you're doing everything right: consistent top-6 finishes, decent wins, and you're actually *slightly* unlucky (+0.18 WAX). You're the tortoise to MP's hare, except the hare is already at the finish line and the tortoise is stuck in traffic. Still, you're legitimately good—just not good enough to catch the leader.
+**Record:** 8-4 | **PPG:** 112.91 | **Top6:** 8 | **MVP-W:** 7.82 | **WAX:** +0.18
+
+Second place with 8-4, trailing the leader by 3.54 power points. Scoring 112.91 PPG with 8 top-6 finishes shows genuine quality. Playoff odds: **89.9%** | Championship odds: **11.9%**
 
 ---
 
 ### #3 ZSF - Power Score: 30.36
-**Record: 7-5 | PPG: 114.90 | WAX: -0.36**  
-**Components: Real Wins: 7 | Top6 Wins: 9 | MVP-W: 7.36**
 
-Legitimately good, but let's be honest—you're getting a little help from the schedule gods. That -0.36 WAX means you've won 0.4 more games than your scoring suggests. Your 114.90 PPG is solid, but sitting at 7-5 is partly luck. Keep it up, but watch out for regression.
+**Record:** 7-5 | **PPG:** 114.90 | **Top6:** 9 | **MVP-W:** 7.36 | **WAX:** -0.36
+
+Currently in the playoff picture at #3 with a 7-5 record. Their 114.90 PPG and 7.36 MVP-W put them in solid position. 9 top-6 finishes in 12 weeks shows they can compete with anyone. Playoff odds: **75.9%** | Championship odds: **4.9%**
 
 ---
 
 ### #4 KIRK - Power Score: 29.18
-**Record: 7-5 | PPG: 109.36 | WAX: -0.18**  
-**Components: Real Wins: 7 | Top6 Wins: 8 | MVP-W: 7.18**
 
-Solid middle-of-the-pack performance. Your 7-5 record with 109.36 PPG and -0.18 WAX shows you're getting exactly what you deserve. No excuses, no lucky breaks—just decent football.
+**Record:** 7-5 | **PPG:** 109.36 | **Top6:** 8 | **MVP-W:** 7.18 | **WAX:** -0.18
+
+Currently in the playoff picture at #4 with a 7-5 record. Their 109.36 PPG and 7.18 MVP-W put them in solid position. 8 top-6 finishes in 12 weeks shows they can compete with anyone. Playoff odds: **77.6%** | Championship odds: **0.6%**
 
 ---
 
 ### #5 GV - Power Score: 27.82
-**Record: 7-5 | PPG: 104.92 | WAX: +0.18**  
-**Components: Real Wins: 7 | Top6 Wins: 7 | MVP-W: 6.82**
 
-Solid middle-of-the-pack performance. Your 7-5 record with 104.92 PPG and +0.18 WAX shows you're getting exactly what you deserve. No excuses, no lucky breaks—just decent football.
+**Record:** 7-5 | **PPG:** 104.92 | **Top6:** 7 | **MVP-W:** 6.82 | **WAX:** +0.18
+
+On the playoff bubble at #5 with 7-5. Need to step it up - only 22.4% playoff odds right now. Their 104.92 PPG and 7 top-6 finishes show potential. Playoff odds: **22.4%** | Championship odds: **0.2%**
 
 ---
 
 ### #6 POO - Power Score: 26.00
-**Record: 7-5 | PPG: 105.56 | WAX: +1.00**  
-**Components: Real Wins: 7 | Top6 Wins: 6 | MVP-W: 6.00**
 
-Sitting pretty at 7-5 with 105.56 PPG, but that +1.00 WAX tells the real story. You've won 1 more games than your scoring deserves. Not complaining though, right? Wins are wins, even if they're gifts from the schedule gods.
+**Record:** 7-5 | **PPG:** 105.56 | **Top6:** 6 | **MVP-W:** 6.00 | **WAX:** +1.00
+
+On the playoff bubble at #6 with 7-5. Need to step it up - only 30.5% playoff odds right now. Their 105.56 PPG and 6 top-6 finishes show potential. They've benefited from +1.00 WAX - riding some good matchups. Playoff odds: **30.5%** | Championship odds: **0.4%**
 
 ---
 
 ### #7 PATS - Power Score: 25.18
-**Record: 5-7 | PPG: 108.22 | WAX: -2.18**  
-**Components: Real Wins: 5 | Top6 Wins: 8 | MVP-W: 7.18**
 
-Lower middle tier with 5-7. Your 108.22 PPG puts you in no-man's land, and your -2.18 WAX shows you're getting what you earn. Not great, not terrible—just... there.
+**Record:** 5-7 | **PPG:** 108.22 | **Top6:** 8 | **MVP-W:** 7.18 | **WAX:** -2.18
+
+Sitting at #7 with a 5-7 record - outside looking in. At just 2.7% playoff odds, it would take a miracle. Their 108.22 PPG suggests they have some scoring punch. The -2.18 WAX means they're better than their record - just unlucky. Playoff odds: **2.7%**
 
 ---
 
 ### #8 GEMP - Power Score: 19.45
-**Record: 6-6 | PPG: 97.92 | WAX: +1.55**  
-**Components: Real Wins: 6 | Top6 Wins: 3 | MVP-W: 4.45**
 
-Even with +1.55 WAX helping you out, you're still sitting at 6-6. That 97.92 PPG isn't doing you any favors. You're winning more than you should, and you're still struggling. Imagine if you were unlucky?
+**Record:** 6-6 | **PPG:** 97.92 | **Top6:** 3 | **MVP-W:** 4.45 | **WAX:** +1.55
+
+Sitting at #8 with a 6-6 record - outside looking in. At just 1.4% playoff odds, it would take a miracle. Their 97.92 PPG suggests they have some scoring punch. That +1.55 WAX is actually concerning - they've been lucky and still can't crack the top 6. Playoff odds: **1.4%**
 
 ---
 
 ### #9 ROUX - Power Score: 17.64
-**Record: 4-8 | PPG: 95.58 | WAX: -0.64**  
-**Components: Real Wins: 4 | Top6 Wins: 5 | MVP-W: 4.64**
 
-Fighting for scraps with a 4-8 record. That 95.58 PPG is bottom-tier, and your -0.64 WAX shows the fantasy gods aren't helping. Consistency isn't your strong suit. Neither is winning, apparently.
+**Record:** 4-8 | **PPG:** 95.58 | **Top6:** 5 | **MVP-W:** 4.64 | **WAX:** -0.64
+
+At #9 with 4-8, the season hasn't gone as planned. Averaging 95.58 PPG with only 5 top-6 finishes in 12 weeks. Playoff odds: **0.0%** - time to play for next year.
 
 ---
 
 ### #10 KESS - Power Score: 17.64
-**Record: 5-7 | PPG: 96.57 | WAX: +0.36**  
-**Components: Real Wins: 5 | Top6 Wins: 3 | MVP-W: 4.64**
 
-Ranked 10th with 5-7. Your 96.57 PPG and +0.36 WAX paint a picture of mediocrity. You're not unlucky—you're just not good enough.
+**Record:** 5-7 | **PPG:** 96.57 | **Top6:** 3 | **MVP-W:** 4.64 | **WAX:** +0.36
+
+At #10 with 5-7, the season hasn't gone as planned. Averaging 96.57 PPG with only 3 top-6 finishes in 12 weeks. Playoff odds: **0.0%** - time to play for next year.
 
 ---
 
 ### #11 3000 - Power Score: 15.18
-**Record: 4-8 | PPG: 91.66 | WAX: -0.18**  
-**Components: Real Wins: 4 | Top6 Wins: 3 | MVP-W: 4.18**
 
-Second-to-last with 4-8. Your 91.66 PPG is brutal, and even with -0.18 WAX, you can't escape the bottom. You're not just bad—you're bad AND getting exactly what you deserve. At least you're not in last place?
+**Record:** 4-8 | **PPG:** 91.66 | **Top6:** 3 | **MVP-W:** 4.18 | **WAX:** -0.18
+
+Bringing up the rear at #11 with a 4-8 record. Their 91.66 PPG ranks near the bottom of the league. Only 3 top-6 finishes in 12 weeks tells the story. Playoff odds: **0.0%** - better luck next year.
 
 ---
 
 ### #12 WOOD - Power Score: 12.36
-**Record: 3-9 | PPG: 88.40 | WAX: -0.36**  
-**Components: Real Wins: 3 | Top6 Wins: 3 | MVP-W: 3.36**
 
-Last place with 3-9. Your 88.40 PPG is the worst in the league, and your -0.36 WAX shows you're getting exactly what you've earned—nothing. At least you own it?
+**Record:** 3-9 | **PPG:** 88.40 | **Top6:** 3 | **MVP-W:** 3.36 | **WAX:** -0.36
 
----
-
-
-## Final Thoughts
-
-This league has: one elite team (MP), a cluster of above-average teams fighting for playoff spots, a bunch of lucky frauds (looking at you, GEMP), some genuinely unlucky squads (RIP KIRK), and absolute dumpster fires bringing up the rear (3000, we're still talking about you).
-
-May the odds be ever in your favor. Or not. Based on these power rankings, most of you need more than luck—you need a miracle.
+Bringing up the rear at #12 with a 3-9 record. Their 88.40 PPG ranks near the bottom of the league. Only 3 top-6 finishes in 12 weeks tells the story. Playoff odds: **0.0%** - better luck next year.
 
 ---
 
-*Power Rankings Formula: (Real Wins × 2) + (Top6 Wins) + (MVP-W)*  
-*WAX (Wins Above Expectation) = Real Wins - MVP-W*  
-*Data through Week 10, 2025 Season*
+## Predicted Final Standings
+
+Based on current trajectory and remaining schedule:
+
+| Rank | Team | Projected Wins | Current Record |
+|------|------|----------------|----------------|
+| 1 | MP | 11.0 | 9-3 |
+| 2 | sgf | 9.7 | 8-4 |
+| 3 | ZSF | 8.9 | 7-5 |
+| 4 | KIRK | 9.1 | 7-5 |
+| 5 | POO | 8.5 | 7-5 |
+| 6 | GV | 8.4 | 7-5 |
+| 7 | GEMP | 7.2 | 6-6 |
+| 8 | PATS | 6.6 | 5-7 |
+| 9 | KESS | 6.5 | 5-7 |
+| 10 | ROUX | 5.6 | 4-8 |
+| 11 | 3000 | 4.7 | 4-8 |
+| 12 | WOOD | 3.9 | 3-9 |
+
+---
+
+## Projected Playoff Matchups
+
+*If playoffs started today (top 4 make it):*
+
+**Semifinal 1:** #1 MP vs #4 KIRK
+
+**Semifinal 2:** #2 sgf vs #3 ZSF
+
+---
+
+*Analysis generated by ESPN Fantasy Football Scraper. May your players stay healthy and your opponents' stars have bye weeks.*

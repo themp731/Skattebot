@@ -33,6 +33,12 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
         'visualizations/power_rankings.png',
         'visualizations/power_breakdown.png',
         'visualizations/power_rankings_evolution.png',
+        'visualizations/wax_leaderboard.png',
+        'visualizations/wins_vs_expected.png',
+        'visualizations/total_points.png',
+        'visualizations/weekly_performance.png',
+        'visualizations/weekly_rank_heatmap.png',
+        'visualizations/consistency.png',
     ]
     
     for img_path in image_files:
@@ -134,6 +140,37 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
             border: 2px solid var(--border);
         }}
         
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+        }}
+        
+        th {{
+            background: var(--accent);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: bold;
+        }}
+        
+        td {{
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }}
+        
+        tr:hover {{
+            background: rgba(233, 69, 96, 0.1);
+        }}
+        
+        tr:last-child td {{
+            border-bottom: none;
+        }}
+        
         code {{
             background: var(--bg-secondary);
             padding: 3px 8px;
@@ -179,18 +216,13 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
             font-style: italic;
         }}
         
-        .team-card {{
-            background: rgba(22, 33, 62, 0.6);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 4px solid var(--accent);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .playoff-high {{
+            color: var(--success);
+            font-weight: bold;
         }}
         
-        .team-card:hover {{
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.2);
+        .playoff-low {{
+            color: var(--accent);
         }}
         
         @media (max-width: 768px) {{
@@ -205,6 +237,14 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
             h2 {{
                 font-size: 1.4em;
             }}
+            
+            table {{
+                font-size: 0.85em;
+            }}
+            
+            th, td {{
+                padding: 8px 6px;
+            }}
         }}
     </style>
 </head>
@@ -212,42 +252,15 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
     <div class="container">
         {html_content}
     </div>
-    
-    <script>
-        document.querySelectorAll('h3').forEach(h3 => {{
-            const wrapper = document.createElement('div');
-            wrapper.className = 'team-card';
-            
-            let sibling = h3.nextElementSibling;
-            const content = [h3.cloneNode(true)];
-            
-            while (sibling && sibling.tagName !== 'H3' && sibling.tagName !== 'H2' && sibling.tagName !== 'HR') {{
-                content.push(sibling.cloneNode(true));
-                sibling = sibling.nextElementSibling;
-            }}
-            
-            content.forEach(el => wrapper.appendChild(el));
-            h3.parentNode.insertBefore(wrapper, h3);
-            
-            content.forEach((_, i) => {{
-                if (i === 0) h3.remove();
-                else {{
-                    const next = wrapper.nextElementSibling;
-                    if (next && next.tagName !== 'H3' && next.tagName !== 'H2' && next.tagName !== 'HR' && next.tagName !== 'DIV') {{
-                        next.remove();
-                    }}
-                }}
-            }});
-        }});
-    </script>
 </body>
 </html>'''
     
     with open(output_file, 'w') as f:
         f.write(full_html)
     
-    print(f"✓ Created HTML file: {output_file}")
-    print(f"  - File size: {os.path.getsize(output_file) / 1024:.1f} KB")
+    file_size = os.path.getsize(output_file)
+    print(f"Created HTML file: {output_file}")
+    print(f"  - File size: {file_size / 1024:.1f} KB")
     
     return output_file
 
