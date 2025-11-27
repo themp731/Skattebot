@@ -116,15 +116,16 @@ def calculate_summary_stats(df):
     return summary
 
 def fetch_espn_projections(remaining_schedule):
-    """Fetch ESPN projections and roster health for remaining weeks."""
+    """Fetch ESPN projections and enhanced roster health for remaining weeks."""
     api = get_espn_api()
     remaining_weeks = sorted(set(g['week'] for g in remaining_schedule))
+    current_week = min(remaining_weeks) if remaining_weeks else 13
     
     print(f"  Fetching ESPN projections for weeks {remaining_weeks}...")
     projections = api.get_weekly_projections(remaining_weeks)
     
-    print(f"  Fetching current roster health...")
-    roster_health = api.get_team_rosters_with_health()
+    print(f"  Fetching enhanced roster health (starters + bench studs)...")
+    roster_health = api.get_enhanced_roster_health(current_week)
     
     return projections, roster_health
 
@@ -135,7 +136,11 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
     Blending formula:
         expected_score = (ESPN_PROJECTION_WEIGHT × espn_projected) + (HISTORICAL_WEIGHT × historical_ppg)
         
-    Roster health adjusts variance (injured rosters = more uncertainty).
+    Enhanced roster health includes:
+    - Variance multiplier based on injury impact
+    - Bench stud availability tracking
+    - Returning player projections
+    
     Tracks both wins AND total points for tiebreaker analysis.
     """
     current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
@@ -151,9 +156,14 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
     
     for team in roster_health:
         if team in team_stats:
-            health_pct = roster_health[team].get('roster_health_pct', 1.0)
-            team_stats[team]['roster_health'] = health_pct
-            team_stats[team]['injured_players'] = roster_health[team].get('injured_players', [])
+            health_data = roster_health[team]
+            team_stats[team]['roster_health'] = health_data.get('roster_health_pct', 1.0)
+            team_stats[team]['variance_multiplier'] = health_data.get('variance_multiplier', 1.0)
+            team_stats[team]['injury_impact'] = health_data.get('injury_impact_score', 0.0)
+            team_stats[team]['injured_starters'] = health_data.get('injured_starters', [])
+            team_stats[team]['bench_studs'] = health_data.get('bench_studs', [])
+            team_stats[team]['returning_players'] = health_data.get('returning_players', [])
+            team_stats[team]['health_narrative'] = health_data.get('narrative', '')
     
     win_distributions = {team: [] for team in team_stats.keys()}
     points_distributions = {team: [] for team in team_stats.keys()}
@@ -191,8 +201,8 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
                         expected = stats['ppg']
                     
                     base_std = stats['std']
-                    roster_health_factor = stats.get('roster_health', 1.0)
-                    adjusted_std = base_std * (1 + (1 - roster_health_factor) * 0.5)
+                    variance_mult = stats.get('variance_multiplier', 1.0)
+                    adjusted_std = base_std * variance_mult
                     
                     if team == home:
                         home_score = max(50, np.random.normal(expected, adjusted_std))
@@ -241,7 +251,12 @@ def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections
             'points_mean': points_array.mean(),
             'points_std': points_array.std(),
             'roster_health': team_stats[team].get('roster_health', 1.0),
-            'injured_players': team_stats[team].get('injured_players', []),
+            'variance_multiplier': team_stats[team].get('variance_multiplier', 1.0),
+            'injury_impact': team_stats[team].get('injury_impact', 0.0),
+            'injured_starters': team_stats[team].get('injured_starters', []),
+            'bench_studs': team_stats[team].get('bench_studs', []),
+            'returning_players': team_stats[team].get('returning_players', []),
+            'health_narrative': team_stats[team].get('health_narrative', ''),
         }
     
     return results
@@ -784,13 +799,18 @@ def save_summary_csv(summary, filename='team_summary.csv'):
     print(f"  Saved summary table to: {filename}")
 
 def generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_health):
-    """Generate snarky commentary based on projections and roster health."""
+    """Generate snarky commentary based on projections, roster health, and specific player injuries."""
     wins_mode = pred['wins_mode']
     wins_mean = pred['wins_mean']
     current_wins = int(pred['current_wins'])
     points_mean = pred['points_mean']
     points_current = pred['current_points']
-    injured = pred.get('injured_players', [])
+    
+    injured_starters = pred.get('injured_starters', [])
+    bench_studs = pred.get('bench_studs', [])
+    returning_players = pred.get('returning_players', [])
+    variance_mult = pred.get('variance_multiplier', 1.0)
+    injury_impact = pred.get('injury_impact', 0.0)
     
     lines = []
     
@@ -798,7 +818,7 @@ def generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_
         if roster_health >= 0.9:
             lines.append(f"The simulations are decisive: {team} is playoff-bound with a healthy roster backing up the math.")
         else:
-            lines.append(f"Even with {len(injured)} players on the injury report, {team} has essentially locked up a playoff spot. Must be nice to have depth.")
+            lines.append(f"Even with injuries affecting the lineup, {team} has essentially locked up a playoff spot. Must be nice to have depth.")
     elif playoff_pct >= 75:
         lines.append(f"Strong odds at {playoff_pct:.0f}%, but fantasy football loves chaos. One bad week and this could get interesting.")
     elif playoff_pct >= 50:
@@ -810,10 +830,23 @@ def generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_
     else:
         lines.append(f"The computer ran {NUM_SIMULATIONS:,} simulations and found essentially no path to the playoffs. Time to play spoiler.")
     
-    if len(injured) >= 3:
-        lines.append(f"With {len(injured)} players banged up, the roster health is concerning. The simulation added extra variance to account for this mess.")
-    elif len(injured) >= 1:
-        lines.append(f"The injury situation ({len(injured)} affected) adds uncertainty to these projections.")
+    stud_injuries = [p for p in injured_starters if p.get('is_stud', False)]
+    if stud_injuries:
+        stud_names = [f"{p['name']} ({p['status']})" for p in stud_injuries[:2]]
+        if injury_impact > 0.15:
+            lines.append(f"Key injuries to {', '.join(stud_names)} are devastating - the variance multiplier of {variance_mult:.2f}x reflects massive uncertainty.")
+        else:
+            lines.append(f"Injuries to {', '.join(stud_names)} add unpredictability to the projections.")
+    elif injured_starters:
+        lines.append(f"{len(injured_starters)} starter(s) dealing with injuries adds some variance ({variance_mult:.2f}x) to these projections.")
+    
+    if returning_players:
+        names = [p['name'] for p in returning_players[:2]]
+        lines.append(f"Watch for potential boost if {', '.join(names)} return(s) - could shift the distribution upward.")
+    
+    if bench_studs:
+        names = [f"{p['name']} ({p['position']})" for p in bench_studs[:2]]
+        lines.append(f"Injured bench talent ({', '.join(names)}) waiting in the wings if healthy.")
     
     expected_wins = wins_mean - current_wins
     if expected_wins >= 2.5:
@@ -824,7 +857,7 @@ def generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_
     return " ".join(lines)
 
 def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_remaining):
-    """Generate fully dynamic commentary based on actual stats and projections."""
+    """Generate fully dynamic commentary based on actual stats, projections, and player-specific injuries."""
     team = row['team_name']
     rank = int(row['power_rank'])
     wins = int(row['real_wins'])
@@ -843,7 +876,13 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
     wins_mode = pred.get('wins_mode', wins)
     points_mean = pred.get('points_mean', row['points_for'])
     roster_health = pred.get('roster_health', 1.0)
-    injured = pred.get('injured_players', [])
+    
+    injured_starters = pred.get('injured_starters', [])
+    bench_studs = pred.get('bench_studs', [])
+    returning_players = pred.get('returning_players', [])
+    variance_mult = pred.get('variance_multiplier', 1.0)
+    injury_impact = pred.get('injury_impact', 0.0)
+    health_narrative = pred.get('health_narrative', '')
     
     lines = []
     
@@ -916,11 +955,31 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
     snark = generate_snarky_projection_commentary(team, pred, rank, playoff_pct, roster_health)
     lines.append(f"\n\n*{snark}*")
     
-    if injured:
-        injury_str = ", ".join(injured[:3])
-        if len(injured) > 3:
-            injury_str += f" (+{len(injured)-3} more)"
-        lines.append(f"\n\n**Injury Watch:** {injury_str}")
+    if injured_starters or returning_players or bench_studs:
+        lines.append(f"\n\n**Roster Health Report:**")
+        
+        if health_narrative:
+            lines.append(f"\n{health_narrative}")
+        
+        if injured_starters:
+            lines.append(f"\n\n*Injured Starters ({len(injured_starters)}):*")
+            for p in injured_starters[:4]:
+                stud_tag = " ⭐" if p.get('is_stud', False) else ""
+                availability = p.get('availability', 0) * 100
+                lines.append(f"\n- **{p['name']}** ({p['position']}, {p['status']}){stud_tag}: {p.get('outlook', 'Status unclear')}")
+        
+        if returning_players:
+            lines.append(f"\n\n*Potential Returns:*")
+            for p in returning_players[:2]:
+                lines.append(f"\n- **{p['name']}** ({p['position']}): {p.get('outlook', 'Watch for updates')}")
+        
+        if bench_studs:
+            lines.append(f"\n\n*Bench Depth (Injured Studs):*")
+            for p in bench_studs[:2]:
+                lines.append(f"\n- **{p['name']}** ({p['position']}, {p['status']}): {p.get('outlook', 'On bench')}")
+        
+        if variance_mult > 1.1:
+            lines.append(f"\n\n*Simulation Impact:* Injury uncertainty increased variance by {(variance_mult-1)*100:.0f}%, widening the win/PF distribution range.")
     
     return " ".join(lines)
 
