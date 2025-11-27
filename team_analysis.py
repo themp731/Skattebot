@@ -1239,7 +1239,32 @@ def generate_markdown_analysis(summary, remaining_schedule, game_predictions, pl
     md = f"""# {CURRENT_SEASON} Fantasy Football Power Rankings Analysis
 ## Week {weeks_played} Update - Generated {generated_date}
 
-*This analysis blends ESPN's official projections with historical performance data. All commentary is dynamically generated.*
+---
+
+## A Note on ESPN's "Projections" (Read This First)
+
+Before we dive into the numbers, let's address the elephant in the room: **ESPN's projection system is fundamentally broken.**
+
+Here's what ESPN does: They project points for your entire starting lineup, including players who are on BYE weeks. That's right - if Jonathan Taylor is on BYE and will score exactly **zero points** this week, ESPN still includes his 19-point projection in your team's total. This isn't a minor oversight; it's a fundamental failure to understand how fantasy football works.
+
+**The result?** ESPN's "projected points" are systematically inflated garbage that will mislead you into thinking your team is performing better than it actually will. Every single week, across every single team, their projections include phantom points from players who literally cannot play.
+
+### What We Do Instead
+
+This analysis applies actual intelligence to the problem:
+
+| Projection Type | What It Means |
+|-----------------|---------------|
+| **ESPN Raw** | ESPN's projection (includes BYE players who will score 0 - useless) |
+| **Corrected Baseline** | ESPN Raw minus unavailable players (the realistic floor) |
+| **Optimized** | Corrected + your best bench replacements (what a smart manager achieves) |
+| **Monte Carlo Input** | 60% Optimized + 40% Historical PPG (our simulation uses this) |
+
+**The key insight:** Our "Optimized" projection is always greater than or equal to the Corrected Baseline, because making smart lineup decisions always helps. But it's often *less* than ESPN's Raw projection - not because optimization hurts you, but because ESPN's number was bullshit to begin with.
+
+When you see a matchup breakdown showing ESPN Raw at 103 but Optimized at 88, don't panic. The 88 is what you'll actually score. The 103 was a fantasy (pun intended) that included your BYE week player's imaginary contribution.
+
+*This analysis corrects for ESPN's incompetence so you can make informed decisions. You're welcome.*
 
 ---
 
