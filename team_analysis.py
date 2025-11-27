@@ -1121,10 +1121,111 @@ def generate_dynamic_commentary(row, all_teams_summary, playoff_preds, games_rem
     
     return " ".join(lines)
 
+def generate_matchup_breakdown(team, remaining_schedule, espn_projections, optimized_lineups, playoff_preds, all_preds):
+    """Generate detailed matchup breakdown for a specific team showing roster decisions and projections."""
+    lines = []
+    
+    team_matchups = [g for g in remaining_schedule if g['home'] == team or g['away'] == team]
+    
+    if not team_matchups:
+        return ""
+    
+    lines.append(f"\n\n**Upcoming Matchups & Roster Decisions:**\n")
+    
+    team_pred = playoff_preds.get(team, {})
+    team_historical = team_pred.get('historical_ppg', 100)
+    
+    total_expected_pf = team_pred.get('current_points', 0)
+    
+    for game in sorted(team_matchups, key=lambda x: x['week']):
+        week = game['week']
+        is_home = game['home'] == team
+        opponent = game['away'] if is_home else game['home']
+        
+        week_proj = espn_projections.get(week, {})
+        week_opt = optimized_lineups.get(week, {})
+        
+        team_espn = week_proj.get(team, {}).get('projected_points', 0)
+        opp_espn = week_proj.get(opponent, {}).get('projected_points', 0)
+        
+        team_opt_data = week_opt.get(team, {})
+        opp_opt_data = week_opt.get(opponent, {})
+        
+        team_optimized = team_opt_data.get('optimized_projection', team_espn)
+        opp_optimized = opp_opt_data.get('optimized_projection', opp_espn)
+        
+        team_blended = (ESPN_PROJECTION_WEIGHT * team_optimized) + (HISTORICAL_WEIGHT * team_historical)
+        
+        opp_pred = all_preds.get(opponent, {})
+        opp_historical = opp_pred.get('historical_ppg', 100)
+        opp_blended = (ESPN_PROJECTION_WEIGHT * opp_optimized) + (HISTORICAL_WEIGHT * opp_historical)
+        
+        spread = team_blended - opp_blended
+        if abs(spread) < 3:
+            win_prob = 50 + (spread * 3)
+        elif abs(spread) < 10:
+            win_prob = 50 + (spread * 2.5)
+        else:
+            win_prob = 50 + (spread * 2)
+        win_prob = max(5, min(95, win_prob))
+        
+        total_expected_pf += team_blended
+        
+        lines.append(f"\n**Week {week} vs {opponent}:**\n")
+        lines.append(f"| Projection Type | {team} | {opponent} |")
+        lines.append(f"\n|-----------------|--------|----------|")
+        lines.append(f"\n| ESPN Raw | {team_espn:.1f} | {opp_espn:.1f} |")
+        lines.append(f"\n| Optimized (BYE/Inj Adj) | {team_optimized:.1f} | {opp_optimized:.1f} |")
+        lines.append(f"\n| Historical PPG | {team_historical:.1f} | {opp_historical:.1f} |")
+        lines.append(f"\n| **MC Blended** | **{team_blended:.1f}** | **{opp_blended:.1f}** |")
+        
+        if win_prob >= 60:
+            outcome_str = f"**Favored** ({win_prob:.0f}% win probability)"
+        elif win_prob >= 45:
+            outcome_str = f"Toss-up ({win_prob:.0f}% win probability)"
+        else:
+            outcome_str = f"Underdog ({win_prob:.0f}% win probability)"
+        
+        lines.append(f"\n\n*Expected Outcome:* {outcome_str} | Spread: {spread:+.1f}")
+        
+        team_moves = team_opt_data.get('optimization_moves', [])
+        team_bye = team_opt_data.get('bye_players', [])
+        team_unavail = team_opt_data.get('unavailable_starters', [])
+        
+        if team_bye or team_unavail or team_moves:
+            lines.append(f"\n\n*Roster Decisions for Week {week}:*")
+            
+            if team_bye:
+                bye_names = [f"{p['name']} ({p['position']})" for p in team_bye]
+                lines.append(f"\n- BYE: {', '.join(bye_names)}")
+            
+            if team_unavail:
+                for p in team_unavail:
+                    if p.get('reason') != 'BYE':
+                        lines.append(f"\n- {p['reason']}: {p['name']} ({p['position']}) - {p.get('projected_pts', 0):.1f} pts lost")
+            
+            if team_moves:
+                for move in team_moves:
+                    lines.append(f"\n- **ACTION:** Start {move['start_player']} (+{move['projected_gain']:.1f} pts) for {move['bench_player']} ({move['bench_reason']})")
+        else:
+            lines.append(f"\n\n*Roster Decisions:* None needed - lineup is optimally set.")
+    
+    remaining_weeks = len(team_matchups)
+    if remaining_weeks > 0:
+        lines.append(f"\n\n**Projected Season Totals (Optimized):**")
+        lines.append(f"\n- Current PF: {team_pred.get('current_points', 0):.0f}")
+        lines.append(f"\n- Expected Additional PF: +{total_expected_pf - team_pred.get('current_points', 0):.0f}")
+        lines.append(f"\n- **Projected Final PF: {total_expected_pf:.0f}**")
+    
+    return " ".join(lines)
+
 def generate_markdown_analysis(summary, remaining_schedule, game_predictions, playoff_preds, 
                                espn_projections, roster_health, reg_season_weeks, 
-                               filename='power_rankings_analysis.md'):
+                               optimized_lineups=None, filename='power_rankings_analysis.md'):
     """Generate dynamic markdown analysis with Monte Carlo methodology."""
+    if optimized_lineups is None:
+        optimized_lineups = {}
+    
     latest_season = summary['season'].max()
     current_summary = summary[summary['season'] == latest_season].copy()
     current_summary = current_summary.sort_values('power_rank')
@@ -1371,6 +1472,11 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
         commentary = generate_dynamic_commentary(row, current_summary, playoff_preds, games_remaining)
         md += f"{commentary}\n\n"
         
+        matchup_breakdown = generate_matchup_breakdown(team, remaining_schedule, espn_projections, 
+                                                        optimized_lineups, playoff_preds, playoff_preds)
+        if matchup_breakdown:
+            md += f"{matchup_breakdown}\n\n"
+        
         md += f"![{team} Monte Carlo](visualizations/monte_carlo/{team.lower()}_monte_carlo.png)\n\n"
         md += "---\n\n"
 
@@ -1472,7 +1578,8 @@ def main():
     
     print("\nGenerating markdown analysis...")
     generate_markdown_analysis(summary, remaining_schedule, game_predictions, 
-                              playoff_preds, espn_projections, roster_health, reg_season_weeks)
+                              playoff_preds, espn_projections, roster_health, reg_season_weeks,
+                              optimized_lineups)
     
     print("\n" + "="*80)
     print("ANALYSIS COMPLETE!")

@@ -1,5 +1,5 @@
 # 2025 Fantasy Football Power Rankings Analysis
-## Week 12 Update - Generated November 27, 2025 at 05:03 AM
+## Week 12 Update - Generated November 27, 2025 at 05:09 AM
 
 *This analysis blends ESPN's official projections with historical performance data. All commentary is dynamically generated.*
 
@@ -113,17 +113,17 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 | Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | Championship % |
 |------|--------|-----------|------------------|--------------|----------------|----------------|
-| MP | 9-3 | 99.4% | 11 | 1699 | #1.3 | 81.3% |
-| ZSF | 7-5 | 76.9% | 9 | 1684 | #3.3 | 8.5% |
-| sgf | 8-4 | 72.6% | 9 | 1629 | #3.5 | 6.3% |
+| MP | 9-3 | 99.2% | 11 | 1700 | #1.3 | 81.2% |
+| ZSF | 7-5 | 76.3% | 9 | 1684 | #3.3 | 7.7% |
+| sgf | 8-4 | 73.4% | 9 | 1630 | #3.4 | 7.1% |
 | KIRK | 7-5 | 60.2% | 9 | 1600 | #4.2 | 1.2% |
-| POO | 7-5 | 52.7% | 9 | 1558 | #4.3 | 1.8% |
-| GV | 7-5 | 35.3% | 9 | 1547 | #4.9 | 0.8% |
-| PATS | 5-7 | 1.7% | 7 | 1586 | #7.8 | 0.0% |
-| GEMP | 6-6 | 1.2% | 7 | 1434 | #7.7 | 0.0% |
+| POO | 7-5 | 53.1% | 9 | 1557 | #4.3 | 1.9% |
+| GV | 7-5 | 34.8% | 9 | 1547 | #4.9 | 0.8% |
+| PATS | 5-7 | 1.7% | 7 | 1587 | #7.7 | 0.0% |
+| GEMP | 6-6 | 1.3% | 7 | 1434 | #7.7 | 0.0% |
 | KESS | 5-7 | 0.0% | 6 | 1412 | #8.9 | 0.0% |
 | 3000 | 4-8 | 0.0% | 4 | 1309 | #11.4 | 0.0% |
-| WOOD | 3-9 | 0.0% | 4 | 1310 | #11.3 | 0.0% |
+| WOOD | 3-9 | 0.0% | 4 | 1310 | #11.4 | 0.0% |
 | ROUX | 4-8 | 0.0% | 6 | 1415 | #9.4 | 0.0% |
 
 ### Playoff Picture Analysis
@@ -142,12 +142,12 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
 
 | Rank | Team | Current PF | Projected Final PF | Expected Addition |
 |------|------|------------|-------------------|-------------------|
-| 1 | MP | 1390 | 1699 | +309 |
-| 2 | ZSF | 1379 | 1684 | +305 |
-| 3 | sgf | 1355 | 1629 | +274 |
-| 4 | KIRK | 1312 | 1600 | +287 |
-| 5 | PATS | 1299 | 1586 | +287 |
-| 6 | POO | 1267 | 1558 | +291 |
+| 1 | MP | 1390 | 1700 | +310 |
+| 2 | ZSF | 1379 | 1684 | +306 |
+| 3 | sgf | 1355 | 1630 | +275 |
+| 4 | KIRK | 1312 | 1600 | +288 |
+| 5 | PATS | 1299 | 1587 | +288 |
+| 6 | POO | 1267 | 1557 | +291 |
 
 
 ---
@@ -223,7 +223,7 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
 
 Sitting atop the standings with a commanding 9-3 record, this team has earned the top spot through dominant performance. Their 115.85 PPG leads the league, which translates to an impressive 8.36 MVP-W and 9 top-6 weekly finishes. With a +0.64 WAX, they've caught a few breaks too - but at this level, you take what you can get. 
 
-**Projection Summary:** Most likely finish: **11 wins** | Projected PF: **1699** | Playoff: **99.4%** | Championship: **81.3%** 
+**Projection Summary:** Most likely finish: **11 wins** | Projected PF: **1700** | Playoff: **99.2%** | Championship: **81.2%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -248,6 +248,52 @@ Fully healthy starting lineup.
 
 *Total Optimization Gain:* **+9.0 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs GEMP:**
+ | Projection Type | MP | GEMP | 
+|-----------------|--------|----------| 
+| ESPN Raw | 103.0 | 86.7 | 
+| Optimized (BYE/Inj Adj) | 87.7 | 85.4 | 
+| Historical PPG | 115.8 | 97.9 | 
+| **MC Blended** | **98.9** | **90.4** | 
+
+*Expected Outcome:* **Favored** (71% win probability) | Spread: +8.6 
+
+*Roster Decisions for Week 13:* 
+- BYE: Jonathan Taylor (RB), Texans D/ST (D/ST) 
+- **ACTION:** Start Tony Pollard (+9.0 pts) for Jonathan Taylor (BYE) 
+**Week 14 vs GV:**
+ | Projection Type | MP | GV | 
+|-----------------|--------|----------| 
+| ESPN Raw | 93.0 | 97.1 | 
+| Optimized (BYE/Inj Adj) | 93.0 | 91.5 | 
+| Historical PPG | 115.8 | 104.9 | 
+| **MC Blended** | **102.1** | **96.9** | 
+
+*Expected Outcome:* **Favored** (63% win probability) | Spread: +5.2 
+
+*Roster Decisions for Week 14:* 
+- BYE: George Kittle (WR) 
+**Week 15 vs POO:**
+ | Projection Type | MP | POO | 
+|-----------------|--------|----------| 
+| ESPN Raw | 101.8 | 101.2 | 
+| Optimized (BYE/Inj Adj) | 101.8 | 101.2 | 
+| Historical PPG | 115.8 | 105.6 | 
+| **MC Blended** | **107.4** | **103.0** | 
+
+*Expected Outcome:* **Favored** (61% win probability) | Spread: +4.4 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1390 
+- Expected Additional PF: +308 
+- **Projected Final PF: 1699**
+
 ![MP Monte Carlo](visualizations/monte_carlo/mp_monte_carlo.png)
 
 ---
@@ -258,7 +304,7 @@ Fully healthy starting lineup.
 
 Second place with 8-4, trailing the leader by 3.54 power points. Scoring 112.91 PPG with 8 top-6 finishes shows genuine quality. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1629** | Playoff: **72.6%** | Championship: **6.3%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1630** | Playoff: **73.4%** | Championship: **7.1%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -288,6 +334,53 @@ Key injuries: Chris Olave (RB, QUESTIONABLE). Bench depth: Joe Burrow (QB) avail
 
 *Total Optimization Gain:* **+11.1 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs GV:**
+ | Projection Type | sgf | GV | 
+|-----------------|--------|----------| 
+| ESPN Raw | 93.5 | 98.7 | 
+| Optimized (BYE/Inj Adj) | 77.4 | 91.3 | 
+| Historical PPG | 112.9 | 104.9 | 
+| **MC Blended** | **91.6** | **96.8** | 
+
+*Expected Outcome:* Underdog (37% win probability) | Spread: -5.2 
+
+*Roster Decisions for Week 13:* 
+- BYE: Stefon Diggs (RB) 
+- **ACTION:** Start Sam LaPorta (+0.0 pts) for Stefon Diggs (BYE) 
+**Week 14 vs POO:**
+ | Projection Type | sgf | POO | 
+|-----------------|--------|----------| 
+| ESPN Raw | 50.7 | 101.3 | 
+| Optimized (BYE/Inj Adj) | 56.7 | 93.1 | 
+| Historical PPG | 112.9 | 105.6 | 
+| **MC Blended** | **79.2** | **98.1** | 
+
+*Expected Outcome:* Underdog (12% win probability) | Spread: -19.0 
+
+*Roster Decisions for Week 14:* 
+- BYE: Christian McCaffrey (RB) 
+- **ACTION:** Start Marvin Harrison Jr. (+11.1 pts) for Christian McCaffrey (BYE) 
+**Week 15 vs ZSF:**
+ | Projection Type | sgf | ZSF | 
+|-----------------|--------|----------| 
+| ESPN Raw | 99.6 | 100.3 | 
+| Optimized (BYE/Inj Adj) | 94.7 | 100.3 | 
+| Historical PPG | 112.9 | 114.9 | 
+| **MC Blended** | **102.0** | **106.1** | 
+
+*Expected Outcome:* Underdog (40% win probability) | Spread: -4.2 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1355 
+- Expected Additional PF: +273 
+- **Projected Final PF: 1628**
+
 ![sgf Monte Carlo](visualizations/monte_carlo/sgf_monte_carlo.png)
 
 ---
@@ -298,7 +391,7 @@ Key injuries: Chris Olave (RB, QUESTIONABLE). Bench depth: Joe Burrow (QB) avail
 
 Currently in the playoff picture at #3 with a 7-5 record. Their 114.90 PPG and 7.36 MVP-W put them in solid position. 9 top-6 finishes in 12 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1684** | Playoff: **76.9%** | Championship: **8.5%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1684** | Playoff: **76.3%** | Championship: **7.7%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -308,7 +401,7 @@ Currently in the playoff picture at #3 with a 7-5 record. Their 114.90 PPG and 7
 | **Optimized** | **90.7 pts** | BYE/injury adjusted (-8.0 from ESPN) | 
 | Monte Carlo Input | 100.4 pts | 60% Optimized + 40% Historical | 
 
-*Strong odds at 77%, but fantasy football loves chaos. One bad week and this could get interesting.* 
+*Strong odds at 76%, but fantasy football loves chaos. One bad week and this could get interesting.* 
 
 **Roster Health & Availability Report:** 
 Fully healthy starting lineup. Bench depth: James Cook III (RB), Travis Etienne Jr. (RB) available. 
@@ -324,6 +417,51 @@ Fully healthy starting lineup. Bench depth: James Cook III (RB), Travis Etienne 
 - **Week 13:** Bench De'Von Achane (BYE) → Start **James Cook III** (+16.9 pts) 
 
 *Total Optimization Gain:* **+16.9 projected points** across 3 remaining weeks.
+
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs PATS:**
+ | Projection Type | ZSF | PATS | 
+|-----------------|--------|----------| 
+| ESPN Raw | 104.9 | 107.1 | 
+| Optimized (BYE/Inj Adj) | 80.9 | 93.6 | 
+| Historical PPG | 114.9 | 108.2 | 
+| **MC Blended** | **94.5** | **99.4** | 
+
+*Expected Outcome:* Underdog (38% win probability) | Spread: -4.9 
+
+*Roster Decisions for Week 13:* 
+- BYE: De'Von Achane (RB), A.J. Brown (RB), Eagles D/ST (D/ST) 
+- **ACTION:** Start James Cook III (+16.9 pts) for De'Von Achane (BYE) 
+**Week 14 vs 3000:**
+ | Projection Type | ZSF | 3000 | 
+|-----------------|--------|----------| 
+| ESPN Raw | 90.9 | 18.8 | 
+| Optimized (BYE/Inj Adj) | 90.9 | 18.8 | 
+| Historical PPG | 114.9 | 91.7 | 
+| **MC Blended** | **100.5** | **47.9** | 
+
+*Expected Outcome:* **Favored** (95% win probability) | Spread: +52.5 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+**Week 15 vs sgf:**
+ | Projection Type | ZSF | sgf | 
+|-----------------|--------|----------| 
+| ESPN Raw | 100.3 | 99.6 | 
+| Optimized (BYE/Inj Adj) | 100.3 | 94.7 | 
+| Historical PPG | 114.9 | 112.9 | 
+| **MC Blended** | **106.1** | **102.0** | 
+
+*Expected Outcome:* **Favored** (60% win probability) | Spread: +4.2 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1379 
+- Expected Additional PF: +301 
+- **Projected Final PF: 1680**
 
 ![ZSF Monte Carlo](visualizations/monte_carlo/zsf_monte_carlo.png)
 
@@ -356,6 +494,50 @@ Fully healthy starting lineup. Bench depth: RJ Harvey (RB) available.
 - **Nico Collins** (RB, HOU) - Week 13 
 - **Tyler Loop** (WR, BAL) - Week 13
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs WOOD:**
+ | Projection Type | KIRK | WOOD | 
+|-----------------|--------|----------| 
+| ESPN Raw | 106.7 | 80.6 | 
+| Optimized (BYE/Inj Adj) | 52.2 | 87.8 | 
+| Historical PPG | 109.4 | 88.4 | 
+| **MC Blended** | **75.1** | **88.1** | 
+
+*Expected Outcome:* Underdog (24% win probability) | Spread: -13.0 
+
+*Roster Decisions for Week 13:* 
+- BYE: Lamar Jackson (QB), Tyler Warren (WR), Nico Collins (RB), Tyler Loop (WR) 
+**Week 14 vs PATS:**
+ | Projection Type | KIRK | PATS | 
+|-----------------|--------|----------| 
+| ESPN Raw | 101.7 | 68.3 | 
+| Optimized (BYE/Inj Adj) | 101.7 | 68.3 | 
+| Historical PPG | 109.4 | 108.2 | 
+| **MC Blended** | **104.8** | **84.2** | 
+
+*Expected Outcome:* **Favored** (91% win probability) | Spread: +20.5 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+**Week 15 vs 3000:**
+ | Projection Type | KIRK | 3000 | 
+|-----------------|--------|----------| 
+| ESPN Raw | 104.5 | 88.6 | 
+| Optimized (BYE/Inj Adj) | 104.5 | 88.6 | 
+| Historical PPG | 109.4 | 91.7 | 
+| **MC Blended** | **106.5** | **89.8** | 
+
+*Expected Outcome:* **Favored** (83% win probability) | Spread: +16.7 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1312 
+- Expected Additional PF: +286 
+- **Projected Final PF: 1599**
+
 ![KIRK Monte Carlo](visualizations/monte_carlo/kirk_monte_carlo.png)
 
 ---
@@ -364,9 +546,9 @@ Fully healthy starting lineup. Bench depth: RJ Harvey (RB) available.
 
 **Record:** 7-5 | **PPG:** 104.92 | **Total PF:** 1259 | **Top6:** 7 | **MVP-W:** 6.82 | **WAX:** +0.18
 
-On the playoff bubble at #5 with 7-5. Need to step it up - only 35.3% playoff odds right now. Their 104.92 PPG and 7 top-6 finishes show potential. 
+On the playoff bubble at #5 with 7-5. Need to step it up - only 34.8% playoff odds right now. Their 104.92 PPG and 7 top-6 finishes show potential. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1547** | Playoff: **35.3%** | Championship: **0.8%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1547** | Playoff: **34.8%** | Championship: **0.8%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -396,6 +578,52 @@ Key injuries: Saquon Barkley (RB, QUESTIONABLE). Bench depth: Dak Prescott (QB) 
 
 *Total Optimization Gain:* **+19.2 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs sgf:**
+ | Projection Type | GV | sgf | 
+|-----------------|--------|----------| 
+| ESPN Raw | 98.7 | 93.5 | 
+| Optimized (BYE/Inj Adj) | 91.3 | 77.4 | 
+| Historical PPG | 104.9 | 112.9 | 
+| **MC Blended** | **96.8** | **91.6** | 
+
+*Expected Outcome:* **Favored** (63% win probability) | Spread: +5.2 
+
+*Roster Decisions for Week 13:* 
+- BYE: Saquon Barkley (RB), Michael Pittman Jr. (RB) 
+- **ACTION:** Start Omarion Hampton (+11.2 pts) for Saquon Barkley (BYE) 
+- **ACTION:** Start Harold Fannin Jr. (+8.0 pts) for Michael Pittman Jr. (BYE) 
+**Week 14 vs MP:**
+ | Projection Type | GV | MP | 
+|-----------------|--------|----------| 
+| ESPN Raw | 97.1 | 93.0 | 
+| Optimized (BYE/Inj Adj) | 91.5 | 93.0 | 
+| Historical PPG | 104.9 | 115.8 | 
+| **MC Blended** | **96.9** | **102.1** | 
+
+*Expected Outcome:* Underdog (37% win probability) | Spread: -5.2 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+**Week 15 vs GEMP:**
+ | Projection Type | GV | GEMP | 
+|-----------------|--------|----------| 
+| ESPN Raw | 92.7 | 79.8 | 
+| Optimized (BYE/Inj Adj) | 86.8 | 72.6 | 
+| Historical PPG | 104.9 | 97.9 | 
+| **MC Blended** | **94.1** | **82.7** | 
+
+*Expected Outcome:* **Favored** (73% win probability) | Spread: +11.3 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1259 
+- Expected Additional PF: +288 
+- **Projected Final PF: 1547**
+
 ![GV Monte Carlo](visualizations/monte_carlo/gv_monte_carlo.png)
 
 ---
@@ -404,9 +632,9 @@ Key injuries: Saquon Barkley (RB, QUESTIONABLE). Bench depth: Dak Prescott (QB) 
 
 **Record:** 7-5 | **PPG:** 105.56 | **Total PF:** 1267 | **Top6:** 6 | **MVP-W:** 6.00 | **WAX:** +1.00
 
-On the playoff bubble at #6 with 7-5. Still in decent shape with 52.7% playoff odds. Their 105.56 PPG and 6 top-6 finishes show potential. They've benefited from +1.00 WAX - riding some good matchups. 
+On the playoff bubble at #6 with 7-5. Still in decent shape with 53.1% playoff odds. Their 105.56 PPG and 6 top-6 finishes show potential. They've benefited from +1.00 WAX - riding some good matchups. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1558** | Playoff: **52.7%** | Championship: **1.8%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1557** | Playoff: **53.1%** | Championship: **1.9%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -431,6 +659,52 @@ Fully healthy starting lineup.
 
 *Total Optimization Gain:* **+11.3 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs 3000:**
+ | Projection Type | POO | 3000 | 
+|-----------------|--------|----------| 
+| ESPN Raw | 109.5 | 84.7 | 
+| Optimized (BYE/Inj Adj) | 78.0 | 45.1 | 
+| Historical PPG | 105.6 | 91.7 | 
+| **MC Blended** | **89.0** | **63.8** | 
+
+*Expected Outcome:* **Favored** (95% win probability) | Spread: +25.3 
+
+*Roster Decisions for Week 13:* 
+- BYE: Jalen Hurts (QB), Derrick Henry (RB) 
+- **ACTION:** Start DK Metcalf (+11.3 pts) for Derrick Henry (BYE) 
+**Week 14 vs sgf:**
+ | Projection Type | POO | sgf | 
+|-----------------|--------|----------| 
+| ESPN Raw | 101.3 | 50.7 | 
+| Optimized (BYE/Inj Adj) | 93.1 | 56.7 | 
+| Historical PPG | 105.6 | 112.9 | 
+| **MC Blended** | **98.1** | **79.2** | 
+
+*Expected Outcome:* **Favored** (88% win probability) | Spread: +19.0 
+
+*Roster Decisions for Week 14:* 
+- BYE: Chase McLaughlin (WR) 
+**Week 15 vs MP:**
+ | Projection Type | POO | MP | 
+|-----------------|--------|----------| 
+| ESPN Raw | 101.2 | 101.8 | 
+| Optimized (BYE/Inj Adj) | 101.2 | 101.8 | 
+| Historical PPG | 105.6 | 115.8 | 
+| **MC Blended** | **103.0** | **107.4** | 
+
+*Expected Outcome:* Underdog (39% win probability) | Spread: -4.4 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1267 
+- Expected Additional PF: +290 
+- **Projected Final PF: 1557**
+
 ![POO Monte Carlo](visualizations/monte_carlo/poo_monte_carlo.png)
 
 ---
@@ -441,7 +715,7 @@ Fully healthy starting lineup.
 
 Sitting at #7 with a 5-7 record - outside looking in. At just 1.7% playoff odds, it would take a miracle. Their 108.22 PPG suggests they have some scoring punch. The -2.18 WAX means they're better than their record - just unlucky. 
 
-**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1586** | Playoff: **1.7%** | Championship: **0.0%** 
+**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1587** | Playoff: **1.7%** | Championship: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -469,6 +743,51 @@ Key injuries: Jaxson Dart (QB, QUESTIONABLE).
 
 *Total Optimization Gain:* **+10.4 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs ZSF:**
+ | Projection Type | PATS | ZSF | 
+|-----------------|--------|----------| 
+| ESPN Raw | 107.1 | 104.9 | 
+| Optimized (BYE/Inj Adj) | 93.6 | 80.9 | 
+| Historical PPG | 108.2 | 114.9 | 
+| **MC Blended** | **99.4** | **94.5** | 
+
+*Expected Outcome:* **Favored** (62% win probability) | Spread: +4.9 
+
+*Roster Decisions for Week 13:* 
+- BYE: TreVeyon Henderson (RB) 
+- **ACTION:** Start D'Andre Swift (+10.4 pts) for TreVeyon Henderson (BYE) 
+**Week 14 vs KIRK:**
+ | Projection Type | PATS | KIRK | 
+|-----------------|--------|----------| 
+| ESPN Raw | 68.3 | 101.7 | 
+| Optimized (BYE/Inj Adj) | 68.3 | 101.7 | 
+| Historical PPG | 108.2 | 109.4 | 
+| **MC Blended** | **84.2** | **104.8** | 
+
+*Expected Outcome:* Underdog (9% win probability) | Spread: -20.5 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+**Week 15 vs KESS:**
+ | Projection Type | PATS | KESS | 
+|-----------------|--------|----------| 
+| ESPN Raw | 107.8 | 83.0 | 
+| Optimized (BYE/Inj Adj) | 98.1 | 78.4 | 
+| Historical PPG | 108.2 | 96.6 | 
+| **MC Blended** | **102.2** | **85.7** | 
+
+*Expected Outcome:* **Favored** (83% win probability) | Spread: +16.5 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1299 
+- Expected Additional PF: +286 
+- **Projected Final PF: 1585**
+
 ![PATS Monte Carlo](visualizations/monte_carlo/pats_monte_carlo.png)
 
 ---
@@ -477,9 +796,9 @@ Key injuries: Jaxson Dart (QB, QUESTIONABLE).
 
 **Record:** 6-6 | **PPG:** 97.92 | **Total PF:** 1175 | **Top6:** 3 | **MVP-W:** 4.45 | **WAX:** +1.55
 
-Sitting at #8 with a 6-6 record - outside looking in. At just 1.2% playoff odds, it would take a miracle. Their 97.92 PPG suggests they have some scoring punch. That +1.55 WAX is actually concerning - they've been lucky and still can't crack the top 6. 
+Sitting at #8 with a 6-6 record - outside looking in. At just 1.3% playoff odds, it would take a miracle. Their 97.92 PPG suggests they have some scoring punch. That +1.55 WAX is actually concerning - they've been lucky and still can't crack the top 6. 
 
-**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1434** | Playoff: **1.2%** | Championship: **0.0%** 
+**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1434** | Playoff: **1.3%** | Championship: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -506,6 +825,51 @@ Sitting at #8 with a 6-6 record - outside looking in. At just 1.2% playoff odds,
 - **Week 13:** Bench Daniel Jones (BYE) → Start **Brock Purdy** (+16.0 pts) 
 
 *Total Optimization Gain:* **+16.0 projected points** across 3 remaining weeks.
+
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs MP:**
+ | Projection Type | GEMP | MP | 
+|-----------------|--------|----------| 
+| ESPN Raw | 86.7 | 103.0 | 
+| Optimized (BYE/Inj Adj) | 85.4 | 87.7 | 
+| Historical PPG | 97.9 | 115.8 | 
+| **MC Blended** | **90.4** | **98.9** | 
+
+*Expected Outcome:* Underdog (29% win probability) | Spread: -8.6 
+
+*Roster Decisions for Week 13:* 
+- BYE: Daniel Jones (QB) 
+- **ACTION:** Start Brock Purdy (+16.0 pts) for Daniel Jones (BYE) 
+**Week 14 vs ROUX:**
+ | Projection Type | GEMP | ROUX | 
+|-----------------|--------|----------| 
+| ESPN Raw | 84.3 | 86.1 | 
+| Optimized (BYE/Inj Adj) | 76.8 | 84.6 | 
+| Historical PPG | 97.9 | 95.6 | 
+| **MC Blended** | **85.3** | **89.0** | 
+
+*Expected Outcome:* Underdog (41% win probability) | Spread: -3.7 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+**Week 15 vs GV:**
+ | Projection Type | GEMP | GV | 
+|-----------------|--------|----------| 
+| ESPN Raw | 79.8 | 92.7 | 
+| Optimized (BYE/Inj Adj) | 72.6 | 86.8 | 
+| Historical PPG | 97.9 | 104.9 | 
+| **MC Blended** | **82.7** | **94.1** | 
+
+*Expected Outcome:* Underdog (27% win probability) | Spread: -11.3 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1175 
+- Expected Additional PF: +258 
+- **Projected Final PF: 1433**
 
 ![GEMP Monte Carlo](visualizations/monte_carlo/gemp_monte_carlo.png)
 
@@ -544,6 +908,51 @@ Key injuries: Kenneth Walker III (RB, QUESTIONABLE).
 - **Week 14:** Bench Rachaad White (BYE) → Start **Alec Pierce** (+8.8 pts) 
 
 *Total Optimization Gain:* **+8.8 projected points** across 3 remaining weeks.
+
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs KESS:**
+ | Projection Type | ROUX | KESS | 
+|-----------------|--------|----------| 
+| ESPN Raw | 87.3 | 90.4 | 
+| Optimized (BYE/Inj Adj) | 82.0 | 67.7 | 
+| Historical PPG | 95.6 | 96.6 | 
+| **MC Blended** | **87.5** | **79.3** | 
+
+*Expected Outcome:* **Favored** (70% win probability) | Spread: +8.2 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+**Week 14 vs GEMP:**
+ | Projection Type | ROUX | GEMP | 
+|-----------------|--------|----------| 
+| ESPN Raw | 86.1 | 84.3 | 
+| Optimized (BYE/Inj Adj) | 84.6 | 76.8 | 
+| Historical PPG | 95.6 | 97.9 | 
+| **MC Blended** | **89.0** | **85.3** | 
+
+*Expected Outcome:* Toss-up (59% win probability) | Spread: +3.7 
+
+*Roster Decisions for Week 14:* 
+- BYE: Rachaad White (RB) 
+- **ACTION:** Start Alec Pierce (+8.8 pts) for Rachaad White (BYE) 
+**Week 15 vs WOOD:**
+ | Projection Type | ROUX | WOOD | 
+|-----------------|--------|----------| 
+| ESPN Raw | 92.6 | 82.3 | 
+| Optimized (BYE/Inj Adj) | 87.8 | 82.3 | 
+| Historical PPG | 95.6 | 88.4 | 
+| **MC Blended** | **90.9** | **84.8** | 
+
+*Expected Outcome:* **Favored** (65% win probability) | Spread: +6.1 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1147 
+- Expected Additional PF: +267 
+- **Projected Final PF: 1414**
 
 ![ROUX Monte Carlo](visualizations/monte_carlo/roux_monte_carlo.png)
 
@@ -588,6 +997,52 @@ Key injuries: DeVonta Smith (RB, QUESTIONABLE). Watch for return: Joe Mixon.
 
 *Total Optimization Gain:* **+10.3 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs ROUX:**
+ | Projection Type | KESS | ROUX | 
+|-----------------|--------|----------| 
+| ESPN Raw | 90.4 | 87.3 | 
+| Optimized (BYE/Inj Adj) | 67.7 | 82.0 | 
+| Historical PPG | 96.6 | 95.6 | 
+| **MC Blended** | **79.3** | **87.5** | 
+
+*Expected Outcome:* Underdog (30% win probability) | Spread: -8.2 
+
+*Roster Decisions for Week 13:* 
+- BYE: DeVonta Smith (RB), Mark Andrews (WR) 
+**Week 14 vs WOOD:**
+ | Projection Type | KESS | WOOD | 
+|-----------------|--------|----------| 
+| ESPN Raw | 79.3 | 72.8 | 
+| Optimized (BYE/Inj Adj) | 81.7 | 65.6 | 
+| Historical PPG | 96.6 | 88.4 | 
+| **MC Blended** | **87.6** | **74.7** | 
+
+*Expected Outcome:* **Favored** (76% win probability) | Spread: +12.9 
+
+*Roster Decisions for Week 14:* 
+- BYE: Sean Tucker (RB) 
+- **ACTION:** Start Alvin Kamara (+10.4 pts) for Sean Tucker (BYE) 
+**Week 15 vs PATS:**
+ | Projection Type | KESS | PATS | 
+|-----------------|--------|----------| 
+| ESPN Raw | 83.0 | 107.8 | 
+| Optimized (BYE/Inj Adj) | 78.4 | 98.1 | 
+| Historical PPG | 96.6 | 108.2 | 
+| **MC Blended** | **85.7** | **102.2** | 
+
+*Expected Outcome:* Underdog (17% win probability) | Spread: -16.5 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1159 
+- Expected Additional PF: +253 
+- **Projected Final PF: 1411**
+
 ![KESS Monte Carlo](visualizations/monte_carlo/kess_monte_carlo.png)
 
 ---
@@ -608,7 +1063,7 @@ Bringing up the rear at #11 with a 4-8 record. Their 91.66 PPG ranks near the bo
 | **Optimized** | **50.8 pts** | BYE/injury adjusted (-13.2 from ESPN) | 
 | Monte Carlo Input | 67.2 pts | 60% Optimized + 40% Historical | 
 
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Only 0.4 more projected wins suggests a rough finish ahead.* 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Only 0.5 more projected wins suggests a rough finish ahead.* 
 
 **Roster Health & Availability Report:** 
 Fully healthy starting lineup. Bench depth: Kenneth Gainwell (RB) available. 
@@ -623,6 +1078,52 @@ Fully healthy starting lineup. Bench depth: Kenneth Gainwell (RB) available.
 - **Week 13:** Bench Woody Marks (BYE) → Start **Kenneth Gainwell** (+12.1 pts) 
 
 *Total Optimization Gain:* **+12.1 projected points** across 3 remaining weeks.
+
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs POO:**
+ | Projection Type | 3000 | POO | 
+|-----------------|--------|----------| 
+| ESPN Raw | 84.7 | 109.5 | 
+| Optimized (BYE/Inj Adj) | 45.1 | 78.0 | 
+| Historical PPG | 91.7 | 105.6 | 
+| **MC Blended** | **63.8** | **89.0** | 
+
+*Expected Outcome:* Underdog (5% win probability) | Spread: -25.3 
+
+*Roster Decisions for Week 13:* 
+- BYE: Woody Marks (RB), Andy Borregales (WR), Hunter Henry (WR), Drake Maye (QB) 
+- **ACTION:** Start Kenneth Gainwell (+12.1 pts) for Woody Marks (BYE) 
+**Week 14 vs ZSF:**
+ | Projection Type | 3000 | ZSF | 
+|-----------------|--------|----------| 
+| ESPN Raw | 18.8 | 90.9 | 
+| Optimized (BYE/Inj Adj) | 18.8 | 90.9 | 
+| Historical PPG | 91.7 | 114.9 | 
+| **MC Blended** | **47.9** | **100.5** | 
+
+*Expected Outcome:* Underdog (5% win probability) | Spread: -52.5 
+
+*Roster Decisions for Week 14:* 
+- BYE: 49ers D/ST (D/ST) 
+**Week 15 vs KIRK:**
+ | Projection Type | 3000 | KIRK | 
+|-----------------|--------|----------| 
+| ESPN Raw | 88.6 | 104.5 | 
+| Optimized (BYE/Inj Adj) | 88.6 | 104.5 | 
+| Historical PPG | 91.7 | 109.4 | 
+| **MC Blended** | **89.8** | **106.5** | 
+
+*Expected Outcome:* Underdog (17% win probability) | Spread: -16.7 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1100 
+- Expected Additional PF: +202 
+- **Projected Final PF: 1301**
 
 ![3000 Monte Carlo](visualizations/monte_carlo/3000_monte_carlo.png)
 
@@ -662,6 +1163,53 @@ Fully healthy starting lineup. Bench depth: Josh Jacobs (RB), Bo Nix (QB) availa
 
 *Total Optimization Gain:* **+22.0 projected points** across 3 remaining weeks.
 
+
+
+**Upcoming Matchups & Roster Decisions:**
+ 
+**Week 13 vs KIRK:**
+ | Projection Type | WOOD | KIRK | 
+|-----------------|--------|----------| 
+| ESPN Raw | 80.6 | 106.7 | 
+| Optimized (BYE/Inj Adj) | 87.8 | 52.2 | 
+| Historical PPG | 88.4 | 109.4 | 
+| **MC Blended** | **88.1** | **75.1** | 
+
+*Expected Outcome:* **Favored** (76% win probability) | Spread: +13.0 
+
+*Roster Decisions for Week 13:* 
+- BYE: Nick Chubb (RB), Patriots D/ST (D/ST) 
+- **ACTION:** Start Josh Jacobs (+17.6 pts) for Nick Chubb (BYE) 
+**Week 14 vs KESS:**
+ | Projection Type | WOOD | KESS | 
+|-----------------|--------|----------| 
+| ESPN Raw | 72.8 | 79.3 | 
+| Optimized (BYE/Inj Adj) | 65.6 | 81.7 | 
+| Historical PPG | 88.4 | 96.6 | 
+| **MC Blended** | **74.7** | **87.6** | 
+
+*Expected Outcome:* Underdog (24% win probability) | Spread: -12.9 
+
+*Roster Decisions for Week 14:* 
+- BYE: Emeka Egbuka (RB) 
+- **ACTION:** Start David Njoku (+4.4 pts) for Emeka Egbuka (BYE) 
+**Week 15 vs ROUX:**
+ | Projection Type | WOOD | ROUX | 
+|-----------------|--------|----------| 
+| ESPN Raw | 82.3 | 92.6 | 
+| Optimized (BYE/Inj Adj) | 82.3 | 87.8 | 
+| Historical PPG | 88.4 | 95.6 | 
+| **MC Blended** | **84.8** | **90.9** | 
+
+*Expected Outcome:* Underdog (35% win probability) | Spread: -6.1 
+
+*Roster Decisions:* None needed - lineup is optimally set. 
+
+**Projected Season Totals (Optimized):** 
+- Current PF: 1061 
+- Expected Additional PF: +248 
+- **Projected Final PF: 1308**
+
 ![WOOD Monte Carlo](visualizations/monte_carlo/wood_monte_carlo.png)
 
 ---
@@ -672,18 +1220,18 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 | Rank | Team | Projected Wins | Projected PF | Current Record | Playoff % |
 |------|------|----------------|--------------|----------------|-----------|
-| 1 | MP | 10.7 | 1699 | 9-3 | 99.4% |
-| 2 | ZSF | 9.0 | 1684 | 7-5 | 76.9% |
-| 3 | sgf | 9.2 | 1629 | 8-4 | 72.6% |
+| 1 | MP | 10.7 | 1700 | 9-3 | 99.2% |
+| 2 | ZSF | 8.9 | 1684 | 7-5 | 76.3% |
+| 3 | sgf | 9.2 | 1630 | 8-4 | 73.4% |
 | 4 | KIRK | 8.8 | 1600 | 7-5 | 60.2% |
-| 5 | POO | 9.0 | 1558 | 7-5 | 52.7% |
-| 6 | GV | 8.7 | 1547 | 7-5 | 35.3% |
-| 7 | GEMP | 7.2 | 1434 | 6-6 | 1.2% |
-| 8 | PATS | 6.5 | 1586 | 5-7 | 1.7% |
+| 5 | POO | 9.0 | 1557 | 7-5 | 53.1% |
+| 6 | GV | 8.7 | 1547 | 7-5 | 34.8% |
+| 7 | GEMP | 7.2 | 1434 | 6-6 | 1.3% |
+| 8 | PATS | 6.5 | 1587 | 5-7 | 1.7% |
 | 9 | KESS | 6.4 | 1412 | 5-7 | 0.0% |
 | 10 | ROUX | 5.8 | 1415 | 4-8 | 0.0% |
 | 11 | WOOD | 4.4 | 1310 | 3-9 | 0.0% |
-| 12 | 3000 | 4.4 | 1309 | 4-8 | 0.0% |
+| 12 | 3000 | 4.5 | 1309 | 4-8 | 0.0% |
 
 ---
 
@@ -691,9 +1239,9 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 *If playoffs started today (top 4 make it, seeded by record then Points For):*
 
-**Semifinal 1:** #1 MP (Proj. PF: 1699) vs #4 KIRK (Proj. PF: 1600)
+**Semifinal 1:** #1 MP (Proj. PF: 1700) vs #4 KIRK (Proj. PF: 1600)
 
-**Semifinal 2:** #2 ZSF (Proj. PF: 1684) vs #3 sgf (Proj. PF: 1629)
+**Semifinal 2:** #2 ZSF (Proj. PF: 1684) vs #3 sgf (Proj. PF: 1630)
 
 ---
 
