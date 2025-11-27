@@ -1,31 +1,31 @@
 # ESPN Fantasy Football Scraper & Analyzer
 
 ## Overview
-A comprehensive ESPN Fantasy Football data scraper and analysis tool that downloads historical league data, generates advanced statistical visualizations, and provides playoff predictions with Monte Carlo simulations.
+A comprehensive ESPN Fantasy Football data scraper and analysis tool that downloads historical league data, generates advanced statistical visualizations, and provides playoff predictions with hybrid Monte Carlo simulations blending ESPN projections with historical performance.
 
 **Current Status**: Fully functional with 2025 season data (weeks 1-12 processed, weeks 13-15 remaining)
 
 ## Recent Changes (November 27, 2025)
 
-### Enhanced Monte Carlo Analysis
-- **10,000 Simulation Engine** - Full probability distributions for each team
-- **95% Confidence Intervals** - Shows projected win range with statistical certainty
-- **Individual Team Distribution Plots** - 12 plots showing win/standing distributions
-- **Combined CI Summary Chart** - All teams' win projections on one visualization
-- **Snarky CI Commentary** - Auto-generated roasts based on each team's statistical outlook
-- **Methodology Documentation** - Detailed explanation of Monte Carlo process in markdown
+### Hybrid Monte Carlo with ESPN Projections
+- **ESPN Projection Integration** - Fetches ESPN's weekly projected points for each remaining matchup
+- **Blended Scoring Model** - 60% ESPN projections + 40% historical PPG for each simulated game
+- **Roster Health Tracking** - Injured players increase scoring variance in simulations
+- **Points For Distribution** - Full density tracking of projected total points (tiebreaker)
+- **Win Density Plots** - Probability mass charts showing most likely win outcomes
 
 ### Key Playoff Stats (Week 12)
-| Team | Record | Playoff % | 95% CI Wins | Championship % |
-|------|--------|-----------|-------------|----------------|
-| MP | 9-3 | 99.5% | [9.0, 12.0] | 81.5% |
-| sgf | 8-4 | 89.6% | [8.0, 11.0] | 11.9% |
-| KIRK | 7-5 | 77.4% | [8.0, 10.0] | 0.7% |
-| ZSF | 7-5 | 75.0% | [7.0, 10.0] | 5.4% |
+| Team | Record | Playoff % | Most Likely Wins | Projected PF | Championship % |
+|------|--------|-----------|------------------|--------------|----------------|
+| MP | 9-3 | 98.7% | 11 | 1,708 | 82.2% |
+| KIRK | 7-5 | 81.3% | 10 | 1,631 | 3.1% |
+| ZSF | 7-5 | 73.6% | 9 | 1,695 | 7.8% |
+| sgf | 8-4 | 68.4% | 9 | 1,638 | 5.1% |
+| POO | 7-5 | 50.3% | 9 | 1,581 | 1.4% |
 
 ### Previous Features
 - Power Rankings system: `(Real Wins × 2) + (Top6 Wins) + (MVP-W)`
-- 9 visualization charts
+- 9 core visualization charts + 13 Monte Carlo plots
 - ESPN API integration with private league authentication
 - Multi-season data scraping with automatic unplayed week filtering
 - Advanced metrics: WAX (Wins Above Expectation), MVP-W, Top6 Wins
@@ -34,12 +34,12 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 
 ### Core Files
 - **espn_ff_scraper.py** - Main scraper with CLI interface
-- **espn_api.py** - ESPN API wrapper for data fetching
+- **espn_api.py** - ESPN API wrapper with projections & roster health methods
 - **data_processor.py** - Data transformation and calculations
 - **csv_generator.py** - CSV file generation
 - **position_mapping.py** - Position/slot ID to name mappings
 - **config.py** - Configuration constants
-- **team_analysis.py** - Analysis, visualization, and playoff prediction engine
+- **team_analysis.py** - Analysis, visualization, and hybrid Monte Carlo engine
 - **md_to_html.py** - Markdown to HTML converter with embedded images
 
 ### Data Files
@@ -50,13 +50,13 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 
 ### Generated Analysis
 - **power_rankings_analysis.md** - Dynamic markdown analysis with playoffs
-- **power_rankings_analysis.html** - Styled HTML with embedded images (3.91 MB)
+- **power_rankings_analysis.html** - Styled HTML with embedded images (6.70 MB)
 
 ### Visualizations (22 total)
 **Core Charts (9)**
 1. `power_rankings.png` - Power rankings leaderboard
 2. `power_breakdown.png` - Power score components (stacked bar)
-3. `power_rankings_evolution.png` - Weekly power ranking changes (line chart)
+3. `power_rankings_evolution.png` - Weekly power ranking changes
 4. `wax_leaderboard.png` - Luck index (WAX)
 5. `wins_vs_expected.png` - Real vs expected wins scatter
 6. `total_points.png` - Total points scored
@@ -65,8 +65,8 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 9. `consistency.png` - Team consistency analysis
 
 **Monte Carlo Charts (13)**
-10. `monte_carlo_summary.png` - Combined 95% CI visualization
-11-22. `monte_carlo/*.png` - Individual team distribution plots (12 teams)
+10. `monte_carlo_summary.png` - Combined wins + PF projections
+11-22. `monte_carlo/*.png` - Individual team density plots (12 teams)
 
 ## User Workflow
 
@@ -75,23 +75,23 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 python espn_ff_scraper.py --league_id 149388 --years 2025
 ```
 
-### 2. Analyzing Data with Monte Carlo Predictions
+### 2. Analyzing Data with Hybrid Monte Carlo
 ```bash
 python team_analysis.py
 ```
-- Fetches remaining schedule from ESPN API
-- Runs 10,000 Monte Carlo simulations
-- Tracks full win distributions for each team
-- Calculates 95% confidence intervals (2.5th to 97.5th percentile)
-- Generates 22 visualization charts (including 12 individual team plots)
-- Generates power_rankings_analysis.md with snarky CI commentary
+- Fetches ESPN projections for remaining weeks
+- Fetches roster health/injury data
+- Runs 10,000 Monte Carlo simulations with blended scoring
+- Tracks win AND points distributions (for tiebreaker analysis)
+- Generates 22 visualization charts
+- Generates power_rankings_analysis.md with full methodology
 
 ### 3. Converting to HTML
 ```bash
 python md_to_html.py
 ```
 - Creates styled HTML with dark theme
-- Embeds all 22 images as base64 (3.91 MB total)
+- Embeds all 22 images as base64 (6.70 MB total)
 - Mobile responsive design
 - No external dependencies
 
@@ -112,36 +112,43 @@ python md_to_html.py
 - Positive = lucky (winning more than expected)
 - Negative = unlucky (losing despite good scoring)
 
-### 95% Confidence Interval
-- Calculated from 10,000 simulation outcomes
-- Uses 2.5th and 97.5th percentiles
-- Tight CI = consistent/predictable team
-- Wide CI = volatile/boom-bust team
+### Hybrid Monte Carlo Blending
+```
+Expected Score = (0.6 × ESPN_Projected_Points) + (0.4 × Historical_PPG)
+Simulated Score = Normal(Expected, Adjusted_Variance)
+```
+- ESPN projections weighted 60% (captures lineup decisions, matchups)
+- Historical PPG weighted 40% (captures established patterns)
+- Injured rosters increase variance by up to 50%
+
+### Tiebreaker: Points For
+- League uses Total Points For as tiebreaker
+- Simulation tracks full PF distribution for tiebreaker scenarios
+- Critical for teams battling for 4th playoff spot
 
 ## Technical Notes
 
 ### Monte Carlo Simulation
 ```python
-def monte_carlo_playoff_simulation(summary, remaining_schedule, num_simulations=10000):
-    # For each simulation:
-    # 1. Model team scoring with normal distribution (mean=PPG, std=variance)
-    # 2. Simulate each remaining game using random score draws
-    # 3. Calculate final standings with points-for tiebreaker
-    # 4. Track full win distributions for CI calculation
-    # 5. Return probabilities + distributions after all simulations
+def monte_carlo_playoff_simulation(summary, remaining_schedule, espn_projections, roster_health):
+    # For each of 10,000 simulations:
+    # 1. Blend ESPN projections with historical PPG (60/40 split)
+    # 2. Adjust variance based on roster health
+    # 3. Simulate each remaining game with random score draws
+    # 4. Track final wins AND total points for each team
+    # 5. Rank teams by wins, then Points For (tiebreaker)
+    # 6. Return win distributions, PF distributions, playoff probabilities
 ```
 
-### Snarky CI Commentary
-Generated by `generate_snarky_ci_commentary()`:
-- Comments vary based on playoff probability and CI width
-- Locked-in teams get "must be nice" treatment
-- Eliminated teams get "thoughts and prayers" treatment
-- Wide CIs trigger "inconsistent QB play" roasts
+### ESPN API Methods
+- `get_weekly_projections(weeks)` - Fetch projected points per team
+- `get_team_rosters_with_health()` - Fetch injury designations
+- Injury statuses: OUT, IR, DOUBTFUL, SUSPENSION, QUESTIONABLE
 
 ### Dynamic Commentary
-All commentary is generated fresh using `generate_dynamic_commentary()`:
-- No hardcoded templates or stale content
-- Commentary based on actual rank, WAX, PPG, playoff odds, and CIs
+All commentary generated by `generate_dynamic_commentary()`:
+- Based on current rank, projections, roster health
+- Includes snarky commentary via `generate_snarky_projection_commentary()`
 - Regenerates with new stats on every run
 
 ### Dependencies
@@ -150,5 +157,6 @@ All commentary is generated fresh using `generate_dynamic_commentary()`:
 
 ## Maintenance Notes
 - ESPN cookies (ESPN_S2, SWID) may expire periodically
+- ESPN projections update throughout the week (run close to game time for best accuracy)
 - CSV files auto-overwrite to prevent duplicates
 - All analysis regenerates on each run (no cached content)
