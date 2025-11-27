@@ -19,15 +19,53 @@ def image_to_base64(image_path):
         return f'data:{mime};base64,{data}'
     return None
 
+def preprocess_markdown_tables(content):
+    """
+    Fix table formatting issues before markdown processing.
+    The nl2br extension breaks tables by adding <br> between rows.
+    This function normalizes tables to ensure proper parsing.
+    """
+    lines = content.split('\n')
+    result = []
+    in_table = False
+    table_buffer = []
+    
+    for line in lines:
+        stripped = line.strip()
+        
+        is_table_row = stripped.startswith('|') and stripped.endswith('|')
+        is_separator = stripped.startswith('|') and set(stripped.replace('|', '').replace('-', '').replace(':', '').strip()) == set()
+        
+        if is_table_row or is_separator:
+            if not in_table:
+                in_table = True
+                if result and result[-1].strip():
+                    result.append('')
+            table_buffer.append(stripped)
+        else:
+            if in_table:
+                result.extend(table_buffer)
+                result.append('')
+                table_buffer = []
+                in_table = False
+            result.append(line)
+    
+    if table_buffer:
+        result.extend(table_buffer)
+    
+    return '\n'.join(result)
+
 def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_rankings_analysis.html'):
     """Convert markdown to HTML with embedded images."""
     
     with open(md_file, 'r') as f:
         md_content = f.read()
     
+    md_content = preprocess_markdown_tables(md_content)
+    
     html_content = markdown.markdown(
         md_content,
-        extensions=['tables', 'fenced_code', 'nl2br']
+        extensions=['tables', 'fenced_code']
     )
     
     image_files = [
