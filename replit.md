@@ -27,20 +27,21 @@ A comprehensive ESPN Fantasy Football data scraper and analysis tool that downlo
 
 ### Expected Monetary Payouts (NEW)
 - **Full Prize Structure** - $250 buy-in × 12 teams = $3,000 pool
-- **Weekly High Score** - $20 × 15 weeks = $300 total
-- **Playoff Prizes** - $2,700 split: 55% 1st ($1,485), 30% 2nd ($810), 15% 3rd ($405)
-- **Points-For Champion** - Total FAAB spent by league (estimated ~$300)
-- **Expected Value Calculation** - (Playoff % × Avg Prize) + (PF Leader % × FAAB)
+- **Weekly High Score** - $20 × 15 weeks = $300 (deducted from pool first)
+- **Playoff Pool** - $3,000 - $300 = $2,700 split: 55% 1st ($1,485), 30% 2nd ($810), 15% 3rd ($405)
+- **Points-For Champion** - 50% of Total FAAB Spent = $218 (current: $436 total FAAB)
+- **Expected Value Calculation** - E[Playoff] + E[PF Prize] + E[Weekly]
+- **FAAB Tracking** - Shows each team's FAAB spent and their contribution to PF prize pool
 - **Terminology Fix** - "#1 Seed %" = Regular season champion, NOT playoff winner
 
 ### Key Playoff Stats (Week 12)
-| Team | Record | Playoff % | Most Likely Wins | Projected PF | #1 Seed % | PF Leader % | Expected Payout |
-|------|--------|-----------|------------------|--------------|-----------|-------------|-----------------|
-| MP | 9-3 | 99.2% | 11 | 1,699 | 80.7% | 54.8% | **$1,057** |
-| ZSF | 7-5 | 76.7% | 9 | 1,726 | 7.0% | 37.9% | **$804** |
-| sgf | 8-4 | 73.9% | 10 | 1,693 | 4.3% | 5.4% | **$682** |
-| KIRK | 7-5 | 60.9% | 9 | 1,638 | 2.7% | 0.7% | **$550** |
-| POO | 7-5 | 52.4% | 9 | 1,586 | 0.4% | 0.1% | **$472** |
+| Team | Record | Playoff % | PF Leader % | FAAB Spent | E[Playoff] | E[PF Prize] | E[Weekly] | **Total Expected** |
+|------|--------|-----------|-------------|------------|------------|-------------|-----------|-------------------|
+| MP | 9-3 | 99.4% | 53.9% | $16 | $894 | $117 | $30 | **$1,042** |
+| ZSF | 7-5 | 76.1% | 38.9% | $78 | $685 | $85 | $28 | **$797** |
+| sgf | 8-4 | 73.9% | 5.5% | $16 | $665 | $12 | $25 | **$702** |
+| KIRK | 7-5 | 61.2% | 0.6% | $30 | $550 | $1 | $22 | **$574** |
+| POO | 7-5 | 51.9% | 0.1% | $40 | $467 | $0 | $18 | **$485** |
 
 ### Previous Features
 - Power Rankings system: `(Real Wins × 2) + (Top6 Wins) + (MVP-W)`

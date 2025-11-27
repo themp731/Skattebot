@@ -824,6 +824,52 @@ class ESPNFantasyAPI:
         
         return " ".join(parts) if parts else "No optimization data available."
 
+    def get_faab_spending(self) -> Dict[str, Any]:
+        """
+        Fetch FAAB (Free Agent Acquisition Budget) spending for all teams.
+        
+        Returns:
+            Dict containing:
+                - team_spending: Dict mapping team abbrev to FAAB spent
+                - total_spent: Total FAAB spent across all teams
+                - pf_prize: Points-For prize (50% of total FAAB spent)
+        """
+        try:
+            url = f"{self.base_url}/seasons/{self.season}/segments/0/leagues/{self.league_id}"
+            params = {'view': 'mTeam'}
+            
+            response = requests.get(
+                url,
+                cookies=self._get_cookies(),
+                headers=self._get_headers(),
+                params=params
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            team_spending = {}
+            total_spent = 0
+            
+            for team in data.get('teams', []):
+                abbrev = team.get('abbrev', f"Team{team.get('id')}")
+                spent = team.get('transactionCounter', {}).get('acquisitionBudgetSpent', 0)
+                team_spending[abbrev] = spent
+                total_spent += spent
+            
+            return {
+                'team_spending': team_spending,
+                'total_spent': total_spent,
+                'pf_prize': total_spent / 2
+            }
+            
+        except Exception as e:
+            logging.error(f"Error fetching FAAB data: {e}")
+            return {
+                'team_spending': {},
+                'total_spent': 0,
+                'pf_prize': 0
+            }
+
     def validate_league(self) -> bool:
         """Validate if the league ID exists and is accessible."""
         try:

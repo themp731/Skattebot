@@ -1223,7 +1223,7 @@ def generate_matchup_breakdown(team, remaining_schedule, espn_projections, optim
 
 def generate_markdown_analysis(summary, remaining_schedule, game_predictions, playoff_preds, 
                                espn_projections, roster_health, reg_season_weeks, 
-                               optimized_lineups=None, filename='power_rankings_analysis.md'):
+                               optimized_lineups=None, faab_data=None, filename='power_rankings_analysis.md'):
     """Generate dynamic markdown analysis with Monte Carlo methodology."""
     if optimized_lineups is None:
         optimized_lineups = {}
@@ -1361,12 +1361,13 @@ This league means business. Here's how the $250 buy-in breaks down:
 | Prize | Amount | Criteria |
 |-------|--------|----------|
 | **Weekly High Score** | $20 × 15 weeks = **$300** | Top scorer each week through Week 15 |
-| **Playoff 1st Place** | **$1,485** (55% of $2,700) | Win the championship tournament |
-| **Playoff 2nd Place** | **$810** (30% of $2,700) | Lose in the finals |
-| **Playoff 3rd Place** | **$405** (15% of $2,700) | Win the consolation bracket |
-| **Points-For Champion** | **Total FAAB Spent** | Highest regular season Points For |
+| **Playoff Pool** | $3,000 - $300 = **$2,700** | Split among top 3 playoff finishers |
+| **Playoff 1st Place** | 55% of $2,700 = **$1,485** | Win the championship tournament |
+| **Playoff 2nd Place** | 30% of $2,700 = **$810** | Lose in the finals |
+| **Playoff 3rd Place** | 15% of $2,700 = **$405** | Win the consolation bracket |
+| **Points-For Champion** | **50% of Total FAAB Spent** | Highest regular season Points For |
 
-The Points-For prize is unique: whoever scores the most total points during the regular season wins the combined FAAB spent by all managers. Even if you miss the playoffs, outscore everyone else and you walk away with cash.
+The Points-For prize is unique: whoever scores the most total points during the regular season wins **half of all FAAB spent** by managers. Every dollar spent on waivers contributes $0.50 to this prize pool. Even if you miss the playoffs, outscore everyone else and you walk away with cash.
 
 ### Why Points For Matters
 
@@ -1443,61 +1444,108 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
         expected_add = pred['points_mean'] - pred['current_points']
         md += f"| {i} | {team} | {pred['current_points']:.0f} | {pred['points_mean']:.0f} | +{expected_add:.0f} |\n"
 
-    md += """
+    total_faab = faab_data['total_spent'] if faab_data else 0
+    pf_prize = faab_data['pf_prize'] if faab_data else 0
+    team_faab = faab_data.get('team_spending', {}) if faab_data else {}
+    
+    WEEKLY_PRIZE = 20
+    WEEKLY_WEEKS = 15
+    WEEKLY_TOTAL = WEEKLY_PRIZE * WEEKLY_WEEKS
+    BUY_IN = 250
+    NUM_TEAMS = 12
+    TOTAL_POOL = BUY_IN * NUM_TEAMS
+    PLAYOFF_POOL = TOTAL_POOL - WEEKLY_TOTAL
+    PLAYOFF_1ST = int(PLAYOFF_POOL * 0.55)
+    PLAYOFF_2ND = int(PLAYOFF_POOL * 0.30)
+    PLAYOFF_3RD = int(PLAYOFF_POOL * 0.15)
+    AVG_PLAYOFF_PRIZE = (PLAYOFF_1ST + PLAYOFF_2ND + PLAYOFF_3RD) / 3
+
+    md += f"""
 
 ---
 
 ## Expected Monetary Payouts
 
-Based on our Monte Carlo simulations, here's what each team can expect to earn. This accounts for playoff probability, seeding, and Points-For leader chances.
+Based on our Monte Carlo simulations, here's what each team can expect to earn. This factors in playoff probability, Points-For leader chances, and weekly high-score potential.
 
-**Prize Pool Breakdown:**
-- Weekly High Score: $20 × 15 weeks = $300 (not simulated - depends on weekly performance)
-- Playoff Pool: $2,700 (55% 1st / 30% 2nd / 15% 3rd)
-- Points-For Champion: FAAB Pool (estimated ~$200-400 based on typical spending)
+### Prize Pool Breakdown ($3,000 Total)
 
-*Note: Expected Playoff Payout assumes equal probability of finishing 1st/2nd/3rd once in playoffs. This is a simplification - actual playoff tournament outcomes depend on seeding and matchups.*
+| Source | Amount | Details |
+|--------|--------|---------|
+| **Buy-In** | ${BUY_IN} × {NUM_TEAMS} teams | = **${TOTAL_POOL:,}** total pool |
+| **Weekly High Score** | ${WEEKLY_PRIZE} × {WEEKLY_WEEKS} weeks | = **${WEEKLY_TOTAL}** allocated |
+| **Playoff Pool** | ${TOTAL_POOL:,} - ${WEEKLY_TOTAL} | = **${PLAYOFF_POOL:,}** remaining |
+| **1st Place** | 55% of ${PLAYOFF_POOL:,} | = **${PLAYOFF_1ST:,}** |
+| **2nd Place** | 30% of ${PLAYOFF_POOL:,} | = **${PLAYOFF_2ND:,}** |
+| **3rd Place** | 15% of ${PLAYOFF_POOL:,} | = **${PLAYOFF_3RD:,}** |
+| **Points-For Champion** | 50% of Total FAAB | = **${pf_prize:.0f}** (current) |
 
-| Team | Playoff % | PF Leader % | Expected Playoff Payout | Expected PF Prize | Total Expected |
-|------|-----------|-------------|------------------------|-------------------|----------------|
+### FAAB Spending by Team
+
+The Points-For winner takes home **half of all FAAB spent** across the league. Here's what each manager has contributed to the pot:
+
+| Team | FAAB Spent | Contribution to PF Prize |
+|------|------------|-------------------------|
 """
+    
+    faab_sorted = sorted(team_faab.items(), key=lambda x: x[1], reverse=True)
+    for team, spent in faab_sorted:
+        contribution = spent / 2
+        md += f"| {team} | ${spent} | ${contribution:.0f} |\n"
+    
+    md += f"""
+| **TOTAL** | **${total_faab}** | **${pf_prize:.0f}** (prize pool) |
 
-    FAAB_ESTIMATE = 300
-    PLAYOFF_1ST = 1485
-    PLAYOFF_2ND = 810
-    PLAYOFF_3RD = 405
-    AVG_PLAYOFF_PRIZE = (PLAYOFF_1ST + PLAYOFF_2ND + PLAYOFF_3RD) / 3
+### Expected Payouts Summary
+
+| Team | Playoff % | PF Leader % | FAAB Spent | E[Playoff] | E[PF Prize] | E[Weekly] | **Total Expected** |
+|------|-----------|-------------|------------|------------|-------------|-----------|-------------------|
+"""
     
     expected_payouts = []
     for team, pred in playoff_preds.items():
         playoff_pct = pred['playoff_pct'] / 100
         pf_leader_pct = pred.get('points_for_leader_pct', 0) / 100
+        team_ppg = pred.get('historical_ppg', 100)
         
         expected_playoff = playoff_pct * AVG_PLAYOFF_PRIZE
-        expected_pf = pf_leader_pct * FAAB_ESTIMATE
-        total_expected = expected_playoff + expected_pf
+        expected_pf = pf_leader_pct * pf_prize
+        
+        ppg_rank = sum(1 for t, p in playoff_preds.items() if p.get('historical_ppg', 0) > team_ppg) + 1
+        weekly_probability = max(0, (NUM_TEAMS - ppg_rank + 1) / (NUM_TEAMS * 2))
+        expected_weekly = weekly_probability * WEEKLY_PRIZE * 3
+        
+        total_expected = expected_playoff + expected_pf + expected_weekly
         
         expected_payouts.append({
             'team': team,
             'playoff_pct': pred['playoff_pct'],
             'pf_leader_pct': pred.get('points_for_leader_pct', 0),
+            'faab_spent': team_faab.get(team, 0),
             'expected_playoff': expected_playoff,
             'expected_pf': expected_pf,
+            'expected_weekly': expected_weekly,
             'total_expected': total_expected
         })
     
     expected_payouts.sort(key=lambda x: x['total_expected'], reverse=True)
     for ep in expected_payouts:
-        md += f"| {ep['team']} | {ep['playoff_pct']:.1f}% | {ep['pf_leader_pct']:.1f}% | ${ep['expected_playoff']:.0f} | ${ep['expected_pf']:.0f} | **${ep['total_expected']:.0f}** |\n"
+        md += f"| {ep['team']} | {ep['playoff_pct']:.1f}% | {ep['pf_leader_pct']:.1f}% | ${ep['faab_spent']} | ${ep['expected_playoff']:.0f} | ${ep['expected_pf']:.0f} | ${ep['expected_weekly']:.0f} | **${ep['total_expected']:.0f}** |\n"
 
     md += f"""
 
-**How to Read This:**
-- **Expected Playoff Payout**: (Playoff % × Average Playoff Prize $900). If you make playoffs, average payout is $900 (weighted avg of 1st/2nd/3rd).
-- **Expected PF Prize**: (PF Leader % × ~${FAAB_ESTIMATE} FAAB pool). Your probability of leading Points For × estimated FAAB pot.
-- **Total Expected**: Combined expected value from both prizes.
+### How Expected Payouts Are Calculated
 
-*This doesn't include weekly $20 high score prizes - those depend on individual weekly matchups.*
+1. **E[Playoff]** = Playoff % × Average Playoff Prize (${AVG_PLAYOFF_PRIZE:.0f})
+   - Average of 1st/2nd/3rd prizes assuming equal odds once in playoffs (simplification)
+   
+2. **E[PF Prize]** = PF Leader % × ${pf_prize:.0f} (current FAAB pool ÷ 2)
+   - Your probability of finishing with the most Points For × the prize
+   
+3. **E[Weekly]** = Estimated weekly high-score wins based on PPG ranking
+   - Top scorers have better odds at the $20/week prize (3 remaining weeks estimated)
+
+*Note: Weekly estimates are rough approximations based on current PPG. Actual weekly winners depend on head-to-head variance.*
 
 ---
 
@@ -1657,8 +1705,14 @@ def main():
     remaining_schedule, reg_season_weeks, playoff_teams = get_remaining_schedule()
     print(f"  Found {len(remaining_schedule)} remaining games through week {reg_season_weeks}")
     
-    print("[4/8] Fetching ESPN projections, roster health, and lineup optimization...")
+    print("[4/8] Fetching ESPN projections, roster health, lineup optimization, and FAAB...")
     espn_projections, roster_health, optimized_lineups = fetch_espn_projections(remaining_schedule)
+    
+    from espn_api import ESPNFantasyAPI
+    import os
+    api = ESPNFantasyAPI(149388, 2025, os.environ.get('ESPN_S2'), os.environ.get('SWID'))
+    faab_data = api.get_faab_spending()
+    print(f"  FAAB spent: ${faab_data['total_spent']} total | Points-For prize: ${faab_data['pf_prize']:.0f}")
     
     print(f"[5/8] Running Monte Carlo simulations ({NUM_SIMULATIONS:,} iterations)...")
     print(f"  Blending: Optimized Projections ({ESPN_PROJECTION_WEIGHT*100:.0f}%) + Historical ({HISTORICAL_WEIGHT*100:.0f}%)")
@@ -1681,7 +1735,7 @@ def main():
     print("\nGenerating markdown analysis...")
     generate_markdown_analysis(summary, remaining_schedule, game_predictions, 
                               playoff_preds, espn_projections, roster_health, reg_season_weeks,
-                              optimized_lineups)
+                              optimized_lineups, faab_data)
     
     print("\n" + "="*80)
     print("ANALYSIS COMPLETE!")
