@@ -1,0 +1,1 @@
+"""Automation orchestration for Skattebot."""

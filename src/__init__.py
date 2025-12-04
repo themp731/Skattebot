@@ -1,0 +1,1 @@
+"""Skattebot source package."""

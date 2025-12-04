@@ -1,16 +1,20 @@
 """ESPN Fantasy Football API interaction module."""
-import requests
-from typing import Dict, Any, Optional
 import logging
+from typing import Any, Dict, Optional
+
+import requests
+
+from src.common.config import ESPN_FF_BASE_URL
+
 
 class ESPNFantasyAPI:
     def __init__(self, league_id: int, season: int, espn_s2: Optional[str] = None, swid: Optional[str] = None):
         self.league_id = league_id
         self.season = season
-        self.base_url = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl"
+        self.base_url = ESPN_FF_BASE_URL
         self.espn_s2 = espn_s2
         self.swid = swid
-        
+
     def _get_cookies(self) -> Optional[Dict[str, str]]:
         """Build cookies dict for private league authentication."""
         if self.espn_s2 and self.swid:
@@ -19,7 +23,7 @@ class ESPNFantasyAPI:
                 'SWID': self.swid
             }
         return None
-        
+
     def get_league_data(self) -> Optional[Dict[str, Any]]:
         """Fetch league data from ESPN API."""
         response = None
@@ -30,7 +34,7 @@ class ESPNFantasyAPI:
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
                 'Accept': 'application/json'
             }
-            response = requests.get(url, cookies=cookies, headers=headers)
+            response = requests.get(url, cookies=cookies, headers=headers, timeout=30)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
@@ -52,7 +56,7 @@ class ESPNFantasyAPI:
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
                 'Accept': 'application/json'
             }
-            response = requests.get(url, params=params, cookies=cookies, headers=headers)
+            response = requests.get(url, params=params, cookies=cookies, headers=headers, timeout=30)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:

@@ -1,217 +1,145 @@
-# ESPN Fantasy Football Data Scraper
+# ESPN Fantasy Football Scraper & Newsletter
 
-A Python-based tool to scrape historical data from ESPN Fantasy Football leagues and export to CSV files.
+An end-to-end toolkit that scrapes ESPN Fantasy Football data, builds power-ranking visualizations, archives weekly artifacts, and emails a Tuesday-morning recap. The core logic now lives inside the `src/` package so it can be reused locally, on Replit, or in any scheduled worker.
 
-## Features
+## Feature Highlights
+- Multi-season scraping with automatic filtering of unplayed weeks.
+- Analysis pipeline that creates `team_summary.csv`, a snarky markdown newsletter, and nine Matplotlib/Seaborn visuals.
+- Automation runner (`src/automation/runner.py`) that orchestrates scrape → analysis → archiving → email.
+- Directory hygiene: latest outputs live in `data/latest/` and `reports/latest/`; immutable snapshots are stored under `archive/<timestamp>/`.
+- SMTP notifications with attachments so the recap lands in your inbox without pulling files manually.
 
-- Scrape data from **multiple seasons** in one run
-- Supports both **public** and **private** ESPN leagues
-- Exports data to CSV files:
-  - `matchups.csv` - Weekly matchup results
-  - `player_stats.csv` - Individual player performance
-  - `team_stats.csv` - Team-level statistics
+## Quick Start
 
-## Setup Instructions
-
-### 1. Required Parameters (Always Needed)
-
-You need to set these parameters before running the scraper:
-
-#### **League ID** (Required)
-Your ESPN Fantasy Football League ID - found in your league URL:
-```
-https://fantasy.espn.com/football/league?leagueId=YOUR_LEAGUE_ID
-```
-
-#### **Years** (Required)
-The season years you want to scrape historical data for.
-
-### 2. ESPN Authentication (For Private Leagues Only)
-
-**Public leagues**: No authentication needed - skip to step 3!
-
-**Private leagues**: You need two authentication cookies from ESPN.
-
-#### How to Get Your ESPN Cookies:
-
-1. **Login to ESPN** - Go to your fantasy league page at https://fantasy.espn.com
-2. **Open Developer Tools**:
-   - Chrome/Edge: Press `F12` or right-click → "Inspect"
-   - Firefox: Press `F12` or right-click → "Inspect Element"
-3. **Navigate to Storage**:
-   - Chrome/Edge: Click the **"Application"** tab
-   - Firefox: Click the **"Storage"** tab
-4. **Find Cookies**:
-   - Expand "Cookies" in the left sidebar
-   - Click on `https://fantasy.espn.com`
-5. **Copy Two Values**:
-   - **`espn_s2`** - A long string (250+ characters)
-   - **`SWID`** - A shorter string (~38 characters, includes curly brackets like `{1E6CC139-...}`)
-
-#### Add Cookies to Replit Secrets:
-
-1. Click the **"Secrets"** tab (lock icon) in the left sidebar
-2. Add two secrets:
-   - Key: `ESPN_S2`, Value: [paste your espn_s2 cookie]
-   - Key: `SWID`, Value: [paste your SWID cookie]
-
-**Important**: Never share these cookies or commit them to your code!
-
-### 3. Run the Scraper
-
-**In the Shell (recommended):**
-
-**Note:** 
-- Each time you run the scraper, it will **clear and overwrite** existing CSV files to ensure fresh data without duplicates.
-- The scraper automatically **filters out weeks that haven't been played yet** (where all scores are 0), so you only get actual game data.
-
+### Manual scrape + analysis
 ```bash
-# Single year
-python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2024
-
-# Multiple years
-python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2020 2021 2022 2023 2024
-
-# Specific week across years
-python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --week 10
-
-# Custom output directory
-python espn_ff_scraper.py --league_id YOUR_LEAGUE_ID --years 2023 2024 --output ./data
+python -m src.scraper.espn_ff_scraper --league_id YOUR_LEAGUE_ID --years 2024 2025 --output ./data/latest
+python -m src.analysis.team_analysis ./data/latest/team_stats.csv ./reports/latest
 ```
+- CSVs land in `data/latest/`.
+- Markdown + PNGs land in `reports/latest/`.
+- Copy both folders somewhere safe if you want historical snapshots.
 
-### 4. Analyze Your Data (Optional)
-
-After scraping, run the analysis script to generate comprehensive statistics and visualizations:
-
+### One-shot automation + email
 ```bash
-python team_analysis.py
+python -m src.automation.runner --league-id YOUR_LEAGUE_ID --years 2024 2025 --verbose
 ```
+The runner wipes yesterday's artifacts, runs the scraper + analysis, archives the results, and emails the summary CSV + markdown newsletter whenever SMTP secrets are set.
 
-**This creates:**
-- **team_summary.csv** - Season summary with Power Rankings and WAX (Wins Above Expectation) metric
-- **power_rankings_analysis.md** - Snarky written analysis of each team's performance with embedded images
-- **visualizations/** folder containing:
-  - `power_rankings.png` - Overall power rankings (#1-#12)
-  - `power_breakdown.png` - Stacked bar chart showing power score components
-  - `power_rankings_evolution.png` - Line chart showing weekly power ranking changes
-  - `wax_leaderboard.png` - Luck index showing who's running hot/cold
-  - `wins_vs_expected.png` - Real wins vs expected wins scatter plot
-  - `total_points.png` - Total points scored by each team
-  - `weekly_performance.png` - Weekly scoring trends over time
-  - `weekly_rank_heatmap.png` - Visual grid of weekly rankings
-  - `consistency.png` - Team consistency analysis
+### Artifact directories
+- `data/latest/`: fresh CSV exports (`matchups.csv`, `player_stats.csv`, `team_stats.csv`).
+- `reports/latest/`: `team_summary.csv`, `power_rankings_analysis.md`, and charts.
+- `archive/<timestamp>/`: timestamped copy of both folders for future reference.
 
-**About Power Rankings:**
+## Secrets & Environment
+
+| Key | Required | Purpose |
+| --- | --- | --- |
+| `ESPN_S2` | Private leagues | ESPN auth cookie (long string) |
+| `SWID` | Private leagues | ESPN auth cookie with braces |
+| `EMAIL_FROM` | Optional | Sender address for recap email |
+| `EMAIL_TO` | Optional | Comma-separated recipients |
+| `SMTP_HOST` / `SMTP_PORT` | Optional | Mail server + port (default 587) |
+| `SMTP_USERNAME` / `SMTP_PASSWORD` | Optional | SMTP credentials |
+| `LEAGUE_ID`, `YEARS` | Optional | Helpful for scheduled deployments (see `.replit`) |
+
+**How to capture ESPN cookies**
+1. Log in to https://fantasy.espn.com and load your league page.
+2. Open browser dev tools (`F12`) → Application/Storage tab.
+3. Expand **Cookies → https://fantasy.espn.com**.
+4. Copy the values for `espn_s2` and `SWID` (keep the braces).
+5. Store them as `ESPN_S2` and `SWID` secrets (never commit these values).
+
+## Project Architecture
 ```
-[Power Score] = (Real Wins × 2) + (Top6 Wins) + (MVP-W)
+src/
+├─ common/
+│  ├─ config.py              # shared constants, defaults, CSV names
+│  └─ position_mapping.py    # slot/position maps for ESPN IDs
+├─ scraper/
+│  ├─ espn_ff_scraper.py     # CLI + scrape_league helper
+│  ├─ espn_api.py            # ESPN HTTP client
+│  ├─ data_processor.py      # dataframe builders
+│  └─ csv_generator.py       # type-safe CSV writer
+├─ analysis/
+│  └─ team_analysis.py       # power rankings, charts, markdown
+└─ automation/
+   └─ runner.py              # scrape → analyze → archive → email
 ```
-This formula heavily weights actual matchup wins while also rewarding teams that consistently score in the top half and beat multiple opponents each week.
+Supporting folders:
+- `data/`, `reports/`, `archive/`: contain generated artifacts (git-ignored except for `.gitkeep`).
+- `visualizations/`: checked-in gallery for reference.
 
-**About WAX (Wins Above Expectation):**
-```
-[WAX] = [Real Wins] - [MVP-W]
-```
-Where MVP-W (Minimized Variance Potential Wins) represents your theoretical win rate if you played all teams every week. A positive WAX means you're lucky (winning more than expected), negative means unlucky.
+## Workflow Details
+1. **Scrape data** (manual): `python -m src.scraper.espn_ff_scraper --league_id ... --years ...`.
+2. **Analyze data**: `python -m src.analysis.team_analysis ./data/latest/team_stats.csv ./reports/latest`.
+3. **Automate everything**: `python -m src.automation.runner --league-id ... --years ...`.
+4. **Email recap**: provide SMTP + email env vars so the runner can send attachments (`team_summary.csv` + `power_rankings_analysis.md`).
+5. **Archive**: every automation run copies `data/latest/` and `reports/latest/` into `archive/<UTC timestamp>/` for long-term storage.
 
-## Command Line Options
+## Power Rankings & Visualizations
+`team_analysis.py` produces the following assets on each run:
+1. `power_rankings.png` — leaderboard sorted by power score.
+2. `power_breakdown.png` — stacked bars of Real Wins, Top6 Wins, MVP-W.
+3. `power_rankings_evolution.png` — line chart for weekly ranking shifts.
+4. `wax_leaderboard.png` — Wins Above Expectation comparison.
+5. `wins_vs_expected.png` — scatter of real vs expected wins.
+6. `total_points.png` — season-long points for each team.
+7. `weekly_performance.png` — trends of weekly scoring.
+8. `weekly_rank_heatmap.png` — heatmap of weekly ranks.
+9. `consistency.png` — variation in scoring week over week.
+10. `power_rankings_analysis.md` — narrative report with snark + embedded charts.
 
+## Command Reference
+
+### Scraper (`src.scraper.espn_ff_scraper`)
 | Option | Description | Required | Default |
-|--------|-------------|----------|---------|
-| `--league_id` | ESPN Fantasy Football League ID | Yes | - |
-| `--years` | Season year(s) to scrape (can specify multiple) | No | 2023 |
-| `--week` | Specific week to scrape (default: all weeks) | No | All weeks |
-| `--output` | Output directory for CSV files | No | Current directory |
+| --- | --- | --- | --- |
+| `--league_id` | ESPN Fantasy Football League ID | Yes | — |
+| `--years` | One or more seasons to fetch | No | current season |
+| `--week` | Specific week (otherwise all played weeks) | No | All |
+| `--output` | Output directory for CSVs | No | `.` |
+
+### Automation runner (`src.automation.runner`)
+| Option | Description | Required | Default |
+| --- | --- | --- | --- |
+| `--league-id` | ESPN league ID | Yes | — |
+| `--years` | Season list | No | current season |
+| `--week` | Limit to a single week | No | all played weeks |
+| `--email-to` / `--email-from` | Override email env vars | No | env |
+| `--smtp-host` / `--smtp-port` | Override SMTP env vars | No | env/587 |
+| `--smtp-username` / `--smtp-password` | SMTP credentials | No | env |
+| `--smtp-disable-tls` | Use SSL instead of STARTTLS | No | STARTTLS |
+| `--verbose` | Debug logging | No | info |
 
 ## Output Files
+All CSVs include a `season` column so you can combine multiple years safely.
+- `matchups.csv`: week-by-week matchups including opponent, score, and result.
+- `player_stats.csv`: per-player scoring with slot/position labels.
+- `team_stats.csv`: team totals plus advanced metrics (weekly rank, Top6 wins, MVP-W, WAX inputs).
+- `team_summary.csv`: rollup used for power rankings and newsletter narrative.
 
-All CSV files include a `season` column to track which year the data is from:
-
-### matchups.csv
-Weekly head-to-head matchup results with team names
-- `week` - Week number (1-17)
-- `matchup_id` - Unique matchup identifier
-- `team_id` - Team ID number
-- `team_name` - Team name/abbreviation (e.g., "PATS", "ZSF")
-- `opponent_id` - Opponent team ID
-- `opponent_name` - Opponent team name/abbreviation
-- `team_score` - Points scored by team
-- `opponent_score` - Points scored by opponent
-- `winner` - True if team won, False if lost
-- `season` - Year (e.g., 2024)
-
-### player_stats.csv
-Individual player performance by week with position names
-- `week` - Week number (1-17)
-- `team_id` - Team ID number
-- `team_name` - Team name/abbreviation
-- `player_id` - ESPN player ID
-- `player_name` - Player full name
-- `position` - Player position (QB, RB, WR, TE, K, D/ST, etc.)
-- `slot_position` - Lineup slot (QB, RB, WR, FLEX, BENCH, IR, etc.)
-- `points` - Actual fantasy points scored
-- `projected_points` - Projected fantasy points
-- `season` - Year (e.g., 2024)
-
-### team_stats.csv
-Team-level statistics by week with advanced metrics
-- `week` - Week number (1-17)
-- `team_id` - Team ID number
-- `team_name` - Team name/abbreviation
-- `points_for` - Points scored this week
-- `points_against` - Points allowed this week
-- `weekly_rank` - Ranking for this week (1 = highest scoring)
-- `wins` - Matchup result (1 = won, 0 = lost)
-- `top6_wins` - Top-half scoring (1 = top 6, 0 = bottom 6)
-- `mvp_w` - All-play win percentage (0-1 scale, represents wins if playing all 11 opponents)
-- `season` - Year (e.g., 2024)
+## Automation & Hosting
+- `.replit` runs `python -m src.automation.runner` by default so the Run button performs the full pipeline.
+- `replit.md` details how to add secrets, override args, and schedule weekly runs with Replit Deployments.
 
 ## Troubleshooting
-
-### "403 Forbidden" Error
-- **For private leagues**: Make sure you've added `ESPN_S2` and `SWID` secrets correctly
-- **Check league ID**: Verify the league ID is correct
-- **Verify access**: Make sure you're a member of the league
-
-### "Invalid league ID" Error
-- Double-check your league ID from the ESPN URL
-- Verify the league exists for the years you're requesting
-
-### No Data for Certain Weeks
-- Early season weeks may not have data yet
-- Playoff weeks (15-17) may not exist for all league formats
+- **403 Forbidden**: ESPN cookies missing or expired. Refresh `ESPN_S2` and `SWID`.
+- **Invalid league ID**: double-check the numeric ID in the league URL and ensure you have access for each requested season.
+- **No email**: confirm SMTP host/credentials plus `EMAIL_FROM`/`EMAIL_TO`. Run with `--verbose` for SMTP logs.
+- **No charts**: verify `team_stats.csv` exists in `data/latest/` before running the analysis step.
 
 ## Privacy & Security
+- Never commit secrets; store them in Replit/Vercel/your host's secret manager.
+- ESPN cookies expire periodically—treat them like passwords and rotate when scraping fails.
+- Archives may contain sensitive matchup data; share them carefully.
 
-- **Never commit secrets** to your code or share them publicly
-- Store `ESPN_S2` and `SWID` in Replit Secrets only
-- These cookies give access to your ESPN account - treat them like passwords
-- Cookies may expire periodically - you'll need to retrieve fresh ones if scraping stops working
-
-## Technical Notes
-
-- Uses ESPN's unofficial Fantasy Football API (v3)
-- Supports seasons from 2010 onwards
-- Maximum 17 weeks per season (regular season + playoffs)
-- Data is appended to CSV files - delete existing files to start fresh
-
-## Project Summary
-- Scraper (`espn_ff_scraper.py`) pulls league + weekly box scores through `espn_api.py`.
-- `data_processor.py` normalizes matchups, player stats, and team stats before CSV export.
-- `csv_generator.py` writes/append CSVs (`matchups.csv`, `player_stats.csv`, `team_stats.csv`) for downstream analysis.
-- Support modules (see `replit.md`) cover visualization, power rankings, and Replit automation.
-
-## Git + GitHub Setup
-1. `git init` and add everything: `git add . && git commit -m "Initial import"`.
-2. Create a matching GitHub repo, then:
+## Git + GitHub Workflow
+1. `git init && git add . && git commit -m "Initial import"`.
+2. Create a GitHub repo, then:
    ```bash
    git branch -M main
    git remote add origin https://github.com/<user>/<repo>.git
    git push -u origin main
    ```
-3. Use feature branches for changes, open PRs, and tag releases as needed.
-
-## Replit Hosting Workflow
-1. On Replit, “Create Repl” → “Import from GitHub” and select this repo.
-2. Replit auto-installs packages from `pyproject.toml`/`replit.nix`; secrets (ESPN_S2, SWID) go into Replit Secrets.
-3. The existing `.replit` workflow exposes a “Project” run button that triggers the `ESPN FF Scraper` workflow (`python espn_ff_scraper.py --league_id 149388 --years 2024` by default). Adjust args as needed.
-4. For scheduled/data refreshes, update `[deployment]` or add Replit Deployments to run headless.
+3. Use feature branches for enhancements and keep generated artifacts out of version control (already handled via `.gitignore`).

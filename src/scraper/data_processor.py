@@ -1,8 +1,11 @@
 """Process and transform ESPN Fantasy Football data."""
-import pandas as pd
-from typing import Dict, List, Any
 import logging
-from position_mapping import POSITION_MAP, LINEUP_SLOT_MAP
+from typing import Any, Dict
+
+import pandas as pd
+
+from src.common.position_mapping import LINEUP_SLOT_MAP, POSITION_MAP
+
 
 class DataProcessor:
     def __init__(self, league_data: Dict[str, Any]):
@@ -17,7 +20,7 @@ class DataProcessor:
                 # ESPN may have different name fields - try multiple options
                 team_id = team['id']
                 team_name = (
-                    team.get('name') or 
+                    team.get('name') or
                     f"{team.get('location', '')} {team.get('nickname', '')}".strip() or
                     team.get('abbrev', f'Team {team_id}')
                 )
@@ -29,14 +32,14 @@ class DataProcessor:
     def process_matchups(self, boxscore_data: Dict[str, Any], week: int) -> pd.DataFrame:
         """Process matchup data into a DataFrame."""
         matchups = []
-        
+
         try:
             for matchup in boxscore_data.get('schedule', []):
                 home_team_id = matchup['home']['teamId']
                 away_team_id = matchup['away']['teamId']
                 home_score = matchup['home']['totalPoints']
                 away_score = matchup['away']['totalPoints']
-                
+
                 matchups.extend([
                     {
                         'week': week,
@@ -63,22 +66,22 @@ class DataProcessor:
                 ])
         except KeyError as e:
             logging.error(f"Error processing matchups: {e}")
-            
+
         return pd.DataFrame(matchups)
 
     def process_player_stats(self, boxscore_data: Dict[str, Any], week: int) -> pd.DataFrame:
         """Process player statistics into a DataFrame."""
         player_stats = []
-        
+
         try:
             for team in boxscore_data.get('teams', []):
                 team_id = team['id']
                 team_name = self.teams_map.get(team_id, f'Team {team_id}')
-                
+
                 for player in team.get('roster', {}).get('entries', []):
                     position_id = player['playerPoolEntry']['player']['defaultPositionId']
                     slot_id = player['lineupSlotId']
-                    
+
                     player_stats.append({
                         'week': week,
                         'team_id': team_id,
@@ -92,52 +95,52 @@ class DataProcessor:
                     })
         except KeyError as e:
             logging.error(f"Error processing player stats: {e}")
-            
+
         return pd.DataFrame(player_stats)
 
     def process_team_stats(self, boxscore_data: Dict[str, Any], week: int) -> pd.DataFrame:
         """Process team statistics into a DataFrame."""
         team_stats = []
-        
+
         try:
             # Build team stats from matchup schedule data
             team_points = {}
             team_points_against = {}
-            
+
             for matchup in boxscore_data.get('schedule', []):
                 if matchup.get('matchupPeriodId') == week:
                     home_id = matchup.get('home', {}).get('teamId')
                     away_id = matchup.get('away', {}).get('teamId')
                     home_points = matchup.get('home', {}).get('totalPoints', 0)
                     away_points = matchup.get('away', {}).get('totalPoints', 0)
-                    
+
                     if home_id and away_id:
                         team_points[home_id] = home_points
                         team_points[away_id] = away_points
                         team_points_against[home_id] = away_points
                         team_points_against[away_id] = home_points
-            
+
             # Sort teams by points
             sorted_teams = sorted(team_points.items(), key=lambda x: x[1], reverse=True)
-            
+
             # Calculate stats for each team
             total_teams = len(team_points)
-            
+
             for rank, (team_id, points) in enumerate(sorted_teams, 1):
                 points_against = team_points_against.get(team_id, 0)
-                
+
                 # Wins: 1 if won matchup, 0 if lost
                 wins = 1 if points > points_against else 0
-                
+
                 # Top6Wins: 1 if in top 6 scorers, 0 otherwise
                 top6_wins = 1 if rank <= 6 else 0
-                
+
                 # mvp_w: all-play winning percentage
                 # Count how many teams this team would have beaten
                 teams_beaten = sum(1 for other_points in team_points.values() if points > other_points)
                 # Divide by number of other teams (total - 1)
                 mvp_w = teams_beaten / (total_teams - 1) if total_teams > 1 else 0
-                
+
                 team_stats.append({
                     'week': week,
                     'team_id': team_id,
@@ -151,5 +154,5 @@ class DataProcessor:
                 })
         except (KeyError, TypeError) as e:
             logging.error(f"Error processing team stats: {e}")
-            
+
         return pd.DataFrame(team_stats)
