@@ -193,3 +193,25 @@ Team-level statistics by week with advanced metrics
 - Supports seasons from 2010 onwards
 - Maximum 17 weeks per season (regular season + playoffs)
 - Data is appended to CSV files - delete existing files to start fresh
+
+## Project Summary
+- Scraper (`espn_ff_scraper.py`) pulls league + weekly box scores through `espn_api.py`.
+- `data_processor.py` normalizes matchups, player stats, and team stats before CSV export.
+- `csv_generator.py` writes/append CSVs (`matchups.csv`, `player_stats.csv`, `team_stats.csv`) for downstream analysis.
+- Support modules (see `replit.md`) cover visualization, power rankings, and Replit automation.
+
+## Git + GitHub Setup
+1. `git init` and add everything: `git add . && git commit -m "Initial import"`.
+2. Create a matching GitHub repo, then:
+   ```bash
+   git branch -M main
+   git remote add origin https://github.com/<user>/<repo>.git
+   git push -u origin main
+   ```
+3. Use feature branches for changes, open PRs, and tag releases as needed.
+
+## Replit Hosting Workflow
+1. On Replit, “Create Repl” → “Import from GitHub” and select this repo.
+2. Replit auto-installs packages from `pyproject.toml`/`replit.nix`; secrets (ESPN_S2, SWID) go into Replit Secrets.
+3. The existing `.replit` workflow exposes a “Project” run button that triggers the `ESPN FF Scraper` workflow (`python espn_ff_scraper.py --league_id 149388 --years 2024` by default). Adjust args as needed.
+4. For scheduled/data refreshes, update `[deployment]` or add Replit Deployments to run headless.
