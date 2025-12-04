@@ -143,3 +143,48 @@ All CSVs include a `season` column so you can combine multiple years safely.
    git push -u origin main
    ```
 3. Use feature branches for enhancements and keep generated artifacts out of version control (already handled via `.gitignore`).
+## Replit Setup
+1. Import this repo into a Python Replit and open the Shell.
+2. Run `pip install -r requirements.txt` once (or let the `.replit` hook do it automatically on first run).
+3. Add the required secrets under **Tools → Secrets** (`ESPN_S2`, `SWID`, optional SMTP keys).
+4. Hit **Run**—Replit executes `python -m src.automation.runner` per `.replit`, generating fresh data, reports, and archive snapshots.
+5. For custom flags, stop the default run and execute the desired CLI command in the Shell.
+
+## src Modules at a Glance
+| Folder | Responsibility | Typical Consumers |
+| --- | --- | --- |
+| `common/` | Shared config values, ID/position maps | All downstream code |
+| `scraper/` | HTTP calls, parsing, CSV emission | Automation runner, manual scrape |
+| `analysis/` | Power-ranking math, charts, newsletter | Automation runner, manual analysis |
+| `automation/` | Orchestrates scrape → analyze → archive → email | Replit/cron jobs |
+
+```mermaid
+flowchart TD
+   subgraph Common
+      C1[common/config.py]
+      C2[common/position_mapping.py]
+   end
+   subgraph Scraper
+      S1[espn_ff_scraper.py\nCLI + orchestration]
+      S2[espn_api.py\nESPN HTTP client]
+      S3[data_processor.py\nBuild DataFrames]
+      S4[csv_generator.py\nPersist typed CSVs]
+   end
+   subgraph Analysis
+      A1[team_analysis.py\nRankings + visuals + markdown]
+   end
+   subgraph Automation
+      R1[automation/runner.py\nPipeline controller]
+   end
+   R1 --> S1
+   S1 --> S2
+   S1 --> S3
+   S3 --> S4
+   S4 -->|CSVs| A1
+   R1 --> A1
+   C1 --> S1
+   C1 --> S3
+   C1 --> A1
+   C2 --> S3
+   A1 -->|Reports & Charts| R1
+```
