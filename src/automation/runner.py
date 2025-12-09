@@ -14,6 +14,7 @@ from typing import List, Sequence
 
 import markdown
 import pandas as pd
+from openai import OpenAI
 from weasyprint import HTML, CSS
 
 from src.analysis.team_analysis import run_analysis
@@ -55,6 +56,39 @@ def parse_recipients(raw: str | None) -> List[str]:
     if not raw:
         return []
     return [item.strip() for item in raw.split(',') if item.strip()]
+
+
+def generate_skattebot_intro(week_num: int, weekly_results: str) -> str:
+    """Generate SkatteBot's frat-bro style intro for the email."""
+    try:
+        client = OpenAI(
+            api_key=os.getenv("AI_INTEGRATIONS_OPENAI_API_KEY"),
+            base_url=os.getenv("AI_INTEGRATIONS_OPENAI_BASE_URL")
+        )
+        
+        prompt = f"""You are SkatteBot, a fantasy football commentator who is a frat bro that loves beer and tacos. 
+Write a 2-3 sentence intro for this week's fantasy football recap email. 
+Introduce yourself as "SkatteBot" at the start.
+Be funny, use bro-speak, and reference beer/tacos naturally.
+Summarize the most exciting parts of this week's matchups.
+
+Week {week_num} Results:
+{weekly_results}
+
+Keep it short, fun, and hype up the action!"""
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=150,
+            temperature=0.9
+        )
+        
+        return response.choices[0].message.content.strip()
+        
+    except Exception as e:
+        logging.warning(f"Failed to generate SkatteBot intro: {e}")
+        return "Yo bros, it's SkatteBot here with your weekly fantasy recap! Let's see who crushed it and who needs more tacos."
 
 
 def format_weekly_results(matchups_path: Path) -> tuple[int, str]:
@@ -249,19 +283,16 @@ def run(args: argparse.Namespace) -> None:
         generate_pdf_from_markdown(artifacts['markdown'], pdf_path)
         
         week_num, weekly_results = format_weekly_results(matchups_path)
+        skattebot_intro = generate_skattebot_intro(week_num, weekly_results)
         
         subject = f"ESPN Fantasy Recap - Week {week_num} ({datetime.utcnow():%Y-%m-%d})"
         body = (
-            f"Fantasy Football Weekly Recap - Week {week_num}\n"
-            f"{'=' * 45}\n\n"
+            f"{skattebot_intro}\n\n"
+            f"{'=' * 45}\n"
             f"WEEK {week_num} RESULTS:\n"
             f"{'-' * 30}\n"
             f"{weekly_results}\n\n"
             f"{'=' * 45}\n"
-            f"SUMMARY:\n"
-            f"  League ID: {args.league_id}\n"
-            f"  Seasons: {', '.join(map(str, args.years))}\n"
-            f"  Teams: {artifacts['teams']}\n\n"
             f"See attached PDF for full power rankings, charts, and AI commentary."
         )
         attachments = [pdf_path, artifacts['summary_csv']]

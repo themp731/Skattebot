@@ -1,97 +1,73 @@
-# ESPN Fantasy Football Scraper & Analyzer
+# SkatteBot - ESPN Fantasy Football Analyzer
 
 ## Overview
-A comprehensive ESPN Fantasy Football data scraper and analysis tool that downloads historical league data, generates advanced statistical visualizations, and sends weekly email recaps with AI-generated commentary.
 
-**Current Status**: Fully functional with 2025 season data (weeks 1-14 processed)
+SkatteBot is a Python-based ESPN Fantasy Football data scraper and analysis tool. It pulls historical league data from ESPN's API, generates advanced statistical visualizations and power rankings, creates AI-powered snarky commentary, and delivers weekly email recaps with PDF reports.
 
-## Features
-- **Data Scraping**: Pulls matchups, player stats, and team stats from ESPN's API
-- **Power Rankings**: Custom ranking system using Real Wins, Top6 Wins, and MVP-W
-- **WAX (Wins Above Expectation)**: Luck analysis showing who's running hot/cold
-- **Visualizations**: 9 charts including power rankings, weekly trends, and heatmaps
-- **AI Commentary**: Personalized, snarky weekly recaps for each team using OpenAI
-- **PDF Reports**: Professional PDF with embedded charts
-- **Email Delivery**: Sends weekly results + PDF report to your inbox
+The system processes matchup data, calculates custom metrics (Power Score, WAX/Wins Above Expectation, MVP-W), generates 9+ visualization charts, and emails results to league members.
 
-## Required Secrets
+## User Preferences
 
-Add these under the **Secrets** tab (lock icon in the sidebar):
+Preferred communication style: Simple, everyday language.
 
-| Key | Required | Purpose |
-| --- | --- | --- |
-| `ESPN_S2` | Private leagues only | ESPN auth cookie (long string) |
-| `SWID` | Private leagues only | ESPN auth cookie with braces |
-| `LEAGUE_ID` | Yes | Your ESPN league ID number |
-| `YEARS` | Yes | Season year (e.g., `2025`) |
-| `EMAIL_FROM` | For email | Your sending email address |
-| `EMAIL_TO` | For email | Recipient email(s), comma-separated |
-| `SMTP_HOST` | For email | SMTP server (e.g., `smtp.gmail.com`) |
-| `SMTP_PORT` | For email | Usually `587` |
-| `SMTP_USERNAME` | For email | Your email login |
-| `SMTP_PASSWORD` | For email | Your email password or app password |
+## System Architecture
 
-The AI commentary uses Replit's built-in OpenAI integration - no additional API keys needed.
+### Project Structure
+The codebase follows a modular Python package structure under `src/`:
+- `src/scraper/` - ESPN API interaction and data collection
+- `src/analysis/` - Statistical analysis and visualization generation
+- `src/automation/` - Pipeline orchestration and email delivery
+- `src/common/` - Shared configuration and utilities
 
-## How to Run
+### Data Flow Pipeline
+1. **Scraping**: ESPN API → Raw JSON → Processed DataFrames → CSV files in `data/latest/`
+2. **Analysis**: CSV files → Statistical calculations → Markdown reports + PNG charts in `reports/latest/`
+3. **Delivery**: Reports → PDF generation (WeasyPrint) → Email with attachments
+4. **Archiving**: Timestamped copies stored in `archive/<timestamp>/`
 
-### Using the Run Button
-Click the **Run** button to execute the full pipeline:
-1. Scrapes ESPN data into `data/latest/`
-2. Generates reports and charts in `reports/latest/`
-3. Archives everything under `archive/<timestamp>/`
-4. Sends email with week results, PDF report, and CSV summary
+### Key Design Decisions
 
-### Using the Shell
-For manual runs or testing:
-```bash
-python -m src.automation.runner --league-id YOUR_LEAGUE_ID --years 2025 --verbose
-```
+**ESPN API Integration**: Direct HTTP requests to ESPN's fantasy API endpoints with cookie-based authentication for private leagues. No official SDK used - custom implementation in `espn_api.py`.
 
-## Setting Up Automatic Weekly Runs
+**Data Storage**: CSV files for persistence rather than a database. Simple, portable, and human-readable. Files organized into `data/` and `reports/` directories with `latest/` symlinks and timestamped archives.
 
-To have this run automatically every week (like every Tuesday morning):
+**Visualization**: Matplotlib + Seaborn for chart generation. Charts saved as PNG files and embedded in Markdown reports.
 
-1. Click **Deploy** in the top menu
-2. Choose **Scheduled** deployment type
-3. Set the command: `python -m src.automation.runner --league-id YOUR_LEAGUE_ID --years 2025`
-4. Pick your schedule (e.g., "Every Tuesday at 8:00 AM")
-5. Copy your secrets to the deployment environment
-6. Click **Deploy**
+**PDF Generation**: WeasyPrint converts Markdown → HTML → PDF for email attachments.
 
-The scheduled deployment will automatically run the pipeline at your chosen time and send the email recap.
+**AI Commentary**: Uses Replit's built-in OpenAI integration (environment variables `AI_INTEGRATIONS_OPENAI_API_KEY` and `AI_INTEGRATIONS_OPENAI_BASE_URL`) for generating personalized team commentary.
 
-## What the Email Contains
+### Custom Metrics System
+- **Power Score**: Weighted composite of Real Wins (2×), Top6 Wins, and MVP-W
+- **MVP-W**: Theoretical win rate against all teams each week
+- **WAX**: Luck index (Real Wins - MVP-W)
 
-**In the email body:**
-- Week number
-- This week's 5 matchup results (winner, loser, scores)
+## External Dependencies
 
-**Attached:**
-- PDF report with power rankings, charts, and AI commentary for each team
-- CSV summary of all team stats
+### ESPN Fantasy API
+- Base URL: `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl`
+- Authentication: `espn_s2` and `SWID` cookies for private leagues
+- Endpoints: League data, boxscores by week
 
-## Troubleshooting
+### OpenAI (via Replit Integration)
+- Used for AI-generated team commentary
+- Configured through Replit's built-in AI integration environment variables
 
-- **403 errors**: ESPN cookies (`ESPN_S2`/`SWID`) are missing or expired. Get fresh ones from your browser.
-- **No email sent**: Check that all email settings are configured in Secrets.
-- **Missing data**: The runner clears `data/latest/` each run. Historical data is in `archive/`.
+### Email (SMTP)
+- Configurable SMTP server for sending weekly reports
+- Supports Gmail and other SMTP providers
+- Requires: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`
 
-## Project Structure
-```
-src/
-├── analysis/team_analysis.py  - Power rankings, charts, AI commentary
-├── automation/runner.py       - Main pipeline (scrape → analyze → PDF → email)
-├── common/                    - Config and position mappings
-└── scraper/                   - ESPN API integration
+### Python Libraries
+- `pandas` - Data manipulation
+- `matplotlib`/`seaborn` - Visualizations
+- `requests` - HTTP client for ESPN API
+- `weasyprint` - PDF generation
+- `markdown` - Markdown to HTML conversion
+- `openai` - AI commentary generation
 
-data/latest/                   - Most recent scraped data
-reports/latest/                - Most recent generated reports
-archive/                       - Historical runs by timestamp
-```
-
-## Key Metrics
-
-- **Power Score** = (Real Wins × 2) + Top6 Wins + MVP-W
-- **MVP-W** = Theoretical wins if you played every team each week
-- **WAX** = Real Wins - MVP-W (positive = lucky, negative = unlucky)
+### Required Secrets
+- `ESPN_S2`, `SWID` - ESPN authentication (private leagues)
+- `LEAGUE_ID` - ESPN league identifier
+- `YEARS` - Season year(s) to process
+- Email configuration secrets for delivery
