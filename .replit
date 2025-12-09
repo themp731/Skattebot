@@ -26,7 +26,7 @@ outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python -m src.automation.runner --league-id 149388 --years 2024"
+args = "python -m src.automation.runner --league-id $LEAGUE_ID --years $YEARS"
 
 [deployment]
 run = ["sh", "-c", "python -m src.automation.runner --league-id ${LEAGUE_ID:-12345} --years ${YEARS:-2024}"]
