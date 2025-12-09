@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import List, Sequence
 
 import markdown
+import pandas as pd
 from weasyprint import HTML, CSS
 
 from src.analysis.team_analysis import run_analysis
@@ -54,6 +55,54 @@ def parse_recipients(raw: str | None) -> List[str]:
     if not raw:
         return []
     return [item.strip() for item in raw.split(',') if item.strip()]
+
+
+def format_weekly_results(matchups_path: Path) -> tuple[int, str]:
+    """Format the most recent week's game results for email body.
+    
+    Returns:
+        Tuple of (week_number, formatted_results_string)
+    """
+    if not matchups_path.exists():
+        return 0, "No matchup data available."
+    
+    df = pd.read_csv(matchups_path)
+    latest_week = df['week'].max()
+    week_df = df[df['week'] == latest_week].copy()
+    
+    matchups_seen = set()
+    results_lines = []
+    
+    for _, row in week_df.iterrows():
+        team1 = row['team_name']
+        team2 = row['opponent_name']
+        matchup_key = tuple(sorted([team1, team2]))
+        
+        if matchup_key in matchups_seen:
+            continue
+        matchups_seen.add(matchup_key)
+        
+        score1 = row['team_score']
+        score2 = row['opponent_score']
+        
+        if row['winner']:
+            winner = team1
+            loser = team2
+            winner_score = score1
+            loser_score = score2
+        else:
+            winner = team2
+            loser = team1
+            winner_score = score2
+            loser_score = score1
+        
+        margin = abs(score1 - score2)
+        results_lines.append(
+            f"  {winner} defeats {loser} ({winner_score:.2f} - {loser_score:.2f}) by {margin:.2f} pts"
+        )
+    
+    results_text = "\n".join(sorted(results_lines))
+    return latest_week, results_text
 
 
 def generate_pdf_from_markdown(md_path: Path, output_pdf: Path) -> Path:
@@ -197,14 +246,21 @@ def run(args: argparse.Namespace) -> None:
         pdf_path = REPORT_LATEST_DIR / 'power_rankings_report.pdf'
         generate_pdf_from_markdown(artifacts['markdown'], pdf_path)
         
-        subject = f"ESPN Fantasy Recap - {datetime.utcnow():%Y-%m-%d}"
+        week_num, weekly_results = format_weekly_results(matchups_path)
+        
+        subject = f"ESPN Fantasy Recap - Week {week_num} ({datetime.utcnow():%Y-%m-%d})"
         body = (
-            f"Weekly scrape completed for league {args.league_id}.\n"
-            f"Seasons processed: {', '.join(map(str, args.years))}\n"
-            f"Rows analyzed: {artifacts['rows']}\n"
-            f"Teams summarized: {artifacts['teams']}\n"
-            f"Archive: {archive_dir.relative_to(BASE_DIR)}\n\n"
-            "Attached: PDF report with charts and CSV summary."
+            f"Fantasy Football Weekly Recap - Week {week_num}\n"
+            f"{'=' * 45}\n\n"
+            f"WEEK {week_num} RESULTS:\n"
+            f"{'-' * 30}\n"
+            f"{weekly_results}\n\n"
+            f"{'=' * 45}\n"
+            f"SUMMARY:\n"
+            f"  League ID: {args.league_id}\n"
+            f"  Seasons: {', '.join(map(str, args.years))}\n"
+            f"  Teams: {artifacts['teams']}\n\n"
+            f"See attached PDF for full power rankings, charts, and AI commentary."
         )
         attachments = [pdf_path, artifacts['summary_csv']]
         message = build_email(subject, body, sender, recipients, attachments)
