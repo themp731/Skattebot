@@ -1,12 +1,14 @@
 """Configuration settings for the ESPN Fantasy Football scraper."""
 
+import os
+
 # ESPN API endpoints
 ESPN_FF_BASE_URL = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl"
 LEAGUE_ENDPOINT = "/seasons/{year}/segments/0/leagues/{league_id}"
 BOXSCORE_ENDPOINT = "/boxscore"
 
-# API parameters
-DEFAULT_SEASON = 2023
+# API parameters - reads from YEARS secret, defaults to 2025
+DEFAULT_SEASON = int(os.getenv('YEARS', '2025'))
 MAX_WEEK = 17
 
 # CSV output settings
