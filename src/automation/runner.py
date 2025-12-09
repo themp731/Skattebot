@@ -104,13 +104,10 @@ def format_weekly_results(matchups_path: Path) -> tuple[int, str]:
     latest_week = int(df['week'].max())
     week_df = df[df['week'] == latest_week].copy()
     
-    actual_matchup_ids = sorted(week_df['matchup_id'].unique())[-5:]
-    real_matchups = week_df[week_df['matchup_id'].isin(actual_matchup_ids)]
-    
     matchups_seen = set()
     results_lines = []
     
-    for _, row in real_matchups.iterrows():
+    for _, row in week_df.iterrows():
         matchup_id = row['matchup_id']
         if matchup_id in matchups_seen:
             continue
