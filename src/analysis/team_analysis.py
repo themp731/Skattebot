@@ -6,14 +6,16 @@ Generates summary tables, markdown reports, and visualizations including WAX (Wi
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from openai import OpenAI
 
 sns.set_style("whitegrid")
 plt.rcParams['figure.facecolor'] = 'white'
@@ -27,6 +29,75 @@ VISUALIZATIONS_SUBDIR = "visualizations"
 def _ensure_dir(path: Path) -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def generate_ai_commentary(
+    team_name: str,
+    matchup_data: pd.DataFrame,
+    player_data: pd.DataFrame,
+    summary_row: pd.Series
+) -> str:
+    """Generate AI commentary for a team based on their most recent matchup and player performance."""
+    try:
+        client = OpenAI(
+            api_key=os.getenv("AI_INTEGRATIONS_OPENAI_API_KEY"),
+            base_url=os.getenv("AI_INTEGRATIONS_OPENAI_BASE_URL")
+        )
+        
+        # Get most recent week's matchup for this team
+        team_matchups = matchup_data[matchup_data['team_name'] == team_name]
+        if team_matchups.empty:
+            return ""
+        
+        latest_week = team_matchups['week'].max()
+        latest_matchup = team_matchups[team_matchups['week'] == latest_week].iloc[0]
+        
+        # Get player stats for the most recent week
+        team_players = player_data[
+            (player_data['team_name'] == team_name) & 
+            (player_data['week'] == latest_week)
+        ].sort_values('points', ascending=False)
+        
+        # Get top 5 performers
+        top_players = team_players.head(5)
+        top_players_str = "\n".join([
+            f"  - {row['player_name']} ({row['position']}): {row['points']:.1f} pts"
+            for _, row in top_players.iterrows()
+        ])
+        
+        # Build the prompt
+        won_lost = "won" if latest_matchup['winner'] else "lost"
+        margin = abs(latest_matchup['team_score'] - latest_matchup['opponent_score'])
+        
+        prompt = f"""You are a witty fantasy football analyst writing personalized commentary for a team's weekly performance.
+
+Team: {team_name}
+Week {latest_week} Result: {won_lost} against {latest_matchup['opponent_name']}
+Score: {latest_matchup['team_score']:.2f} - {latest_matchup['opponent_score']:.2f} (margin: {margin:.2f})
+
+Season Stats:
+- Power Rank: #{int(summary_row['power_rank'])}
+- Record: {int(summary_row['real_wins'])}-{int(summary_row['games_played'] - summary_row['real_wins'])}
+- Points Per Game: {summary_row['ppg']:.2f}
+- WAX (Luck Index): {summary_row['wax']:+.2f}
+
+Top Performers This Week:
+{top_players_str}
+
+Write a brief (2-3 sentences) snarky but insightful commentary about this team's week. Be entertaining and reference specific players or matchup details. Keep it fun and engaging for a fantasy football audience."""
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=200,
+            temperature=0.8
+        )
+        
+        return response.choices[0].message.content.strip()
+        
+    except Exception as e:
+        logging.warning(f"Failed to generate AI commentary for {team_name}: {e}")
+        return ""
 
 
 def load_data(filename: str | Path = DEFAULT_TEAM_STATS) -> pd.DataFrame:
@@ -300,12 +371,16 @@ def save_summary_csv(summary: pd.DataFrame, filename: str | Path = 'team_summary
 
 def generate_markdown_analysis(summary: pd.DataFrame,
                                filename: str | Path = 'power_rankings_analysis.md',
-                               visualization_dir: str | Path = VISUALIZATIONS_SUBDIR) -> Path:
-    """Generate a snarky markdown analysis of the power rankings."""
+                               visualization_dir: str | Path = VISUALIZATIONS_SUBDIR,
+                               matchup_data: Optional[pd.DataFrame] = None,
+                               player_data: Optional[pd.DataFrame] = None) -> Path:
+    """Generate a snarky markdown analysis of the power rankings with optional AI commentary."""
     output_path = Path(filename)
     _ensure_dir(output_path.parent or Path('.'))
     visualization_dir = _ensure_dir(Path(visualization_dir))
     visual_prefix = Path(os.path.relpath(visualization_dir, output_path.parent or Path('.'))).as_posix()
+    
+    use_ai_commentary = matchup_data is not None and player_data is not None
 
     latest_season = summary['season'].max()
     current_summary = summary[summary['season'] == latest_season].sort_values('power_rank')
@@ -426,11 +501,17 @@ Positive = lucky. Negative = unlucky.
             else:
                 analysis = (f"Last place with {ppg:.2f} PPG. You're earning every painful loss.")
 
+        ai_section = ""
+        if use_ai_commentary:
+            ai_text = generate_ai_commentary(team, matchup_data, player_data, row)
+            if ai_text:
+                ai_section = f"\n\n**AI Weekly Recap:** {ai_text}"
+
         md += f"""### #{rank} {team} - Power Score: {power:.2f}
 **Record: {wins}-{losses} | PPG: {ppg:.2f} | WAX: {wax:+.2f}**  
 **Components: Real Wins: {wins} | Top6 Wins: {top6} | MVP-W: {mvp_w:.2f}**
 
-{analysis}
+{analysis}{ai_section}
 
 ---
 
@@ -452,7 +533,9 @@ This league has one elite team, a cluster of contenders, a few lucky frauds, and
     return output_path
 
 
-def run_analysis(team_stats_path: Path, report_dir: Path) -> dict:
+def run_analysis(team_stats_path: Path, report_dir: Path,
+                 matchups_path: Optional[Path] = None,
+                 player_stats_path: Optional[Path] = None) -> dict:
     """Execute the full analysis pipeline and return artifact paths."""
     report_dir = _ensure_dir(report_dir)
     visualizations_dir = report_dir / VISUALIZATIONS_SUBDIR
@@ -461,8 +544,23 @@ def run_analysis(team_stats_path: Path, report_dir: Path) -> dict:
     summary = calculate_summary_stats(df)
     print_summary_table(summary)
 
+    matchup_data = None
+    player_data = None
+    if matchups_path and matchups_path.exists():
+        matchup_data = pd.read_csv(matchups_path)
+        logging.info("Loaded matchup data for AI commentary: %d rows", len(matchup_data))
+    if player_stats_path and player_stats_path.exists():
+        player_data = pd.read_csv(player_stats_path)
+        logging.info("Loaded player stats for AI commentary: %d rows", len(player_data))
+
     summary_csv = save_summary_csv(summary, report_dir / 'team_summary.csv')
-    markdown_path = generate_markdown_analysis(summary, report_dir / 'power_rankings_analysis.md', visualizations_dir)
+    markdown_path = generate_markdown_analysis(
+        summary,
+        report_dir / 'power_rankings_analysis.md',
+        visualizations_dir,
+        matchup_data=matchup_data,
+        player_data=player_data
+    )
     create_visualizations(df, summary, visualizations_dir)
 
     return {

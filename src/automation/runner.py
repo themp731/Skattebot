@@ -168,11 +168,19 @@ def run(args: argparse.Namespace) -> None:
     )
 
     team_stats_path = DATA_LATEST_DIR / 'team_stats.csv'
+    matchups_path = DATA_LATEST_DIR / 'matchups.csv'
+    player_stats_path = DATA_LATEST_DIR / 'player_stats.csv'
+    
     if not team_stats_path.exists():
         raise FileNotFoundError(f"Expected {team_stats_path} to exist after scraping")
 
-    logging.info("Running analysis step")
-    artifacts = run_analysis(team_stats_path, REPORT_LATEST_DIR)
+    logging.info("Running analysis step with AI commentary")
+    artifacts = run_analysis(
+        team_stats_path,
+        REPORT_LATEST_DIR,
+        matchups_path=matchups_path,
+        player_stats_path=player_stats_path
+    )
 
     archive_dir = archive_run(DATA_LATEST_DIR, REPORT_LATEST_DIR)
 
