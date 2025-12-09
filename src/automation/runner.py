@@ -12,6 +12,9 @@ from email.message import EmailMessage
 from pathlib import Path
 from typing import List, Sequence
 
+import markdown
+from weasyprint import HTML, CSS
+
 from src.analysis.team_analysis import run_analysis
 from src.common.config import DEFAULT_SEASON
 from src.scraper.espn_ff_scraper import scrape_league
@@ -51,6 +54,58 @@ def parse_recipients(raw: str | None) -> List[str]:
     if not raw:
         return []
     return [item.strip() for item in raw.split(',') if item.strip()]
+
+
+def generate_pdf_from_markdown(md_path: Path, output_pdf: Path) -> Path:
+    """Convert markdown file to PDF with embedded images."""
+    md_content = md_path.read_text()
+    
+    html_content = markdown.markdown(
+        md_content,
+        extensions=['tables', 'fenced_code', 'codehilite']
+    )
+    
+    base_path = md_path.parent.as_uri() + '/'
+    
+    styled_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <base href="{base_path}">
+        <style>
+            body {{
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 20px;
+                color: #333;
+            }}
+            h1 {{ color: #1a1a2e; border-bottom: 3px solid #4a90d9; padding-bottom: 10px; }}
+            h2 {{ color: #16213e; margin-top: 30px; }}
+            h3 {{ color: #0f3460; }}
+            img {{ max-width: 100%; height: auto; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }}
+            table {{ border-collapse: collapse; width: 100%; margin: 20px 0; }}
+            th, td {{ border: 1px solid #ddd; padding: 10px; text-align: left; }}
+            th {{ background-color: #4a90d9; color: white; }}
+            tr:nth-child(even) {{ background-color: #f9f9f9; }}
+            code {{ background-color: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }}
+            pre {{ background-color: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 8px; overflow-x: auto; }}
+            pre code {{ background-color: transparent; color: inherit; }}
+            hr {{ border: none; border-top: 2px solid #eee; margin: 30px 0; }}
+            blockquote {{ border-left: 4px solid #4a90d9; margin: 20px 0; padding-left: 20px; color: #666; }}
+        </style>
+    </head>
+    <body>
+        {html_content}
+    </body>
+    </html>
+    """
+    
+    HTML(string=styled_html, base_url=str(md_path.parent)).write_pdf(output_pdf)
+    logging.info("Generated PDF report: %s", output_pdf)
+    return output_pdf
 
 
 def build_email(subject: str,
@@ -131,6 +186,9 @@ def run(args: argparse.Namespace) -> None:
     use_tls = not args.smtp_disable_tls
 
     if recipients and sender and smtp_host:
+        pdf_path = REPORT_LATEST_DIR / 'power_rankings_report.pdf'
+        generate_pdf_from_markdown(artifacts['markdown'], pdf_path)
+        
         subject = f"ESPN Fantasy Recap - {datetime.utcnow():%Y-%m-%d}"
         body = (
             f"Weekly scrape completed for league {args.league_id}.\n"
@@ -138,9 +196,9 @@ def run(args: argparse.Namespace) -> None:
             f"Rows analyzed: {artifacts['rows']}\n"
             f"Teams summarized: {artifacts['teams']}\n"
             f"Archive: {archive_dir.relative_to(BASE_DIR)}\n\n"
-            "Attachments include the latest summary CSV and markdown newsletter."
+            "Attached: PDF report with charts and CSV summary."
         )
-        attachments = [artifacts['summary_csv'], artifacts['markdown']]
+        attachments = [pdf_path, artifacts['summary_csv']]
         message = build_email(subject, body, sender, recipients, attachments)
         send_email(message, smtp_host, smtp_port, smtp_user, smtp_pass, use_tls=use_tls)
     else:
