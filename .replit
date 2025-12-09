@@ -29,7 +29,8 @@ task = "shell.exec"
 args = "python -m src.automation.runner --league-id $LEAGUE_ID --years $YEARS"
 
 [deployment]
-run = ["sh", "-c", "python -m src.automation.runner --league-id ${LEAGUE_ID:-12345} --years ${YEARS:-2024}"]
+run = ["python", "-m", "src.automation.runner", "--league-id", "149388", "--years", "2025"]
+deploymentTarget = "scheduled"
 
 [agent]
 expertMode = true
