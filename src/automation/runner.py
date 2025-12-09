@@ -58,7 +58,7 @@ def parse_recipients(raw: str | None) -> List[str]:
 
 
 def format_weekly_results(matchups_path: Path) -> tuple[int, str]:
-    """Format the most recent week's game results for email body.
+    """Format the most recent week's actual head-to-head matchup results for email body.
     
     Returns:
         Tuple of (week_number, formatted_results_string)
@@ -67,21 +67,23 @@ def format_weekly_results(matchups_path: Path) -> tuple[int, str]:
         return 0, "No matchup data available."
     
     df = pd.read_csv(matchups_path)
-    latest_week = df['week'].max()
+    latest_week = int(df['week'].max())
     week_df = df[df['week'] == latest_week].copy()
+    
+    actual_matchup_ids = sorted(week_df['matchup_id'].unique())[:5]
+    real_matchups = week_df[week_df['matchup_id'].isin(actual_matchup_ids)]
     
     matchups_seen = set()
     results_lines = []
     
-    for _, row in week_df.iterrows():
+    for _, row in real_matchups.iterrows():
+        matchup_id = row['matchup_id']
+        if matchup_id in matchups_seen:
+            continue
+        matchups_seen.add(matchup_id)
+        
         team1 = row['team_name']
         team2 = row['opponent_name']
-        matchup_key = tuple(sorted([team1, team2]))
-        
-        if matchup_key in matchups_seen:
-            continue
-        matchups_seen.add(matchup_key)
-        
         score1 = row['team_score']
         score2 = row['opponent_score']
         
@@ -98,10 +100,10 @@ def format_weekly_results(matchups_path: Path) -> tuple[int, str]:
         
         margin = abs(score1 - score2)
         results_lines.append(
-            f"  {winner} defeats {loser} ({winner_score:.2f} - {loser_score:.2f}) by {margin:.2f} pts"
+            f"  {winner} def. {loser}  ({winner_score:.2f} - {loser_score:.2f})"
         )
     
-    results_text = "\n".join(sorted(results_lines))
+    results_text = "\n".join(results_lines)
     return latest_week, results_text
 
 
