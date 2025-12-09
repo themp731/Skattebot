@@ -35,6 +35,8 @@ class DataProcessor:
 
         try:
             for matchup in boxscore_data.get('schedule', []):
+                if matchup.get('matchupPeriodId') != week:
+                    continue
                 home_team_id = matchup['home']['teamId']
                 away_team_id = matchup['away']['teamId']
                 home_score = matchup['home']['totalPoints']
