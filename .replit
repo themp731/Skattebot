@@ -33,3 +33,4 @@ run = ["sh", "-c", "python -m src.automation.runner --league-id ${LEAGUE_ID:-123
 
 [agent]
 expertMode = true
+integrations = ["python_openai_ai_integrations:1.0.0"]
