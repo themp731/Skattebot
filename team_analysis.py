@@ -493,7 +493,7 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
                 md_lines.append("\n")
     
     md_lines.append("\n### Complete Week 15 Decision Tree (64 Outcomes)\n")
-    md_lines.append("*All possible matchup combinations leading to playoff outcomes.*\n\n")
+    md_lines.append("*Click on tiebreaker scenarios (marked with ⚖️) to see PF margin requirements.*\n\n")
     
     unique_outcomes = {}
     for scenario in all_scenarios:
@@ -509,41 +509,293 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
     
     sorted_outcomes = sorted(unique_outcomes.items(), key=lambda x: -x[1]['total_prob'])
     
-    md_lines.append("```mermaid\n")
-    md_lines.append("flowchart LR\n")
-    md_lines.append("    subgraph MATCHUPS[\"Week 15 Matchups\"]\n")
+    outcome_tiebreakers = {}
+    for playoff_key, outcome_data in sorted_outcomes:
+        sample = outcome_data['scenarios'][0]
+        if 'final_standings' in sample and len(sample['final_standings']) >= 5:
+            final_standings = sample['final_standings']
+            fourth_seed = final_standings[3]
+            fifth_place = final_standings[4]
+            if fifth_place['wins'] == fourth_seed['wins']:
+                margin = fourth_seed['pf'] - fifth_place['pf']
+                outcome_tiebreakers[playoff_key] = {
+                    'fourth': fourth_seed['team'],
+                    'fifth': fifth_place['team'],
+                    'margin': margin,
+                    'fourth_pf': fourth_seed['pf'],
+                    'fifth_pf': fifth_place['pf']
+                }
     
-    for i, m in enumerate(matchups_with_probs):
-        md_lines.append(f"        M{i}[\"{m['home']} vs {m['away']}\"]\n")
-    
-    md_lines.append("    end\n\n")
-    
-    md_lines.append("    subgraph OUTCOMES[\"Playoff Outcomes\"]\n")
-    
-    for i, (playoff_key, outcome_data) in enumerate(sorted_outcomes[:12]):
-        teams_str = ", ".join(sorted(outcome_data['teams']))
-        prob = outcome_data['total_prob'] * 100
-        paths = len(outcome_data['scenarios'])
+    import json
+    scenario_data = []
+    for idx, scenario in enumerate(all_scenarios):
+        winners = [r['winner'] for r in scenario['results']] if 'results' in scenario else []
+        playoff_key = tuple(sorted(scenario['playoff_teams']))
+        has_tb = playoff_key in outcome_tiebreakers
+        tb_info = outcome_tiebreakers.get(playoff_key, None)
         
-        has_bubble = any(t['team'] in outcome_data['teams'] for t in bubble_teams)
-        
-        md_lines.append(f"        O{i}[\"{teams_str}<br/>{prob:.1f}% ({paths} paths)\"]\n")
+        scenario_data.append({
+            'id': idx,
+            'winners': winners,
+            'playoff_teams': sorted(scenario['playoff_teams']),
+            'prob': scenario['probability'] * 100,
+            'has_tiebreaker': has_tb,
+            'tiebreaker': tb_info
+        })
     
-    md_lines.append("    end\n\n")
+    matchup_data = []
+    for m in matchups_with_probs:
+        matchup_data.append({
+            'home': m['home'],
+            'away': m['away'],
+            'home_prob': m['home_win_prob'] * 100,
+            'away_prob': m['away_win_prob'] * 100
+        })
     
-    md_lines.append("    MATCHUPS --> OUTCOMES\n\n")
+    outcome_data_list = []
+    for playoff_key, outcome_data in sorted_outcomes:
+        has_tb = playoff_key in outcome_tiebreakers
+        tb_info = outcome_tiebreakers.get(playoff_key, None)
+        outcome_data_list.append({
+            'teams': sorted(outcome_data['teams']),
+            'prob': outcome_data['total_prob'] * 100,
+            'paths': len(outcome_data['scenarios']),
+            'has_tiebreaker': has_tb,
+            'tiebreaker': tb_info
+        })
     
-    for i, (playoff_key, outcome_data) in enumerate(sorted_outcomes[:12]):
-        has_bubble = any(t['team'] in outcome_data['teams'] for t in bubble_teams)
-        if has_bubble:
-            md_lines.append(f"    style O{i} fill:#F0AB00,color:#000\n")
-        else:
-            md_lines.append(f"    style O{i} fill:#003366,color:#fff\n")
+    tree_json = json.dumps({
+        'matchups': matchup_data,
+        'scenarios': scenario_data,
+        'outcomes': outcome_data_list
+    })
     
-    md_lines.append("    style MATCHUPS fill:#0d2137,color:#fff\n")
-    md_lines.append("    style OUTCOMES fill:#0a1628,color:#fff\n")
+    md_lines.append(f'''<div id="decision-tree-container">
+<style>
+#decision-tree-container {{
+    background: #0a1628;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 20px 0;
+}}
+.tree-wrapper {{
+    display: flex;
+    gap: 20px;
+    min-width: 1200px;
+    align-items: flex-start;
+}}
+.tree-column {{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}}
+.tree-column h4 {{
+    color: #F0AB00;
+    margin: 0 0 10px 0;
+    text-align: center;
+    font-size: 14px;
+}}
+.matchup-col {{ width: 160px; }}
+.scenarios-col {{ 
+    width: 800px;
+    max-height: 600px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 5px;
+}}
+.outcomes-col {{ width: 200px; }}
+.matchup-node {{
+    background: #003366;
+    border: 2px solid #F0AB00;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+}}
+.matchup-teams {{ font-weight: bold; margin-bottom: 5px; }}
+.matchup-probs {{ font-size: 10px; color: #aaa; }}
+.scenario-node {{
+    background: #1a2a3a;
+    border: 1px solid #334455;
+    border-radius: 6px;
+    padding: 6px;
+    font-size: 9px;
+    color: #ccc;
+    cursor: default;
+    transition: all 0.2s;
+}}
+.scenario-node:hover {{ background: #2a3a4a; }}
+.scenario-node.has-tiebreaker {{
+    border-color: #F0AB00;
+    cursor: pointer;
+}}
+.scenario-node.has-tiebreaker:hover {{
+    background: #2a3520;
+    border-color: #22c55e;
+}}
+.scenario-winners {{ font-weight: bold; color: #fff; }}
+.scenario-prob {{ color: #888; font-size: 8px; }}
+.outcome-node {{
+    background: #003366;
+    border: 2px solid #22c55e;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    color: #fff;
+    font-size: 11px;
+    margin-bottom: 8px;
+}}
+.outcome-node.playoff {{ background: #166534; border-color: #22c55e; }}
+.outcome-node.has-tiebreaker {{ cursor: pointer; }}
+.outcome-teams {{ font-weight: bold; margin-bottom: 5px; }}
+.outcome-stats {{ font-size: 10px; color: #aaa; }}
+.tb-badge {{ color: #F0AB00; }}
+.modal-overlay {{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}}
+.modal-overlay.active {{ display: flex; }}
+.modal-content {{
+    background: #0d2137;
+    border: 2px solid #F0AB00;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 400px;
+    color: #fff;
+}}
+.modal-header {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}}
+.modal-header h3 {{ margin: 0; color: #F0AB00; }}
+.modal-close {{
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}}
+.modal-body {{ line-height: 1.6; }}
+.margin-highlight {{
+    background: #22c55e;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}}
+</style>
+
+<div class="tree-wrapper">
+    <div class="tree-column matchup-col">
+        <h4>Week 15 Matchups</h4>
+        <div id="matchups-container"></div>
+    </div>
+    <div class="tree-column">
+        <h4>64 Possible Outcomes (Winner Combinations)</h4>
+        <div class="scenarios-col" id="scenarios-container"></div>
+    </div>
+    <div class="tree-column outcomes-col">
+        <h4>Playoff Participants</h4>
+        <div id="outcomes-container"></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="tb-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>⚖️ Tiebreaker Details</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+    </div>
+</div>
+
+<script>
+(function() {{
+    const data = {tree_json};
     
-    md_lines.append("```\n\n")
+    const matchupsContainer = document.getElementById('matchups-container');
+    data.matchups.forEach((m, i) => {{
+        const node = document.createElement('div');
+        node.className = 'matchup-node';
+        node.innerHTML = `
+            <div class="matchup-teams">${{m.home}} vs ${{m.away}}</div>
+            <div class="matchup-probs">${{m.home_prob.toFixed(0)}}% / ${{m.away_prob.toFixed(0)}}%</div>
+        `;
+        matchupsContainer.appendChild(node);
+    }});
+    
+    const scenariosContainer = document.getElementById('scenarios-container');
+    data.scenarios.forEach(s => {{
+        const node = document.createElement('div');
+        node.className = 'scenario-node' + (s.has_tiebreaker ? ' has-tiebreaker' : '');
+        const winnersStr = s.winners.join(', ');
+        const tbBadge = s.has_tiebreaker ? ' <span class="tb-badge">⚖️</span>' : '';
+        node.innerHTML = `
+            <div class="scenario-winners">${{winnersStr}}${{tbBadge}}</div>
+            <div class="scenario-prob">${{s.prob.toFixed(1)}}%</div>
+        `;
+        if (s.has_tiebreaker && s.tiebreaker) {{
+            node.onclick = () => showModal(s.tiebreaker, s.playoff_teams);
+        }}
+        scenariosContainer.appendChild(node);
+    }});
+    
+    const outcomesContainer = document.getElementById('outcomes-container');
+    data.outcomes.forEach(o => {{
+        const node = document.createElement('div');
+        node.className = 'outcome-node playoff' + (o.has_tiebreaker ? ' has-tiebreaker' : '');
+        const tbBadge = o.has_tiebreaker ? ' <span class="tb-badge">⚖️</span>' : '';
+        node.innerHTML = `
+            <div class="outcome-teams">${{o.teams.join(', ')}}${{tbBadge}}</div>
+            <div class="outcome-stats">${{o.prob.toFixed(1)}}% (${{o.paths}} paths)</div>
+        `;
+        if (o.has_tiebreaker && o.tiebreaker) {{
+            node.onclick = () => showModal(o.tiebreaker, o.teams);
+        }}
+        outcomesContainer.appendChild(node);
+    }});
+}})();
+
+function showModal(tb, teams) {{
+    const modal = document.getElementById('tb-modal');
+    const body = document.getElementById('modal-body');
+    const marginStr = tb.margin > 0 ? '+' + tb.margin.toFixed(1) : tb.margin.toFixed(1);
+    body.innerHTML = `
+        <p><strong>Playoff Teams:</strong> ${{teams.join(', ')}}</p>
+        <p><strong>4th Seed:</strong> ${{tb.fourth}} (${{tb.fourth_pf.toFixed(1)}} PF)</p>
+        <p><strong>5th Place:</strong> ${{tb.fifth}} (${{tb.fifth_pf.toFixed(1)}} PF)</p>
+        <p><strong>Current Margin:</strong> <span class="margin-highlight">${{marginStr}} PF</span></p>
+        <p style="color:#aaa;font-size:12px;">The 4th seed wins the tiebreaker because they have more Points For.</p>
+    `;
+    modal.classList.add('active');
+}}
+
+function closeModal() {{
+    document.getElementById('tb-modal').classList.remove('active');
+}}
+
+document.getElementById('tb-modal').addEventListener('click', function(e) {{
+    if (e.target === this) closeModal();
+}});
+</script>
+</div>
+
+''')
     
     md_lines.append("### Tiebreaker Margin Requirements by Outcome\n\n")
     
