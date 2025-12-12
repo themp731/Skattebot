@@ -1,5 +1,5 @@
 # DU Alums 2025 Fantasy Football Power Rankings
-## Week 14 Update - Generated December 12, 2025 at 03:41 AM
+## Week 14 Update - Generated December 12, 2025 at 03:46 AM
 
 ---
 
@@ -7,12 +7,12 @@
 ### Current Standings (After Week 14)
 | Seed | Team | Record | Points For | Playoff % |
 |------|------|--------|------------|----------|
-| 1 | **ZSF** | 9-5 | 1656.28 | 90.5% |
-| 2 | **MP** | 9-5 | 1587.82 | 91.7% |
-| 3 | **sgf** | 9-5 | 1526.08 | 64.5% |
-| 4 | **KIRK** | 9-5 | 1524.90 | 87.4% |
-| 5 | **GV** | 9-5 | 1485.96 | 63.4% |
-| 6 | **POO** | 8-6 | 1471.46 | 2.4% |
+| 1 | **ZSF** | 9-5 | 1656.28 | 91.1% |
+| 2 | **MP** | 9-5 | 1587.82 | 91.2% |
+| 3 | **sgf** | 9-5 | 1526.08 | 64.9% |
+| 4 | **KIRK** | 9-5 | 1524.90 | 86.9% |
+| 5 | **GV** | 9-5 | 1485.96 | 63.6% |
+| 6 | **POO** | 8-6 | 1471.46 | 2.3% |
 | 7 | **GEMP** (ELIMINATED) | 7-7 | 1380.84 | 0.0% |
 | 8 | **KESS** (ELIMINATED) | 6-8 | 1334.74 | 0.0% |
 | 9 | **PATS** (ELIMINATED) | 5-9 | 1477.38 | 0.0% |
@@ -23,47 +23,47 @@
 ### Week 15 Matchups (Final Week of Regular Season)
 | Matchup | Favorite | Win Prob | Playoff Implications |
 |---------|----------|----------|---------------------|
-| WOOD vs ROUX | ROUX | 50% | No playoff impact |
+| WOOD vs ROUX | WOOD | 51% | No playoff impact |
 | GEMP vs GV | GV | 63% | GV fighting for playoff spot |
 | KESS vs PATS | PATS | 67% | No playoff impact |
 | MP vs POO | MP | 52% | MP fighting for playoff spot; POO fighting for playoff spot |
-| KIRK vs 3000 | KIRK | 76% | KIRK fighting for playoff spot |
-| sgf vs ZSF | ZSF | 63% | sgf fighting for playoff spot; ZSF fighting for playoff spot |
+| KIRK vs 3000 | KIRK | 75% | KIRK fighting for playoff spot |
+| sgf vs ZSF | ZSF | 62% | sgf fighting for playoff spot; ZSF fighting for playoff spot |
 
 ### Playoff Probability by Seed
 | Team | 1st Seed | 2nd Seed | 3rd Seed | 4th Seed | Total Playoff % |
 |------|----------|----------|----------|----------|----------------|
-| **MP** | 20.0% | 34.8% | 14.8% | 22.1% | **91.7%** |
-| **ZSF** | 62.4% | 1.8% | 9.6% | 16.8% | **90.5%** |
-| **KIRK** | 6.0% | 36.4% | 34.6% | 10.4% | **87.4%** |
-| **sgf** | 11.4% | 18.3% | 10.4% | 24.3% | **64.5%** |
-| **GV** | 0.2% | 8.6% | 30.5% | 24.1% | **63.4%** |
-| **POO** | 0.0% | 0.0% | 0.1% | 2.3% | **2.4%** |
+| **MP** | 19.2% | 35.3% | 14.3% | 22.3% | **91.2%** |
+| **ZSF** | 62.0% | 1.8% | 10.1% | 17.3% | **91.1%** |
+| **KIRK** | 6.2% | 35.4% | 34.8% | 10.5% | **86.9%** |
+| **sgf** | 12.4% | 18.7% | 10.1% | 23.8% | **64.9%** |
+| **GV** | 0.2% | 8.8% | 30.6% | 23.9% | **63.6%** |
+| **POO** | 0.0% | 0.0% | 0.1% | 2.2% | **2.3%** |
 
 ### Clinch/Elimination Scenarios
 
 **ZSF** (Currently #1, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 74.7% playoff probability (needs help)
+- With a LOSS: 76.6% playoff probability (needs help)
 
 **MP** (Currently #2, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 82.6% playoff probability (needs help)
+- With a LOSS: 81.6% playoff probability (needs help)
 
 **sgf** (Currently #3, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 43.3% playoff probability (needs help)
+- With a LOSS: 43.6% playoff probability (needs help)
 
 **KIRK** (Currently #4, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 48.2% playoff probability (needs help)
+- With a LOSS: 47.4% playoff probability (needs help)
 
 **GV** (Currently #5, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 2.0% playoff probability (needs help)
+- With a LOSS: 2.2% playoff probability (needs help)
 
 **POO** (Currently #6, 8-6):
-- With a WIN: 5.1% playoff probability
+- With a WIN: 4.7% playoff probability
 - LOSE and OUT: Eliminated with a loss
 
 ### Week 15 Points For Tiebreaker Analysis
@@ -267,19 +267,23 @@
     </div>
 </div>
 
-<div class="modal-overlay" id="tb-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>⚖️ Tiebreaker Details</h3>
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-        </div>
-        <div class="modal-body" id="modal-body"></div>
-    </div>
-</div>
-
 <script>
 (function() {
-    const data = {"matchups": [{"home": "WOOD", "away": "ROUX", "home_prob": 49.830000000000005, "away_prob": 50.17}, {"home": "GEMP", "away": "GV", "home_prob": 37.32, "away_prob": 62.68}, {"home": "KESS", "away": "PATS", "home_prob": 33.33, "away_prob": 66.67}, {"home": "MP", "away": "POO", "home_prob": 52.25, "away_prob": 47.75}, {"home": "KIRK", "away": "3000", "home_prob": 75.7, "away_prob": 24.3}, {"home": "sgf", "away": "ZSF", "home_prob": 37.4, "away_prob": 62.6}], "scenarios": [{"id": 0, "winners": ["WOOD", "GEMP", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9168992392362268, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 1, "winners": ["WOOD", "GEMP", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.534703004710904, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 2, "winners": ["WOOD", "GEMP", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.294328289477415, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 3, "winners": ["WOOD", "GEMP", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.49264574655845395, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 4, "winners": ["WOOD", "GEMP", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8379318406417195, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 5, "winners": ["WOOD", "GEMP", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.4025276263147497, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 6, "winners": ["WOOD", "GEMP", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.2689794415798386, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 7, "winners": ["WOOD", "GEMP", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.45021692628069243, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 8, "winners": ["WOOD", "GEMP", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.8340735757539532, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 9, "winners": ["WOOD", "GEMP", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 3.069866466368916, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 10, "winners": ["WOOD", "GEMP", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5887448862724051, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 11, "winners": ["WOOD", "GEMP", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9854393016217261, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 12, "winners": ["WOOD", "GEMP", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.6761150859761007, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 13, "winners": ["WOOD", "GEMP", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.8054760529974305, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 14, "winners": ["WOOD", "GEMP", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5380395850623415, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 15, "winners": ["WOOD", "GEMP", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9005689311471277, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 16, "winners": ["WOOD", "GV", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 1.5399583149873184, "has_tiebreaker": false, "tiebreaker": null}, {"id": 17, "winners": ["WOOD", "GV", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.5775772865830513, "has_tiebreaker": false, "tiebreaker": null}, {"id": 18, "winners": ["WOOD", "GV", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.49433272198404, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 19, "winners": ["WOOD", "GV", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8274125239625911, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 20, "winners": ["WOOD", "GV", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 1.4073303261367358, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 21, "winners": ["WOOD", "GV", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.3555849843892958, "has_tiebreaker": false, "tiebreaker": null}, {"id": 22, "winners": ["WOOD", "GV", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.4517586119567065, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 23, "winners": ["WOOD", "GV", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.7561521152002627, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 24, "winners": ["WOOD", "GV", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 3.0803786636725023, "has_tiebreaker": false, "tiebreaker": null}, {"id": 25, "winners": ["WOOD", "GV", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 5.15592792368713, "has_tiebreaker": false, "tiebreaker": null}, {"id": 26, "winners": ["WOOD", "GV", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9888137586161401, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 27, "winners": ["WOOD", "GV", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.6550732965072292, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 28, "winners": ["WOOD", "GV", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 2.8150828935954455, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 29, "winners": ["WOOD", "GV", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.711876714948526, "has_tiebreaker": false, "tiebreaker": null}, {"id": 30, "winners": ["WOOD", "GV", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9036527650511139, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 31, "winners": ["WOOD", "GV", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.5125310987219178, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 32, "winners": ["ROUX", "GEMP", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9231554250949527, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 33, "winners": ["ROUX", "GEMP", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.5451745885279158, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 34, "winners": ["ROUX", "GEMP", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.2963365499314049, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 35, "winners": ["ROUX", "GEMP", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.4960071664627259, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 36, "winners": ["ROUX", "GEMP", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8436492162351006, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 37, "winners": ["ROUX", "GEMP", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.4120973512384305, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 38, "winners": ["ROUX", "GEMP", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.2708147418033414, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 39, "winners": ["ROUX", "GEMP", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.45328884590612767, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 40, "winners": ["ROUX", "GEMP", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.846587824514867, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 41, "winners": ["ROUX", "GEMP", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 3.0908127757922643, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 42, "winners": ["ROUX", "GEMP", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.592762009718775, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 43, "winners": ["ROUX", "GEMP", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.992163149957094, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 44, "winners": ["ROUX", "GEMP", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.6875515525470797, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 45, "winners": ["ROUX", "GEMP", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.82461837404939, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 46, "winners": ["ROUX", "GEMP", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5417107361544786, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 47, "winners": ["ROUX", "GEMP", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9067136920660526, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 48, "winners": ["ROUX", "GV", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 1.550465756831502, "has_tiebreaker": false, "tiebreaker": null}, {"id": 49, "winners": ["ROUX", "GV", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.5951646090281293, "has_tiebreaker": false, "tiebreaker": null}, {"id": 50, "winners": ["ROUX", "GV", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.4977056524571399, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 51, "winners": ["ROUX", "GV", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8330581241662289, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 52, "winners": ["ROUX", "GV", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 1.4169328208364447, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 53, "winners": ["ROUX", "GV", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.3716576092075248, "has_tiebreaker": false, "tiebreaker": null}, {"id": 54, "winners": ["ROUX", "GV", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.45484105081011367, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 55, "winners": ["ROUX", "GV", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.7613114914629175, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 56, "winners": ["ROUX", "GV", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 3.1013966999086784, "has_tiebreaker": false, "tiebreaker": null}, {"id": 57, "winners": ["ROUX", "GV", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 5.191107845301692, "has_tiebreaker": false, "tiebreaker": null}, {"id": 58, "winners": ["ROUX", "GV", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9955606315426802, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 59, "winners": ["ROUX", "GV", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.666366190763951, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 60, "winners": ["ROUX", "GV", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 2.834290764031376, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 61, "winners": ["ROUX", "GV", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.744026786854656, "has_tiebreaker": false, "tiebreaker": null}, {"id": 62, "winners": ["ROUX", "GV", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9098185675820665, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 63, "winners": ["ROUX", "GV", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.5228513992149029, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}], "outcomes": [{"teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 37.31999999999999, "paths": 32, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 29.702923760000004, "paths": 8, "has_tiebreaker": false, "tiebreaker": null}, {"teams": ["GV", "MP", "ZSF", "sgf"], "prob": 15.231240000000001, "paths": 16, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"teams": ["GV", "KIRK", "MP", "sgf"], "prob": 9.272199435400001, "paths": 4, "has_tiebreaker": false, "tiebreaker": null}, {"teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 8.473636804600002, "paths": 4, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}]};
+    const data = {"matchups": [{"home": "WOOD", "away": "ROUX", "home_prob": 50.82, "away_prob": 49.18}, {"home": "GEMP", "away": "GV", "home_prob": 37.24, "away_prob": 62.75999999999999}, {"home": "KESS", "away": "PATS", "home_prob": 32.800000000000004, "away_prob": 67.19999999999999}, {"home": "MP", "away": "POO", "home_prob": 51.94, "away_prob": 48.06}, {"home": "KIRK", "away": "3000", "home_prob": 75.11, "away_prob": 24.89}, {"home": "sgf", "away": "ZSF", "home_prob": 37.830000000000005, "away_prob": 62.169999999999995}], "scenarios": [{"id": 0, "winners": ["WOOD", "GEMP", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9161239254447373, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 1, "winners": ["WOOD", "GEMP", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.5055623696774862, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 2, "winners": ["WOOD", "GEMP", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.30358573431393304, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 3, "winners": ["WOOD", "GEMP", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.4989142242214436, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 4, "winners": ["WOOD", "GEMP", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8476880218882186, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 5, "winners": ["WOOD", "GEMP", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.393094483763958, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 6, "winners": ["WOOD", "GEMP", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.28090740067631154, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 7, "winners": ["WOOD", "GEMP", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.4616445440139119, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 8, "winners": ["WOOD", "GEMP", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.8769368228623882, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 9, "winners": ["WOOD", "GEMP", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 3.0845668061685076, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 10, "winners": ["WOOD", "GEMP", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.6219805288383017, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 11, "winners": ["WOOD", "GEMP", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.0221657276732015, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 12, "winners": ["WOOD", "GEMP", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.7367266789904963, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 13, "winners": ["WOOD", "GEMP", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.8541447960042063, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 14, "winners": ["WOOD", "GEMP", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5755176013856138, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 15, "winners": ["WOOD", "GEMP", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9458083340772827, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 16, "winners": ["WOOD", "GV", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 1.5439295800459638, "has_tiebreaker": false, "tiebreaker": null}, {"id": 17, "winners": ["WOOD", "GV", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.5373011364382116, "has_tiebreaker": false, "tiebreaker": null}, {"id": 18, "winners": ["WOOD", "GV", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.5116283750145658, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 19, "winners": ["WOOD", "GV", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8408124788436573, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 20, "winners": ["WOOD", "GV", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 1.4285956029458806, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 21, "winners": ["WOOD", "GV", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.347760735795543, "has_tiebreaker": false, "tiebreaker": null}, {"id": 22, "winners": ["WOOD", "GV", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.4734089276703896, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 23, "winners": ["WOOD", "GV", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.7780024592457868, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 24, "winners": ["WOOD", "GV", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 3.16317279814295, "has_tiebreaker": false, "tiebreaker": null}, {"id": 25, "winners": ["WOOD", "GV", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 5.198373060019751, "has_tiebreaker": false, "tiebreaker": null}, {"id": 26, "winners": ["WOOD", "GV", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.0482142317371592, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 27, "winners": ["WOOD", "GV", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.7226402005577366, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 28, "winners": ["WOOD", "GV", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 2.9268787962793645, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 29, "winners": ["WOOD", "GV", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.81004638553233, "has_tiebreaker": false, "tiebreaker": null}, {"id": 30, "winners": ["WOOD", "GV", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9699109737637249, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 31, "winners": ["WOOD", "GV", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.593956257966978, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 32, "winners": ["ROUX", "GEMP", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8865599105346746, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 33, "winners": ["ROUX", "GEMP", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.4569767284679016, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 34, "winners": ["ROUX", "GEMP", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.2937887920810552, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 35, "winners": ["ROUX", "GEMP", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.4828138832587681, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 36, "winners": ["ROUX", "GEMP", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8203324855659699, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 37, "winners": ["ROUX", "GEMP", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.3481382666570534, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 38, "winners": ["ROUX", "GEMP", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.27184230549510036, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 39, "winners": ["ROUX", "GEMP", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.44674692393947624, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 40, "winners": ["ROUX", "GEMP", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.8163666459734797, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 41, "winners": ["ROUX", "GEMP", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.9850254924708226, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 42, "winners": ["ROUX", "GEMP", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.60190874475143, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 43, "winners": ["ROUX", "GEMP", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9891796632618662, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 44, "winners": ["ROUX", "GEMP", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.6806811899400353, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 45, "winners": ["ROUX", "GEMP", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.7620393755900605, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 46, "winners": ["ROUX", "GEMP", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5569452112582544, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 47, "winners": ["ROUX", "GEMP", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9152863807540488, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 48, "winners": ["ROUX", "GV", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 1.4941057998162244, "has_tiebreaker": false, "tiebreaker": null}, {"id": 49, "winners": ["ROUX", "GV", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.455420501574799, "has_tiebreaker": false, "tiebreaker": null}, {"id": 50, "winners": ["ROUX", "GV", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.49511773874884607, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 51, "winners": ["ROUX", "GV", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8136788215177307, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 52, "winners": ["ROUX", "GV", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 1.3824937377583315, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 53, "winners": ["ROUX", "GV", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.2719967136250454, "has_tiebreaker": false, "tiebreaker": null}, {"id": 54, "winners": ["ROUX", "GV", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.45813166199979866, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 55, "winners": ["ROUX", "GV", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.7528957289592249, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 56, "winners": ["ROUX", "GV", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 3.061094809379581, "has_tiebreaker": false, "tiebreaker": null}, {"id": 57, "winners": ["ROUX", "GV", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 5.030617612982515, "has_tiebreaker": false, "tiebreaker": null}, {"id": 58, "winners": ["ROUX", "GV", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.0143875623147087, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 59, "winners": ["ROUX", "GV", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.6670492928655942, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 60, "winners": ["ROUX", "GV", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 2.832426194431703, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 61, "winners": ["ROUX", "GV", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.654822535231799, "has_tiebreaker": false, "tiebreaker": null}, {"id": 62, "winners": ["ROUX", "GV", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9386112099508068, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 63, "winners": ["ROUX", "GV", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.5425180788432897, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}], "outcomes": [{"teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 37.239999999999995, "paths": 32, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 29.306338681199996, "paths": 8, "has_tiebreaker": false, "tiebreaker": null}, {"teams": ["GV", "MP", "ZSF", "sgf"], "prob": 15.620963999999995, "paths": 16, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"teams": ["GV", "KIRK", "MP", "sgf"], "prob": 9.262302987384718, "paths": 4, "has_tiebreaker": false, "tiebreaker": null}, {"teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 8.57039433141528, "paths": 4, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}]};
+    
+    // Create modal and append to body (outside container for proper fixed positioning)
+    const modalHTML = `
+        <div class="tb-modal-overlay" id="tb-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:10000;justify-content:center;align-items:center;">
+            <div style="background:#0d2137;border:3px solid #F0AB00;border-radius:12px;padding:24px;max-width:450px;color:#fff;box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                    <h3 style="margin:0;color:#F0AB00;font-size:18px;">⚖️ Tiebreaker Details</h3>
+                    <button onclick="closeTbModal()" style="background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+                </div>
+                <div id="tb-modal-body" style="line-height:1.8;font-size:14px;"></div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
     
     const matchupsContainer = document.getElementById('matchups-container');
     data.matchups.forEach((m, i) => {
@@ -303,7 +307,7 @@
             <div class="scenario-prob">${s.prob.toFixed(1)}%</div>
         `;
         if (s.has_tiebreaker && s.tiebreaker) {
-            node.onclick = () => showModal(s.tiebreaker, s.playoff_teams);
+            node.onclick = function() { showTbModal(s.tiebreaker, s.playoff_teams); };
         }
         scenariosContainer.appendChild(node);
     });
@@ -318,33 +322,34 @@
             <div class="outcome-stats">${o.prob.toFixed(1)}% (${o.paths} paths)</div>
         `;
         if (o.has_tiebreaker && o.tiebreaker) {
-            node.onclick = () => showModal(o.tiebreaker, o.teams);
+            node.onclick = function() { showTbModal(o.tiebreaker, o.teams); };
         }
         outcomesContainer.appendChild(node);
     });
+    
+    // Attach close handler
+    document.getElementById('tb-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeTbModal();
+    });
 })();
 
-function showModal(tb, teams) {
+function showTbModal(tb, teams) {
     const modal = document.getElementById('tb-modal');
-    const body = document.getElementById('modal-body');
+    const body = document.getElementById('tb-modal-body');
     const marginStr = tb.margin > 0 ? '+' + tb.margin.toFixed(1) : tb.margin.toFixed(1);
     body.innerHTML = `
         <p><strong>Playoff Teams:</strong> ${teams.join(', ')}</p>
         <p><strong>4th Seed:</strong> ${tb.fourth} (${tb.fourth_pf.toFixed(1)} PF)</p>
         <p><strong>5th Place:</strong> ${tb.fifth} (${tb.fifth_pf.toFixed(1)} PF)</p>
-        <p><strong>Current Margin:</strong> <span class="margin-highlight">${marginStr} PF</span></p>
-        <p style="color:#aaa;font-size:12px;">The 4th seed wins the tiebreaker because they have more Points For.</p>
+        <p><strong>Current Margin:</strong> <span style="background:#22c55e;color:#000;padding:2px 10px;border-radius:4px;font-weight:bold;">${marginStr} PF</span></p>
+        <p style="color:#aaa;font-size:12px;margin-top:12px;">The 4th seed wins the tiebreaker because they have more Points For.</p>
     `;
-    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
-function closeModal() {
-    document.getElementById('tb-modal').classList.remove('active');
+function closeTbModal() {
+    document.getElementById('tb-modal').style.display = 'none';
 }
-
-document.getElementById('tb-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
 </script>
 </div>
 
@@ -352,22 +357,13 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 
 | Outcome | 4th Seed | 5th Place | PF Margin |
 |---------|----------|-----------|----------|
-| KIRK, MP, ZSF, sgf (37.3%) | ZSF | GV | +182.5 |
-| GV, MP, ZSF, sgf (15.2%) | ZSF | KIRK | +140.8 |
-| GV, KIRK, ZSF, sgf (8.5%) | ZSF | MP | +73.3 |
+| KIRK, MP, ZSF, sgf (37.2%) | ZSF | GV | +182.5 |
+| GV, MP, ZSF, sgf (15.6%) | ZSF | KIRK | +140.8 |
+| GV, KIRK, ZSF, sgf (8.6%) | ZSF | MP | +73.3 |
 
 ### Scenario Details (Top 8 Most Likely)
 
 **Scenario 1** (5.2%):
-- ROUX beats WOOD
-- GV beats GEMP
-- PATS beats KESS
-- MP beats POO
-- KIRK beats 3000
-- ZSF beats sgf
-- **Playoffs:** GV, KIRK, MP, ZSF
-
-**Scenario 2** (5.2%):
 - WOOD beats ROUX
 - GV beats GEMP
 - PATS beats KESS
@@ -376,8 +372,17 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 - ZSF beats sgf
 - **Playoffs:** GV, KIRK, MP, ZSF
 
-**Scenario 3** (4.7%):
+**Scenario 2** (5.0%):
 - ROUX beats WOOD
+- GV beats GEMP
+- PATS beats KESS
+- MP beats POO
+- KIRK beats 3000
+- ZSF beats sgf
+- **Playoffs:** GV, KIRK, MP, ZSF
+
+**Scenario 3** (4.8%):
+- WOOD beats ROUX
 - GV beats GEMP
 - PATS beats KESS
 - POO beats MP
@@ -386,7 +391,7 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 - **Playoffs:** GV, KIRK, MP, ZSF
 
 **Scenario 4** (4.7%):
-- WOOD beats ROUX
+- ROUX beats WOOD
 - GV beats GEMP
 - PATS beats KESS
 - POO beats MP
@@ -394,8 +399,8 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 - ZSF beats sgf
 - **Playoffs:** GV, KIRK, MP, ZSF
 
-**Scenario 5** (3.1%):
-- ROUX beats WOOD
+**Scenario 5** (3.2%):
+- WOOD beats ROUX
 - GV beats GEMP
 - PATS beats KESS
 - MP beats POO
@@ -404,7 +409,7 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 - **Playoffs:** GV, KIRK, MP, sgf
 
 **Scenario 6** (3.1%):
-- ROUX beats WOOD
+- WOOD beats ROUX
 - GEMP beats GV
 - PATS beats KESS
 - MP beats POO
@@ -413,7 +418,7 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 - **Playoffs:** KIRK, MP, ZSF, sgf
 
 **Scenario 7** (3.1%):
-- WOOD beats ROUX
+- ROUX beats WOOD
 - GV beats GEMP
 - PATS beats KESS
 - MP beats POO
@@ -421,8 +426,8 @@ document.getElementById('tb-modal').addEventListener('click', function(e) {
 - sgf beats ZSF
 - **Playoffs:** GV, KIRK, MP, sgf
 
-**Scenario 8** (3.1%):
-- WOOD beats ROUX
+**Scenario 8** (3.0%):
+- ROUX beats WOOD
 - GEMP beats GV
 - PATS beats KESS
 - MP beats POO
@@ -605,18 +610,18 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 | Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % | PF Leader % |
 |------|--------|-----------|------------------|--------------|----------------|----------------|-------------|
-| ZSF | 9-5 | 90.5% | 10 | 1776 | #2.1 | 62.4% | 96.4% |
-| MP | 9-5 | 91.7% | 10 | 1700 | #2.6 | 20.0% | 3.6% |
-| KIRK | 9-5 | 87.4% | 10 | 1637 | #2.9 | 6.0% | 0.0% |
-| sgf | 9-5 | 64.5% | 9 | 1632 | #3.6 | 11.4% | 0.0% |
-| GV | 9-5 | 63.4% | 10 | 1593 | #4.0 | 0.2% | 0.0% |
-| POO | 8-6 | 2.4% | 8 | 1581 | #5.8 | 0.0% | 0.0% |
+| ZSF | 9-5 | 91.1% | 10 | 1776 | #2.1 | 62.0% | 96.6% |
+| MP | 9-5 | 91.2% | 10 | 1700 | #2.7 | 19.2% | 3.4% |
+| KIRK | 9-5 | 86.9% | 10 | 1636 | #2.9 | 6.2% | 0.0% |
+| sgf | 9-5 | 64.9% | 9 | 1633 | #3.5 | 12.4% | 0.0% |
+| GV | 9-5 | 63.6% | 10 | 1593 | #4.0 | 0.2% | 0.0% |
+| POO | 8-6 | 2.3% | 8 | 1581 | #5.8 | 0.0% | 0.0% |
 | GEMP | 7-7 | 0.0% | 7 | 1479 | #7.0 | 0.0% | 0.0% |
 | PATS | 5-9 | 0.0% | 6 | 1586 | #8.5 | 0.0% | 0.0% |
 | KESS | 6-8 | 0.0% | 6 | 1431 | #8.8 | 0.0% | 0.0% |
-| ROUX | 5-9 | 0.0% | 6 | 1418 | #9.7 | 0.0% | 0.0% |
+| ROUX | 5-9 | 0.0% | 5 | 1418 | #9.7 | 0.0% | 0.0% |
 | 3000 | 4-10 | 0.0% | 4 | 1385 | #11.3 | 0.0% | 0.0% |
-| WOOD | 4-10 | 0.0% | 4 | 1327 | #11.6 | 0.0% | 0.0% |
+| WOOD | 4-10 | 0.0% | 5 | 1328 | #11.6 | 0.0% | 0.0% |
 
 
 > **Why Playoff % and Projected Standing Sometimes Conflict**
@@ -647,8 +652,8 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
 |------|------|------------|-------------------|-------------------|
 | 1 | ZSF | 1656 | 1776 | +119 |
 | 2 | MP | 1588 | 1700 | +112 |
-| 3 | KIRK | 1525 | 1637 | +112 |
-| 4 | sgf | 1526 | 1632 | +106 |
+| 3 | KIRK | 1525 | 1636 | +112 |
+| 4 | sgf | 1526 | 1633 | +107 |
 | 5 | GV | 1486 | 1593 | +107 |
 | 6 | PATS | 1477 | 1586 | +109 |
 
@@ -698,16 +703,16 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
 
 | Team | Playoff % | PF Leader % | Total Cost | E[Playoff] | E[PF Prize] | E[Weekly] | E[Return] | **Net Expected** |
 |------|-----------|-------------|------------|------------|-------------|-----------|-----------|------------------|
-| ZSF | 90.5% | 96.4% | $294 | $980 | $231 | $29 | $1240 | **$946** |
-| MP | 91.7% | 3.6% | $258 | $639 | $9 | $28 | $675 | **$417** |
-| KIRK | 87.4% | 0.0% | $265 | $525 | $0 | $26 | $551 | **$286** |
-| sgf | 64.5% | 0.0% | $262 | $361 | $0 | $26 | $387 | **$125** |
-| GV | 63.4% | 0.0% | $280 | $196 | $0 | $26 | $222 | **$-58** |
+| ZSF | 91.1% | 96.6% | $294 | $976 | $232 | $29 | $1236 | **$942** |
+| MP | 91.2% | 3.4% | $258 | $629 | $8 | $28 | $665 | **$407** |
+| KIRK | 86.9% | 0.0% | $265 | $520 | $0 | $26 | $546 | **$281** |
+| sgf | 64.9% | 0.0% | $262 | $376 | $0 | $26 | $403 | **$141** |
+| GV | 63.6% | 0.0% | $280 | $198 | $0 | $26 | $224 | **$-56** |
 | 3000 | 0.0% | 0.0% | $250 | $0 | $0 | $22 | $22 | **$-228** |
 | GEMP | 0.0% | 0.0% | $256 | $0 | $0 | $24 | $24 | **$-232** |
 | WOOD | 0.0% | 0.0% | $254 | $0 | $0 | $21 | $21 | **$-233** |
 | ROUX | 0.0% | 0.0% | $270 | $0 | $0 | $23 | $23 | **$-248** |
-| POO | 2.4% | 0.0% | $276 | $1 | $0 | $26 | $26 | **$-250** |
+| POO | 2.3% | 0.0% | $276 | $0 | $0 | $26 | $26 | **$-250** |
 | KESS | 0.0% | 0.0% | $278 | $0 | $0 | $23 | $23 | **$-255** |
 | PATS | 0.0% | 0.0% | $296 | $0 | $0 | $26 | $26 | **$-270** |
 
@@ -907,7 +912,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 Sitting atop the standings with a commanding 9-5 record, this team has earned the top spot through dominant performance. Their 118.31 PPG leads the league, which translates to an impressive 9.27 MVP-W and 11 top-6 weekly finishes. Their -0.27 WAX shows they're earning their wins fair and square - no luck needed. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1776** | Playoff: **90.5%** | #1 Seed: **62.4%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1776** | Playoff: **91.1%** | #1 Seed: **62.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -964,7 +969,7 @@ Key injuries: De'Von Achane (RB, QUESTIONABLE). Bench depth: James Cook III (RB)
 
 Second place with 9-5, trailing the leader by 0.91 power points. Scoring 113.42 PPG with 10 top-6 finishes shows genuine quality. That -0.36 WAX is frustrating - a bit more luck and they'd be in first. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1700** | Playoff: **91.7%** | #1 Seed: **20.0%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1700** | Playoff: **91.2%** | #1 Seed: **19.2%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -974,7 +979,7 @@ Second place with 9-5, trailing the leader by 0.91 power points. Scoring 113.42 
 | Historical PPG | 113.4 pts | Season average through week 12 | 
 | Monte Carlo Input | 111.8 pts | 60% Optimized + 40% Historical | 
 
-*Strong odds at 92%, but fantasy football loves chaos. One bad week and this could get interesting. Key injuries to Breece Hall (QUESTIONABLE) are devastating - the variance multiplier of 1.08x reflects massive uncertainty.* 
+*Strong odds at 91%, but fantasy football loves chaos. One bad week and this could get interesting. Key injuries to Breece Hall (QUESTIONABLE) are devastating - the variance multiplier of 1.08x reflects massive uncertainty.* 
 
 **Roster Health & Availability Report:** 
 Key injuries: Breece Hall (RB, QUESTIONABLE). 
@@ -1018,7 +1023,7 @@ Key injuries: Breece Hall (RB, QUESTIONABLE).
 
 Currently in the playoff picture at #3 with a 9-5 record. Their 108.92 PPG and 8.55 MVP-W put them in solid position. 10 top-6 finishes in 14 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1637** | Playoff: **87.4%** | #1 Seed: **6.0%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1636** | Playoff: **86.9%** | #1 Seed: **6.2%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1072,7 +1077,7 @@ Key injuries: Davante Adams (RB, QUESTIONABLE).
 
 Currently in the playoff picture at #4 with a 9-5 record. Their 109.01 PPG and 8.36 MVP-W put them in solid position. 8 top-6 finishes in 14 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1632** | Playoff: **64.5%** | #1 Seed: **11.4%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1633** | Playoff: **64.9%** | #1 Seed: **12.4%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1122,9 +1127,9 @@ Currently in the playoff picture at #4 with a 9-5 record. Their 109.01 PPG and 8
 
 **Record:** 9-5 | **PPG:** 106.14 | **Total PF:** 1486 | **Top6:** 8 | **MVP-W:** 8.18 | **WAX:** +0.82
 
-On the playoff bubble at #5 with 9-5. Still in decent shape with 63.4% playoff odds. Their 106.14 PPG and 8 top-6 finishes show potential. They've benefited from +0.82 WAX - riding some good matchups. 
+On the playoff bubble at #5 with 9-5. Still in decent shape with 63.6% playoff odds. Their 106.14 PPG and 8 top-6 finishes show potential. They've benefited from +0.82 WAX - riding some good matchups. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1593** | Playoff: **63.4%** | #1 Seed: **0.2%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1593** | Playoff: **63.6%** | #1 Seed: **0.2%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1134,7 +1139,7 @@ On the playoff bubble at #5 with 9-5. Still in decent shape with 63.4% playoff o
 | Historical PPG | 106.1 pts | Season average through week 12 | 
 | Monte Carlo Input | 107.0 pts | 60% Optimized + 40% Historical | 
 
-*Right on the knife's edge at 63%. ESPN projects enough points to stay competitive, but so does everyone else.* 
+*Right on the knife's edge at 64%. ESPN projects enough points to stay competitive, but so does everyone else.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
@@ -1168,9 +1173,9 @@ On the playoff bubble at #5 with 9-5. Still in decent shape with 63.4% playoff o
 
 **Record:** 8-6 | **PPG:** 105.10 | **Total PF:** 1471 | **Top6:** 7 | **MVP-W:** 7.09 | **WAX:** +0.91
 
-On the playoff bubble at #6 with 8-6. Need to step it up - only 2.4% playoff odds right now. Their 105.10 PPG and 7 top-6 finishes show potential. They've benefited from +0.91 WAX - riding some good matchups. 
+On the playoff bubble at #6 with 8-6. Need to step it up - only 2.3% playoff odds right now. Their 105.10 PPG and 7 top-6 finishes show potential. They've benefited from +0.91 WAX - riding some good matchups. 
 
-**Projection Summary:** Most likely finish: **8 wins** | Projected PF: **1581** | Playoff: **2.4%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **8 wins** | Projected PF: **1581** | Playoff: **2.3%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1381,7 +1386,7 @@ At #9 with 6-8, the season hasn't gone as planned. Averaging 95.34 PPG with only
 
 At #10 with 5-9, the season hasn't gone as planned. Averaging 94.25 PPG with only 5 top-6 finishes in 14 weeks. 
 
-**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1418** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **5 wins** | Projected PF: **1418** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1391,7 +1396,7 @@ At #10 with 5-9, the season hasn't gone as planned. Averaging 94.25 PPG with onl
 | Historical PPG | 94.2 pts | Season average through week 12 | 
 | Monte Carlo Input | 98.0 pts | 60% Optimized + 40% Historical | 
 
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.04x) to these projections.* 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.04x) to these projections. Only 0.5 more projected wins suggests a rough finish ahead.* 
 
 **Roster Health & Availability Report:** 
 1 minor injury(s) in lineup. 
@@ -1487,7 +1492,7 @@ Bringing up the rear at #11 with a 4-10 record. Their 92.04 PPG ranks near the b
 
 Bringing up the rear at #12 with a 4-10 record. Their 87.80 PPG ranks near the bottom of the league. Only 4 top-6 finishes in 14 weeks tells the story. 
 
-**Projection Summary:** Most likely finish: **4 wins** | Projected PF: **1327** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **5 wins** | Projected PF: **1328** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1497,7 +1502,7 @@ Bringing up the rear at #12 with a 4-10 record. Their 87.80 PPG ranks near the b
 | Historical PPG | 87.8 pts | Season average through week 12 | 
 | Monte Carlo Input | 98.3 pts | 60% Optimized + 40% Historical | 
 
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Key injuries to Josh Jacobs (QUESTIONABLE) are devastating - the variance multiplier of 1.13x reflects massive uncertainty. Only 0.5 more projected wins suggests a rough finish ahead.* 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Key injuries to Josh Jacobs (QUESTIONABLE) are devastating - the variance multiplier of 1.13x reflects massive uncertainty.* 
 
 **Roster Health & Availability Report:** 
 Key injuries: Josh Jacobs (RB, QUESTIONABLE). 
@@ -1543,18 +1548,18 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 | Rank | Team | Projected Wins | Projected PF | Current Record | Playoff % |
 |------|------|----------------|--------------|----------------|-----------|
-| 1 | ZSF | 9.6 | 1776 | 9-5 | 90.5% |
-| 2 | MP | 9.5 | 1700 | 9-5 | 91.7% |
-| 3 | KIRK | 9.8 | 1637 | 9-5 | 87.4% |
-| 4 | sgf | 9.4 | 1632 | 9-5 | 64.5% |
-| 5 | GV | 9.6 | 1593 | 9-5 | 63.4% |
-| 6 | POO | 8.5 | 1581 | 8-6 | 2.4% |
+| 1 | ZSF | 9.6 | 1776 | 9-5 | 91.1% |
+| 2 | MP | 9.5 | 1700 | 9-5 | 91.2% |
+| 3 | KIRK | 9.8 | 1636 | 9-5 | 86.9% |
+| 4 | sgf | 9.4 | 1633 | 9-5 | 64.9% |
+| 5 | GV | 9.6 | 1593 | 9-5 | 63.6% |
+| 6 | POO | 8.5 | 1581 | 8-6 | 2.3% |
 | 7 | GEMP | 7.4 | 1479 | 7-7 | 0.0% |
 | 8 | PATS | 5.7 | 1586 | 5-9 | 0.0% |
 | 9 | KESS | 6.3 | 1431 | 6-8 | 0.0% |
 | 10 | ROUX | 5.5 | 1418 | 5-9 | 0.0% |
 | 11 | 3000 | 4.2 | 1385 | 4-10 | 0.0% |
-| 12 | WOOD | 4.5 | 1327 | 4-10 | 0.0% |
+| 12 | WOOD | 4.5 | 1328 | 4-10 | 0.0% |
 
 ---
 
@@ -1562,9 +1567,9 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 *If playoffs started today (top 4 make it, seeded by record then Points For):*
 
-**Semifinal 1:** #1 ZSF (Proj. PF: 1776) vs #4 sgf (Proj. PF: 1632)
+**Semifinal 1:** #1 ZSF (Proj. PF: 1776) vs #4 sgf (Proj. PF: 1633)
 
-**Semifinal 2:** #2 MP (Proj. PF: 1700) vs #3 KIRK (Proj. PF: 1637)
+**Semifinal 2:** #2 MP (Proj. PF: 1700) vs #3 KIRK (Proj. PF: 1636)
 
 ---
 

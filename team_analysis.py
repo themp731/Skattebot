@@ -714,19 +714,23 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
     </div>
 </div>
 
-<div class="modal-overlay" id="tb-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>⚖️ Tiebreaker Details</h3>
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-        </div>
-        <div class="modal-body" id="modal-body"></div>
-    </div>
-</div>
-
 <script>
 (function() {{
     const data = {tree_json};
+    
+    // Create modal and append to body (outside container for proper fixed positioning)
+    const modalHTML = `
+        <div class="tb-modal-overlay" id="tb-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:10000;justify-content:center;align-items:center;">
+            <div style="background:#0d2137;border:3px solid #F0AB00;border-radius:12px;padding:24px;max-width:450px;color:#fff;box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                    <h3 style="margin:0;color:#F0AB00;font-size:18px;">⚖️ Tiebreaker Details</h3>
+                    <button onclick="closeTbModal()" style="background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+                </div>
+                <div id="tb-modal-body" style="line-height:1.8;font-size:14px;"></div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
     
     const matchupsContainer = document.getElementById('matchups-container');
     data.matchups.forEach((m, i) => {{
@@ -750,7 +754,7 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
             <div class="scenario-prob">${{s.prob.toFixed(1)}}%</div>
         `;
         if (s.has_tiebreaker && s.tiebreaker) {{
-            node.onclick = () => showModal(s.tiebreaker, s.playoff_teams);
+            node.onclick = function() {{ showTbModal(s.tiebreaker, s.playoff_teams); }};
         }}
         scenariosContainer.appendChild(node);
     }});
@@ -765,33 +769,34 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
             <div class="outcome-stats">${{o.prob.toFixed(1)}}% (${{o.paths}} paths)</div>
         `;
         if (o.has_tiebreaker && o.tiebreaker) {{
-            node.onclick = () => showModal(o.tiebreaker, o.teams);
+            node.onclick = function() {{ showTbModal(o.tiebreaker, o.teams); }};
         }}
         outcomesContainer.appendChild(node);
     }});
+    
+    // Attach close handler
+    document.getElementById('tb-modal').addEventListener('click', function(e) {{
+        if (e.target === this) closeTbModal();
+    }});
 }})();
 
-function showModal(tb, teams) {{
+function showTbModal(tb, teams) {{
     const modal = document.getElementById('tb-modal');
-    const body = document.getElementById('modal-body');
+    const body = document.getElementById('tb-modal-body');
     const marginStr = tb.margin > 0 ? '+' + tb.margin.toFixed(1) : tb.margin.toFixed(1);
     body.innerHTML = `
         <p><strong>Playoff Teams:</strong> ${{teams.join(', ')}}</p>
         <p><strong>4th Seed:</strong> ${{tb.fourth}} (${{tb.fourth_pf.toFixed(1)}} PF)</p>
         <p><strong>5th Place:</strong> ${{tb.fifth}} (${{tb.fifth_pf.toFixed(1)}} PF)</p>
-        <p><strong>Current Margin:</strong> <span class="margin-highlight">${{marginStr}} PF</span></p>
-        <p style="color:#aaa;font-size:12px;">The 4th seed wins the tiebreaker because they have more Points For.</p>
+        <p><strong>Current Margin:</strong> <span style="background:#22c55e;color:#000;padding:2px 10px;border-radius:4px;font-weight:bold;">${{marginStr}} PF</span></p>
+        <p style="color:#aaa;font-size:12px;margin-top:12px;">The 4th seed wins the tiebreaker because they have more Points For.</p>
     `;
-    modal.classList.add('active');
+    modal.style.display = 'flex';
 }}
 
-function closeModal() {{
-    document.getElementById('tb-modal').classList.remove('active');
+function closeTbModal() {{
+    document.getElementById('tb-modal').style.display = 'none';
 }}
-
-document.getElementById('tb-modal').addEventListener('click', function(e) {{
-    if (e.target === this) closeModal();
-}});
 </script>
 </div>
 
