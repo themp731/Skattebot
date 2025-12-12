@@ -212,13 +212,50 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
                 scenario_counts[playoff_key] = {'count': 0, 'example_matchups': sim['matchup_winners']}
             scenario_counts[playoff_key]['count'] += 1
         
-        top_scenarios = sorted(scenario_counts.items(), key=lambda x: -x[1]['count'])[:8]
+        import itertools
         all_scenarios = []
-        for playoff_key, data in top_scenarios:
+        
+        for outcome_tuple in itertools.product([0, 1], repeat=len(matchups_with_probs)):
+            scenario_results = []
+            scenario_prob = 1.0
+            
+            for i, outcome in enumerate(outcome_tuple):
+                matchup = matchups_with_probs[i]
+                if outcome == 0:
+                    winner = matchup['home']
+                    loser = matchup['away']
+                    scenario_prob *= matchup['home_win_prob']
+                else:
+                    winner = matchup['away']
+                    loser = matchup['home']
+                    scenario_prob *= matchup['away_win_prob']
+                
+                scenario_results.append({'winner': winner, 'loser': loser})
+            
+            final_standings = []
+            for team_data in current_standings:
+                team = team_data['team']
+                new_wins = team_data['wins']
+                new_pf = team_data['pf'] + team_data['ppg']
+                
+                for result in scenario_results:
+                    if result['winner'] == team:
+                        new_wins += 1
+                
+                final_standings.append({
+                    'team': team,
+                    'wins': new_wins,
+                    'pf': new_pf
+                })
+            
+            final_standings.sort(key=lambda x: (-x['wins'], -x['pf']))
+            playoff_teams = [s['team'] for s in final_standings[:4]]
+            
             all_scenarios.append({
-                'probability': data['count'] / num_sims,
-                'playoff_teams': list(playoff_key),
-                'matchup_winners': data['example_matchups']
+                'results': scenario_results,
+                'probability': scenario_prob,
+                'playoff_teams': playoff_teams,
+                'final_standings': final_standings
             })
     else:
         matchups_with_probs = []
