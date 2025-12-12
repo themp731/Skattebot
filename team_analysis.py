@@ -115,6 +115,263 @@ def calculate_summary_stats(df):
     
     return summary
 
+def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, optimized_lineups=None):
+    """
+    Generate comprehensive playoff scenarios analysis for the final week.
+    Enumerates all possible outcomes and determines playoff implications.
+    
+    Returns dict with:
+    - current_standings: List of teams with current record and PF
+    - week15_matchups: List of matchups with win probabilities
+    - scenarios: All 64 possible outcomes with resulting playoffs
+    - clinch_scenarios: Which results clinch/eliminate each bubble team
+    - decision_tree_md: Markdown for decision tree visualization
+    """
+    current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
+    
+    current_standings = []
+    for _, row in current_summary.iterrows():
+        current_standings.append({
+            'team': row['team_name'],
+            'wins': int(row['real_wins']),
+            'losses': int(row['games_played'] - row['real_wins']),
+            'pf': round(row['points_for'], 2),
+            'ppg': round(row['ppg'], 2)
+        })
+    
+    current_standings.sort(key=lambda x: (-x['wins'], -x['pf']))
+    for i, team in enumerate(current_standings):
+        team['current_seed'] = i + 1
+    
+    week15_games = [g for g in remaining_schedule if g['week'] == 15]
+    
+    matchups_with_probs = []
+    for game in week15_games:
+        home = game['home']
+        away = game['away']
+        
+        home_prob = 0.5
+        for pred in game_predictions:
+            if (pred['home'] == home and pred['away'] == away) or \
+               (pred['home'] == away and pred['away'] == home):
+                raw_prob = pred.get('home_win_prob', 50)
+                if raw_prob > 1:
+                    raw_prob = raw_prob / 100.0
+                if pred['home'] == home:
+                    home_prob = raw_prob
+                else:
+                    home_prob = 1 - raw_prob
+                break
+        
+        matchups_with_probs.append({
+            'home': home,
+            'away': away,
+            'home_win_prob': home_prob,
+            'away_win_prob': 1 - home_prob
+        })
+    
+    import itertools
+    all_scenarios = []
+    
+    for outcome_tuple in itertools.product([0, 1], repeat=len(matchups_with_probs)):
+        scenario_results = []
+        scenario_prob = 1.0
+        
+        for i, outcome in enumerate(outcome_tuple):
+            matchup = matchups_with_probs[i]
+            if outcome == 0:
+                winner = matchup['home']
+                loser = matchup['away']
+                scenario_prob *= matchup['home_win_prob']
+            else:
+                winner = matchup['away']
+                loser = matchup['home']
+                scenario_prob *= matchup['away_win_prob']
+            
+            scenario_results.append({'winner': winner, 'loser': loser})
+        
+        final_standings = []
+        for team_data in current_standings:
+            team = team_data['team']
+            new_wins = team_data['wins']
+            new_pf = team_data['pf'] + team_data['ppg']
+            
+            for result in scenario_results:
+                if result['winner'] == team:
+                    new_wins += 1
+            
+            final_standings.append({
+                'team': team,
+                'wins': new_wins,
+                'pf': new_pf
+            })
+        
+        final_standings.sort(key=lambda x: (-x['wins'], -x['pf']))
+        playoff_teams = [s['team'] for s in final_standings[:4]]
+        
+        all_scenarios.append({
+            'results': scenario_results,
+            'probability': scenario_prob,
+            'playoff_teams': playoff_teams,
+            'final_standings': final_standings
+        })
+    
+    team_playoff_probs = {}
+    team_seed_probs = {team['team']: {1: 0, 2: 0, 3: 0, 4: 0} for team in current_standings}
+    
+    for team in current_standings:
+        team_name = team['team']
+        prob_sum = sum(s['probability'] for s in all_scenarios if team_name in s['playoff_teams'])
+        team_playoff_probs[team_name] = prob_sum
+        
+        for s in all_scenarios:
+            for seed_idx, t in enumerate(s['final_standings'][:4]):
+                if t['team'] == team_name:
+                    team_seed_probs[team_name][seed_idx + 1] += s['probability']
+    
+    bubble_teams = [t for t in current_standings if 0.01 < team_playoff_probs[t['team']] < 0.99]
+    
+    clinch_scenarios = {}
+    for team in bubble_teams:
+        team_name = team['team']
+        clinch_scenarios[team_name] = {
+            'clinch_with_win': False,
+            'clinch_with_loss': False,
+            'eliminated_with_loss': False,
+            'needs_help': [],
+            'clinch_prob': team_playoff_probs[team_name]
+        }
+        
+        team_matchup = None
+        for m in matchups_with_probs:
+            if team_name in [m['home'], m['away']]:
+                team_matchup = m
+                break
+        
+        if team_matchup:
+            team_wins_scenarios = [s for s in all_scenarios 
+                                   if any(r['winner'] == team_name for r in s['results'])]
+            team_loses_scenarios = [s for s in all_scenarios 
+                                    if any(r['loser'] == team_name for r in s['results'])]
+            
+            if team_wins_scenarios:
+                all_make_playoffs = all(team_name in s['playoff_teams'] for s in team_wins_scenarios)
+                clinch_scenarios[team_name]['clinch_with_win'] = all_make_playoffs
+                clinch_scenarios[team_name]['win_playoff_prob'] = sum(
+                    s['probability'] for s in team_wins_scenarios if team_name in s['playoff_teams']
+                ) / sum(s['probability'] for s in team_wins_scenarios) if team_wins_scenarios else 0
+            
+            if team_loses_scenarios:
+                all_eliminated = all(team_name not in s['playoff_teams'] for s in team_loses_scenarios)
+                clinch_scenarios[team_name]['eliminated_with_loss'] = all_eliminated
+                clinch_scenarios[team_name]['loss_playoff_prob'] = sum(
+                    s['probability'] for s in team_loses_scenarios if team_name in s['playoff_teams']
+                ) / sum(s['probability'] for s in team_loses_scenarios) if team_loses_scenarios else 0
+    
+    md_lines = []
+    md_lines.append("## Week 15 Playoff Scenarios\n")
+    md_lines.append("### Current Standings (After Week 14)\n")
+    md_lines.append("| Seed | Team | Record | Points For | Playoff % |\n")
+    md_lines.append("|------|------|--------|------------|----------|\n")
+    
+    for team in current_standings:
+        pct = team_playoff_probs.get(team['team'], 0) * 100
+        status = ""
+        if pct >= 99.9:
+            status = " (CLINCHED)"
+        elif pct <= 0.1:
+            status = " (ELIMINATED)"
+        md_lines.append(f"| {team['current_seed']} | **{team['team']}**{status} | {team['wins']}-{team['losses']} | {team['pf']:.2f} | {pct:.1f}% |\n")
+    
+    md_lines.append("\n### Week 15 Matchups (Final Week of Regular Season)\n")
+    md_lines.append("| Matchup | Favorite | Win Prob | Playoff Implications |\n")
+    md_lines.append("|---------|----------|----------|---------------------|\n")
+    
+    for m in matchups_with_probs:
+        home_in_contention = team_playoff_probs.get(m['home'], 0) > 0.01 and team_playoff_probs.get(m['home'], 0) < 0.99
+        away_in_contention = team_playoff_probs.get(m['away'], 0) > 0.01 and team_playoff_probs.get(m['away'], 0) < 0.99
+        
+        if m['home_win_prob'] > 0.5:
+            fav = m['home']
+            prob = m['home_win_prob'] * 100
+        else:
+            fav = m['away']
+            prob = m['away_win_prob'] * 100
+        
+        implications = []
+        if home_in_contention or away_in_contention:
+            if home_in_contention:
+                implications.append(f"{m['home']} fighting for playoff spot")
+            if away_in_contention:
+                implications.append(f"{m['away']} fighting for playoff spot")
+        else:
+            home_locked = team_playoff_probs.get(m['home'], 0) >= 0.99
+            away_locked = team_playoff_probs.get(m['away'], 0) >= 0.99
+            if home_locked and away_locked:
+                implications.append("Seeding battle")
+            else:
+                implications.append("No playoff impact")
+        
+        md_lines.append(f"| {m['home']} vs {m['away']} | {fav} | {prob:.0f}% | {'; '.join(implications)} |\n")
+    
+    md_lines.append("\n### Playoff Probability by Seed\n")
+    md_lines.append("| Team | 1st Seed | 2nd Seed | 3rd Seed | 4th Seed | Total Playoff % |\n")
+    md_lines.append("|------|----------|----------|----------|----------|----------------|\n")
+    
+    sorted_by_playoff = sorted(current_standings, key=lambda x: -team_playoff_probs.get(x['team'], 0))
+    for team in sorted_by_playoff:
+        t = team['team']
+        if team_playoff_probs.get(t, 0) > 0.001:
+            s1 = team_seed_probs[t][1] * 100
+            s2 = team_seed_probs[t][2] * 100
+            s3 = team_seed_probs[t][3] * 100
+            s4 = team_seed_probs[t][4] * 100
+            total = team_playoff_probs[t] * 100
+            md_lines.append(f"| **{t}** | {s1:.1f}% | {s2:.1f}% | {s3:.1f}% | {s4:.1f}% | **{total:.1f}%** |\n")
+    
+    md_lines.append("\n### Clinch/Elimination Scenarios\n")
+    
+    for team in bubble_teams:
+        t = team['team']
+        info = clinch_scenarios.get(t, {})
+        md_lines.append(f"\n**{t}** (Currently #{team['current_seed']}, {team['wins']}-{team['losses']}):\n")
+        
+        if info.get('clinch_with_win'):
+            md_lines.append(f"- WIN and IN: Clinches playoff spot with a victory\n")
+        elif info.get('win_playoff_prob', 0) > 0:
+            md_lines.append(f"- With a WIN: {info.get('win_playoff_prob', 0)*100:.1f}% playoff probability\n")
+        
+        if info.get('eliminated_with_loss'):
+            md_lines.append(f"- LOSE and OUT: Eliminated with a loss\n")
+        elif info.get('loss_playoff_prob', 0) > 0:
+            md_lines.append(f"- With a LOSS: {info.get('loss_playoff_prob', 0)*100:.1f}% playoff probability (needs help)\n")
+    
+    md_lines.append("\n### Decision Tree: Key Scenarios\n")
+    md_lines.append("```\n")
+    md_lines.append("WEEK 15 PLAYOFF SCENARIOS\n")
+    md_lines.append("=" * 50 + "\n")
+    
+    most_likely = sorted(all_scenarios, key=lambda x: -x['probability'])[:8]
+    for i, scenario in enumerate(most_likely):
+        md_lines.append(f"\nScenario {i+1} ({scenario['probability']*100:.1f}% likely):\n")
+        results_str = ", ".join([f"{r['winner']} beats {r['loser']}" for r in scenario['results']])
+        md_lines.append(f"  Results: {results_str}\n")
+        md_lines.append(f"  Playoffs: {', '.join(scenario['playoff_teams'])}\n")
+    
+    md_lines.append("```\n")
+    
+    return {
+        'current_standings': current_standings,
+        'week15_matchups': matchups_with_probs,
+        'all_scenarios': all_scenarios,
+        'team_playoff_probs': team_playoff_probs,
+        'team_seed_probs': team_seed_probs,
+        'clinch_scenarios': clinch_scenarios,
+        'bubble_teams': bubble_teams,
+        'markdown': ''.join(md_lines)
+    }
+
+
 def fetch_espn_projections(remaining_schedule):
     """Fetch ESPN projections, enhanced roster health, and optimized lineup data for remaining weeks."""
     api = get_espn_api()
@@ -1240,10 +1497,13 @@ def generate_matchup_breakdown(team, remaining_schedule, espn_projections, optim
 
 def generate_markdown_analysis(summary, remaining_schedule, game_predictions, playoff_preds, 
                                espn_projections, roster_health, reg_season_weeks, 
-                               optimized_lineups=None, faab_data=None, filename='power_rankings_analysis.md'):
+                               optimized_lineups=None, faab_data=None, playoff_scenarios=None,
+                               filename='power_rankings_analysis.md'):
     """Generate dynamic markdown analysis with Monte Carlo methodology."""
     if optimized_lineups is None:
         optimized_lineups = {}
+    if playoff_scenarios is None:
+        playoff_scenarios = {}
     
     latest_season = summary['season'].max()
     current_summary = summary[summary['season'] == latest_season].copy()
@@ -1258,8 +1518,14 @@ def generate_markdown_analysis(summary, remaining_schedule, game_predictions, pl
     most_unlucky = current_summary.loc[current_summary['wax'].idxmin()]
     top_scorer = current_summary.loc[current_summary['ppg'].idxmax()]
     
+    playoff_scenarios_md = playoff_scenarios.get('markdown', '') if playoff_scenarios else ''
+    
     md = f"""# {CURRENT_SEASON} Fantasy Football Power Rankings Analysis
 ## Week {weeks_played} Update - Generated {generated_date}
+
+---
+
+{playoff_scenarios_md}
 
 ---
 
@@ -1985,6 +2251,9 @@ def main():
     print("[6/8] Predicting remaining games (using optimized projections)...")
     game_predictions = predict_remaining_games(summary, remaining_schedule, espn_projections, optimized_lineups)
     
+    print("[6.5/8] Generating playoff scenarios analysis...")
+    playoff_scenarios = generate_playoff_scenarios(summary, remaining_schedule, game_predictions, optimized_lineups)
+    
     print_summary_table(summary)
     save_summary_csv(summary)
     
@@ -1998,7 +2267,7 @@ def main():
     print("\nGenerating markdown analysis...")
     generate_markdown_analysis(summary, remaining_schedule, game_predictions, 
                               playoff_preds, espn_projections, roster_health, reg_season_weeks,
-                              optimized_lineups, faab_data)
+                              optimized_lineups, faab_data, playoff_scenarios)
     
     print("\n" + "="*80)
     print("ANALYSIS COMPLETE!")
