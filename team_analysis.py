@@ -2077,7 +2077,7 @@ def generate_markdown_analysis(summary, remaining_schedule, game_predictions, pl
     
     weeks_played = int(current_summary['games_played'].max())
     games_remaining = reg_season_weeks - weeks_played
-    generated_date = datetime.now().strftime("%B %d, %Y at %I:%M %p")
+    generated_date = datetime.now().strftime("%B %d, %Y at %I:%M %p EST")
     
     leader = current_summary[current_summary['power_rank'] == 1].iloc[0]
     most_lucky = current_summary.loc[current_summary['wax'].idxmax()]
@@ -2088,6 +2088,25 @@ def generate_markdown_analysis(summary, remaining_schedule, game_predictions, pl
     
     md = f"""# DU Alums {CURRENT_SEASON} Fantasy Football Power Rankings
 ## Week {weeks_played} Update - Generated {generated_date}
+
+---
+
+> **A Message From Your Humble Commissioner's IT Department:**
+>
+> Creating this masterpiece of statistical analysis required approximately 47 hours of development time, $127 in cloud computing credits, 3 existential crises, and more caffeine than is medically advisable. The Monte Carlo simulation alone ran 10,000 iterations just so you ingrates could see that your 23% playoff odds are, in fact, mathematically justified rather than just vibes.
+>
+> In light of these sacrifices, the author humbly suggests the following adjustments to the league's prize structure:
+>
+> | Original Payout | Proposed Adjustment | Justification |
+> |-----------------|---------------------|---------------|
+> | Weekly High Score: $50 | $45 + $5 to IT | "Analytics fee" |
+> | 1st Place: $1,485 | $1,400 + $85 to IT | "Championship data processing surcharge" |
+> | 2nd Place: $810 | $780 + $30 to IT | "Runner-up computational assessment" |
+> | 3rd Place: $405 | $390 + $15 to IT | "Consolation algorithm maintenance" |
+>
+> These modest proposals would net approximately $135 in "totally legitimate" compensation, which the author would definitely spend on improving next year's analysis and not on bourbon. Probably.
+>
+> *— The Management*
 
 ---
 
