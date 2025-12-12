@@ -14,22 +14,23 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "ESPN FF Scraper"
+args = "Power Rankings Generator"
 
 [[workflows.workflow]]
-name = "ESPN FF Scraper"
+name = "Power Rankings Generator"
 author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python espn_ff_scraper.py --league_id 149388 --years 2025"
+args = "python main.py --html-only"
+
+[workflows.workflow.metadata]
+outputType = "console"
 
 [deployment]
 run = ["sh", "-c", "python espn_ff_scraper.py --league_id 12345 --week 1"]
+deploymentTarget = "static"
+publicDir = "public"
 
 [agent]
 expertMode = true

@@ -42,16 +42,16 @@ def run_analysis():
     """Run team analysis and generate visualizations."""
     logger.info("Step 2: Running team analysis and generating visualizations...")
     
-    sys.path.insert(0, 'scrapers')
+    from scrapers import team_analysis
+    import pandas as pd
     
-    original_dir = os.getcwd()
+    original_load_data = team_analysis.load_data
+    original_load_matchups = team_analysis.load_matchups
+    
+    team_analysis.load_data = lambda filename='team_stats.csv': pd.read_csv(os.path.join(DATA_DIR, filename))
+    team_analysis.load_matchups = lambda filename='matchups.csv': pd.read_csv(os.path.join(DATA_DIR, filename))
     
     try:
-        from scrapers import team_analysis
-        
-        team_analysis.load_data = lambda filename='team_stats.csv': team_analysis.pd.read_csv(os.path.join(DATA_DIR, filename))
-        team_analysis.load_matchups = lambda filename='matchups.csv': team_analysis.pd.read_csv(os.path.join(DATA_DIR, filename))
-        
         if hasattr(team_analysis, 'main'):
             team_analysis.main()
         else:
@@ -63,11 +63,11 @@ def run_analysis():
             
             os.makedirs('visualizations', exist_ok=True)
             os.makedirs('visualizations/monte_carlo', exist_ok=True)
-            
-            logger.info("Analysis complete.")
-            
+        
+        logger.info("Analysis complete.")
     finally:
-        os.chdir(original_dir)
+        team_analysis.load_data = original_load_data
+        team_analysis.load_matchups = original_load_matchups
 
 def generate_html():
     """Generate the static HTML page."""
