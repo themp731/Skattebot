@@ -133,13 +133,13 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
                 startOnLoad: true,
                 theme: 'dark',
                 themeVariables: {
-                    primaryColor: '#0f3460',
-                    primaryTextColor: '#eaeaea',
-                    primaryBorderColor: '#e94560',
-                    lineColor: '#a0a0a0',
-                    secondaryColor: '#16213e',
-                    tertiaryColor: '#1a1a2e',
-                    edgeLabelBackground: '#16213e'
+                    primaryColor: '#003366',
+                    primaryTextColor: '#f0f0f0',
+                    primaryBorderColor: '#F0AB00',
+                    lineColor: '#b8c5d6',
+                    secondaryColor: '#0d2137',
+                    tertiaryColor: '#0a1628',
+                    edgeLabelBackground: '#003366'
                 },
                 flowchart: {
                     curve: 'basis',
@@ -155,20 +155,22 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fantasy Football Power Rankings Analysis</title>
+    <title>DU Alums Fantasy Football - Power Rankings</title>
     {mermaid_script}
     <style>
         :root {{
-            --bg-primary: #1a1a2e;
-            --bg-secondary: #16213e;
-            --bg-card: #0f3460;
-            --text-primary: #eaeaea;
-            --text-secondary: #a0a0a0;
-            --accent: #e94560;
-            --accent-secondary: #0f3460;
+            --bg-primary: #0a1628;
+            --bg-secondary: #0d2137;
+            --bg-card: #003366;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b8c5d6;
+            --accent: #F0AB00;
+            --accent-secondary: #003366;
             --success: #00d26a;
-            --warning: #ffc107;
-            --border: #2a2a4a;
+            --warning: #F0AB00;
+            --border: #1a4a7a;
+            --du-sapphire: #003366;
+            --du-gold: #F0AB00;
         }}
         
         * {{
@@ -197,10 +199,44 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
         }}
         
         h1 {{
-            color: var(--accent);
+            color: var(--du-gold);
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(233, 69, 96, 0.3);
+            text-shadow: 0 2px 10px rgba(240, 171, 0, 0.4);
+        }}
+        
+        .du-header {{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--du-sapphire) 0%, #004080 100%);
+            border-radius: 15px;
+            border: 2px solid var(--du-gold);
+        }}
+        
+        .du-logo {{
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--du-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-family: Georgia, serif;
+        }}
+        
+        .du-title {{
+            flex: 1;
+        }}
+        
+        .du-title h1 {{
+            margin: 0;
+            font-size: 2em;
+        }}
+        
+        .du-subtitle {{
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            margin-top: 5px;
         }}
         
         h2 {{
@@ -378,6 +414,13 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
 </head>
 <body>
     <div class="container">
+        <div class="du-header">
+            <div class="du-logo">ΔΥ</div>
+            <div class="du-title">
+                <h1 style="color: var(--du-gold);">DU Alums Fantasy Football</h1>
+                <div class="du-subtitle">Dikaia Upotheke - Justice Our Foundation</div>
+            </div>
+        </div>
         {html_content}
     </div>
 </body>
