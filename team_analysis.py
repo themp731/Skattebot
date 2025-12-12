@@ -194,14 +194,14 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
             team_name = team['team']
             pred = playoff_preds.get(team_name, {})
             
-            win_playoff_prob = pred.get('playoff_given_win_pct', 0) / 100.0
-            loss_playoff_prob = pred.get('playoff_given_loss_pct', 0) / 100.0
+            win_playoff_pct = pred.get('playoff_given_win_pct', 0)
+            loss_playoff_pct = pred.get('playoff_given_loss_pct', 0)
             
             clinch_scenarios[team_name] = {
-                'clinch_with_win': win_playoff_prob >= 0.999,
-                'eliminated_with_loss': loss_playoff_prob <= 0.001,
-                'win_playoff_prob': win_playoff_prob,
-                'loss_playoff_prob': loss_playoff_prob,
+                'clinch_with_win': win_playoff_pct >= 99.9,
+                'eliminated_with_loss': loss_playoff_pct <= 0.1,
+                'win_playoff_prob': win_playoff_pct / 100.0,
+                'loss_playoff_prob': loss_playoff_pct / 100.0,
                 'clinch_prob': team_playoff_probs.get(team_name, 0)
             }
         

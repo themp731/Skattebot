@@ -1,5 +1,5 @@
 # 2025 Fantasy Football Power Rankings Analysis
-## Week 14 Update - Generated December 12, 2025 at 03:02 AM
+## Week 14 Update - Generated December 12, 2025 at 03:04 AM
 
 ---
 
@@ -7,12 +7,12 @@
 ### Current Standings (After Week 14)
 | Seed | Team | Record | Points For | Playoff % |
 |------|------|--------|------------|----------|
-| 1 | **ZSF** | 9-5 | 1656.28 | 89.8% |
-| 2 | **MP** | 9-5 | 1587.82 | 91.5% |
-| 3 | **sgf** | 9-5 | 1526.08 | 65.4% |
-| 4 | **KIRK** | 9-5 | 1524.90 | 87.1% |
-| 5 | **GV** | 9-5 | 1485.96 | 63.7% |
-| 6 | **POO** | 8-6 | 1471.46 | 2.5% |
+| 1 | **ZSF** | 9-5 | 1656.28 | 90.3% |
+| 2 | **MP** | 9-5 | 1587.82 | 91.0% |
+| 3 | **sgf** | 9-5 | 1526.08 | 65.1% |
+| 4 | **KIRK** | 9-5 | 1524.90 | 87.3% |
+| 5 | **GV** | 9-5 | 1485.96 | 63.6% |
+| 6 | **POO** | 8-6 | 1471.46 | 2.7% |
 | 7 | **GEMP** (ELIMINATED) | 7-7 | 1380.84 | 0.0% |
 | 8 | **KESS** (ELIMINATED) | 6-8 | 1334.74 | 0.0% |
 | 9 | **PATS** (ELIMINATED) | 5-9 | 1477.38 | 0.0% |
@@ -25,45 +25,45 @@
 |---------|----------|----------|---------------------|
 | WOOD vs ROUX | ROUX | 50% | No playoff impact |
 | GEMP vs GV | GV | 63% | GV fighting for playoff spot |
-| KESS vs PATS | PATS | 67% | No playoff impact |
-| MP vs POO | MP | 53% | MP fighting for playoff spot; POO fighting for playoff spot |
+| KESS vs PATS | PATS | 66% | No playoff impact |
+| MP vs POO | MP | 52% | MP fighting for playoff spot; POO fighting for playoff spot |
 | KIRK vs 3000 | KIRK | 76% | KIRK fighting for playoff spot |
 | sgf vs ZSF | ZSF | 62% | sgf fighting for playoff spot; ZSF fighting for playoff spot |
 
 ### Playoff Probability by Seed
 | Team | 1st Seed | 2nd Seed | 3rd Seed | 4th Seed | Total Playoff % |
 |------|----------|----------|----------|----------|----------------|
-| **MP** | 20.7% | 34.6% | 13.6% | 22.7% | **91.5%** |
-| **ZSF** | 61.2% | 1.6% | 9.9% | 17.0% | **89.8%** |
-| **KIRK** | 6.2% | 36.8% | 34.4% | 9.8% | **87.1%** |
-| **sgf** | 11.7% | 18.9% | 10.8% | 23.9% | **65.4%** |
-| **GV** | 0.2% | 8.1% | 31.1% | 24.3% | **63.7%** |
-| **POO** | 0.0% | 0.0% | 0.2% | 2.3% | **2.5%** |
+| **MP** | 20.4% | 34.6% | 14.2% | 21.8% | **91.0%** |
+| **ZSF** | 61.2% | 1.8% | 9.6% | 17.6% | **90.3%** |
+| **KIRK** | 6.4% | 36.4% | 34.6% | 9.9% | **87.3%** |
+| **sgf** | 11.7% | 18.9% | 10.9% | 23.5% | **65.1%** |
+| **GV** | 0.3% | 8.3% | 30.3% | 24.8% | **63.6%** |
+| **POO** | 0.0% | 0.0% | 0.3% | 2.4% | **2.7%** |
 
 ### Clinch/Elimination Scenarios
 
 **ZSF** (Currently #1, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 73.4% playoff probability (needs help)
+- With a LOSS: 74.7% playoff probability (needs help)
 
 **MP** (Currently #2, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 82.0% playoff probability (needs help)
+- With a LOSS: 81.1% playoff probability (needs help)
 
 **sgf** (Currently #3, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 43.7% playoff probability (needs help)
+- With a LOSS: 43.2% playoff probability (needs help)
 
 **KIRK** (Currently #4, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 45.6% playoff probability (needs help)
+- With a LOSS: 46.5% playoff probability (needs help)
 
 **GV** (Currently #5, 9-5):
 - WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 1.8% playoff probability (needs help)
+- With a LOSS: 1.9% playoff probability (needs help)
 
 **POO** (Currently #6, 8-6):
-- With a WIN: 5.3% playoff probability
+- With a WIN: 5.6% playoff probability
 - LOSE and OUT: Eliminated with a loss
 
 ### Decision Tree: Key Scenarios
@@ -71,36 +71,36 @@
 WEEK 15 PLAYOFF SCENARIOS (10,000 Monte Carlo simulations with variance)
 ==================================================
 
-Scenario 1 (34.1% of simulations):
-  Results: ROUX wins, GEMP wins, KESS wins, POO wins, KIRK wins, ZSF wins
+Scenario 1 (34.0% of simulations):
+  Results: WOOD wins, GEMP wins, PATS wins, MP wins, 3000 wins, ZSF wins
   Playoffs: KIRK, MP, ZSF, sgf
 
-Scenario 2 (32.7% of simulations):
-  Results: WOOD wins, GV wins, PATS wins, POO wins, KIRK wins, ZSF wins
+Scenario 2 (32.9% of simulations):
+  Results: WOOD wins, GV wins, KESS wins, POO wins, KIRK wins, ZSF wins
   Playoffs: GV, KIRK, MP, ZSF
 
-Scenario 3 (12.0% of simulations):
+Scenario 3 (11.7% of simulations):
   Results: ROUX wins, GV wins, PATS wins, POO wins, 3000 wins, ZSF wins
   Playoffs: GV, MP, ZSF, sgf
 
-Scenario 4 (10.2% of simulations):
+Scenario 4 (9.7% of simulations):
   Results: WOOD wins, GV wins, PATS wins, MP wins, KIRK wins, sgf wins
   Playoffs: GV, KIRK, MP, sgf
 
-Scenario 5 (8.5% of simulations):
+Scenario 5 (9.0% of simulations):
   Results: ROUX wins, GV wins, PATS wins, POO wins, KIRK wins, sgf wins
   Playoffs: GV, KIRK, ZSF, sgf
 
-Scenario 6 (1.6% of simulations):
-  Results: WOOD wins, GEMP wins, PATS wins, POO wins, KIRK wins, ZSF wins
+Scenario 6 (1.7% of simulations):
+  Results: ROUX wins, GEMP wins, PATS wins, POO wins, KIRK wins, ZSF wins
   Playoffs: KIRK, MP, POO, ZSF
 
 Scenario 7 (0.6% of simulations):
-  Results: ROUX wins, GEMP wins, PATS wins, POO wins, 3000 wins, sgf wins
+  Results: WOOD wins, GEMP wins, KESS wins, POO wins, 3000 wins, sgf wins
   Playoffs: MP, POO, ZSF, sgf
 
 Scenario 8 (0.3% of simulations):
-  Results: ROUX wins, GV wins, KESS wins, POO wins, 3000 wins, ZSF wins
+  Results: WOOD wins, GV wins, KESS wins, POO wins, 3000 wins, ZSF wins
   Playoffs: GV, MP, POO, ZSF
 ```
 
@@ -278,12 +278,12 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 | Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % | PF Leader % |
 |------|--------|-----------|------------------|--------------|----------------|----------------|-------------|
-| ZSF | 9-5 | 89.8% | 10 | 1776 | #2.1 | 61.2% | 96.5% |
-| MP | 9-5 | 91.5% | 10 | 1700 | #2.6 | 20.7% | 3.5% |
-| KIRK | 9-5 | 87.1% | 10 | 1637 | #2.9 | 6.2% | 0.0% |
-| sgf | 9-5 | 65.4% | 9 | 1633 | #3.5 | 11.7% | 0.0% |
-| GV | 9-5 | 63.7% | 10 | 1593 | #4.0 | 0.2% | 0.0% |
-| POO | 8-6 | 2.5% | 8 | 1581 | #5.8 | 0.0% | 0.0% |
+| ZSF | 9-5 | 90.3% | 10 | 1775 | #2.1 | 61.2% | 96.2% |
+| MP | 9-5 | 91.0% | 10 | 1700 | #2.6 | 20.4% | 3.8% |
+| KIRK | 9-5 | 87.3% | 10 | 1637 | #2.9 | 6.4% | 0.0% |
+| sgf | 9-5 | 65.1% | 9 | 1633 | #3.5 | 11.7% | 0.0% |
+| GV | 9-5 | 63.6% | 10 | 1593 | #4.0 | 0.3% | 0.0% |
+| POO | 8-6 | 2.7% | 8 | 1582 | #5.8 | 0.0% | 0.0% |
 | GEMP | 7-7 | 0.0% | 7 | 1479 | #7.0 | 0.0% | 0.0% |
 | PATS | 5-9 | 0.0% | 6 | 1586 | #8.5 | 0.0% | 0.0% |
 | KESS | 6-8 | 0.0% | 6 | 1431 | #8.8 | 0.0% | 0.0% |
@@ -306,9 +306,9 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 ### Playoff Picture Analysis
 
-**Locked In:** MP - ESPN projections and historical data both agree: these teams are playoff-bound.
+**Locked In:** ZSF, MP - ESPN projections and historical data both agree: these teams are playoff-bound.
 
-**Looking Good:** GV, sgf, KIRK, ZSF - Strong position but not mathematically safe. The simulation likes their chances.
+**Looking Good:** GV, sgf, KIRK - Strong position but not mathematically safe. The simulation likes their chances.
 
 **Long Shots:** GEMP, POO, KESS, WOOD, ROUX, 3000, PATS - The simulations found very few paths to the playoffs. Time to play spoiler.
 
@@ -318,10 +318,10 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
 
 | Rank | Team | Current PF | Projected Final PF | Expected Addition |
 |------|------|------------|-------------------|-------------------|
-| 1 | ZSF | 1656 | 1776 | +119 |
+| 1 | ZSF | 1656 | 1775 | +119 |
 | 2 | MP | 1588 | 1700 | +112 |
 | 3 | KIRK | 1525 | 1637 | +112 |
-| 4 | sgf | 1526 | 1633 | +107 |
+| 4 | sgf | 1526 | 1633 | +106 |
 | 5 | GV | 1486 | 1593 | +107 |
 | 6 | PATS | 1477 | 1586 | +109 |
 
@@ -371,16 +371,16 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
 
 | Team | Playoff % | PF Leader % | Total Cost | E[Playoff] | E[PF Prize] | E[Weekly] | E[Return] | **Net Expected** |
 |------|-----------|-------------|------------|------------|-------------|-----------|-----------|------------------|
-| ZSF | 89.8% | 96.5% | $294 | $963 | $232 | $29 | $1223 | **$929** |
-| MP | 91.5% | 3.5% | $258 | $642 | $8 | $28 | $678 | **$420** |
-| KIRK | 87.1% | 0.0% | $265 | $529 | $0 | $26 | $555 | **$290** |
-| sgf | 65.4% | 0.0% | $262 | $372 | $0 | $26 | $398 | **$136** |
-| GV | 63.7% | 0.0% | $280 | $194 | $0 | $26 | $220 | **$-60** |
+| ZSF | 90.3% | 96.2% | $294 | $962 | $231 | $29 | $1222 | **$928** |
+| MP | 91.0% | 3.8% | $258 | $641 | $9 | $28 | $677 | **$419** |
+| KIRK | 87.3% | 0.0% | $265 | $530 | $0 | $26 | $556 | **$291** |
+| sgf | 65.1% | 0.0% | $262 | $371 | $0 | $26 | $398 | **$136** |
+| GV | 63.6% | 0.0% | $280 | $195 | $0 | $26 | $220 | **$-60** |
 | 3000 | 0.0% | 0.0% | $250 | $0 | $0 | $22 | $22 | **$-228** |
 | GEMP | 0.0% | 0.0% | $256 | $0 | $0 | $24 | $24 | **$-232** |
 | WOOD | 0.0% | 0.0% | $254 | $0 | $0 | $21 | $21 | **$-233** |
 | ROUX | 0.0% | 0.0% | $270 | $0 | $0 | $23 | $23 | **$-248** |
-| POO | 2.5% | 0.0% | $276 | $1 | $0 | $26 | $26 | **$-250** |
+| POO | 2.7% | 0.0% | $276 | $1 | $0 | $26 | $27 | **$-249** |
 | KESS | 0.0% | 0.0% | $278 | $0 | $0 | $23 | $23 | **$-255** |
 | PATS | 0.0% | 0.0% | $296 | $0 | $0 | $26 | $26 | **$-270** |
 
@@ -580,7 +580,7 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 Sitting atop the standings with a commanding 9-5 record, this team has earned the top spot through dominant performance. Their 118.31 PPG leads the league, which translates to an impressive 9.27 MVP-W and 11 top-6 weekly finishes. Their -0.27 WAX shows they're earning their wins fair and square - no luck needed. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1776** | Playoff: **89.8%** | #1 Seed: **61.2%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1775** | Playoff: **90.3%** | #1 Seed: **61.2%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -637,7 +637,7 @@ Key injuries: De'Von Achane (RB, QUESTIONABLE). Bench depth: James Cook III (RB)
 
 Second place with 9-5, trailing the leader by 0.91 power points. Scoring 113.42 PPG with 10 top-6 finishes shows genuine quality. That -0.36 WAX is frustrating - a bit more luck and they'd be in first. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1700** | Playoff: **91.5%** | #1 Seed: **20.7%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1700** | Playoff: **91.0%** | #1 Seed: **20.4%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -647,7 +647,7 @@ Second place with 9-5, trailing the leader by 0.91 power points. Scoring 113.42 
 | Historical PPG | 113.4 pts | Season average through week 12 | 
 | Monte Carlo Input | 111.8 pts | 60% Optimized + 40% Historical | 
 
-*Strong odds at 92%, but fantasy football loves chaos. One bad week and this could get interesting. Key injuries to Breece Hall (QUESTIONABLE) are devastating - the variance multiplier of 1.08x reflects massive uncertainty.* 
+*Strong odds at 91%, but fantasy football loves chaos. One bad week and this could get interesting. Key injuries to Breece Hall (QUESTIONABLE) are devastating - the variance multiplier of 1.08x reflects massive uncertainty.* 
 
 **Roster Health & Availability Report:** 
 Key injuries: Breece Hall (RB, QUESTIONABLE). 
@@ -691,7 +691,7 @@ Key injuries: Breece Hall (RB, QUESTIONABLE).
 
 Currently in the playoff picture at #3 with a 9-5 record. Their 108.92 PPG and 8.55 MVP-W put them in solid position. 10 top-6 finishes in 14 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1637** | Playoff: **87.1%** | #1 Seed: **6.2%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1637** | Playoff: **87.3%** | #1 Seed: **6.4%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -745,7 +745,7 @@ Key injuries: Davante Adams (RB, QUESTIONABLE).
 
 Currently in the playoff picture at #4 with a 9-5 record. Their 109.01 PPG and 8.36 MVP-W put them in solid position. 8 top-6 finishes in 14 weeks shows they can compete with anyone. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1633** | Playoff: **65.4%** | #1 Seed: **11.7%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1633** | Playoff: **65.1%** | #1 Seed: **11.7%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -795,9 +795,9 @@ Currently in the playoff picture at #4 with a 9-5 record. Their 109.01 PPG and 8
 
 **Record:** 9-5 | **PPG:** 106.14 | **Total PF:** 1486 | **Top6:** 8 | **MVP-W:** 8.18 | **WAX:** +0.82
 
-On the playoff bubble at #5 with 9-5. Still in decent shape with 63.7% playoff odds. Their 106.14 PPG and 8 top-6 finishes show potential. They've benefited from +0.82 WAX - riding some good matchups. 
+On the playoff bubble at #5 with 9-5. Still in decent shape with 63.6% playoff odds. Their 106.14 PPG and 8 top-6 finishes show potential. They've benefited from +0.82 WAX - riding some good matchups. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1593** | Playoff: **63.7%** | #1 Seed: **0.2%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1593** | Playoff: **63.6%** | #1 Seed: **0.3%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -841,9 +841,9 @@ On the playoff bubble at #5 with 9-5. Still in decent shape with 63.7% playoff o
 
 **Record:** 8-6 | **PPG:** 105.10 | **Total PF:** 1471 | **Top6:** 7 | **MVP-W:** 7.09 | **WAX:** +0.91
 
-On the playoff bubble at #6 with 8-6. Need to step it up - only 2.5% playoff odds right now. Their 105.10 PPG and 7 top-6 finishes show potential. They've benefited from +0.91 WAX - riding some good matchups. 
+On the playoff bubble at #6 with 8-6. Need to step it up - only 2.7% playoff odds right now. Their 105.10 PPG and 7 top-6 finishes show potential. They've benefited from +0.91 WAX - riding some good matchups. 
 
-**Projection Summary:** Most likely finish: **8 wins** | Projected PF: **1581** | Playoff: **2.5%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **8 wins** | Projected PF: **1582** | Playoff: **2.7%** | #1 Seed: **0.0%** 
 
 **Projection Breakdown (Avg Per Game, Weeks 13-15):** 
 | Source | Projection | Notes | 
@@ -1216,12 +1216,12 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 | Rank | Team | Projected Wins | Projected PF | Current Record | Playoff % |
 |------|------|----------------|--------------|----------------|-----------|
-| 1 | ZSF | 9.6 | 1776 | 9-5 | 89.8% |
-| 2 | MP | 9.5 | 1700 | 9-5 | 91.5% |
-| 3 | KIRK | 9.8 | 1637 | 9-5 | 87.1% |
-| 4 | sgf | 9.4 | 1633 | 9-5 | 65.4% |
-| 5 | GV | 9.6 | 1593 | 9-5 | 63.7% |
-| 6 | POO | 8.5 | 1581 | 8-6 | 2.5% |
+| 1 | ZSF | 9.6 | 1775 | 9-5 | 90.3% |
+| 2 | MP | 9.5 | 1700 | 9-5 | 91.0% |
+| 3 | KIRK | 9.8 | 1637 | 9-5 | 87.3% |
+| 4 | sgf | 9.4 | 1633 | 9-5 | 65.1% |
+| 5 | GV | 9.6 | 1593 | 9-5 | 63.6% |
+| 6 | POO | 8.5 | 1582 | 8-6 | 2.7% |
 | 7 | GEMP | 7.4 | 1479 | 7-7 | 0.0% |
 | 8 | PATS | 5.7 | 1586 | 5-9 | 0.0% |
 | 9 | KESS | 6.3 | 1431 | 6-8 | 0.0% |
@@ -1235,7 +1235,7 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 *If playoffs started today (top 4 make it, seeded by record then Points For):*
 
-**Semifinal 1:** #1 ZSF (Proj. PF: 1776) vs #4 sgf (Proj. PF: 1633)
+**Semifinal 1:** #1 ZSF (Proj. PF: 1775) vs #4 sgf (Proj. PF: 1633)
 
 **Semifinal 2:** #2 MP (Proj. PF: 1700) vs #3 KIRK (Proj. PF: 1637)
 
