@@ -23,7 +23,9 @@ The analysis output is generated as a dynamic Markdown file (`power_rankings_ana
 - **Visualization**: Generates 22 distinct charts, including power rankings, weekly performance, and individual team Monte Carlo density plots. These are embedded in the HTML report.
 
 ### Feature Specifications
-- **Playoff Scenarios Analysis**: Identifies clinch/elimination scenarios, calculates probability-weighted seeding, and accurately accounts for Points For tiebreakers.
+- **Playoff Scenarios Analysis**: Uses 10,000 Monte Carlo simulations with variance to calculate playoff probabilities, accounting for Points For tiebreakers with projection uncertainty.
+- **Conditional Probabilities**: Calculates P(playoffs | win) and P(playoffs | loss) by aggregating simulation outcomes.
+- **Monte Carlo Variance Integration**: Week 15 projections sample from score distributions, enabling edge cases where lower-seeded teams can overtake on PF tiebreaker.
 - **BYE Week Tracking**: Integrates the NFL BYE schedule into projections and lineup optimization.
 - **Tiebreaker Logic**: Explicitly tracks "Points For" distribution in simulations for accurate tiebreaker analysis.
 - **Optimized Data Consistency**: All projection tables and win probabilities are derived from the optimized, blended projection data.
