@@ -55,18 +55,43 @@ def preprocess_markdown_tables(content):
     
     return '\n'.join(result)
 
+def extract_mermaid_blocks(content):
+    """Extract mermaid code blocks and replace with placeholders."""
+    mermaid_pattern = r'```mermaid\n(.*?)```'
+    mermaid_blocks = []
+    
+    def replace_mermaid(match):
+        mermaid_code = match.group(1)
+        placeholder = f'<!--MERMAID_PLACEHOLDER_{len(mermaid_blocks)}-->'
+        mermaid_blocks.append(mermaid_code)
+        return placeholder
+    
+    content = re.sub(mermaid_pattern, replace_mermaid, content, flags=re.DOTALL)
+    return content, mermaid_blocks
+
+def restore_mermaid_blocks(html_content, mermaid_blocks):
+    """Restore mermaid blocks as div elements for Mermaid.js rendering."""
+    for i, mermaid_code in enumerate(mermaid_blocks):
+        placeholder = f'<!--MERMAID_PLACEHOLDER_{i}-->'
+        mermaid_html = f'<div class="mermaid">\n{mermaid_code}\n</div>'
+        html_content = html_content.replace(placeholder, mermaid_html)
+    return html_content
+
 def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_rankings_analysis.html'):
-    """Convert markdown to HTML with embedded images."""
+    """Convert markdown to HTML with embedded images and Mermaid diagrams."""
     
     with open(md_file, 'r') as f:
         md_content = f.read()
     
+    md_content, mermaid_blocks = extract_mermaid_blocks(md_content)
     md_content = preprocess_markdown_tables(md_content)
     
     html_content = markdown.markdown(
         md_content,
         extensions=['tables', 'fenced_code']
     )
+    
+    html_content = restore_mermaid_blocks(html_content, mermaid_blocks)
     
     image_files = [
         'visualizations/power_rankings.png',
@@ -99,12 +124,39 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
                     f'alt="{Path(img_path).stem}"'
                 )
     
+    has_mermaid = len(mermaid_blocks) > 0
+    mermaid_script = '''
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({ 
+                startOnLoad: true,
+                theme: 'dark',
+                themeVariables: {
+                    primaryColor: '#0f3460',
+                    primaryTextColor: '#eaeaea',
+                    primaryBorderColor: '#e94560',
+                    lineColor: '#a0a0a0',
+                    secondaryColor: '#16213e',
+                    tertiaryColor: '#1a1a2e',
+                    edgeLabelBackground: '#16213e'
+                },
+                flowchart: {
+                    curve: 'basis',
+                    padding: 20
+                }
+            });
+        });
+    </script>
+''' if has_mermaid else ''
+    
     full_html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy Football Power Rankings Analysis</title>
+    {mermaid_script}
     <style>
         :root {{
             --bg-primary: #1a1a2e;
@@ -275,6 +327,30 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
             padding: 15px;
             margin: 15px 0;
             border-radius: 0 10px 10px 0;
+        }}
+        
+        .mermaid {{
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 2px solid var(--border);
+            overflow-x: auto;
+        }}
+        
+        .mermaid svg {{
+            max-width: 100%;
+            height: auto;
+        }}
+        
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {{
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }}
+        
+        .mermaid .node:hover rect, .mermaid .node:hover circle {{
+            filter: brightness(1.2);
+            transform: scale(1.02);
         }}
         
         @media (max-width: 768px) {{

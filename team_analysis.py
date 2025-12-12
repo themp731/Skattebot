@@ -421,23 +421,90 @@ def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, op
         elif info.get('loss_playoff_prob', 0) > 0:
             md_lines.append(f"- With a LOSS: {info.get('loss_playoff_prob', 0)*100:.1f}% playoff probability (needs help)\n")
     
-    md_lines.append("\n### Decision Tree: Key Scenarios\n")
-    md_lines.append("```\n")
-    md_lines.append("WEEK 15 PLAYOFF SCENARIOS (10,000 Monte Carlo simulations with variance)\n")
-    md_lines.append("=" * 50 + "\n")
+    tiebreaker_teams = [t for t in current_standings if t['wins'] >= 8 and team_playoff_probs.get(t['team'], 0) < 0.999]
+    if len(tiebreaker_teams) > 1:
+        md_lines.append("\n### Week 15 Points For Tiebreaker Analysis\n")
+        md_lines.append("*If two teams finish with identical records, the team with higher total Points For wins the tiebreaker.*\n\n")
+        
+        underdog_teams = [t for t in tiebreaker_teams if t['wins'] < 9]
+        favorite_teams = [t for t in tiebreaker_teams if t['wins'] >= 9]
+        
+        for underdog in underdog_teams:
+            md_lines.append(f"**{underdog['team']}** (Current PF: {underdog['pf']:.1f}) - Week 15 PF Margins Needed:\n\n")
+            md_lines.append("| If This Team Loses | Their Current PF | PF Gap | Margin {underdog['team']} Needs |\n".replace("{underdog['team']}", underdog['team']))
+            md_lines.append("|-------------------|-----------------|--------|---------------------------|\n")
+            
+            for fav in favorite_teams:
+                pf_gap = fav['pf'] - underdog['pf']
+                if pf_gap > 0:
+                    md_lines.append(f"| {fav['team']} | {fav['pf']:.1f} | {pf_gap:.1f} pts behind | Outscore by **>{pf_gap:.0f} pts** |\n")
+                else:
+                    md_lines.append(f"| {fav['team']} | {fav['pf']:.1f} | {abs(pf_gap):.1f} pts ahead | Already ahead on PF |\n")
+            
+            md_lines.append("\n")
+    
+    md_lines.append("\n### Interactive Decision Tree\n")
+    md_lines.append("*Click on playoff outcomes to see which matchup results lead to each scenario.*\n\n")
     
     most_likely = sorted(all_scenarios, key=lambda x: -x['probability'])[:8]
-    for i, scenario in enumerate(most_likely):
-        md_lines.append(f"\nScenario {i+1} ({scenario['probability']*100:.1f}% of simulations):\n")
-        if 'results' in scenario:
-            results_str = ", ".join([f"{r['winner']} beats {r['loser']}" for r in scenario['results']])
-            md_lines.append(f"  Results: {results_str}\n")
-        elif 'matchup_winners' in scenario:
-            results_str = ", ".join([f"{w} wins" for w in scenario['matchup_winners'].values()])
-            md_lines.append(f"  Results: {results_str}\n")
-        md_lines.append(f"  Playoffs: {', '.join(sorted(scenario['playoff_teams']))}\n")
     
-    md_lines.append("```\n")
+    md_lines.append("```mermaid\n")
+    md_lines.append("flowchart TD\n")
+    md_lines.append("    START[\"Week 15 Matchups\"] --> |\"6 games\"| OUTCOMES\n")
+    
+    scenario_nodes = []
+    for i, scenario in enumerate(most_likely):
+        playoff_str = ", ".join(sorted(scenario['playoff_teams']))
+        prob = scenario['probability'] * 100
+        node_id = f"S{i+1}"
+        scenario_nodes.append(node_id)
+        
+        if 'matchup_winners' in scenario:
+            winners = list(scenario['matchup_winners'].values())
+            key_results = ", ".join(winners[:3]) + "..."
+        elif 'results' in scenario:
+            key_results = ", ".join([r['winner'] for r in scenario['results'][:3]]) + "..."
+        else:
+            key_results = "Various"
+        
+        md_lines.append(f"    OUTCOMES --> |\"{prob:.1f}%\"| {node_id}[\"{playoff_str}\"]\n")
+    
+    md_lines.append("\n")
+    
+    for i, scenario in enumerate(most_likely):
+        node_id = f"S{i+1}"
+        playoff_teams = sorted(scenario['playoff_teams'])
+        
+        has_poo = 'POO' in playoff_teams
+        if has_poo:
+            md_lines.append(f"    {node_id} --> POO_IN{{\"POO Makes Playoffs!\"}}\n")
+            md_lines.append(f"    style {node_id} fill:#00d26a,color:#000\n")
+        else:
+            md_lines.append(f"    style {node_id} fill:#e94560,color:#fff\n")
+    
+    md_lines.append("    style START fill:#0f3460,color:#fff\n")
+    md_lines.append("    style OUTCOMES fill:#16213e,color:#fff\n")
+    if any('POO' in sorted(s['playoff_teams']) for s in most_likely):
+        md_lines.append("    style POO_IN fill:#00d26a,color:#000\n")
+    
+    md_lines.append("```\n\n")
+    
+    md_lines.append("### Scenario Details\n\n")
+    for i, scenario in enumerate(most_likely):
+        playoff_str = ", ".join(sorted(scenario['playoff_teams']))
+        prob = scenario['probability'] * 100
+        
+        md_lines.append(f"**Scenario {i+1}** ({prob:.1f}% of simulations):\n")
+        if 'matchup_winners' in scenario:
+            for matchup_key, winner in scenario['matchup_winners'].items():
+                parts = matchup_key.split('_vs_')
+                if len(parts) == 2:
+                    loser = parts[0] if parts[1] == winner else parts[1]
+                    md_lines.append(f"- {winner} beats {loser}\n")
+        elif 'results' in scenario:
+            for r in scenario['results']:
+                md_lines.append(f"- {r['winner']} beats {r['loser']}\n")
+        md_lines.append(f"- **Playoffs:** {playoff_str}\n\n")
     
     return {
         'current_standings': current_standings,
