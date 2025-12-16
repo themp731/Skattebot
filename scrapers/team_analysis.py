@@ -115,7 +115,163 @@ def calculate_summary_stats(df):
     
     return summary
 
+def generate_championship_preview(summary, matchups_df=None):
+    """
+    Generate championship preview for the 4 playoff teams.
+    
+    The playoff matchups are:
+    - Semifinal 1: #1 ZSF vs #4 MP
+    - Semifinal 2: #2 GV vs #3 Kirk
+    
+    Returns dict with:
+    - markdown: Championship preview markdown content
+    """
+    from .openai_helper import generate_championship_preview as ai_preview, generate_week_recap
+    
+    current_summary = summary[summary['season'] == CURRENT_SEASON].copy()
+    
+    playoff_teams = {
+        'ZSF': {'seed': 1},
+        'GV': {'seed': 2},
+        'KIRK': {'seed': 3},
+        'MP': {'seed': 4}
+    }
+    
+    for team_name in playoff_teams:
+        team_row = current_summary[current_summary['team_name'] == team_name]
+        if not team_row.empty:
+            row = team_row.iloc[0]
+            weeks = int(row['games_played'])
+            wins = int(row['real_wins'])
+            playoff_teams[team_name].update({
+                'record': f"{wins}-{weeks - wins}",
+                'ppg': f"{row['ppg']:.2f}",
+                'pf': f"{row['points_for']:.0f}",
+                'power_rank': int(row['power_rank']),
+                'wax': f"{row['wax']:+.2f}"
+            })
+    
+    matchup1 = {
+        'seed1_team': 'ZSF',
+        'seed1_record': playoff_teams['ZSF'].get('record', 'N/A'),
+        'seed1_ppg': playoff_teams['ZSF'].get('ppg', 'N/A'),
+        'seed1_pf': playoff_teams['ZSF'].get('pf', 'N/A'),
+        'seed4_team': 'MP',
+        'seed4_record': playoff_teams['MP'].get('record', 'N/A'),
+        'seed4_ppg': playoff_teams['MP'].get('ppg', 'N/A'),
+        'seed4_pf': playoff_teams['MP'].get('pf', 'N/A'),
+    }
+    
+    matchup2 = {
+        'seed2_team': 'GV',
+        'seed2_record': playoff_teams['GV'].get('record', 'N/A'),
+        'seed2_ppg': playoff_teams['GV'].get('ppg', 'N/A'),
+        'seed2_pf': playoff_teams['GV'].get('pf', 'N/A'),
+        'seed3_team': 'KIRK',
+        'seed3_record': playoff_teams['KIRK'].get('record', 'N/A'),
+        'seed3_ppg': playoff_teams['KIRK'].get('ppg', 'N/A'),
+        'seed3_pf': playoff_teams['KIRK'].get('pf', 'N/A'),
+    }
+    
+    try:
+        championship_md = ai_preview(matchup1, matchup2, playoff_teams)
+    except Exception as e:
+        print(f"  Warning: AI preview generation failed: {e}")
+        championship_md = generate_fallback_championship_md(matchup1, matchup2, playoff_teams)
+    
+    week15_results = []
+    if matchups_df is not None:
+        week15_data = matchups_df[matchups_df['week'] == 15]
+        winners_seen = set()
+        for _, row in week15_data.iterrows():
+            if row['winner'] and row['team_name'] not in winners_seen:
+                week15_results.append({
+                    'winner': row['team_name'],
+                    'loser': row['opponent_name'],
+                    'winner_score': row['team_score'],
+                    'loser_score': row['opponent_score']
+                })
+                winners_seen.add(row['team_name'])
+    
+    week_recap_md = ""
+    if week15_results:
+        try:
+            clinched = ['ZSF', 'GV', 'KIRK', 'MP']
+            eliminated = [t for t in current_summary['team_name'].unique() if t not in clinched]
+            week_recap_md = "\n## Week 15 Recap - Regular Season Finale\n\n"
+            week_recap_md += generate_week_recap(week15_results, {
+                'clinched_teams': ', '.join(clinched),
+                'eliminated_teams': ', '.join(eliminated)
+            })
+            week_recap_md += "\n\n---\n\n"
+        except Exception as e:
+            print(f"  Warning: AI week recap generation failed: {e}")
+            week_recap_md = generate_fallback_week_recap(week15_results)
+    else:
+        week_recap_md = "\n## Week 15 Recap\n\n*Week 15 results not yet available. The regular season is complete and the playoff field is set!*\n\n---\n\n"
+    
+    final_md = week_recap_md + championship_md
+    
+    return {
+        'markdown': final_md,
+        'playoff_teams': playoff_teams,
+        'matchup1': matchup1,
+        'matchup2': matchup2
+    }
+
+
+def generate_fallback_championship_md(matchup1, matchup2, playoff_teams):
+    """Generate fallback championship preview if AI fails."""
+    return f"""## Championship Preview - Playoff Week 1
+
+The regular season is complete and we have our Final Four! After 15 weeks of fantasy football warfare, these four teams have earned the right to compete for the championship.
+
+### Semifinal 1: #1 {matchup1['seed1_team']} vs #4 {matchup1['seed4_team']}
+
+| Stat | {matchup1['seed1_team']} (#1) | {matchup1['seed4_team']} (#4) |
+|------|------|------|
+| Record | {matchup1['seed1_record']} | {matchup1['seed4_record']} |
+| PPG | {matchup1['seed1_ppg']} | {matchup1['seed4_ppg']} |
+| Total PF | {matchup1['seed1_pf']} | {matchup1['seed4_pf']} |
+
+The top seed {matchup1['seed1_team']} has home-field advantage against {matchup1['seed4_team']}. This should be an exciting matchup!
+
+### Semifinal 2: #2 {matchup2['seed2_team']} vs #3 {matchup2['seed3_team']}
+
+| Stat | {matchup2['seed2_team']} (#2) | {matchup2['seed3_team']} (#3) |
+|------|------|------|
+| Record | {matchup2['seed2_record']} | {matchup2['seed3_record']} |
+| PPG | {matchup2['seed2_ppg']} | {matchup2['seed3_ppg']} |
+| Total PF | {matchup2['seed2_pf']} | {matchup2['seed3_pf']} |
+
+{matchup2['seed2_team']} and {matchup2['seed3_team']} battle it out in what promises to be a closely contested semifinal.
+
+*May the best teams win! Good luck to all playoff participants.*
+
+---
+
+"""
+
+
+def generate_fallback_week_recap(week15_results):
+    """Generate fallback week 15 recap."""
+    md = "\n## Week 15 Recap - Regular Season Finale\n\n"
+    md += "Here are the final regular season matchup results:\n\n"
+    for result in week15_results:
+        md += f"- **{result['winner']}** defeated {result['loser']} ({result.get('winner_score', 'N/A')}-{result.get('loser_score', 'N/A')})\n"
+    md += "\n---\n\n"
+    return md
+
+
 def generate_playoff_scenarios(summary, remaining_schedule, game_predictions, optimized_lineups=None, playoff_preds=None):
+    """
+    DEPRECATED: This function is replaced by generate_championship_preview for playoff weeks.
+    Kept for backward compatibility but now just calls the new function.
+    """
+    return generate_championship_preview(summary)
+
+
+def _generate_playoff_scenarios_old(summary, remaining_schedule, game_predictions, optimized_lineups=None, playoff_preds=None):
     """
     Generate comprehensive playoff scenarios analysis for the final week.
     Uses Monte Carlo simulation results to incorporate projection variance for accurate
@@ -2838,8 +2994,9 @@ def main():
     print("[6/8] Predicting remaining games (using optimized projections)...")
     game_predictions = predict_remaining_games(summary, remaining_schedule, espn_projections, optimized_lineups)
     
-    print("[6.5/8] Generating playoff scenarios analysis...")
-    playoff_scenarios = generate_playoff_scenarios(summary, remaining_schedule, game_predictions, optimized_lineups, playoff_preds)
+    print("[6.5/8] Generating championship preview...")
+    matchups_df = load_matchups()
+    playoff_scenarios = generate_championship_preview(summary, matchups_df)
     
     print_summary_table(summary)
     save_summary_csv(summary)

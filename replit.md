@@ -4,6 +4,13 @@
 This project is an ESPN Fantasy Football data scraper and analysis tool. Its primary purpose is to download historical league data, generate advanced statistical visualizations, and provide playoff predictions. A key feature is its hybrid Monte Carlo simulation, which blends ESPN projections with historical performance for enhanced accuracy. The tool also includes a lineup optimization engine and a comprehensive roster health report.
 
 ## Recent Changes
+- **2025-12-16**: Championship Preview & Week 15 Recap:
+  - Moved all CSV files to `data/` folder for better organization
+  - Added `scrapers/openai_helper.py` for AI-generated content using Replit AI Integrations
+  - Replaced "Week 15 Playoff Scenarios" with "Championship Preview" featuring confirmed playoff matchups:
+    - Semifinal 1: #1 ZSF vs #4 MP
+    - Semifinal 2: #2 GV vs #3 Kirk
+  - Added Week 15 recap section with AI-generated game summaries and playoff implications
 - **2025-12-12**: Reorganized project structure into modular folders:
   - `scrapers/` - ESPN data scraping and analysis modules
   - `html_generator/` - Markdown to HTML conversion
@@ -22,6 +29,7 @@ This project is an ESPN Fantasy Football data scraper and analysis tool. Its pri
 │   ├── csv_generator.py      # CSV file generation
 │   ├── position_mapping.py   # ESPN position mappings
 │   ├── team_analysis.py      # Monte Carlo analysis & visualizations
+│   ├── openai_helper.py      # OpenAI content generation (week recap, previews)
 │   └── config.py             # Scraper configuration
 ├── html_generator/            # HTML generation
 │   └── md_to_html.py         # Markdown to styled HTML converter
@@ -74,7 +82,8 @@ The analysis output is generated as a dynamic Markdown file (`power_rankings_ana
 
 ### Feature Specifications
 - **Power Rankings**: Calculates a unique Power Score: `(Real Wins × 2) + (Top6 Wins) + (MVP-W)`.
-- **Playoff Scenarios Analysis**: Uses 10,000 Monte Carlo simulations with variance to calculate playoff probabilities.
+- **Championship Preview**: AI-generated playoff preview featuring team matchups, stats comparison, and predictions.
+- **Week 15 Recap**: AI-generated narrative recap of final regular season games and playoff implications.
 - **Conditional Probabilities**: Calculates P(playoffs | win) and P(playoffs | loss) by aggregating simulation outcomes.
 - **Monte Carlo Variance Integration**: Week 15 projections sample from score distributions for accurate tiebreaker analysis.
 - **BYE Week Tracking**: Integrates the NFL BYE schedule into projections and lineup optimization.
@@ -82,6 +91,7 @@ The analysis output is generated as a dynamic Markdown file (`power_rankings_ana
 
 ## External Dependencies
 - **ESPN API**: Used for fetching league data, weekly projections, and detailed roster health information. Requires `ESPN_S2` and `SWID` cookies for private league access.
+- **OpenAI API (via Replit AI Integrations)**: Used for generating week recaps and championship previews. Uses `AI_INTEGRATIONS_OPENAI_BASE_URL` and `AI_INTEGRATIONS_OPENAI_API_KEY` environment variables.
 - **Python Libraries**:
     - `pandas`: For data manipulation and analysis.
     - `matplotlib`: For generating static, animated, and interactive visualizations.
@@ -89,3 +99,4 @@ The analysis output is generated as a dynamic Markdown file (`power_rankings_ana
     - `requests`: For making HTTP requests to the ESPN API.
     - `scipy`: For scientific computing, likely used in statistical analysis and Monte Carlo simulations.
     - `markdown`: For converting Markdown to HTML.
+    - `openai`: For interacting with OpenAI API through Replit AI Integrations.
