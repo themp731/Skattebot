@@ -20,7 +20,7 @@ def get_openai_client():
 
 def generate_week_recap(week_results: list, playoff_implications: dict) -> str:
     """
-    Generate a narrative recap of the week's games and their impact on playoffs.
+    Generate a detailed narrative recap of the week's games and their impact on playoffs.
     
     Args:
         week_results: List of dicts with 'winner', 'loser', 'winner_score', 'loser_score' keys
@@ -37,7 +37,7 @@ def generate_week_recap(week_results: list, playoff_implications: dict) -> str:
     ])
     
     prompt = f"""You are a witty fantasy football analyst writing for a league called "DU Alums". 
-Write a brief but entertaining recap of Week 15 (the final week of the regular season) games and their playoff implications.
+Write a detailed recap of Week 15 (the final week of the regular season) with individual game breakdowns.
 
 Week 15 Results:
 {games_summary}
@@ -48,19 +48,27 @@ Playoff Context:
 - Teams that clinched: {playoff_implications.get('clinched_teams', 'Unknown')}
 - Teams eliminated: {playoff_implications.get('eliminated_teams', 'Unknown')}
 
-Write a 2-3 paragraph recap that:
-1. Highlights the key matchups and their outcomes
-2. Explains who made the playoffs and who didn't
-3. Uses a fun, conversational tone with some humor
-4. Keeps it under 250 words
+Write the recap with this structure:
 
-Do NOT use markdown headers - just write the paragraphs directly."""
+1. Start with a brief 1-2 sentence intro about the week's significance
+
+2. Then write a short paragraph (2-3 sentences) for EACH game that includes:
+   - The final score and margin of victory
+   - What was at stake for each team (playoff implications, seeding, pride, etc.)
+   - A colorful observation about the matchup
+
+3. End with a brief paragraph summarizing the final playoff picture and who's in/out
+
+Use a fun, conversational tone with humor. Each game paragraph should feel distinct and engaging.
+Keep the total response under 500 words.
+
+Do NOT use markdown headers or bullet points - write flowing paragraphs for each game."""
 
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=400,
+            max_tokens=800,
             temperature=0.7
         )
         content = response.choices[0].message.content
