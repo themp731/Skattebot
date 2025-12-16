@@ -1,5 +1,5 @@
 # DU Alums 2025 Fantasy Football Power Rankings
-## Week 14 Update - Generated December 12, 2025 at 03:53 AM EST
+## Week 15 Update - Generated December 16, 2025 at 02:21 PM EST
 
 ---
 
@@ -22,439 +22,36 @@
 
 ---
 
-## Week 15 Playoff Scenarios
-### Current Standings (After Week 14)
-| Seed | Team | Record | Points For | Playoff % |
-|------|------|--------|------------|----------|
-| 1 | **ZSF** | 9-5 | 1656.28 | 90.4% |
-| 2 | **MP** | 9-5 | 1587.82 | 91.1% |
-| 3 | **sgf** | 9-5 | 1526.08 | 64.7% |
-| 4 | **KIRK** | 9-5 | 1524.90 | 87.4% |
-| 5 | **GV** | 9-5 | 1485.96 | 63.6% |
-| 6 | **POO** | 8-6 | 1471.46 | 2.7% |
-| 7 | **GEMP** (ELIMINATED) | 7-7 | 1380.84 | 0.0% |
-| 8 | **KESS** (ELIMINATED) | 6-8 | 1334.74 | 0.0% |
-| 9 | **PATS** (ELIMINATED) | 5-9 | 1477.38 | 0.0% |
-| 10 | **ROUX** (ELIMINATED) | 5-9 | 1319.44 | 0.0% |
-| 11 | **3000** (ELIMINATED) | 4-10 | 1288.56 | 0.0% |
-| 12 | **WOOD** (ELIMINATED) | 4-10 | 1229.16 | 0.0% |
 
-### Week 15 Matchups (Final Week of Regular Season)
-| Matchup | Favorite | Win Prob | Playoff Implications |
-|---------|----------|----------|---------------------|
-| WOOD vs ROUX | WOOD | 51% | No playoff impact |
-| GEMP vs GV | GV | 63% | GV fighting for playoff spot |
-| KESS vs PATS | PATS | 66% | No playoff impact |
-| MP vs POO | MP | 52% | MP fighting for playoff spot; POO fighting for playoff spot |
-| KIRK vs 3000 | KIRK | 76% | KIRK fighting for playoff spot |
-| sgf vs ZSF | ZSF | 62% | sgf fighting for playoff spot; ZSF fighting for playoff spot |
+## Week 15 Recap - Regular Season Finale
 
-### Playoff Probability by Seed
-| Team | 1st Seed | 2nd Seed | 3rd Seed | 4th Seed | Total Playoff % |
-|------|----------|----------|----------|----------|----------------|
-| **MP** | 19.6% | 34.5% | 14.4% | 22.5% | **91.1%** |
-| **ZSF** | 61.8% | 2.0% | 9.6% | 17.0% | **90.4%** |
-| **KIRK** | 6.3% | 36.5% | 34.2% | 10.4% | **87.4%** |
-| **sgf** | 11.9% | 18.4% | 10.7% | 23.6% | **64.7%** |
-| **GV** | 0.3% | 8.6% | 30.9% | 23.9% | **63.6%** |
-| **POO** | 0.0% | 0.0% | 0.2% | 2.5% | **2.7%** |
+Well folks, Week 15 of the DU Alums Fantasy Football League was like a dramatic season finale—full of twists, turns, and a few teams left crying into their nachos. In a battle of the top contenders, KIRK steamrolled GEMP, solidifying their playoff spot with a score of 115.66 to 82.08. Meanwhile, GV showed no mercy to MP, defeating them 110.46 to 95.92, cementing their place in the postseason party. ZSF and MP joined the playoff club, while the rest of the league learned the hard way that the road to glory is paved with disappointment and bad trades.
 
-### Clinch/Elimination Scenarios
+As the dust settles, KIRK, GV, ZSF, and MP will be strutting into the playoffs, ready to battle it out for the championship. Unfortunately, GEMP, POO, KESS, WOOD, sgf, ROUX, 3000, and PATS will be left to ponder their mistakes and plot revenge for next season. So grab your popcorn, folks—this playoff picture is shaping up to be more thrilling than a last-minute Hail Mary pass, and trust me, you won’t want to miss it!
 
-**ZSF** (Currently #1, 9-5):
-- WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 74.6% playoff probability (needs help)
+---
 
-**MP** (Currently #2, 9-5):
-- WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 81.6% playoff probability (needs help)
+## Championship Preview - Playoff Week 1
 
-**sgf** (Currently #3, 9-5):
-- WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 43.2% playoff probability (needs help)
+The stakes couldn’t be higher as we gear up for the DU Alums Fantasy Football Championship Semifinals! Buckle up, folks; it’s time to separate the pretenders from the contenders and crown a champion!
 
-**KIRK** (Currently #4, 9-5):
-- WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 47.7% playoff probability (needs help)
+### SEMIFINAL 1: ZSF (1) vs. MP (4)
 
-**GV** (Currently #5, 9-5):
-- WIN and IN: Clinches playoff spot with a victory
-- With a LOSS: 1.9% playoff probability (needs help)
+In the red corner, we have ZSF, the top seed with a record of 10-5 and a jaw-dropping PPG of 120.38! This team is like a well-oiled machine, racking up a whopping 1806 points this season. With star players that could make even the most jaded fantasy fan shed a tear, ZSF looks to bulldoze their way to the finals.
 
-**POO** (Currently #6, 8-6):
-- With a WIN: 5.7% playoff probability
-- LOSE and OUT: Eliminated with a loss
+But wait! Enter MP, the underdog with a record of 9-6 and a respectable PPG of 115.14. While they might not have the same firepower as ZSF, they’ve shown resilience and a knack for pulling off surprise victories. Can they channel their inner Rocky Balboa and take down the Goliath of this league?
 
-### Week 15 Points For Tiebreaker Analysis
-*Teams with lose-and-still-in scenarios need these margins to win PF tiebreakers.*
+**Prediction:** ZSF advances to the finals, but expect MP to give them a run for their money. ZSF wins by a narrow margin, 125-112.
 
-**ZSF** (Current PF: 1656.3) - Tiebreaker Margins:
+### SEMIFINAL 2: GV (2) vs. KIRK (3)
 
-| Opponent | Their PF | Gap | Margin ZSF Needs |
-|----------|----------|-----|------------------------|
-| MP | 1587.8 | 68.5 ahead | Hold lead |
-| sgf | 1526.1 | 130.2 ahead | Hold lead |
-| KIRK | 1524.9 | 131.4 ahead | Hold lead |
-| GV | 1486.0 | 170.3 ahead | Hold lead |
-| POO | 1471.5 | 184.8 ahead | Hold lead |
+In this high-octane showdown, we have GV, the second seed, sporting a record of 10-5 and a PPG of 105.31. They may not be the highest-scoring team, but GV knows how to grind out wins when it counts. Think of them as the tortoise in this fantasy race—slow and steady wins the day!
 
-**MP** (Current PF: 1587.8) - Tiebreaker Margins:
+On the other side, we have KIRK, the third seed, matching GV’s record but boasting a higher PPG of 108.89. With a season total of 1633 points, KIRK is looking to prove that they’re not just another pretty face with stats. They aim to unleash a scoring barrage that leaves GV gasping for air.
 
-| Opponent | Their PF | Gap | Margin MP Needs |
-|----------|----------|-----|------------------------|
-| ZSF | 1656.3 | 68.5 behind | Outscore by **>68** |
-| sgf | 1526.1 | 61.7 ahead | Hold lead |
-| KIRK | 1524.9 | 62.9 ahead | Hold lead |
-| GV | 1486.0 | 101.9 ahead | Hold lead |
-| POO | 1471.5 | 116.4 ahead | Hold lead |
+**Prediction:** KIRK edges out GV in a nail-biter, winning 115-110.
 
-**sgf** (Current PF: 1526.1) - Tiebreaker Margins:
-
-| Opponent | Their PF | Gap | Margin sgf Needs |
-|----------|----------|-----|------------------------|
-| ZSF | 1656.3 | 130.2 behind | Outscore by **>130** |
-| MP | 1587.8 | 61.7 behind | Outscore by **>62** |
-| KIRK | 1524.9 | 1.2 ahead | Hold lead |
-| GV | 1486.0 | 40.1 ahead | Hold lead |
-| POO | 1471.5 | 54.6 ahead | Hold lead |
-
-**KIRK** (Current PF: 1524.9) - Tiebreaker Margins:
-
-| Opponent | Their PF | Gap | Margin KIRK Needs |
-|----------|----------|-----|------------------------|
-| ZSF | 1656.3 | 131.4 behind | Outscore by **>131** |
-| MP | 1587.8 | 62.9 behind | Outscore by **>63** |
-| sgf | 1526.1 | 1.2 behind | Outscore by **>1** |
-| GV | 1486.0 | 38.9 ahead | Hold lead |
-| POO | 1471.5 | 53.4 ahead | Hold lead |
-
-**GV** (Current PF: 1486.0) - Tiebreaker Margins:
-
-| Opponent | Their PF | Gap | Margin GV Needs |
-|----------|----------|-----|------------------------|
-| ZSF | 1656.3 | 170.3 behind | Outscore by **>170** |
-| MP | 1587.8 | 101.9 behind | Outscore by **>102** |
-| sgf | 1526.1 | 40.1 behind | Outscore by **>40** |
-| KIRK | 1524.9 | 38.9 behind | Outscore by **>39** |
-| POO | 1471.5 | 14.5 ahead | Hold lead |
-
-
-### Complete Week 15 Decision Tree (64 Outcomes)
-*Click on tiebreaker scenarios (marked with ⚖️) to see PF margin requirements.*
-
-<div id="decision-tree-container">
-<style>
-#decision-tree-container {
-    background: #0a1628;
-    border-radius: 12px;
-    padding: 20px;
-    overflow-x: auto;
-    margin: 20px 0;
-}
-.tree-wrapper {
-    display: flex;
-    gap: 20px;
-    min-width: 1200px;
-    align-items: flex-start;
-}
-.tree-column {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.tree-column h4 {
-    color: #F0AB00;
-    margin: 0 0 10px 0;
-    text-align: center;
-    font-size: 14px;
-}
-.matchup-col { width: 160px; }
-.scenarios-col { 
-    width: 800px;
-    max-height: 600px;
-    overflow-y: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    padding: 5px;
-}
-.outcomes-col { width: 200px; }
-.matchup-node {
-    background: #003366;
-    border: 2px solid #F0AB00;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    color: #fff;
-    font-size: 12px;
-}
-.matchup-teams { font-weight: bold; margin-bottom: 5px; }
-.matchup-probs { font-size: 10px; color: #aaa; }
-.scenario-node {
-    background: #1a2a3a;
-    border: 1px solid #334455;
-    border-radius: 6px;
-    padding: 6px;
-    font-size: 9px;
-    color: #ccc;
-    cursor: default;
-    transition: all 0.2s;
-}
-.scenario-node:hover { background: #2a3a4a; }
-.scenario-node.has-tiebreaker {
-    border-color: #F0AB00;
-    cursor: pointer;
-}
-.scenario-node.has-tiebreaker:hover {
-    background: #2a3520;
-    border-color: #22c55e;
-}
-.scenario-winners { font-weight: bold; color: #fff; }
-.scenario-prob { color: #888; font-size: 8px; }
-.outcome-node {
-    background: #003366;
-    border: 2px solid #22c55e;
-    border-radius: 8px;
-    padding: 12px;
-    text-align: center;
-    color: #fff;
-    font-size: 11px;
-    margin-bottom: 8px;
-}
-.outcome-node.playoff { background: #166534; border-color: #22c55e; }
-.outcome-node.has-tiebreaker { cursor: pointer; }
-.outcome-teams { font-weight: bold; margin-bottom: 5px; }
-.outcome-stats { font-size: 10px; color: #aaa; }
-.tb-badge { color: #F0AB00; }
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-.modal-overlay.active { display: flex; }
-.modal-content {
-    background: #0d2137;
-    border: 2px solid #F0AB00;
-    border-radius: 12px;
-    padding: 24px;
-    max-width: 400px;
-    color: #fff;
-}
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-.modal-header h3 { margin: 0; color: #F0AB00; }
-.modal-close {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-}
-.modal-body { line-height: 1.6; }
-.margin-highlight {
-    background: #22c55e;
-    color: #000;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-}
-</style>
-
-<div class="tree-wrapper">
-    <div class="tree-column matchup-col">
-        <h4>Week 15 Matchups</h4>
-        <div id="matchups-container"></div>
-    </div>
-    <div class="tree-column">
-        <h4>64 Possible Outcomes (Winner Combinations)</h4>
-        <div class="scenarios-col" id="scenarios-container"></div>
-    </div>
-    <div class="tree-column outcomes-col">
-        <h4>Playoff Participants</h4>
-        <div id="outcomes-container"></div>
-    </div>
-</div>
-
-<script>
-(function() {
-    const data = {"matchups": [{"home": "WOOD", "away": "ROUX", "home_prob": 51.06, "away_prob": 48.94}, {"home": "GEMP", "away": "GV", "home_prob": 37.04, "away_prob": 62.959999999999994}, {"home": "KESS", "away": "PATS", "home_prob": 33.85, "away_prob": 66.14999999999999}, {"home": "MP", "away": "POO", "home_prob": 51.739999999999995, "away_prob": 48.260000000000005}, {"home": "KIRK", "away": "3000", "home_prob": 75.94999999999999, "away_prob": 24.050000000000004}, {"home": "sgf", "away": "ZSF", "home_prob": 37.87, "away_prob": 62.129999999999995}], "scenarios": [{"id": 0, "winners": ["WOOD", "GEMP", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9527083447281435, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 1, "winners": ["WOOD", "GEMP", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.563025335567984, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 2, "winners": ["WOOD", "GEMP", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.3016805225900179, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 3, "winners": ["WOOD", "GEMP", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.4949408732114553, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 4, "winners": ["WOOD", "GEMP", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8886297780552804, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 5, "winners": ["WOOD", "GEMP", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.4578972302765927, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 6, "winners": ["WOOD", "GEMP", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.28138967955535876, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 7, "winners": ["WOOD", "GEMP", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.46165146001516877, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 8, "winners": ["WOOD", "GEMP", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.8617919351186611, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 9, "winners": ["WOOD", "GEMP", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 3.054479348532411, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 10, "winners": ["WOOD", "GEMP", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5895470182962979, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 11, "winners": ["WOOD", "GEMP", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9672182795550299, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 12, "winners": ["WOOD", "GEMP", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.7365689754315157, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 13, "winners": ["WOOD", "GEMP", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.8490369802894127, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 14, "winners": ["WOOD", "GEMP", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5498944550247262, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 15, "winners": ["WOOD", "GEMP", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9021637837519472, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 16, "winners": ["WOOD", "GV", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 1.6193984174968656, "has_tiebreaker": false, "tiebreaker": null}, {"id": 17, "winners": ["WOOD", "GV", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.656805484000007, "has_tiebreaker": false, "tiebreaker": null}, {"id": 18, "winners": ["WOOD", "GV", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.5127917306227733, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 19, "winners": ["WOOD", "GV", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8412925857827541, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 20, "winners": ["WOOD", "GV", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 1.5104786940162107, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 21, "winners": ["WOOD", "GV", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.4781104108589163, "has_tiebreaker": false, "tiebreaker": null}, {"id": 22, "winners": ["WOOD", "GV", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.47830167993535055, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 23, "winners": ["WOOD", "GV", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.7847077732871225, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 24, "winners": ["WOOD", "GV", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 3.164644174812929, "has_tiebreaker": false, "tiebreaker": null}, {"id": 25, "winners": ["WOOD", "GV", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 5.191955177742997, "has_tiebreaker": false, "tiebreaker": null}, {"id": 26, "winners": ["WOOD", "GV", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.0021025991343115, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 27, "winners": ["WOOD", "GV", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.6440621728073614, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 28, "winners": ["WOOD", "GV", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 2.951792189340394, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 29, "winners": ["WOOD", "GV", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.842747523731679, "has_tiebreaker": false, "tiebreaker": null}, {"id": 30, "winners": ["WOOD", "GV", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.9347018058411651, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 31, "winners": ["WOOD", "GV", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.5334835805891627, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 32, "winners": ["ROUX", "GEMP", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9131521032314007, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 33, "winners": ["ROUX", "GEMP", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.4981288664844712, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 34, "winners": ["ROUX", "GEMP", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.2891548134656378, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 35, "winners": ["ROUX", "GEMP", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.47439103672088934, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 36, "winners": ["ROUX", "GEMP", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8517340645911753, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 37, "winners": ["ROUX", "GEMP", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.3973656570649517, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 38, "winners": ["ROUX", "GEMP", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.2697064417829858, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 39, "winners": ["ROUX", "GEMP", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.44248379265848714, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 40, "winners": ["ROUX", "GEMP", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.7844907423561935, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 41, "winners": ["ROUX", "GEMP", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.9276580359807314, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 42, "winners": ["ROUX", "GEMP", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5650691554136467, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 43, "winners": ["ROUX", "GEMP", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.9270595887470259, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 44, "winners": ["ROUX", "GEMP", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 1.664467012487629, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 45, "winners": ["ROUX", "GEMP", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 2.7307455898034427, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 46, "winners": ["ROUX", "GEMP", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.5270629578713296, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 47, "winners": ["ROUX", "GEMP", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 0.8647061413399977, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"id": 48, "winners": ["ROUX", "GV", "KESS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 1.5521613504170895, "has_tiebreaker": false, "tiebreaker": null}, {"id": 49, "winners": ["ROUX", "GV", "KESS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.546495503074037, "has_tiebreaker": false, "tiebreaker": null}, {"id": 50, "winners": ["ROUX", "GV", "KESS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.49150073044807124, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 51, "winners": ["ROUX", "GV", "KESS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8063623021584014, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 52, "winners": ["ROUX", "GV", "KESS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 1.4477639499638335, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 53, "winners": ["ROUX", "GV", "KESS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 2.375219810173039, "has_tiebreaker": false, "tiebreaker": null}, {"id": 54, "winners": ["ROUX", "GV", "KESS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.4584426990998052, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 55, "winners": ["ROUX", "GV", "KESS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.752126878665722, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 56, "winners": ["ROUX", "GV", "PATS", "MP", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "MP", "sgf"], "prob": 3.0332488428387134, "has_tiebreaker": false, "tiebreaker": null}, {"id": 57, "winners": ["ROUX", "GV", "PATS", "MP", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.976386337617356, "has_tiebreaker": false, "tiebreaker": null}, {"id": 58, "winners": ["ROUX", "GV", "PATS", "MP", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.960495519029244, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 59, "winners": ["ROUX", "GV", "PATS", "MP", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.5758010720170827, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 60, "winners": ["ROUX", "GV", "PATS", "POO", "KIRK", "sgf"], "playoff_teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 2.8292344251139605, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}, {"id": 61, "winners": ["ROUX", "GV", "PATS", "POO", "KIRK", "ZSF"], "playoff_teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 4.641677708801964, "has_tiebreaker": false, "tiebreaker": null}, {"id": 62, "winners": ["ROUX", "GV", "PATS", "POO", "3000", "sgf"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 0.8958931918892795, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"id": 63, "winners": ["ROUX", "GV", "PATS", "POO", "3000", "ZSF"], "playoff_teams": ["GV", "MP", "ZSF", "sgf"], "prob": 1.4698136786923932, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}], "outcomes": [{"teams": ["KIRK", "MP", "ZSF", "sgf"], "prob": 37.03999999999999, "paths": 32, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "GV", "margin": 182.48999999999978, "fourth_pf": 1774.59, "fifth_pf": 1592.1000000000001}}, {"teams": ["GV", "KIRK", "MP", "ZSF"], "prob": 29.709397955999993, "paths": 8, "has_tiebreaker": false, "tiebreaker": null}, {"teams": ["GV", "MP", "ZSF", "sgf"], "prob": 15.141880000000002, "paths": 16, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "KIRK", "margin": 140.76999999999975, "fourth_pf": 1774.59, "fifth_pf": 1633.8200000000002}}, {"teams": ["GV", "KIRK", "MP", "sgf"], "prob": 9.369452785565597, "paths": 4, "has_tiebreaker": false, "tiebreaker": null}, {"teams": ["GV", "KIRK", "ZSF", "sgf"], "prob": 8.739269258434398, "paths": 4, "has_tiebreaker": true, "tiebreaker": {"fourth": "ZSF", "fifth": "MP", "margin": 73.34999999999991, "fourth_pf": 1774.59, "fifth_pf": 1701.24}}]};
-    
-    // Create modal and append to body (outside container for proper fixed positioning)
-    const modalHTML = `
-        <div class="tb-modal-overlay" id="tb-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:10000;justify-content:center;align-items:center;">
-            <div style="background:#0d2137;border:3px solid #F0AB00;border-radius:12px;padding:24px;max-width:450px;color:#fff;box-shadow:0 10px 40px rgba(0,0,0,0.5);">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                    <h3 style="margin:0;color:#F0AB00;font-size:18px;">⚖️ Tiebreaker Details</h3>
-                    <button onclick="closeTbModal()" style="background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
-                </div>
-                <div id="tb-modal-body" style="line-height:1.8;font-size:14px;"></div>
-            </div>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    
-    const matchupsContainer = document.getElementById('matchups-container');
-    data.matchups.forEach((m, i) => {
-        const node = document.createElement('div');
-        node.className = 'matchup-node';
-        node.innerHTML = `
-            <div class="matchup-teams">${m.home} vs ${m.away}</div>
-            <div class="matchup-probs">${m.home_prob.toFixed(0)}% / ${m.away_prob.toFixed(0)}%</div>
-        `;
-        matchupsContainer.appendChild(node);
-    });
-    
-    const scenariosContainer = document.getElementById('scenarios-container');
-    data.scenarios.forEach(s => {
-        const node = document.createElement('div');
-        node.className = 'scenario-node' + (s.has_tiebreaker ? ' has-tiebreaker' : '');
-        const winnersStr = s.winners.join(', ');
-        const tbBadge = s.has_tiebreaker ? ' <span class="tb-badge">⚖️</span>' : '';
-        node.innerHTML = `
-            <div class="scenario-winners">${winnersStr}${tbBadge}</div>
-            <div class="scenario-prob">${s.prob.toFixed(1)}%</div>
-        `;
-        if (s.has_tiebreaker && s.tiebreaker) {
-            node.onclick = function() { showTbModal(s.tiebreaker, s.playoff_teams); };
-        }
-        scenariosContainer.appendChild(node);
-    });
-    
-    const outcomesContainer = document.getElementById('outcomes-container');
-    data.outcomes.forEach(o => {
-        const node = document.createElement('div');
-        node.className = 'outcome-node playoff' + (o.has_tiebreaker ? ' has-tiebreaker' : '');
-        const tbBadge = o.has_tiebreaker ? ' <span class="tb-badge">⚖️</span>' : '';
-        node.innerHTML = `
-            <div class="outcome-teams">${o.teams.join(', ')}${tbBadge}</div>
-            <div class="outcome-stats">${o.prob.toFixed(1)}% (${o.paths} paths)</div>
-        `;
-        if (o.has_tiebreaker && o.tiebreaker) {
-            node.onclick = function() { showTbModal(o.tiebreaker, o.teams); };
-        }
-        outcomesContainer.appendChild(node);
-    });
-    
-    // Attach close handler
-    document.getElementById('tb-modal').addEventListener('click', function(e) {
-        if (e.target === this) closeTbModal();
-    });
-})();
-
-function showTbModal(tb, teams) {
-    const modal = document.getElementById('tb-modal');
-    const body = document.getElementById('tb-modal-body');
-    const marginStr = tb.margin > 0 ? '+' + tb.margin.toFixed(1) : tb.margin.toFixed(1);
-    body.innerHTML = `
-        <p><strong>Playoff Teams:</strong> ${teams.join(', ')}</p>
-        <p><strong>4th Seed:</strong> ${tb.fourth} (${tb.fourth_pf.toFixed(1)} PF)</p>
-        <p><strong>5th Place:</strong> ${tb.fifth} (${tb.fifth_pf.toFixed(1)} PF)</p>
-        <p><strong>Current Margin:</strong> <span style="background:#22c55e;color:#000;padding:2px 10px;border-radius:4px;font-weight:bold;">${marginStr} PF</span></p>
-        <p style="color:#aaa;font-size:12px;margin-top:12px;">The 4th seed wins the tiebreaker because they have more Points For.</p>
-    `;
-    modal.style.display = 'flex';
-}
-
-function closeTbModal() {
-    document.getElementById('tb-modal').style.display = 'none';
-}
-</script>
-</div>
-
-### Tiebreaker Margin Requirements by Outcome
-
-| Outcome | 4th Seed | 5th Place | PF Margin |
-|---------|----------|-----------|----------|
-| KIRK, MP, ZSF, sgf (37.0%) | ZSF | GV | +182.5 |
-| GV, MP, ZSF, sgf (15.1%) | ZSF | KIRK | +140.8 |
-| GV, KIRK, ZSF, sgf (8.7%) | ZSF | MP | +73.3 |
-
-### Scenario Details (Top 8 Most Likely)
-
-**Scenario 1** (5.2%):
-- WOOD beats ROUX
-- GV beats GEMP
-- PATS beats KESS
-- MP beats POO
-- KIRK beats 3000
-- ZSF beats sgf
-- **Playoffs:** GV, KIRK, MP, ZSF
-
-**Scenario 2** (5.0%):
-- ROUX beats WOOD
-- GV beats GEMP
-- PATS beats KESS
-- MP beats POO
-- KIRK beats 3000
-- ZSF beats sgf
-- **Playoffs:** GV, KIRK, MP, ZSF
-
-**Scenario 3** (4.8%):
-- WOOD beats ROUX
-- GV beats GEMP
-- PATS beats KESS
-- POO beats MP
-- KIRK beats 3000
-- ZSF beats sgf
-- **Playoffs:** GV, KIRK, MP, ZSF
-
-**Scenario 4** (4.6%):
-- ROUX beats WOOD
-- GV beats GEMP
-- PATS beats KESS
-- POO beats MP
-- KIRK beats 3000
-- ZSF beats sgf
-- **Playoffs:** GV, KIRK, MP, ZSF
-
-**Scenario 5** (3.2%):
-- WOOD beats ROUX
-- GV beats GEMP
-- PATS beats KESS
-- MP beats POO
-- KIRK beats 3000
-- sgf beats ZSF
-- **Playoffs:** GV, KIRK, MP, sgf
-
-**Scenario 6** (3.1%):
-- WOOD beats ROUX
-- GEMP beats GV
-- PATS beats KESS
-- MP beats POO
-- KIRK beats 3000
-- ZSF beats sgf
-- **Playoffs:** KIRK, MP, ZSF, sgf
-
-**Scenario 7** (3.0%):
-- ROUX beats WOOD
-- GV beats GEMP
-- PATS beats KESS
-- MP beats POO
-- KIRK beats 3000
-- sgf beats ZSF
-- **Playoffs:** GV, KIRK, MP, sgf
-
-**Scenario 8** (3.0%):
-- WOOD beats ROUX
-- GV beats GEMP
-- PATS beats KESS
-- POO beats MP
-- KIRK beats 3000
-- sgf beats ZSF
-- **Playoffs:** GV, KIRK, ZSF, sgf
-
-
+As we dive into Championship Week, the air is thick with anticipation, rivalries are simmering, and the possibility of glory hangs in the balance. Who will rise to the occasion and take home the coveted title? Only time (and fantasy stats) will tell! May the best team win! 🏆
 
 ---
 
@@ -489,14 +86,14 @@ When you see a matchup breakdown showing ESPN Raw at 103 but Optimized at 88, do
 
 | Metric | Value |
 |--------|-------|
-| Weeks Played | 14 |
-| Games Remaining | 1 |
+| Weeks Played | 15 |
+| Games Remaining | 0 |
 | Playoff Teams | 4 |
 | Tiebreaker | **Points For** (Total Season Points) |
-| Current Leader | **ZSF** (9-5) |
-| Highest Scorer | **ZSF** (118.31 PPG) |
-| Luckiest Team | **GEMP** (+1.45 WAX) |
-| Unluckiest Team | **PATS** (-2.82 WAX) |
+| Current Leader | **ZSF** (10-5) |
+| Highest Scorer | **ZSF** (120.38 PPG) |
+| Luckiest Team | **GV** (+1.55 WAX) |
+| Unluckiest Team | **PATS** (-2.64 WAX) |
 
 ---
 
@@ -629,18 +226,18 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 | Team | Record | Playoff % | Most Likely Wins | Projected PF | Proj. Standing | #1 Seed % | PF Leader % |
 |------|--------|-----------|------------------|--------------|----------------|----------------|-------------|
-| ZSF | 9-5 | 90.4% | 10 | 1776 | #2.1 | 61.8% | 96.3% |
-| MP | 9-5 | 91.1% | 10 | 1700 | #2.7 | 19.6% | 3.7% |
-| KIRK | 9-5 | 87.4% | 10 | 1637 | #2.9 | 6.3% | 0.0% |
-| sgf | 9-5 | 64.7% | 9 | 1632 | #3.5 | 11.9% | 0.0% |
-| GV | 9-5 | 63.6% | 10 | 1593 | #4.0 | 0.3% | 0.0% |
-| POO | 8-6 | 2.7% | 8 | 1582 | #5.8 | 0.0% | 0.0% |
-| GEMP | 7-7 | 0.0% | 7 | 1479 | #7.0 | 0.0% | 0.0% |
-| PATS | 5-9 | 0.0% | 6 | 1586 | #8.5 | 0.0% | 0.0% |
-| KESS | 6-8 | 0.0% | 6 | 1431 | #8.8 | 0.0% | 0.0% |
-| ROUX | 5-9 | 0.0% | 5 | 1417 | #9.7 | 0.0% | 0.0% |
-| 3000 | 4-10 | 0.0% | 4 | 1385 | #11.4 | 0.0% | 0.0% |
-| WOOD | 4-10 | 0.0% | 5 | 1327 | #11.6 | 0.0% | 0.0% |
+| ZSF | 10-5 | 100.0% | 10 | 1806 | #1.0 | 100.0% | 100.0% |
+| KIRK | 10-5 | 100.0% | 10 | 1633 | #2.0 | 0.0% | 0.0% |
+| GV | 10-5 | 100.0% | 10 | 1580 | #3.0 | 0.0% | 0.0% |
+| MP | 9-6 | 100.0% | 9 | 1727 | #4.0 | 0.0% | 0.0% |
+| sgf | 9-6 | 0.0% | 9 | 1622 | #5.0 | 0.0% | 0.0% |
+| POO | 9-6 | 0.0% | 9 | 1613 | #6.0 | 0.0% | 0.0% |
+| GEMP | 7-8 | 0.0% | 7 | 1463 | #7.0 | 0.0% | 0.0% |
+| PATS | 6-9 | 0.0% | 6 | 1618 | #8.0 | 0.0% | 0.0% |
+| KESS | 6-9 | 0.0% | 6 | 1388 | #9.0 | 0.0% | 0.0% |
+| ROUX | 5-10 | 0.0% | 5 | 1411 | #10.0 | 0.0% | 0.0% |
+| WOOD | 5-10 | 0.0% | 5 | 1335 | #11.0 | 0.0% | 0.0% |
+| 3000 | 4-11 | 0.0% | 4 | 1386 | #12.0 | 0.0% | 0.0% |
 
 
 > **Why Playoff % and Projected Standing Sometimes Conflict**
@@ -657,11 +254,9 @@ Based on 10,000 Monte Carlo simulations blending ESPN projections with historica
 
 ### Playoff Picture Analysis
 
-**Locked In:** ZSF, MP - ESPN projections and historical data both agree: these teams are playoff-bound.
+**Locked In:** GV, KIRK, ZSF, MP - ESPN projections and historical data both agree: these teams are playoff-bound.
 
-**Looking Good:** GV, sgf, KIRK - Strong position but not mathematically safe. The simulation likes their chances.
-
-**Long Shots:** GEMP, POO, KESS, WOOD, ROUX, 3000, PATS - The simulations found very few paths to the playoffs. Time to play spoiler.
+**Long Shots:** GEMP, POO, KESS, WOOD, sgf, ROUX, 3000, PATS - The simulations found very few paths to the playoffs. Time to play spoiler.
 
 ### Tiebreaker Watch: Points For Leaders
 
@@ -669,12 +264,12 @@ Since Points For is the tiebreaker, here's who's positioned best if records end 
 
 | Rank | Team | Current PF | Projected Final PF | Expected Addition |
 |------|------|------------|-------------------|-------------------|
-| 1 | ZSF | 1656 | 1776 | +119 |
-| 2 | MP | 1588 | 1700 | +112 |
-| 3 | KIRK | 1525 | 1637 | +112 |
-| 4 | sgf | 1526 | 1632 | +106 |
-| 5 | GV | 1486 | 1593 | +107 |
-| 6 | PATS | 1477 | 1586 | +109 |
+| 1 | ZSF | 1806 | 1806 | +-0 |
+| 2 | MP | 1727 | 1727 | +-0 |
+| 3 | KIRK | 1633 | 1633 | +0 |
+| 4 | sgf | 1622 | 1622 | +0 |
+| 5 | PATS | 1618 | 1618 | +-0 |
+| 6 | POO | 1613 | 1613 | +-0 |
 
 
 ---
@@ -693,7 +288,7 @@ Based on our Monte Carlo simulations, here's what each team can expect to earn. 
 | **1st Place** | 55% of $2,700 | = **$1,485** |
 | **2nd Place** | 30% of $2,700 | = **$810** |
 | **3rd Place** | 15% of $2,700 | = **$405** |
-| **Points-For Champion** | 50% of Total FAAB | = **$240** (current) |
+| **Points-For Champion** | 50% of Total FAAB | = **$242** (current) |
 
 ### FAAB Spending by Team (Incremental Cost)
 
@@ -702,19 +297,19 @@ FAAB spending is **additional cost beyond the $250 buy-in**. The Points-For winn
 | Team | FAAB Spent | Contribution to PF Prize |
 |------|------------|-------------------------|
 | PATS | $92 | $46 |
-| ZSF | $88 | $44 |
+| ZSF | $91 | $46 |
 | GV | $60 | $30 |
 | KESS | $57 | $28 |
 | POO | $52 | $26 |
 | ROUX | $41 | $20 |
-| KIRK | $30 | $15 |
+| KIRK | $31 | $16 |
 | sgf | $24 | $12 |
 | MP | $16 | $8 |
 | GEMP | $12 | $6 |
 | WOOD | $8 | $4 |
 | 3000 | $0 | $0 |
 
-| **TOTAL** | **$480** | **$240** (prize pool) |
+| **TOTAL** | **$484** | **$242** (prize pool) |
 
 ### Expected Payouts Summary
 
@@ -722,17 +317,17 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
 
 | Team | Playoff % | PF Leader % | Total Cost | E[Playoff] | E[PF Prize] | E[Weekly] | E[Return] | **Net Expected** |
 |------|-----------|-------------|------------|------------|-------------|-----------|-----------|------------------|
-| ZSF | 90.4% | 96.3% | $294 | $973 | $231 | $29 | $1232 | **$938** |
-| MP | 91.1% | 3.7% | $258 | $630 | $9 | $28 | $666 | **$408** |
-| KIRK | 87.4% | 0.0% | $265 | $528 | $0 | $26 | $554 | **$289** |
-| sgf | 64.7% | 0.0% | $262 | $370 | $0 | $26 | $396 | **$134** |
-| GV | 63.6% | 0.0% | $280 | $199 | $0 | $26 | $225 | **$-55** |
+| ZSF | 100.0% | 100.0% | $296 | $1485 | $242 | $29 | $1756 | **$1461** |
+| KIRK | 100.0% | 0.0% | $266 | $810 | $0 | $26 | $836 | **$571** |
+| GV | 100.0% | 0.0% | $280 | $405 | $0 | $26 | $431 | **$151** |
 | 3000 | 0.0% | 0.0% | $250 | $0 | $0 | $22 | $22 | **$-228** |
+| MP | 100.0% | 0.0% | $258 | $0 | $0 | $28 | $28 | **$-230** |
 | GEMP | 0.0% | 0.0% | $256 | $0 | $0 | $24 | $24 | **$-232** |
-| WOOD | 0.0% | 0.0% | $254 | $0 | $0 | $21 | $21 | **$-233** |
+| WOOD | 0.0% | 0.0% | $254 | $0 | $0 | $22 | $22 | **$-232** |
+| sgf | 0.0% | 0.0% | $262 | $0 | $0 | $26 | $26 | **$-236** |
 | ROUX | 0.0% | 0.0% | $270 | $0 | $0 | $23 | $23 | **$-248** |
-| POO | 2.7% | 0.0% | $276 | $1 | $0 | $26 | $26 | **$-250** |
-| KESS | 0.0% | 0.0% | $278 | $0 | $0 | $23 | $23 | **$-255** |
+| POO | 0.0% | 0.0% | $276 | $0 | $0 | $26 | $26 | **$-250** |
+| KESS | 0.0% | 0.0% | $278 | $0 | $0 | $22 | $22 | **$-256** |
 | PATS | 0.0% | 0.0% | $296 | $0 | $0 | $26 | $26 | **$-270** |
 
 
@@ -742,7 +337,7 @@ Each manager's **total investment** = $250 buy-in + (FAAB Spent ÷ 2). Net Expec
    - Uses actual placement probabilities from Monte Carlo simulations
    - **Sum of all teams' E[Playoff] = $2,700 exactly** (the full playoff pool)
    
-2. **E[PF Prize]** = PF Leader % × $240 (current FAAB pool ÷ 2)
+2. **E[PF Prize]** = PF Leader % × $242 (current FAAB pool ÷ 2)
    - Your probability of finishing with the most Points For × the prize
    
 3. **E[Weekly]** = Probability × $300 (total weekly pool)
@@ -790,22 +385,9 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 ---
 
-## Remaining Schedule (Weeks 15-15)
+## Remaining Schedule (Weeks 16-15)
 
 *Win probabilities based on blended OPTIMIZED projections (60%) and historical data (40%). ESPN's broken projections have been corrected for BYE weeks and injuries before blending.*
-
-### Week 15
-
-*Using OPTIMIZED projections (BYE/injured players zeroed, bench substitutions applied)*
-
-| Matchup | Optimized Proj | Historical PPG | MC Blended | Favorite | Win Prob |
-|---------|----------------|----------------|------------|----------|----------|
-| WOOD vs ROUX | 105.3 vs 100.5 | 87.8 vs 94.2 | 98.3 vs 98.0 | WOOD | 51% |
-| GEMP vs GV | 97.9 vs 107.5 | 98.6 vs 106.1 | 98.2 vs 107.0 | GV | 63% |
-| KESS vs PATS | 97.0 vs 111.1 | 95.3 vs 105.5 | 96.3 vs 108.9 | PATS | 67% |
-| MP vs POO | 110.7 vs 113.5 | 113.4 vs 105.1 | 111.8 vs 110.1 | MP | 52% |
-| KIRK vs 3000 | 113.6 vs 99.9 | 108.9 vs 92.0 | 111.7 vs 96.8 | KIRK | 77% |
-| sgf vs ZSF | 104.7 vs 119.6 | 109.0 vs 118.3 | 106.4 vs 119.1 | ZSF | 63% |
 
 ---
 
@@ -824,78 +406,48 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 ### Team-by-Team Injury Report
 
-**WOOD** (Health: 67%)
+**ROUX** (Health: 78%)
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| Tucker Kraft | WR | IR | Why is he even on your roster?! | IR Slot |
-| Josh Jacobs | RB | Q | Minor Concern | Starter |
-| Aaron Jones Sr. | RB | Q | Minor Concern | Starter |
-| Nick Chubb | RB | Q | Minor Concern | Bench |
-| David Njoku | WR | Q | Minor Concern | Bench |
-| Theo Johnson | WR | Q | Minor Concern | Starter |
+| Ricky Pearsall | RB | Q | Minor Concern | Bench |
+| Quentin Johnston | RB | Q | Minor Concern | Starter |
+| Chris Rodriguez Jr. | RB | Q | Minor Concern | Starter |
+| Hollywood Brown | RB | Q | Minor Concern | Bench |
 
-**POO** (Health: 78%)
+**KESS** (Health: 78%)
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| CeeDee Lamb | RB | Q | Minor Concern | Starter |
-| Devin Neal | RB | Q | Minor Concern | Bench |
-| Ladd McConkey | RB | Q | Minor Concern | Starter |
+| Zach Ertz | WR | IR | Why is he even on your roster?! | Bench (IR) |
+| Patrick Mahomes | QB | O | Major Concern | Starter |
+| Joe Mixon | RB | O | Major Concern | IR Slot |
+| Alvin Kamara | RB | Q | Minor Concern | Bench |
+| Bam Knight | RB | Q | Minor Concern | Starter |
 
 **3000** (Health: 89%)
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| Cade Otton | WR | O | Major Concern | Bench (O) |
+| Jayden Reed | RB | IR | Why is he even on your roster?! | IR Slot |
 | Woody Marks | RB | Q | Minor Concern | Starter |
-| Jayden Reed | RB | Q | Minor Concern | IR Slot |
+| Cade Otton | WR | Q | Minor Concern | Bench |
 
-**sgf** (Health: 89%)
-
-| Player | Position | Status | Severity | Role |
-|--------|----------|--------|----------|------|
-| Sam LaPorta | WR | IR | Why is he even on your roster?! | IR Slot |
-| Christian McCaffrey | RB | Q | Minor Concern | Starter |
-| Marvin Harrison Jr. | RB | Q | Minor Concern | Bench |
-
-**ROUX** (Health: 89%)
+**POO** (Health: 89%)
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| Chris Rodriguez Jr. | RB | Q | Minor Concern | Starter |
+| Devin Neal | RB | Q | Minor Concern | Starter |
 
-**MP** (Health: 89%)
-
-| Player | Position | Status | Severity | Role |
-|--------|----------|--------|----------|------|
-| Cam Skattebo | RB | IR | Why is he even on your roster?! | IR Slot |
-| Justin Herbert | QB | Q | Minor Concern | Bench |
-| Breece Hall | RB | Q | Minor Concern | Starter |
-
-**KESS** (Health: 89%)
+**GEMP** (Health: 89%)
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| Zach Ertz | WR | IR | Why is he even on your roster?! | Bench (IR) |
-| Joe Mixon | RB | O | Major Concern | IR Slot |
-| Jordan Addison | RB | Q | Minor Concern | Bench |
-| Mark Andrews | WR | Q | Minor Concern | Starter |
-| Alvin Kamara | RB | Q | Minor Concern | Bench |
-
-**ZSF** (Health: 89%)
-
-| Player | Position | Status | Severity | Role |
-|--------|----------|--------|----------|------|
-| Drake London | RB | O | Major Concern | IR Slot |
-| De'Von Achane | RB | Q | Minor Concern | Starter |
-| Rome Odunze | RB | Q | Minor Concern | Bench |
-
-**KIRK** (Health: 89%)
-
-| Player | Position | Status | Severity | Role |
-|--------|----------|--------|----------|------|
-| Davante Adams | RB | Q | Minor Concern | Starter |
+| Tyler Bass | WR | IR | Why is he even on your roster?! | IR Slot |
+| Garrett Wilson | RB | IR | Why is he even on your roster?! | Bench (IR) |
+| Daniel Jones | QB | IR | Why is he even on your roster?! | Bench (IR) |
+| Matt Prater | WR | O | Major Concern | Starter |
+| Tee Higgins | RB | Q | Minor Concern | Bench |
 
 **PATS** (Health: 100%)
 
@@ -908,16 +460,41 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| Jake Ferguson | WR | Q | Minor Concern | Bench |
+| Christian Watson | RB | Q | Minor Concern | Bench |
 
-**GEMP** (Health: 100%)
+**sgf** (Health: 100%)
 
 | Player | Position | Status | Severity | Role |
 |--------|----------|--------|----------|------|
-| Daniel Jones | QB | IR | Why is he even on your roster?! | Bench (IR) |
-| Tyler Bass | WR | IR | Why is he even on your roster?! | IR Slot |
-| Garrett Wilson | RB | IR | Why is he even on your roster?! | Bench (IR) |
-| Tee Higgins | RB | Q | Minor Concern | Bench |
+| Sam LaPorta | WR | IR | Why is he even on your roster?! | IR Slot |
+| Marvin Harrison Jr. | RB | Q | Minor Concern | Bench |
+
+**WOOD** (Health: 100%)
+
+| Player | Position | Status | Severity | Role |
+|--------|----------|--------|----------|------|
+| Tucker Kraft | WR | IR | Why is he even on your roster?! | IR Slot |
+| Nick Chubb | RB | Q | Minor Concern | Bench |
+| David Njoku | WR | Q | Minor Concern | Bench |
+
+**MP** (Health: 100%)
+
+| Player | Position | Status | Severity | Role |
+|--------|----------|--------|----------|------|
+| Cam Skattebo | RB | IR | Why is he even on your roster?! | IR Slot |
+
+**ZSF** (Health: 100%)
+
+| Player | Position | Status | Severity | Role |
+|--------|----------|--------|----------|------|
+| Drake London | RB | Q | Minor Concern | IR Slot |
+| Rome Odunze | RB | Q | Minor Concern | Bench |
+
+**KIRK** (Health: 100%)
+
+| Player | Position | Status | Severity | Role |
+|--------|----------|--------|----------|------|
+| Davante Adams | RB | Q | Minor Concern | Bench |
 
 ---
 
@@ -925,420 +502,149 @@ The Optimizer is nothing short of **revolutionary**. It scans every roster, dete
 
 *Each team's analysis includes win/points projections, roster health status, and playoff outlook.*
 
-### #1 ZSF - Power Score: 38.27
+### #1 ZSF - Power Score: 42.27
 
-**Record:** 9-5 | **PPG:** 118.31 | **Total PF:** 1656 | **Top6:** 11 | **MVP-W:** 9.27 | **WAX:** -0.27
+**Record:** 10-5 | **PPG:** 120.38 | **Total PF:** 1806 | **Top6:** 12 | **MVP-W:** 10.27 | **WAX:** -0.27
 
-Sitting atop the standings with a commanding 9-5 record, this team has earned the top spot through dominant performance. Their 118.31 PPG leads the league, which translates to an impressive 9.27 MVP-W and 11 top-6 weekly finishes. Their -0.27 WAX shows they're earning their wins fair and square - no luck needed. 
+Sitting atop the standings with a commanding 10-5 record, this team has earned the top spot through dominant performance. Their 120.38 PPG leads the league, which translates to an impressive 10.27 MVP-W and 12 top-6 weekly finishes. Their -0.27 WAX shows they're earning their wins fair and square - no luck needed. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1776** | Playoff: **90.4%** | #1 Seed: **61.8%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1806** | Playoff: **100.0%** | #1 Seed: **100.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 119.6 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **119.6 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 118.3 pts | Season average through week 12 | 
-| Monte Carlo Input | 119.1 pts | 60% Optimized + 40% Historical | 
-
-*Strong odds at 90%, but fantasy football loves chaos. One bad week and this could get interesting. Key injuries to De'Von Achane (QUESTIONABLE) are devastating - the variance multiplier of 1.15x reflects massive uncertainty. Watch for potential boost if Drake London return(s) - could shift the distribution upward.* 
-
-**Roster Health & Availability Report:** 
-Key injuries: De'Von Achane (RB, QUESTIONABLE). Bench depth: James Cook III (RB) available. Watch for return: Drake London. 
-
-*Injured Starters (1):* 
-- **De'Von Achane** (RB, QUESTIONABLE) ⭐: 21.3 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-
-*Potential Returns:* 
-- **Drake London** (RB): OUT - may return soon 
-
-*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **15%**, widening outcome distributions. This means higher upside but also higher downside risk. 
+*The simulations are decisive: ZSF is playoff-bound with a healthy roster backing up the math. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs sgf:**
- | Projection Type | ZSF | sgf | 
-|-----------------|--------|----------| 
-| ESPN Raw | 119.6 | 104.7 | 
-| Corrected (BYE/Inj=0) | 119.6 | 104.7 | 
-| **Optimized (+Bench)** | **119.6** | **104.7** | 
-| Historical PPG | 118.3 | 109.0 | 
-| **MC Blended** | **119.1** | **106.4** | 
-
-*Expected Outcome:* **Favored** (75% win probability) | Spread: +12.6 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1656 
-- Expected Additional PF: +119 
-- **Projected Final PF: 1775**
 
 ![ZSF Monte Carlo](visualizations/monte_carlo/zsf_monte_carlo.png)
 
 ---
 
-### #2 MP - Power Score: 37.36
+### #2 KIRK - Power Score: 40.18
 
-**Record:** 9-5 | **PPG:** 113.42 | **Total PF:** 1588 | **Top6:** 10 | **MVP-W:** 9.36 | **WAX:** -0.36
+**Record:** 10-5 | **PPG:** 108.89 | **Total PF:** 1633 | **Top6:** 11 | **MVP-W:** 9.18 | **WAX:** +0.82
 
-Second place with 9-5, trailing the leader by 0.91 power points. Scoring 113.42 PPG with 10 top-6 finishes shows genuine quality. That -0.36 WAX is frustrating - a bit more luck and they'd be in first. 
+Second place with 10-5, trailing the leader by 2.09 power points. Scoring 108.89 PPG with 11 top-6 finishes shows genuine quality. The +0.82 WAX suggests some fortune has helped along the way. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1700** | Playoff: **91.1%** | #1 Seed: **19.6%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1633** | Playoff: **100.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 110.7 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **110.7 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 113.4 pts | Season average through week 12 | 
-| Monte Carlo Input | 111.8 pts | 60% Optimized + 40% Historical | 
-
-*Strong odds at 91%, but fantasy football loves chaos. One bad week and this could get interesting. Key injuries to Breece Hall (QUESTIONABLE) are devastating - the variance multiplier of 1.08x reflects massive uncertainty.* 
+*The simulations are decisive: KIRK is playoff-bound with a healthy roster backing up the math. Injured bench talent (Davante Adams (RB)) waiting in the wings if healthy. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Roster Health & Availability Report:** 
-Key injuries: Breece Hall (RB, QUESTIONABLE). 
+Fully healthy starting lineup. 
 
-*Injured Starters (1):* 
-- **Breece Hall** (RB, QUESTIONABLE) ⭐: 15.2 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-
-*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **8%**, widening outcome distributions. This means higher upside but also higher downside risk. 
+*Injured Bench Players (High-Value):* 
+- **Davante Adams** (RB, QUESTIONABLE): 12.2 pts proj when healthy 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs POO:**
- | Projection Type | MP | POO | 
-|-----------------|--------|----------| 
-| ESPN Raw | 110.7 | 113.5 | 
-| Corrected (BYE/Inj=0) | 110.7 | 113.5 | 
-| **Optimized (+Bench)** | **110.7** | **113.5** | 
-| Historical PPG | 113.4 | 105.1 | 
-| **MC Blended** | **111.8** | **110.1** | 
-
-*Expected Outcome:* Toss-up (55% win probability) | Spread: +1.7 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1588 
-- Expected Additional PF: +112 
-- **Projected Final PF: 1700**
-
-![MP Monte Carlo](visualizations/monte_carlo/mp_monte_carlo.png)
-
----
-
-### #3 KIRK - Power Score: 36.55
-
-**Record:** 9-5 | **PPG:** 108.92 | **Total PF:** 1525 | **Top6:** 10 | **MVP-W:** 8.55 | **WAX:** +0.45
-
-Currently in the playoff picture at #3 with a 9-5 record. Their 108.92 PPG and 8.55 MVP-W put them in solid position. 10 top-6 finishes in 14 weeks shows they can compete with anyone. 
-
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1637** | Playoff: **87.4%** | #1 Seed: **6.3%** 
-
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 113.6 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **113.6 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 108.9 pts | Season average through week 12 | 
-| Monte Carlo Input | 111.7 pts | 60% Optimized + 40% Historical | 
-
-*Strong odds at 87%, but fantasy football loves chaos. One bad week and this could get interesting. Injuries to Davante Adams (QUESTIONABLE) add unpredictability to the projections.* 
-
-**Roster Health & Availability Report:** 
-Key injuries: Davante Adams (RB, QUESTIONABLE). 
-
-*Injured Starters (1):* 
-- **Davante Adams** (RB, QUESTIONABLE) ⭐: 14.2 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-
-*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **6%**, widening outcome distributions. This means higher upside but also higher downside risk. 
-
-**Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs 3000:**
- | Projection Type | KIRK | 3000 | 
-|-----------------|--------|----------| 
-| ESPN Raw | 113.6 | 99.9 | 
-| Corrected (BYE/Inj=0) | 113.6 | 99.9 | 
-| **Optimized (+Bench)** | **113.6** | **99.9** | 
-| Historical PPG | 108.9 | 92.0 | 
-| **MC Blended** | **111.7** | **96.7** | 
-
-*Expected Outcome:* **Favored** (80% win probability) | Spread: +15.0 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1525 
-- Expected Additional PF: +112 
-- **Projected Final PF: 1637**
 
 ![KIRK Monte Carlo](visualizations/monte_carlo/kirk_monte_carlo.png)
 
 ---
 
-### #4 sgf - Power Score: 34.36
+### #3 MP - Power Score: 39.09
 
-**Record:** 9-5 | **PPG:** 109.01 | **Total PF:** 1526 | **Top6:** 8 | **MVP-W:** 8.36 | **WAX:** +0.64
+**Record:** 9-6 | **PPG:** 115.14 | **Total PF:** 1727 | **Top6:** 11 | **MVP-W:** 10.09 | **WAX:** -1.09
 
-Currently in the playoff picture at #4 with a 9-5 record. Their 109.01 PPG and 8.36 MVP-W put them in solid position. 8 top-6 finishes in 14 weeks shows they can compete with anyone. 
+Currently in the playoff picture at #3 with a 9-6 record. Their 115.14 PPG and 10.09 MVP-W put them in solid position. 11 top-6 finishes in 15 weeks shows they can compete with anyone. The brutal -1.09 WAX means they've been snake-bitten - they should have more wins. 
 
-**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1632** | Playoff: **64.7%** | #1 Seed: **11.9%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1727** | Playoff: **100.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 104.7 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **104.7 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 109.0 pts | Season average through week 12 | 
-| Monte Carlo Input | 106.4 pts | 60% Optimized + 40% Historical | 
-
-*Right on the knife's edge at 65%. ESPN projects enough points to stay competitive, but so does everyone else. 1 starter(s) dealing with injuries adds some variance (1.05x) to these projections. Only 0.4 more projected wins suggests a rough finish ahead.* 
-
-**Roster Health & Availability Report:** 
-1 minor injury(s) in lineup. Bench depth: Jared Goff (QB) available. 
-
-*Injured Starters (1):* 
-- **Christian McCaffrey** (RB, QUESTIONABLE): 0.0 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+*The simulations are decisive: MP is playoff-bound with a healthy roster backing up the math. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs ZSF:**
- | Projection Type | sgf | ZSF | 
-|-----------------|--------|----------| 
-| ESPN Raw | 104.7 | 119.6 | 
-| Corrected (BYE/Inj=0) | 104.7 | 119.6 | 
-| **Optimized (+Bench)** | **104.7** | **119.6** | 
-| Historical PPG | 109.0 | 118.3 | 
-| **MC Blended** | **106.4** | **119.1** | 
-
-*Expected Outcome:* Underdog (25% win probability) | Spread: -12.6 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1526 
-- Expected Additional PF: +106 
-- **Projected Final PF: 1632**
-
-![sgf Monte Carlo](visualizations/monte_carlo/sgf_monte_carlo.png)
+![MP Monte Carlo](visualizations/monte_carlo/mp_monte_carlo.png)
 
 ---
 
-### #5 GV - Power Score: 34.18
+### #4 GV - Power Score: 36.45
 
-**Record:** 9-5 | **PPG:** 106.14 | **Total PF:** 1486 | **Top6:** 8 | **MVP-W:** 8.18 | **WAX:** +0.82
+**Record:** 10-5 | **PPG:** 105.31 | **Total PF:** 1580 | **Top6:** 8 | **MVP-W:** 8.45 | **WAX:** +1.55
 
-On the playoff bubble at #5 with 9-5. Still in decent shape with 63.6% playoff odds. Their 106.14 PPG and 8 top-6 finishes show potential. They've benefited from +0.82 WAX - riding some good matchups. 
+Currently in the playoff picture at #4 with a 10-5 record. Their 105.31 PPG and 8.45 MVP-W put them in solid position. 8 top-6 finishes in 15 weeks shows they can compete with anyone. That +1.55 WAX suggests they've been catching breaks. 
 
-**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1593** | Playoff: **63.6%** | #1 Seed: **0.3%** 
+**Projection Summary:** Most likely finish: **10 wins** | Projected PF: **1580** | Playoff: **100.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 107.5 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **107.5 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 106.1 pts | Season average through week 12 | 
-| Monte Carlo Input | 107.0 pts | 60% Optimized + 40% Historical | 
-
-*Right on the knife's edge at 64%. ESPN projects enough points to stay competitive, but so does everyone else.* 
+*The simulations are decisive: GV is playoff-bound with a healthy roster backing up the math. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs GEMP:**
- | Projection Type | GV | GEMP | 
-|-----------------|--------|----------| 
-| ESPN Raw | 107.5 | 97.9 | 
-| Corrected (BYE/Inj=0) | 107.5 | 97.9 | 
-| **Optimized (+Bench)** | **107.5** | **97.9** | 
-| Historical PPG | 106.1 | 98.6 | 
-| **MC Blended** | **107.0** | **98.2** | 
-
-*Expected Outcome:* **Favored** (72% win probability) | Spread: +8.8 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1486 
-- Expected Additional PF: +107 
-- **Projected Final PF: 1593**
 
 ![GV Monte Carlo](visualizations/monte_carlo/gv_monte_carlo.png)
 
 ---
 
-### #6 POO - Power Score: 30.09
+### #5 sgf - Power Score: 34.73
 
-**Record:** 8-6 | **PPG:** 105.10 | **Total PF:** 1471 | **Top6:** 7 | **MVP-W:** 7.09 | **WAX:** +0.91
+**Record:** 9-6 | **PPG:** 108.13 | **Total PF:** 1622 | **Top6:** 8 | **MVP-W:** 8.73 | **WAX:** +0.27
 
-On the playoff bubble at #6 with 8-6. Need to step it up - only 2.7% playoff odds right now. Their 105.10 PPG and 7 top-6 finishes show potential. They've benefited from +0.91 WAX - riding some good matchups. 
+On the playoff bubble at #5 with 9-6. Need to step it up - only 0.0% playoff odds right now. Their 108.13 PPG and 8 top-6 finishes show potential. 
 
-**Projection Summary:** Most likely finish: **8 wins** | Projected PF: **1582** | Playoff: **2.7%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1622** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 113.5 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **113.5 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 105.1 pts | Season average through week 12 | 
-| Monte Carlo Input | 110.1 pts | 60% Optimized + 40% Historical | 
-
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Key injuries to CeeDee Lamb (QUESTIONABLE) are devastating - the variance multiplier of 1.12x reflects massive uncertainty. Only 0.5 more projected wins suggests a rough finish ahead.* 
-
-**Roster Health & Availability Report:** 
-Key injuries: CeeDee Lamb (RB, QUESTIONABLE). 
-
-*Injured Starters (2):* 
-- **CeeDee Lamb** (RB, QUESTIONABLE) ⭐: 16.2 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-- **Ladd McConkey** (RB, QUESTIONABLE): 10.0 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-
-*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **12%**, widening outcome distributions. This means higher upside but also higher downside risk. 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
+![sgf Monte Carlo](visualizations/monte_carlo/sgf_monte_carlo.png)
 
+---
 
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs MP:**
- | Projection Type | POO | MP | 
-|-----------------|--------|----------| 
-| ESPN Raw | 113.5 | 110.7 | 
-| Corrected (BYE/Inj=0) | 113.5 | 110.7 | 
-| **Optimized (+Bench)** | **113.5** | **110.7** | 
-| Historical PPG | 105.1 | 113.4 | 
-| **MC Blended** | **110.1** | **111.8** | 
+### #6 POO - Power Score: 34.00
 
-*Expected Outcome:* Underdog (45% win probability) | Spread: -1.7 
+**Record:** 9-6 | **PPG:** 107.53 | **Total PF:** 1613 | **Top6:** 8 | **MVP-W:** 8.00 | **WAX:** +1.00
 
-*Roster Decisions:* None needed - lineup is optimally set. 
+On the playoff bubble at #6 with 9-6. Need to step it up - only 0.0% playoff odds right now. Their 107.53 PPG and 8 top-6 finishes show potential. They've benefited from +1.00 WAX - riding some good matchups. 
 
-**Projected Season Totals (Optimized):** 
-- Current PF: 1471 
-- Expected Additional PF: +110 
-- **Projected Final PF: 1582**
+**Projection Summary:** Most likely finish: **9 wins** | Projected PF: **1613** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.08x) to these projections. Only 0.0 more projected wins suggests a rough finish ahead.* 
+
+**Roster Health & Availability Report:** 
+1 minor injury(s) in lineup. Bench depth: DK Metcalf (RB) available. 
+
+*Injured Starters (1):* 
+- **Devin Neal** (RB, QUESTIONABLE): 7.0 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+
+*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **8%**, widening outcome distributions. This means higher upside but also higher downside risk. 
+
+**Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
 ![POO Monte Carlo](visualizations/monte_carlo/poo_monte_carlo.png)
 
 ---
 
-### #7 PATS - Power Score: 26.82
+### #7 PATS - Power Score: 30.64
 
-**Record:** 5-9 | **PPG:** 105.53 | **Total PF:** 1477 | **Top6:** 9 | **MVP-W:** 7.82 | **WAX:** -2.82
+**Record:** 6-9 | **PPG:** 107.86 | **Total PF:** 1618 | **Top6:** 10 | **MVP-W:** 8.64 | **WAX:** -2.64
 
-Sitting at #7 with a 5-9 record - outside looking in. At just 0.0% playoff odds, it would take a miracle. Their 105.53 PPG suggests they have some scoring punch. The -2.82 WAX means they're better than their record - just unlucky. 
+Sitting at #7 with a 6-9 record - outside looking in. At just 0.0% playoff odds, it would take a miracle. Their 107.86 PPG suggests they have some scoring punch. The -2.64 WAX means they're better than their record - just unlucky. 
 
-**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1586** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1618** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 111.1 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **111.1 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 105.5 pts | Season average through week 12 | 
-| Monte Carlo Input | 108.9 pts | 60% Optimized + 40% Historical | 
-
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Watch for potential boost if Jayden Daniels return(s) - could shift the distribution upward. Injured bench talent (Jayden Daniels (QB)) waiting in the wings if healthy.* 
-
-**Roster Health & Availability Report:** 
-Fully healthy starting lineup. Watch for return: Jayden Daniels. 
-
-*Potential Returns:* 
-- **Jayden Daniels** (QB): OUT - may return soon 
-
-*Injured Bench Players (High-Value):* 
-- **Jayden Daniels** (QB, OUT): 18.4 pts proj when healthy 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs KESS:**
- | Projection Type | PATS | KESS | 
-|-----------------|--------|----------| 
-| ESPN Raw | 111.1 | 97.0 | 
-| Corrected (BYE/Inj=0) | 111.1 | 97.0 | 
-| **Optimized (+Bench)** | **111.1** | **97.0** | 
-| Historical PPG | 105.5 | 95.3 | 
-| **MC Blended** | **108.9** | **96.3** | 
-
-*Expected Outcome:* **Favored** (75% win probability) | Spread: +12.6 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1477 
-- Expected Additional PF: +109 
-- **Projected Final PF: 1586**
 
 ![PATS Monte Carlo](visualizations/monte_carlo/pats_monte_carlo.png)
 
 ---
 
-### #8 GEMP - Power Score: 23.55
+### #8 GEMP - Power Score: 23.64
 
-**Record:** 7-7 | **PPG:** 98.63 | **Total PF:** 1381 | **Top6:** 4 | **MVP-W:** 5.55 | **WAX:** +1.45
+**Record:** 7-8 | **PPG:** 97.51 | **Total PF:** 1463 | **Top6:** 4 | **MVP-W:** 5.64 | **WAX:** +1.36
 
-Sitting at #8 with a 7-7 record - outside looking in. At just 0.0% playoff odds, it would take a miracle. Their 98.63 PPG suggests they have some scoring punch. That +1.45 WAX is actually concerning - they've been lucky and still can't crack the top 6. 
+Sitting at #8 with a 7-8 record - outside looking in. At just 0.0% playoff odds, it would take a miracle. Their 97.51 PPG suggests they have some scoring punch. That +1.36 WAX is actually concerning - they've been lucky and still can't crack the top 6. 
 
-**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1479** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **7 wins** | Projected PF: **1463** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 97.9 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **97.9 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 98.6 pts | Season average through week 12 | 
-| Monte Carlo Input | 98.2 pts | 60% Optimized + 40% Historical | 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.00x) to these projections. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Only 0.4 more projected wins suggests a rough finish ahead.* 
+**Roster Health & Availability Report:** 
+1 minor injury(s) in lineup. 
+
+*Injured Starters (1):* 
+- **Matt Prater** (WR, OUT): 0.0 pts proj, OUT - may return soon 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs GV:**
- | Projection Type | GEMP | GV | 
-|-----------------|--------|----------| 
-| ESPN Raw | 97.9 | 107.5 | 
-| Corrected (BYE/Inj=0) | 97.9 | 107.5 | 
-| **Optimized (+Bench)** | **97.9** | **107.5** | 
-| Historical PPG | 98.6 | 106.1 | 
-| **MC Blended** | **98.2** | **107.0** | 
-
-*Expected Outcome:* Underdog (28% win probability) | Spread: -8.8 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1381 
-- Expected Additional PF: +98 
-- **Projected Final PF: 1479**
 
 ![GEMP Monte Carlo](visualizations/monte_carlo/gemp_monte_carlo.png)
 
@@ -1346,218 +652,92 @@ Sitting at #8 with a 7-7 record - outside looking in. At just 0.0% playoff odds,
 
 ### #9 KESS - Power Score: 21.27
 
-**Record:** 6-8 | **PPG:** 95.34 | **Total PF:** 1335 | **Top6:** 4 | **MVP-W:** 5.27 | **WAX:** +0.73
+**Record:** 6-9 | **PPG:** 92.53 | **Total PF:** 1388 | **Top6:** 4 | **MVP-W:** 5.27 | **WAX:** +0.73
 
-At #9 with 6-8, the season hasn't gone as planned. Averaging 95.34 PPG with only 4 top-6 finishes in 14 weeks. The +0.73 WAX is a red flag - even with good luck, they're struggling. 
+At #9 with 6-9, the season hasn't gone as planned. Averaging 92.53 PPG with only 4 top-6 finishes in 15 weeks. The +0.73 WAX is a red flag - even with good luck, they're struggling. 
 
-**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1431** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **6 wins** | Projected PF: **1388** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 97.0 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **97.0 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 95.3 pts | Season average through week 12 | 
-| Monte Carlo Input | 96.3 pts | 60% Optimized + 40% Historical | 
-
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.04x) to these projections. Watch for potential boost if Joe Mixon return(s) - could shift the distribution upward. Only 0.3 more projected wins suggests a rough finish ahead.* 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 2 starter(s) dealing with injuries adds some variance (1.00x) to these projections. Watch for potential boost if Joe Mixon return(s) - could shift the distribution upward. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Roster Health & Availability Report:** 
-1 minor injury(s) in lineup. Watch for return: Joe Mixon. 
+2 minor injury(s) in lineup. Watch for return: Joe Mixon. 
 
-*Injured Starters (1):* 
-- **Mark Andrews** (WR, QUESTIONABLE): 7.5 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+*Injured Starters (2):* 
+- **Patrick Mahomes** (QB, OUT): 0.0 pts proj, OUT - may return soon 
+- **Bam Knight** (RB, QUESTIONABLE): 0.0 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
 
 *Potential Returns:* 
 - **Joe Mixon** (RB): OUT - may return soon 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs PATS:**
- | Projection Type | KESS | PATS | 
-|-----------------|--------|----------| 
-| ESPN Raw | 97.0 | 111.1 | 
-| Corrected (BYE/Inj=0) | 97.0 | 111.1 | 
-| **Optimized (+Bench)** | **97.0** | **111.1** | 
-| Historical PPG | 95.3 | 105.5 | 
-| **MC Blended** | **96.3** | **108.9** | 
-
-*Expected Outcome:* Underdog (25% win probability) | Spread: -12.6 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1335 
-- Expected Additional PF: +96 
-- **Projected Final PF: 1431**
-
 ![KESS Monte Carlo](visualizations/monte_carlo/kess_monte_carlo.png)
 
 ---
 
-### #10 ROUX - Power Score: 20.18
+### #10 ROUX - Power Score: 20.36
 
-**Record:** 5-9 | **PPG:** 94.25 | **Total PF:** 1319 | **Top6:** 5 | **MVP-W:** 5.18 | **WAX:** -0.18
+**Record:** 5-10 | **PPG:** 94.06 | **Total PF:** 1411 | **Top6:** 5 | **MVP-W:** 5.36 | **WAX:** -0.36
 
-At #10 with 5-9, the season hasn't gone as planned. Averaging 94.25 PPG with only 5 top-6 finishes in 14 weeks. 
+At #10 with 5-10, the season hasn't gone as planned. Averaging 94.06 PPG with only 5 top-6 finishes in 15 weeks. 
 
-**Projection Summary:** Most likely finish: **5 wins** | Projected PF: **1417** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **5 wins** | Projected PF: **1411** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 100.5 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **100.5 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 94.2 pts | Season average through week 12 | 
-| Monte Carlo Input | 98.0 pts | 60% Optimized + 40% Historical | 
-
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.04x) to these projections. Only 0.5 more projected wins suggests a rough finish ahead.* 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 2 starter(s) dealing with injuries adds some variance (1.08x) to these projections. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Roster Health & Availability Report:** 
-1 minor injury(s) in lineup. 
+2 minor injury(s) in lineup. 
 
-*Injured Starters (1):* 
-- **Chris Rodriguez Jr.** (RB, QUESTIONABLE): 8.6 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+*Injured Starters (2):* 
+- **Quentin Johnston** (RB, QUESTIONABLE): 7.7 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+- **Chris Rodriguez Jr.** (RB, QUESTIONABLE): 7.7 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+
+*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **8%**, widening outcome distributions. This means higher upside but also higher downside risk. 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs WOOD:**
- | Projection Type | ROUX | WOOD | 
-|-----------------|--------|----------| 
-| ESPN Raw | 100.5 | 105.3 | 
-| Corrected (BYE/Inj=0) | 100.5 | 105.3 | 
-| **Optimized (+Bench)** | **100.5** | **105.3** | 
-| Historical PPG | 94.2 | 87.8 | 
-| **MC Blended** | **98.0** | **98.3** | 
-
-*Expected Outcome:* Toss-up (49% win probability) | Spread: -0.3 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1319 
-- Expected Additional PF: +98 
-- **Projected Final PF: 1417**
 
 ![ROUX Monte Carlo](visualizations/monte_carlo/roux_monte_carlo.png)
 
 ---
 
-### #11 3000 - Power Score: 17.27
+### #11 WOOD - Power Score: 19.64
 
-**Record:** 4-10 | **PPG:** 92.04 | **Total PF:** 1289 | **Top6:** 4 | **MVP-W:** 5.27 | **WAX:** -1.27
+**Record:** 5-10 | **PPG:** 89.02 | **Total PF:** 1335 | **Top6:** 5 | **MVP-W:** 4.64 | **WAX:** +0.36
 
-Bringing up the rear at #11 with a 4-10 record. Their 92.04 PPG ranks near the bottom of the league. Only 4 top-6 finishes in 14 weeks tells the story. At least the -1.27 WAX shows they've had some bad luck. 
+Bringing up the rear at #11 with a 5-10 record. Their 89.02 PPG ranks near the bottom of the league. Only 5 top-6 finishes in 15 weeks tells the story. With +0.36 WAX, they've actually been a bit lucky - which makes this worse. 
 
-**Projection Summary:** Most likely finish: **4 wins** | Projected PF: **1385** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+**Projection Summary:** Most likely finish: **5 wins** | Projected PF: **1335** | Playoff: **0.0%** | #1 Seed: **0.0%** 
 
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 99.9 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **99.9 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 92.0 pts | Season average through week 12 | 
-| Monte Carlo Input | 96.8 pts | 60% Optimized + 40% Historical | 
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. 1 starter(s) dealing with injuries adds some variance (1.07x) to these projections. Only 0.2 more projected wins suggests a rough finish ahead.* 
+**Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
+
+![WOOD Monte Carlo](visualizations/monte_carlo/wood_monte_carlo.png)
+
+---
+
+### #12 3000 - Power Score: 17.73
+
+**Record:** 4-11 | **PPG:** 92.39 | **Total PF:** 1386 | **Top6:** 4 | **MVP-W:** 5.73 | **WAX:** -1.73
+
+Bringing up the rear at #12 with a 4-11 record. Their 92.39 PPG ranks near the bottom of the league. Only 4 top-6 finishes in 15 weeks tells the story. At least the -1.73 WAX shows they've had some bad luck. 
+
+**Projection Summary:** Most likely finish: **4 wins** | Projected PF: **1386** | Playoff: **0.0%** | #1 Seed: **0.0%** 
+
+*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Injuries to Woody Marks (QUESTIONABLE) add unpredictability to the projections. Only 0.0 more projected wins suggests a rough finish ahead.* 
 
 **Roster Health & Availability Report:** 
-1 minor injury(s) in lineup. 
+Key injuries: Woody Marks (RB, QUESTIONABLE). 
 
 *Injured Starters (1):* 
-- **Woody Marks** (RB, QUESTIONABLE): 10.2 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
+- **Woody Marks** (RB, QUESTIONABLE) ⭐: 13.2 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
 
 *Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **7%**, widening outcome distributions. This means higher upside but also higher downside risk. 
 
 **Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
 
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs KIRK:**
- | Projection Type | 3000 | KIRK | 
-|-----------------|--------|----------| 
-| ESPN Raw | 99.9 | 113.6 | 
-| Corrected (BYE/Inj=0) | 99.9 | 113.6 | 
-| **Optimized (+Bench)** | **99.9** | **113.6** | 
-| Historical PPG | 92.0 | 108.9 | 
-| **MC Blended** | **96.7** | **111.7** | 
-
-*Expected Outcome:* Underdog (20% win probability) | Spread: -15.0 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1289 
-- Expected Additional PF: +97 
-- **Projected Final PF: 1385**
-
 ![3000 Monte Carlo](visualizations/monte_carlo/3000_monte_carlo.png)
-
----
-
-### #12 WOOD - Power Score: 16.09
-
-**Record:** 4-10 | **PPG:** 87.80 | **Total PF:** 1229 | **Top6:** 4 | **MVP-W:** 4.09 | **WAX:** -0.09
-
-Bringing up the rear at #12 with a 4-10 record. Their 87.80 PPG ranks near the bottom of the league. Only 4 top-6 finishes in 14 weeks tells the story. 
-
-**Projection Summary:** Most likely finish: **5 wins** | Projected PF: **1327** | Playoff: **0.0%** | #1 Seed: **0.0%** 
-
-**Projection Breakdown (Avg Per Game, Weeks 13-15):** 
-| Source | Projection | Notes | 
-|--------|------------|-------| 
-| ESPN Raw | 105.3 pts | ESPN projection (includes BYE/injured starters) | 
-| **Optimized** | **105.3 pts** | ESPN Raw - unavailable + bench subs | 
-| Historical PPG | 87.8 pts | Season average through week 12 | 
-| Monte Carlo Input | 98.3 pts | 60% Optimized + 40% Historical | 
-
-*The computer ran 10,000 simulations and found essentially no path to the playoffs. Time to play spoiler. Key injuries to Josh Jacobs (QUESTIONABLE) are devastating - the variance multiplier of 1.13x reflects massive uncertainty.* 
-
-**Roster Health & Availability Report:** 
-Key injuries: Josh Jacobs (RB, QUESTIONABLE). 
-
-*Injured Starters (3):* 
-- **Josh Jacobs** (RB, QUESTIONABLE) ⭐: 19.9 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-- **Aaron Jones Sr.** (RB, QUESTIONABLE): 11.3 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-- **Theo Johnson** (WR, QUESTIONABLE): 0.0 pts proj, Questionable - assumed to play (historical: 80%+ play rate) 
-
-*Monte Carlo Variance Impact:* Roster uncertainty increased simulation variance by **13%**, widening outcome distributions. This means higher upside but also higher downside risk. 
-
-**Lineup Status:** Optimally set - no BYE week or injury substitutions needed.
-
-
-
-**Upcoming Matchups & Roster Decisions:**
- 
-**Week 15 vs ROUX:**
- | Projection Type | WOOD | ROUX | 
-|-----------------|--------|----------| 
-| ESPN Raw | 105.3 | 100.5 | 
-| Corrected (BYE/Inj=0) | 105.3 | 100.5 | 
-| **Optimized (+Bench)** | **105.3** | **100.5** | 
-| Historical PPG | 87.8 | 94.2 | 
-| **MC Blended** | **98.3** | **98.0** | 
-
-*Expected Outcome:* Toss-up (51% win probability) | Spread: +0.3 
-
-*Roster Decisions:* None needed - lineup is optimally set. 
-
-**Projected Season Totals (Optimized):** 
-- Current PF: 1229 
-- Expected Additional PF: +98 
-- **Projected Final PF: 1327**
-
-![WOOD Monte Carlo](visualizations/monte_carlo/wood_monte_carlo.png)
 
 ---
 
@@ -1567,18 +747,18 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 | Rank | Team | Projected Wins | Projected PF | Current Record | Playoff % |
 |------|------|----------------|--------------|----------------|-----------|
-| 1 | ZSF | 9.6 | 1776 | 9-5 | 90.4% |
-| 2 | MP | 9.5 | 1700 | 9-5 | 91.1% |
-| 3 | KIRK | 9.8 | 1637 | 9-5 | 87.4% |
-| 4 | sgf | 9.4 | 1632 | 9-5 | 64.7% |
-| 5 | GV | 9.6 | 1593 | 9-5 | 63.6% |
-| 6 | POO | 8.5 | 1582 | 8-6 | 2.7% |
-| 7 | GEMP | 7.4 | 1479 | 7-7 | 0.0% |
-| 8 | PATS | 5.7 | 1586 | 5-9 | 0.0% |
-| 9 | KESS | 6.3 | 1431 | 6-8 | 0.0% |
-| 10 | ROUX | 5.5 | 1417 | 5-9 | 0.0% |
-| 11 | 3000 | 4.2 | 1385 | 4-10 | 0.0% |
-| 12 | WOOD | 4.5 | 1327 | 4-10 | 0.0% |
+| 1 | ZSF | 10.0 | 1806 | 10-5 | 100.0% |
+| 2 | KIRK | 10.0 | 1633 | 10-5 | 100.0% |
+| 3 | GV | 10.0 | 1580 | 10-5 | 100.0% |
+| 4 | MP | 9.0 | 1727 | 9-6 | 100.0% |
+| 5 | sgf | 9.0 | 1622 | 9-6 | 0.0% |
+| 6 | POO | 9.0 | 1613 | 9-6 | 0.0% |
+| 7 | GEMP | 7.0 | 1463 | 7-8 | 0.0% |
+| 8 | PATS | 6.0 | 1618 | 6-9 | 0.0% |
+| 9 | KESS | 6.0 | 1388 | 6-9 | 0.0% |
+| 10 | ROUX | 5.0 | 1411 | 5-10 | 0.0% |
+| 11 | WOOD | 5.0 | 1335 | 5-10 | 0.0% |
+| 12 | 3000 | 4.0 | 1386 | 4-11 | 0.0% |
 
 ---
 
@@ -1586,9 +766,9 @@ Based on Monte Carlo simulation with ESPN projections and historical performance
 
 *If playoffs started today (top 4 make it, seeded by record then Points For):*
 
-**Semifinal 1:** #1 ZSF (Proj. PF: 1776) vs #4 sgf (Proj. PF: 1632)
+**Semifinal 1:** #1 ZSF (Proj. PF: 1806) vs #4 MP (Proj. PF: 1727)
 
-**Semifinal 2:** #2 MP (Proj. PF: 1700) vs #3 KIRK (Proj. PF: 1637)
+**Semifinal 2:** #2 KIRK (Proj. PF: 1633) vs #3 GV (Proj. PF: 1580)
 
 ---
 
