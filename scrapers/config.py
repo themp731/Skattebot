@@ -1,15 +1,12 @@
 """Configuration settings for the ESPN Fantasy Football scraper."""
 
-# ESPN API endpoints
 ESPN_FF_BASE_URL = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl"
 LEAGUE_ENDPOINT = "/seasons/{year}/segments/0/leagues/{league_id}"
 BOXSCORE_ENDPOINT = "/boxscore"
 
-# API parameters
 DEFAULT_SEASON = 2023
 MAX_WEEK = 17
 
-# CSV output settings
 CSV_HEADERS = {
     'matchups': [
         'week', 'matchup_id', 'team_id', 'team_name', 'opponent_id', 'opponent_name',
@@ -25,7 +22,6 @@ CSV_HEADERS = {
     ]
 }
 
-# Output file names
 OUTPUT_FILES = {
     'matchups': 'matchups.csv',
     'player_stats': 'player_stats.csv',

@@ -2,7 +2,7 @@
 import pandas as pd
 from typing import Dict, List, Any
 import logging
-from position_mapping import POSITION_MAP, LINEUP_SLOT_MAP
+from .position_mapping import POSITION_MAP, LINEUP_SLOT_MAP
 
 class DataProcessor:
     def __init__(self, league_data: Dict[str, Any]):
@@ -14,7 +14,6 @@ class DataProcessor:
         teams_map = {}
         try:
             for team in self.league_data.get('teams', []):
-                # ESPN may have different name fields - try multiple options
                 team_id = team['id']
                 team_name = (
                     team.get('name') or 
@@ -100,7 +99,6 @@ class DataProcessor:
         team_stats = []
         
         try:
-            # Build team stats from matchup schedule data
             team_points = {}
             team_points_against = {}
             
@@ -117,25 +115,14 @@ class DataProcessor:
                         team_points_against[home_id] = away_points
                         team_points_against[away_id] = home_points
             
-            # Sort teams by points
             sorted_teams = sorted(team_points.items(), key=lambda x: x[1], reverse=True)
-            
-            # Calculate stats for each team
             total_teams = len(team_points)
             
             for rank, (team_id, points) in enumerate(sorted_teams, 1):
                 points_against = team_points_against.get(team_id, 0)
-                
-                # Wins: 1 if won matchup, 0 if lost
                 wins = 1 if points > points_against else 0
-                
-                # Top6Wins: 1 if in top 6 scorers, 0 otherwise
                 top6_wins = 1 if rank <= 6 else 0
-                
-                # mvp_w: all-play winning percentage
-                # Count how many teams this team would have beaten
                 teams_beaten = sum(1 for other_points in team_points.values() if points > other_points)
-                # Divide by number of other teams (total - 1)
                 mvp_w = teams_beaten / (total_teams - 1) if total_teams > 1 else 0
                 
                 team_stats.append({

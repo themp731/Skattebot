@@ -1,6 +1,5 @@
 """ESPN Fantasy Football position mappings."""
 
-# Position ID to position name mapping
 POSITION_MAP = {
     0: 'QB',
     1: 'TQB',
@@ -30,7 +29,6 @@ POSITION_MAP = {
     25: 'Rookie'
 }
 
-# Lineup slot ID to slot name mapping
 LINEUP_SLOT_MAP = {
     0: 'QB',
     1: 'TQB',

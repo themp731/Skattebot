@@ -77,10 +77,12 @@ def restore_mermaid_blocks(html_content, mermaid_blocks):
         html_content = html_content.replace(placeholder, mermaid_html)
     return html_content
 
-def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_rankings_analysis.html'):
+def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='public/index.html', base_dir='.'):
     """Convert markdown to HTML with embedded images and Mermaid diagrams."""
     
-    with open(md_file, 'r') as f:
+    md_path = os.path.join(base_dir, md_file)
+    
+    with open(md_path, 'r') as f:
         md_content = f.read()
     
     md_content, mermaid_blocks = extract_mermaid_blocks(md_content)
@@ -106,14 +108,15 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
         'visualizations/monte_carlo_summary.png',
     ]
     
-    mc_dir = Path('visualizations/monte_carlo')
+    mc_dir = Path(base_dir) / 'visualizations' / 'monte_carlo'
     if mc_dir.exists():
         for mc_file in mc_dir.glob('*.png'):
-            image_files.append(str(mc_file))
+            image_files.append(str(mc_file.relative_to(base_dir)))
     
     for img_path in image_files:
-        if os.path.exists(img_path):
-            base64_data = image_to_base64(img_path)
+        full_img_path = os.path.join(base_dir, img_path)
+        if os.path.exists(full_img_path):
+            base64_data = image_to_base64(full_img_path)
             if base64_data:
                 html_content = html_content.replace(
                     f'src="{img_path}"',
@@ -426,17 +429,20 @@ def convert_md_to_html(md_file='power_rankings_analysis.md', output_file='power_
 </body>
 </html>'''
     
-    with open(output_file, 'w') as f:
+    output_path = os.path.join(base_dir, output_file)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    with open(output_path, 'w') as f:
         f.write(full_html)
     
-    file_size = os.path.getsize(output_file)
-    print(f"✓ Created HTML file: {output_file}")
+    file_size = os.path.getsize(output_path)
+    print(f"Created HTML file: {output_path}")
     print(f"  - File size: {file_size / 1024 / 1024:.2f} MB")
     
-    mc_count = len(list(Path('visualizations/monte_carlo').glob('*.png'))) if Path('visualizations/monte_carlo').exists() else 0
+    mc_count = len(list(mc_dir.glob('*.png'))) if mc_dir.exists() else 0
     print(f"  - Embedded images: {len(image_files)} (including {mc_count} Monte Carlo plots)")
     
-    return output_file
+    return output_path
 
 if __name__ == '__main__':
     convert_md_to_html()

@@ -6,10 +6,10 @@ import sys
 import os
 from typing import Optional
 
-from espn_api import ESPNFantasyAPI
-from data_processor import DataProcessor
-from csv_generator import CSVGenerator
-from config import DEFAULT_SEASON, MAX_WEEK, OUTPUT_FILES
+from .espn_api import ESPNFantasyAPI
+from .data_processor import DataProcessor
+from .csv_generator import CSVGenerator
+from .config import DEFAULT_SEASON, MAX_WEEK, OUTPUT_FILES
 
 def setup_logging():
     """Configure logging settings."""
@@ -59,11 +59,7 @@ def clear_existing_csv_files(output_dir: str):
             logging.info(f"Cleared existing file: {csv_file}")
 
 def has_week_been_played(boxscore_data: dict, requested_week: int) -> bool:
-    """Check if a week has been played by finding matchups for that specific week.
-    
-    ESPN returns all matchups for the season in the 'schedule' field.
-    We need to find matchups where matchupPeriodId == requested_week and check if they have scores.
-    """
+    """Check if a week has been played by finding matchups for that specific week."""
     if not boxscore_data:
         return False
     
@@ -71,24 +67,85 @@ def has_week_been_played(boxscore_data: dict, requested_week: int) -> bool:
     if not schedule:
         return False
     
-    # Find matchups for the requested week
     week_matchups = [m for m in schedule if m.get('matchupPeriodId') == requested_week]
     
     if not week_matchups:
-        # No matchups found for this week (week doesn't exist)
         return False
     
-    # Check if any matchup for this week has actual scores
     for matchup in week_matchups:
         home_score = matchup.get('home', {}).get('totalPoints', 0)
         away_score = matchup.get('away', {}).get('totalPoints', 0)
         
-        # If any team has scored points, the week has been played
         if home_score > 0 or away_score > 0:
             return True
     
-    # All matchups for this week have 0 scores
     return False
+
+def run_scraper(league_id: int, years: list, output_dir: str = 'data', week: int = None):
+    """Run the scraper programmatically."""
+    setup_logging()
+    
+    espn_s2 = os.getenv('ESPN_S2')
+    swid = os.getenv('SWID')
+    
+    if espn_s2 and swid:
+        logging.info("Using ESPN authentication credentials for private league access")
+    else:
+        logging.info("No authentication credentials found - accessing public league only")
+
+    clear_existing_csv_files(output_dir)
+    csv_generator = CSVGenerator(output_dir)
+    
+    weeks = [week] if week else range(1, MAX_WEEK + 1)
+    
+    for year in years:
+        logging.info(f"Processing season {year}...")
+        
+        api = ESPNFantasyAPI(league_id, year, espn_s2=espn_s2, swid=swid)
+        
+        if not api.validate_league():
+            logging.error(f"Invalid or inaccessible league ID: {league_id} for season {year}")
+            continue
+
+        league_data = api.get_league_data()
+        if not league_data:
+            logging.error(f"Failed to fetch league data for season {year}")
+            continue
+
+        data_processor = DataProcessor(league_data)
+        
+        for w in weeks:
+            logging.info(f"Processing {year} week {w}...")
+            
+            boxscore_data = api.get_boxscore(w)
+            if not boxscore_data:
+                logging.warning(f"Skipping {year} week {w} - no data available")
+                continue
+            
+            if not has_week_been_played(boxscore_data, w):
+                logging.info(f"Skipping {year} week {w} - no games played yet")
+                continue
+
+            try:
+                matchups_df = data_processor.process_matchups(boxscore_data, w)
+                player_stats_df = data_processor.process_player_stats(boxscore_data, w)
+                team_stats_df = data_processor.process_team_stats(boxscore_data, w)
+                
+                matchups_df['season'] = year
+                player_stats_df['season'] = year
+                team_stats_df['season'] = year
+
+                csv_generator.append_to_csv(matchups_df, OUTPUT_FILES['matchups'])
+                csv_generator.append_to_csv(player_stats_df, OUTPUT_FILES['player_stats'])
+                csv_generator.append_to_csv(team_stats_df, OUTPUT_FILES['team_stats'])
+                
+                logging.info(f"Successfully processed {year} week {w}")
+                
+            except Exception as e:
+                logging.error(f"Error processing {year} week {w}: {e}")
+                continue
+
+    logging.info("Data scraping completed successfully")
 
 def main():
     """Main execution function."""
@@ -98,81 +155,12 @@ def main():
     if not validate_arguments(args):
         sys.exit(1)
 
-    # Get ESPN authentication credentials from environment variables (for private leagues)
-    espn_s2 = os.getenv('ESPN_S2')
-    swid = os.getenv('SWID')
-    
-    if espn_s2 and swid:
-        logging.info("Using ESPN authentication credentials for private league access")
-    else:
-        logging.info("No authentication credentials found - accessing public league only")
-
-    # Clear existing CSV files to start fresh
-    clear_existing_csv_files(args.output)
-
-    csv_generator = CSVGenerator(args.output)
-    
-    # Determine weeks to process
-    weeks = [args.week] if args.week else range(1, MAX_WEEK + 1)
-    
-    # Loop through each year
-    for year in args.years:
-        logging.info(f"Processing season {year}...")
-        
-        # Initialize API for this year with optional authentication
-        api = ESPNFantasyAPI(args.league_id, year, espn_s2=espn_s2, swid=swid)
-        
-        # Validate league
-        if not api.validate_league():
-            logging.error(f"Invalid or inaccessible league ID: {args.league_id} for season {year}")
-            continue
-
-        # Get league data
-        league_data = api.get_league_data()
-        if not league_data:
-            logging.error(f"Failed to fetch league data for season {year}")
-            continue
-
-        data_processor = DataProcessor(league_data)
-        
-        # Process each week for this year
-        for week in weeks:
-            logging.info(f"Processing {year} week {week}...")
-            
-            # Fetch boxscore data
-            boxscore_data = api.get_boxscore(week)
-            if not boxscore_data:
-                logging.warning(f"Skipping {year} week {week} - no data available")
-                continue
-            
-            # Check if the week has been played (matchupPeriodId matches requested week)
-            if not has_week_been_played(boxscore_data, week):
-                logging.info(f"Skipping {year} week {week} - no games played yet")
-                continue
-
-            try:
-                # Process data
-                matchups_df = data_processor.process_matchups(boxscore_data, week)
-                player_stats_df = data_processor.process_player_stats(boxscore_data, week)
-                team_stats_df = data_processor.process_team_stats(boxscore_data, week)
-                
-                # Add season column to track which year the data is from
-                matchups_df['season'] = year
-                player_stats_df['season'] = year
-                team_stats_df['season'] = year
-
-                # Save to CSV
-                csv_generator.append_to_csv(matchups_df, OUTPUT_FILES['matchups'])
-                csv_generator.append_to_csv(player_stats_df, OUTPUT_FILES['player_stats'])
-                csv_generator.append_to_csv(team_stats_df, OUTPUT_FILES['team_stats'])
-                
-                logging.info(f"Successfully processed {year} week {week}")
-                
-            except Exception as e:
-                logging.error(f"Error processing {year} week {week}: {e}")
-                continue
-
-    logging.info("Data scraping completed successfully")
+    run_scraper(
+        league_id=args.league_id,
+        years=args.years,
+        output_dir=args.output,
+        week=args.week
+    )
 
 if __name__ == "__main__":
     main()
