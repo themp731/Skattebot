@@ -7,4 +7,4 @@ For every substantial feature change or Codex work order in this repository:
 3. Keep the change scoped to that work order and preserve unrelated working-tree changes.
 4. When the work is complete and verified, commit the changes with a clear message and push the branch to `origin`.
 
-Small changes may be committed and merged directly on `main`: documentation updates, skill or instruction changes, and typo fixes. Small read-only inspections and purely conversational requests also do not require a worktree or branch.
+Small, focused maintenance changes may be committed and pushed directly on `main`: documentation, skill, or instruction updates; typo fixes; and narrowly scoped repository-hygiene changes such as a `.gitignore` policy update. Use a worktree and branch when the change affects application behavior, involves multiple substantive deliverables, or would otherwise benefit from isolated review. Small read-only inspections and purely conversational requests also do not require a worktree or branch.
