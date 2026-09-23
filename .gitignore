@@ -5,6 +5,8 @@
 /power_rankings_analysis.html
 /visualizations/
 /public/index.html
+/public/data/
+/public-contract-check/
 /outputs/
 
 # Local secrets and environment configuration

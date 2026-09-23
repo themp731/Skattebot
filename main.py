@@ -1,121 +1,76 @@
 #!/usr/bin/env python3
-"""
-Main entry point for the Fantasy Football Power Rankings pipeline.
-Orchestrates data scraping, analysis, and HTML generation.
-"""
+"""Artifact-first local Skattebot refresh entrypoint."""
+from __future__ import annotations
 
-import os
-import sys
-import logging
 import argparse
-from datetime import datetime
+import os
+from pathlib import Path
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)]
-)
-logger = logging.getLogger(__name__)
+from local_pipeline import export_artifacts, generate_dummy_data, write_placeholder_recap, write_site
 
-LEAGUE_ID = 149388
-CURRENT_SEASON = 2025
-DATA_DIR = 'data'
-PUBLIC_DIR = 'public'
 
-def run_scraper():
-    """Run the ESPN data scraper."""
-    logger.info("Step 1: Scraping ESPN Fantasy Football data...")
-    
-    from scrapers.espn_ff_scraper import run_scraper as scrape_data
-    
-    os.makedirs(DATA_DIR, exist_ok=True)
-    
-    scrape_data(
-        league_id=LEAGUE_ID,
-        years=[CURRENT_SEASON],
-        output_dir=DATA_DIR
-    )
-    
-    logger.info("Scraping complete.")
+def _path(value: str | None, environment: str, default: str) -> Path:
+    return Path(value or os.getenv(environment, default))
 
-def run_analysis():
-    """Run team analysis and generate visualizations."""
-    logger.info("Step 2: Running team analysis and generating visualizations...")
-    
-    from scrapers import team_analysis
-    import pandas as pd
-    
-    original_load_data = team_analysis.load_data
-    original_load_matchups = team_analysis.load_matchups
-    
-    team_analysis.load_data = lambda filename='team_stats.csv': pd.read_csv(os.path.join(DATA_DIR, filename))
-    team_analysis.load_matchups = lambda filename='matchups.csv': pd.read_csv(os.path.join(DATA_DIR, filename))
-    
-    try:
-        if hasattr(team_analysis, 'main'):
-            team_analysis.main()
-        else:
-            df = team_analysis.load_data()
-            matchups = team_analysis.load_matchups()
-            summary = team_analysis.calculate_summary_stats(df)
-            
-            remaining_schedule, reg_weeks, playoff_count = team_analysis.get_remaining_schedule()
-            
-            os.makedirs('visualizations', exist_ok=True)
-            os.makedirs('visualizations/monte_carlo', exist_ok=True)
-        
-        logger.info("Analysis complete.")
-    finally:
-        team_analysis.load_data = original_load_data
-        team_analysis.load_matchups = original_load_matchups
 
-def generate_html():
-    """Generate the static HTML page."""
-    logger.info("Step 3: Generating HTML page...")
-    
-    from html_generator.md_to_html import convert_md_to_html
-    
-    os.makedirs(PUBLIC_DIR, exist_ok=True)
-    
-    output_path = convert_md_to_html(
-        md_file='power_rankings_analysis.md',
-        output_file=os.path.join(PUBLIC_DIR, 'index.html'),
-        base_dir='.'
-    )
-    
-    logger.info(f"HTML generated: {output_path}")
+def refresh(args: argparse.Namespace) -> None:
+    data_dir = _path(args.data_dir, "DATA_DIR", "outputs/local/raw")
+    output_dir = _path(args.output_dir, "OUTPUT_DIR", "outputs/local")
+    public_dir = _path(args.public_dir, "PUBLIC_DIR", "public")
+    season = args.season or int(os.getenv("CURRENT_SEASON", "2026"))
+    league_id = args.league_id or os.getenv("LEAGUE_ID")
+    source = "sample" if args.skip_scrape else args.source
+    if source == "dummy":
+        generate_dummy_data(data_dir, season, args.week, args.teams, args.seed)
+    elif source == "espn":
+        if not league_id:
+            raise SystemExit("--league-id (or LEAGUE_ID) is required for --source espn")
+        try:
+            from scrapers.espn_ff_scraper import run_scraper
+            run_scraper(league_id=int(league_id), years=[season], output_dir=str(data_dir), week=args.week)
+        except Exception as error:
+            raise SystemExit(f"ESPN refresh failed; no artifacts were published: {error}") from error
+    elif source != "sample":
+        raise SystemExit(f"Unsupported source: {source}")
+    written = export_artifacts(data_dir, output_dir, public_dir, season, source, args.week)
+    written.append(write_site(public_dir))
+    if args.generate_placeholder_recap:
+        written.append(write_placeholder_recap(output_dir, args.week))
+    print(f"Refresh complete using {source} data.")
+    for path in written:
+        print(f"  wrote {path}")
 
-def main():
-    """Main pipeline execution."""
-    parser = argparse.ArgumentParser(description='Fantasy Football Power Rankings Pipeline')
-    parser.add_argument('--scrape-only', action='store_true', help='Only run the scraper')
-    parser.add_argument('--analyze-only', action='store_true', help='Only run analysis')
-    parser.add_argument('--html-only', action='store_true', help='Only generate HTML')
-    parser.add_argument('--skip-scrape', action='store_true', help='Skip scraping, use existing data')
-    args = parser.parse_args()
-    
-    start_time = datetime.now()
-    logger.info(f"Starting Power Rankings Pipeline at {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
-    
-    try:
-        if args.scrape_only:
-            run_scraper()
-        elif args.analyze_only:
-            run_analysis()
-        elif args.html_only:
-            generate_html()
-        else:
-            if not args.skip_scrape:
-                run_scraper()
-            run_analysis()
-            generate_html()
-        
-        elapsed = datetime.now() - start_time
-        logger.info(f"Pipeline completed successfully in {elapsed.total_seconds():.1f} seconds")
-        
-    except Exception as e:
-        logger.error(f"Pipeline failed: {e}")
-        raise
 
-if __name__ == '__main__':
+def add_refresh_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--source", choices=("dummy", "sample", "espn"), default="dummy")
+    parser.add_argument("--skip-scrape", action="store_true", help="alias for --source sample")
+    parser.add_argument("--league-id", type=int)
+    parser.add_argument("--season", type=int)
+    parser.add_argument("--week", type=int, default=2, help="latest completed week")
+    parser.add_argument("--teams", type=int, default=12, help="dummy team count; must be even and 4+")
+    parser.add_argument("--seed", type=int, help="deterministic dummy-data seed")
+    parser.add_argument("--data-dir")
+    parser.add_argument("--output-dir")
+    parser.add_argument("--public-dir")
+    parser.add_argument("--write-recap-context", action="store_true", help="context is always written; retained for compatibility")
+    parser.add_argument("--generate-placeholder-recap", action="store_true")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Artifact-first local Skattebot refresh")
+    commands = parser.add_subparsers(dest="command", required=True)
+    refresh_parser = commands.add_parser("refresh", help="refresh raw data and publish local artifacts")
+    add_refresh_arguments(refresh_parser)
+    demo_parser = commands.add_parser("local-demo", help="offline dummy demo, including a placeholder recap")
+    add_refresh_arguments(demo_parser)
+    demo_parser.set_defaults(source="dummy", generate_placeholder_recap=True, write_recap_context=True)
+    return parser
+
+
+def main() -> None:
+    args = build_parser().parse_args()
+    refresh(args)
+
+
+if __name__ == "__main__":
     main()
