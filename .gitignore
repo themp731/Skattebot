@@ -1,0 +1,23 @@
+# Runtime and generated data
+/data/*.csv
+/team_summary.csv
+/power_rankings_analysis.md
+/power_rankings_analysis.html
+/visualizations/
+/public/index.html
+/outputs/
+
+# Local secrets and environment configuration
+.env
+.env.*
+
+# Python caches and virtual environments
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+
+# OS and editor metadata
+.DS_Store
+.vscode/
+.idea/

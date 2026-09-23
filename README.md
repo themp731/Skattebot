@@ -2,6 +2,8 @@
 
 A Python-based tool to scrape historical data from ESPN Fantasy Football leagues and export to CSV files.
 
+> Generated runtime outputs (CSV, analysis HTML/Markdown, visualizations, and the built dashboard) are local artifacts and should not be committed. Use `sample_data/` for future committed fixtures.
+
 ## Features
 
 - Scrape data from **multiple seasons** in one run
